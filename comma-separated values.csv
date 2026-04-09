@@ -1,0 +1,268 @@
+🗳  VOTE MAXIMIZER — VOTER POWER CALCULATOR  |  2026 ELECTION CYCLE,,,,,,,,,
+Hybrid sigma methodology  |  Metamargin=0.0 (neutral)  |  Turnout scaling: ÷turnout^0.3  |  🟢 green margin = real poll  |  🟡 amber margin = Cook proxy,,,,,,,,,
+,,,,,,,,,
+📖  METHODOLOGY — HOW THE HYBRID SIGMA APPROACH WORKS,,,,,,,,,
+CORE FORMULA,,,"Voter Power (unnormalized) = t-PDF( (margin − metamargin) / σ_eff,  df ) × (σ_eff / σ_Senate) ÷ turnout^0.3 × 1,000,000
+
+voter_power (0–100) = 100 × VP_raw ÷ max(VP_raw within race type)
+
+The three key adjustable parameters: margin (from polls or Cook rating), σ_eff (race-type specific), metamargin (national environment).",,,,,,
+WHY TWO SIGMAS?,,,"σ_polling = 3.0 pts — how far polls might be off on Election Day (Sam Wang's estimate from 2024 methodology).
+σ_historical = race-type swing based on EIL historical data (Senate 7.97, Governor 11.72, Ballot 16.90, etc.).
+
+These measure different things. Polling error tells you how uncertain the current estimate is. Historical swing tells you how much that race TYPE tends to move over time. Both matter: a ballot measure with σ_hist=16.9 is inherently more volatile than a Senate race with σ_hist=7.97, so its VP should be somewhat higher even at the same poll margin.",,,,,,
+THE BLEND (weight=0.25),,,"σ_eff = σ_polling + (σ_historical − σ_polling) × 0.25
+
+Effective sigmas used:
+  • US Senate:         4.24 pts  (reference; ratio = 1.00×)
+  • US House:          4.00 pts  (matches 2024 VM formula exactly)
+  • Governor:          5.18 pts  (ratio = 1.22×)
+  • AG / Sec of State: 5.00 pts  (ratio = 1.18×)
+  • State Legislature: 3.96 pts  (ratio = 0.93× — lower because districts are more entrenched)
+  • Ballot Initiatives: 6.47 pts  (ratio = 1.53× — highest, most volatile)",,,,,,
+THE SIGMA RATIO BOOST,,,"A wider σ_eff flattens the PDF peak, which would naively reduce VP for volatile race types. To correct for this, each race's VP is multiplied by (σ_eff / σ_Senate). This means: at the same poll margin, a ballot initiative gets 1.53× the VP of an equivalent Senate race, a Governor race gets 1.22×, and so on. The effect grows for non-tossup races: at lean-D (+4 pts), a ballot measure retains 72% of its tossup VP, while a Senate race retains only 53% — correctly reflecting that ballot measures can swing more.",,,,,,
+MARGIN SOURCES (color-coded),,,"🟢 GREEN ""poll"" = real polling average used, sourced from Emerson/PPP/ASR/Sabato Jan–Mar 2026.
+🟡 AMBER ""cook"" = Cook Political Report rating proxy (toss-up=0, lean=±4, likely=±9, solid=±18).
+
+As actual polls become available, replace the Cook proxy with real margins in the ""Poll Margins"" column of each dataset tab. VP scores will recalibrate automatically. Priority: populate margins for all toss-up and lean races first.",,,,,,
+TURNOUT SCALING,,,"Statewide races: divide by turnout^0.3 (gentle size correction). A Maine tossup scores ~94% of Alaska's tossup because Maine's electorate is larger (800k vs 360k). Large competitive states like Georgia (5M) and NC (5.5M) still score in the top 10 for Senate. Solid-state small races score 3–7 — very low but not exactly zero, which is mathematically correct (even a solid race has a non-zero but tiny chance of flipping under extreme conditions).
+House: no turnout scaling — all districts are equal population by law.",,,,,,
+WHAT TO UPDATE,,,"1. Replace Cook proxies with real poll averages as they become available (esp. toss-up and lean races).
+2. Calibrate the metamargin from generic ballot data (currently 0.0 = neutral environment).
+3. Update the 2026 turnout estimate if early-cycle data suggests a departure from 2020 patterns.",,,,,,
+,,,,,,,,,
+▶  US SENATE  |  σ_eff=4.24  |  σ ratio=1.00×,,,,,,,,,
+Race,State,Cook Rating,Margin (pts),Margin Source,2020 Turnout,σ_eff,σ ratio,VP Raw,Voter Power (0–100)
+Alaska Senate 2026,Alaska,lean-R,+2.0,poll,"359,530",4.2425,1.00x,5610.146135,100
+Maine Senate 2026,Maine,toss-up,-2.0,poll,"443,112",4.2425,1.00x,5269.151201,94
+New Hampshire Senate 2026,New Hampshire,lean-D,+2.0,poll,"806,205",4.2425,1.00x,4403.125543,78
+Michigan Senate 2026,Michigan,toss-up,+1.0,poll,"5,539,302",4.2425,1.00x,2859.769319,51
+Ohio Special Senate 2026,Ohio,toss-up,+1.0,poll,"5,922,202",4.2425,1.00x,2802.996468,50
+Minnesota Senate 2026,Minnesota,lean-D,+3.0,poll,"3,277,171",4.2425,1.00x,2355.5891,42
+North Carolina Senate 2026,North Carolina,toss-up,+3.0,poll,"5,524,804",4.2425,1.00x,2013.975599,36
+Georgia Senate 2026,Georgia,toss-up,+4.0,poll,"4,999,960",4.2425,1.00x,1647.935471,29
+Montana Senate 2026,Montana,likely-R,-7.0,poll,"603,674",4.2425,1.00x,1576.834172,28
+Iowa Senate 2026,Iowa,likely-R,-6.0,poll,"1,690,871",4.2425,1.00x,1436.403741,26
+Nebraska Senate 2026,Nebraska,likely-R,-7.0,poll,"956,383",4.2425,1.00x,1373.527029,24
+Louisiana Senate 2026,Louisiana,likely-R,-7.0,poll,"2,148,062",4.2425,1.00x,1077.488692,19
+Texas Senate 2026,Texas,likely-R,-8.0,poll,"11,315,056",4.2425,1.00x,534.7973998,10
+Wyoming Senate 2026,Wyoming,solid-R,-18.0,cook,"276,765",4.2425,1.00x,390.3335566,7
+South Dakota Senate 2026,South Dakota,solid-R,-18.0,cook,"422,609",4.2425,1.00x,343.7855486,6
+Rhode Island Senate 2026,Rhode Island,solid-D,+18.0,cook,"517,757",4.2425,1.00x,323.4680909,6
+New Mexico Senate 2026,New Mexico,solid-D,+18.0,cook,"923,965",4.2425,1.00x,271.8770713,5
+West Virginia Senate 2026,West Virginia,solid-R,-18.0,cook,"794,731",4.2425,1.00x,284.448202,5
+Idaho Senate 2026,Idaho,solid-R,-18.0,cook,"867,934",4.2425,1.00x,277.0277206,5
+Oklahoma Senate 2026,Oklahoma,solid-R,-18.0,cook,"1,560,699",4.2425,1.00x,232.3129895,4
+Alabama Senate 2026,Alabama,solid-R,-18.0,cook,"2,323,282",4.2425,1.00x,206.1762617,4
+Mississippi Senate 2026,Mississippi,solid-R,-18.0,cook,"1,313,759",4.2425,1.00x,244.6327108,4
+South Carolina Senate 2026,South Carolina,solid-R,-18.0,cook,"2,513,329",4.2425,1.00x,201.3698453,4
+Arkansas Senate 2026,Arkansas,solid-R,-18.0,cook,"1,219,069",4.2425,1.00x,250.1847034,4
+Connecticut Senate 2026,Connecticut,solid-D,+18.0,cook,"1,823,857",4.2425,1.00x,221.7032215,4
+Kentucky Senate 2026,Kentucky,solid-R,-18.0,cook,"2,136,768",4.2425,1.00x,211.418033,4
+Kansas Senate 2026,Kansas,solid-R,-18.0,cook,"1,373,986",4.2425,1.00x,241.3651406,4
+Oregon Senate 2026,Oregon,solid-D,+18.0,cook,"2,374,321",4.2425,1.00x,204.8365295,4
+New Jersey Senate 2026,New Jersey,solid-D,+18.0,cook,"4,549,457",4.2425,1.00x,168.53161,3
+Colorado Senate 2026,Colorado,solid-D,+18.0,cook,"3,256,980",4.2425,1.00x,186.3050863,3
+Illinois Senate 2026,Illinois,solid-D,+18.0,cook,"6,033,744",4.2425,1.00x,154.8435698,3
+Virginia Senate 2026,Virginia,solid-D,+18.0,cook,"4,460,524",4.2425,1.00x,169.5326986,3
+Tennessee Senate 2026,Tennessee,solid-R,-18.0,cook,"3,053,851",4.2425,1.00x,189.9393231,3
+Wisconsin Senate 2026,Wisconsin,solid-D,+18.0,cook,"3,298,041",4.2425,1.00x,185.6061764,3
+Florida Special Senate 2026,Florida,solid-R,-18.0,cook,"11,067,456",4.2425,1.00x,129.0787937,2
+,,,,,,,,,
+▶  GOVERNOR  |  σ_eff=5.18  |  σ ratio=1.22×,,,,,,,,,
+Race,State,Cook Rating,Margin (pts),Margin Source,2020 Turnout,σ_eff,σ ratio,VP Raw,Voter Power (0–100)
+Nevada Governor 2026,Nevada,toss-up,-2.0,poll,"1,405,376",5.18,1.22x,4840.302053,100
+Wisconsin Governor 2026,Wisconsin,toss-up,+1.0,poll,"3,298,041",5.18,1.22x,4151.357005,86
+New Hampshire Governor 2026,New Hampshire,likely-R,-4.0,poll,"806,205",5.18,1.22x,4116.342469,85
+Maine Governor 2026,Maine,likely-D,+5.0,poll,"443,112",5.18,1.22x,4070.635199,84
+Michigan Governor 2026,Michigan,toss-up,+2.0,poll,"5,539,302",5.18,1.22x,3207.552038,66
+Kansas Governor 2026,Kansas,lean-R,-5.0,poll,"1,373,986",5.18,1.22x,2898.821974,60
+Georgia Governor 2026,Georgia,toss-up,+3.0,poll,"4,999,960",5.18,1.22x,2846.110117,59
+Iowa Governor 2026,Iowa,likely-R,-6.0,poll,"1,690,871",5.18,1.22x,2246.988057,46
+Arizona Governor 2026,Arizona,toss-up,+5.0,poll,"3,387,326",5.18,1.22x,2211.358415,46
+Vermont Governor 2026,Vermont,likely-D,+9.0,cook,"367,428",5.18,1.22x,2069.743892,43
+Minnesota Governor 2026,Minnesota,solid-D,+6.0,poll,"3,277,171",5.18,1.22x,1842.401065,38
+Alaska Governor 2026,Alaska,solid-R,-18.0,cook,"359,530",5.18,1.22x,640.3203741,13
+South Dakota Governor 2026,South Dakota,solid-R,-18.0,cook,"422,609",5.18,1.22x,610.0089944,13
+Rhode Island Governor 2026,Rhode Island,solid-D,+18.0,cook,"517,757",5.18,1.22x,573.9579389,12
+New Mexico Governor 2026,New Mexico,solid-D,+18.0,cook,"923,965",5.18,1.22x,482.4154465,10
+Nebraska Governor 2026,Nebraska,solid-R,-18.0,cook,"956,383",5.18,1.22x,477.4504498,10
+Idaho Governor 2026,Idaho,solid-R,-18.0,cook,"867,934",5.18,1.22x,491.5546974,10
+Oklahoma Governor 2026,Oklahoma,solid-R,-18.0,cook,"1,560,699",5.18,1.22x,412.2134095,9
+Arkansas Governor 2026,Arkansas,solid-R,-18.0,cook,"1,219,069",5.18,1.22x,443.9247664,9
+Alabama Governor 2026,Alabama,solid-R,-18.0,cook,"2,323,282",5.18,1.22x,365.8367101,8
+Oregon Governor 2026,Oregon,solid-D,+18.0,cook,"2,374,321",5.18,1.22x,363.4595052,8
+Connecticut Governor 2026,Connecticut,solid-D,+18.0,cook,"1,823,857",5.18,1.22x,393.3875633,8
+Tennessee Governor 2026,Tennessee,solid-R,-18.0,cook,"3,053,851",5.18,1.22x,337.0260792,7
+Colorado Governor 2026,Colorado,solid-D,+18.0,cook,"3,256,980",5.18,1.22x,330.5775325,7
+Massachusetts Governor 2026,Massachusetts,solid-D,+18.0,cook,"3,631,402",5.18,1.22x,319.9599075,7
+South Carolina Governor 2026,South Carolina,solid-R,-18.0,cook,"2,513,329",5.18,1.22x,357.308262,7
+Maryland Governor 2026,Maryland,solid-D,+18.0,cook,"3,037,030",5.18,1.22x,337.5849963,7
+North Carolina Governor 2026,North Carolina,solid-R,-18.0,cook,"5,524,804",5.18,1.22x,282.1128046,6
+Ohio Governor 2026,Ohio,solid-R,-18.0,cook,"5,922,202",5.18,1.22x,276.2949176,6
+Illinois Governor 2026,Illinois,solid-D,+18.0,cook,"6,033,744",5.18,1.22x,274.7525913,6
+Florida Governor 2026,Florida,solid-R,-18.0,cook,"11,067,456",5.18,1.22x,229.0358785,5
+Pennsylvania Governor 2026,Pennsylvania,solid-D,+18.0,cook,"6,936,976",5.18,1.22x,263.4916175,5
+New York Governor 2026,New York,solid-D,+18.0,cook,"8,616,861",5.18,1.22x,246.8954776,5
+Texas Governor 2026,Texas,solid-R,-18.0,cook,"11,315,056",5.18,1.22x,227.5206652,5
+California Governor 2026,California,solid-D,+18.0,cook,"17,501,380",5.18,1.22x,199.6163787,4
+,,,,,,,,,
+▶  US HOUSE — Competitive races only (VP≥10)  |  σ_eff=4.00  |  no turnout scaling,,,,,,,,,
+Race,State,Cook Rating,Margin (pts),Source,σ_eff,VP Raw,Voter Power (0–100),,
+Congressional District 1,Arizona,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 2,Maine,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 8,Colorado,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 13,California,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 7,Pennsylvania,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 8,Pennsylvania,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 3,Washington,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 7,Michigan,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 2,Nebraska,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 17,New York,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 7,New Jersey,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 1,New Hampshire,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 3,Wisconsin,toss-up,0.0,cook,4,0.3535533906,100,,
+Congressional District 6,Arizona,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 1,Alaska,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 2,Arizona,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 5,Colorado,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 45,California,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 22,California,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 9,California,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 1,Indiana,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 27,Florida,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 23,Florida,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 1,Iowa,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 6,Kentucky,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 3,Iowa,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 4,Michigan,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 2,Iowa,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 8,Michigan,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 7,Florida,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 9,Florida,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 13,Florida,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 15,Florida,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 47,California,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 48,California,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 27,California,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 4,Nevada,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 3,Nevada,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 1,Nevada,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 1,Montana,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 1,Minnesota,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 2,Missouri,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 10,Michigan,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 9,New Jersey,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 1,North Carolina,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 3,North Carolina,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 11,North Carolina,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 7,Ohio,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 2,New Mexico,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 3,New York,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 4,New York,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 19,New York,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 15,Ohio,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 13,Ohio,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 10,Ohio,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 9,Ohio,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 1,South Carolina,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 5,Tennessee,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 1,Pennsylvania,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 10,Pennsylvania,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 28,Texas,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 15,Texas,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 34,Texas,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 1,Virginia,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 5,Virginia,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 2,Virginia,lean-R,-4.0,cook,4,0.1924500897,54,,
+Congressional District 7,Virginia,lean-D,+4.0,cook,4,0.1924500897,54,,
+Congressional District 1,Wisconsin,lean-R,-4.0,cook,4,0.1924500897,54,,
+,,,,,,,,,
+▶  ATTORNEY GENERAL  |  σ_eff=5.00  |  σ ratio=1.18×,,,,,,,,,
+Race,State,Cook Rating,Margin (pts),Margin Source,2020 Turnout,σ_eff,σ ratio,VP Raw,Voter Power (0–100)
+Nevada Attorney General 2026,Nevada,toss-up,0.0,cook,"1,405,376",5,1.18x,5368.593495,100
+Minnesota Attorney General 2026,Minnesota,toss-up,0.0,cook,"3,277,171",5,1.18x,4164.362718,78
+Arizona Attorney General 2026,Arizona,toss-up,0.0,cook,"3,387,326",5,1.18x,4123.264377,77
+Wisconsin Attorney General 2026,Wisconsin,toss-up,0.0,cook,"3,298,041",5,1.18x,4156.439521,77
+Michigan Attorney General 2026,Michigan,toss-up,0.0,cook,"5,539,302",5,1.18x,3557.638101,66
+Kansas Attorney General 2026,Kansas,lean-R,-4.0,cook,"1,373,986",5,1.18x,3295.791583,61
+Iowa Attorney General 2026,Iowa,likely-R,-9.0,cook,"1,690,871",5,1.18x,1197.841296,22
+Vermont Attorney General 2026,Vermont,solid-D,+18.0,cook,"367,428",5,1.18x,575.1235982,11
+North Dakota Attorney General 2026,North Dakota,solid-R,-18.0,cook,"362,024",5,1.18x,577.6857484,11
+South Dakota Attorney General 2026,South Dakota,solid-R,-18.0,cook,"422,609",5,1.18x,551.4818704,10
+Rhode Island Attorney General 2026,Rhode Island,solid-D,+18.0,cook,"517,757",5,1.18x,518.8897222,10
+Delaware Attorney General 2026,Delaware,solid-D,+18.0,cook,"504,346",5,1.18x,522.9910877,10
+Idaho Attorney General 2026,Idaho,solid-R,-18.0,cook,"867,934",5,1.18x,444.3926342,8
+Nebraska Attorney General 2026,Nebraska,solid-R,-18.0,cook,"956,383",5,1.18x,431.6416142,8
+New Mexico Attorney General 2026,New Mexico,solid-D,+18.0,cook,"923,965",5,1.18x,436.1302459,8
+Arkansas Attorney General 2026,Arkansas,solid-R,-18.0,cook,"1,219,069",5,1.18x,401.3325422,7
+Oklahoma Attorney General 2026,Oklahoma,solid-R,-18.0,cook,"1,560,699",5,1.18x,372.6637216,7
+Connecticut Attorney General 2026,Connecticut,solid-D,+18.0,cook,"1,823,857",5,1.18x,355.6441154,7
+Colorado Attorney General 2026,Colorado,solid-D,+18.0,cook,"3,256,980",5,1.18x,298.8603735,6
+Alabama Attorney General 2026,Alabama,solid-R,-18.0,cook,"2,323,282",5,1.18x,330.7366202,6
+Maryland Attorney General 2026,Maryland,solid-D,+18.0,cook,"3,037,030",5,1.18x,305.1955084,6
+South Carolina Attorney General 2026,South Carolina,solid-R,-18.0,cook,"2,513,329",5,1.18x,323.0264314,6
+Ohio Attorney General 2026,Ohio,solid-R,-18.0,cook,"5,922,202",5,1.18x,249.7858873,5
+Massachusetts Attorney General 2026,Massachusetts,solid-D,+18.0,cook,"3,631,402",5,1.18x,289.2614533,5
+Georgia Attorney General 2026,Georgia,solid-R,-18.0,cook,"4,999,960",5,1.18x,262.7985129,5
+Illinois Attorney General 2026,Illinois,solid-D,+18.0,cook,"6,033,744",5,1.18x,248.391539,5
+New York Attorney General 2026,New York,solid-D,+18.0,cook,"8,616,861",5,1.18x,223.2071674,4
+Florida Attorney General 2026,Florida,solid-R,-18.0,cook,"11,067,456",5,1.18x,207.0611021,4
+Texas Attorney General 2026,Texas,solid-R,-18.0,cook,"11,315,056",5,1.18x,205.6912655,4
+California Attorney General 2026,California,solid-D,+18.0,cook,"17,501,380",5,1.18x,180.4642471,3
+,,,,,,,,,
+▶  SECRETARY OF STATE  |  σ_eff=5.00  |  σ ratio=1.18×,,,,,,,,,
+Race,State,Cook Rating,Margin (pts),Margin Source,2020 Turnout,σ_eff,σ ratio,VP Raw,Voter Power (0–100)
+Nevada Secretary of State 2026,Nevada,toss-up,0.0,cook,"1,405,376",5,1.18x,5368.593495,100
+Arizona Secretary of State 2026,Arizona,toss-up,0.0,cook,"3,387,326",5,1.18x,4123.264377,77
+Wisconsin Secretary of State 2026,Wisconsin,toss-up,0.0,cook,"3,298,041",5,1.18x,4156.439521,77
+Michigan Secretary of State 2026,Michigan,toss-up,0.0,cook,"5,539,302",5,1.18x,3557.638101,66
+Kansas Secretary of State 2026,Kansas,lean-R,-4.0,cook,"1,373,986",5,1.18x,3295.791583,61
+Indiana Secretary of State 2026,Indiana,lean-R,-4.0,cook,"3,033,210",5,1.18x,2598.864812,48
+Iowa Secretary of State 2026,Iowa,likely-R,-9.0,cook,"1,690,871",5,1.18x,1197.841296,22
+Minnesota Secretary of State 2026,Minnesota,likely-D,+9.0,cook,"3,277,171",5,1.18x,982.1610184,18
+Wyoming Secretary of State 2026,Wyoming,solid-R,-18.0,cook,"276,765",5,1.18x,626.151625,12
+North Dakota Secretary of State 2026,North Dakota,solid-R,-18.0,cook,"362,024",5,1.18x,577.6857484,11
+Vermont Secretary of State 2026,Vermont,solid-D,+18.0,cook,"367,428",5,1.18x,575.1235982,11
+Rhode Island Secretary of State 2026,Rhode Island,solid-D,+18.0,cook,"517,757",5,1.18x,518.8897222,10
+South Dakota Secretary of State 2026,South Dakota,solid-R,-18.0,cook,"422,609",5,1.18x,551.4818704,10
+Nebraska Secretary of State 2026,Nebraska,solid-R,-18.0,cook,"956,383",5,1.18x,431.6416142,8
+New Mexico Secretary of State 2026,New Mexico,solid-D,+18.0,cook,"923,965",5,1.18x,436.1302459,8
+Idaho Secretary of State 2026,Idaho,solid-R,-18.0,cook,"867,934",5,1.18x,444.3926342,8
+Arkansas Secretary of State 2026,Arkansas,solid-R,-18.0,cook,"1,219,069",5,1.18x,401.3325422,7
+Connecticut Secretary of State 2026,Connecticut,solid-D,+18.0,cook,"1,823,857",5,1.18x,355.6441154,7
+Alabama Secretary of State 2026,Alabama,solid-R,-18.0,cook,"2,323,282",5,1.18x,330.7366202,6
+South Carolina Secretary of State 2026,South Carolina,solid-R,-18.0,cook,"2,513,329",5,1.18x,323.0264314,6
+Colorado Secretary of State 2026,Colorado,solid-D,+18.0,cook,"3,256,980",5,1.18x,298.8603735,6
+Georgia Secretary of State 2026,Georgia,solid-R,-18.0,cook,"4,999,960",5,1.18x,262.7985129,5
+Massachusetts Secretary of State 2026,Massachusetts,solid-D,+18.0,cook,"3,631,402",5,1.18x,289.2614533,5
+Illinois Secretary of State 2026,Illinois,solid-D,+18.0,cook,"6,033,744",5,1.18x,248.391539,5
+Ohio Secretary of State 2026,Ohio,solid-R,-18.0,cook,"5,922,202",5,1.18x,249.7858873,5
+California Secretary of State 2026,California,solid-D,+18.0,cook,"17,501,380",5,1.18x,180.4642471,3
+,,,,,,,,,
+▶  BALLOT INITIATIVES  |  σ_eff=6.47  |  σ ratio=1.53×,,,,,,,,,
+Race,State,Cook Rating,Margin (pts),Margin Source,2020 Turnout,σ_eff,σ ratio,VP Raw,Voter Power (0–100)
+AK Repeal Top-Four Ranked-Choice Voting Initiative,Alaska,toss-up,0.0,cook,"359,530",6.475,1.53x,10465.19942,100
+ID Reproductive Rights Initiative,Idaho,toss-up,0.0,cook,"867,934",6.475,1.53x,8033.81892,77
+ND Supermajority Threshold for Constitutional Amendments,North Dakota,lean-R,-4.0,cook,"362,024",6.475,1.53x,7558.848786,72
+SD Supermajority Threshold for Constitutional Amendments,South Dakota,lean-R,-4.0,cook,"422,609",6.475,1.53x,7215.978718,69
+NV Question 7 – Voter ID (2nd approval),Nevada,toss-up,0.0,cook,"1,405,376",6.475,1.53x,6952.328576,66
+OK Minimum Wage Increase to $15/hour,Oklahoma,toss-up,0.0,cook,"1,560,699",6.475,1.53x,6737.089292,64
+MT Nonpartisan Judicial Elections Initiative,Montana,lean-R,-4.0,cook,"603,674",6.475,1.53x,6483.897262,62
+NE Direct Democracy Protection Initiative,Nebraska,lean-R,-4.0,cook,"956,383",6.475,1.53x,5647.904073,54
+MO Amendment 3 – Repeal Abortion Rights,Missouri,toss-up,0.0,cook,"3,025,962",6.475,1.53x,5523.431954,53
+MO LGBTQ Anti-Discrimination + Same-Sex Marriage,Missouri,toss-up,0.0,cook,"3,025,962",6.475,1.53x,5523.431954,53
+"MO ""Protect Missouri Voters"" Amendment",Missouri,toss-up,0.0,cook,"3,025,962",6.475,1.53x,5523.431954,53
+KS Referendum on Elected Judicial Elections,Kansas,lean-R,-4.0,cook,"1,373,986",6.475,1.53x,5066.198172,48
+OH Equal Rights Amendment (incl. gender identity),Ohio,toss-up,0.0,cook,"5,922,202",6.475,1.53x,4515.679227,43
+AK Campaign Contribution Limits Initiative,Alaska,likely-D,+9.0,cook,"359,530",6.475,1.53x,3569.312961,34
+NV Question 6 – Abortion Rights (2nd approval),Nevada,likely-D,+9.0,cook,"1,405,376",6.475,1.53x,2371.19576,23
+VA Right to Reproductive Freedom Amendment,Virginia,likely-D,+9.0,cook,"4,460,524",6.475,1.53x,1676.831429,16
+VA Congressional Redistricting Map Amendment,Virginia,likely-D,+9.0,cook,"4,460,524",6.475,1.53x,1676.831429,16
+VA Remove Same-Sex Marriage Ban Amendment,Virginia,likely-D,+9.0,cook,"4,460,524",6.475,1.53x,1676.831429,16
+VA Voting Rights Restoration for Felons Upon Release,Virginia,likely-D,+9.0,cook,"4,460,524",6.475,1.53x,1676.831429,16
+AR Direct Democracy Protection (Save AR Democracy),Arkansas,solid-R,-18.0,cook,"1,219,069",6.475,1.53x,831.2779963,8
+UT Tax Initiative Supermajority Requirement,Utah,solid-R,-18.0,cook,"1,488,289",6.475,1.53x,782.9762517,7
+OR LGBTQ Non-Discrimination + Same-Sex Marriage Repeal,Oregon,solid-D,+18.0,cook,"2,374,321",6.475,1.53x,680.6015615,7
+CA Supermajority Vote Requirements for Initiatives,California,solid-D,+18.0,cook,"17,501,380",6.475,1.53x,373.7946515,4
+CA Recall Process Reform Amendment,California,solid-D,+18.0,cook,"17,501,380",6.475,1.53x,373.7946515,4
