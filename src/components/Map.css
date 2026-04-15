@@ -1,0 +1,144 @@
+.map-wrapper {
+  position: relative;
+  height: 50vh;
+  flex-shrink: 0;
+}
+
+.map-container {
+  width: 100%;
+  height: 100%;
+}
+
+/* ── Error overlay ─────────────────────────────────────────────────────────── */
+.map-error {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  z-index: 10;
+  max-width: 90%;
+  white-space: normal;
+  text-align: center;
+}
+
+/* ── Legend ────────────────────────────────────────────────────────────────── */
+.map-legend {
+  position: absolute;
+  bottom: 28px;
+  right: 48px;
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(4px);
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 11px;
+  color: #475569;
+  z-index: 10;
+  min-width: 130px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+.legend-title {
+  font-weight: 700;
+  font-size: 12px;
+  color: #1e293b;
+  margin-bottom: 6px;
+}
+
+.legend-gradient {
+  height: 10px;
+  border-radius: 5px;
+  /* Match the getDistrictColor hsl gradient */
+  background: linear-gradient(
+    to right,
+    hsl(52, 85%, 90%),
+    hsl(35, 92%, 72%),
+    hsl(15, 93%, 62%),
+    hsl(0, 95%, 50%)
+  );
+  margin-bottom: 4px;
+}
+
+.legend-labels {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  color: #64748b;
+  margin-bottom: 8px;
+}
+
+.legend-no-contest {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  color: #475569;
+}
+
+.legend-swatch {
+  display: inline-block;
+  width: 14px;
+  height: 10px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ── Mapbox popup ──────────────────────────────────────────────────────────── */
+.map-popup {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 13px;
+  color: #1e293b;
+}
+
+.popup-title {
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.popup-subtitle {
+  font-size: 11px;
+  color: #64748b;
+  margin-bottom: 10px;
+}
+
+.popup-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 5px;
+}
+
+.popup-label {
+  color: #64748b;
+  font-size: 11px;
+}
+
+.popup-value {
+  font-weight: 600;
+  font-size: 12px;
+}
+
+.popup-vp {
+  display: inline-block;
+  padding: 1px 7px;
+  border-radius: 4px;
+  color: #1e293b;
+  font-weight: 700;
+}
+
+.popup-candidates {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid #f1f5f9;
+  font-size: 11px;
+  color: #94a3b8;
+}
