@@ -80,6 +80,43 @@
   color: #94a3b8;
 }
 
+/* ── Race tabs ─────────────────────────────────────────────────────────────── */
+.race-tabs {
+  display: flex;
+  gap: 2px;
+  padding: 8px 14px 0;
+  border-bottom: 1px solid #e2e8f0;
+  background: #f8fafc;
+  position: sticky;
+  top: 0;
+  z-index: 3;
+}
+
+.tab-btn {
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #64748b;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  cursor: pointer;
+  border-radius: 4px 4px 0 0;
+  transition: color 0.1s, border-color 0.1s;
+  white-space: nowrap;
+}
+
+.tab-btn:hover {
+  color: #1d4ed8;
+}
+
+.tab-btn--active {
+  color: #1d4ed8;
+  border-bottom-color: #1d4ed8;
+  background: #fff;
+}
+
 /* ── List column header row ────────────────────────────────────────────────── */
 .list-header {
   display: flex;

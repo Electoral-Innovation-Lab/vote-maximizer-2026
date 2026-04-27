@@ -1,43 +1,64 @@
 import { useState, useEffect, useCallback } from 'react';
 import Map from './components/Map.jsx';
 import InfoBox from './components/InfoBox.jsx';
-import { loadHouseRaces } from './utils/parseCSV.js';
+import { loadHouseRaces, loadSenateRaces, loadGovernorRaces } from './utils/parseCSV.js';
 import './App.css';
 
 export default function App() {
-  const [districtData, setDistrictData] = useState([]);
+  const [houseData, setHouseData] = useState([]);
+  const [senateData, setSenateData] = useState([]);
+  const [governorData, setGovernorData] = useState([]);
+  const [activeTab, setActiveTab] = useState('house');
   const [hoveredGeoid, setHoveredGeoid] = useState(null);
   const [selectedGeoid, setSelectedGeoid] = useState(null);
 
   useEffect(() => {
-    loadHouseRaces()
-      .then(setDistrictData)
+    Promise.all([loadHouseRaces(), loadSenateRaces(), loadGovernorRaces()])
+      .then(([house, senate, governor]) => {
+        setHouseData(house);
+        setSenateData(senate);
+        setGovernorData(governor);
+      })
       .catch((err) => console.error('Failed to load CSV data:', err));
   }, []);
 
-  const handleDistrictHover = useCallback((geoid) => {
+  const raceData =
+    activeTab === 'senate' ? senateData :
+    activeTab === 'governor' ? governorData :
+    houseData;
+
+  const handleTabChange = useCallback((tab) => {
+    setActiveTab(tab);
+    setHoveredGeoid(null);
+    setSelectedGeoid(null);
+  }, []);
+
+  const handleHover = useCallback((geoid) => {
     setHoveredGeoid(geoid);
   }, []);
 
-  const handleDistrictSelect = useCallback((geoid) => {
+  const handleSelect = useCallback((geoid) => {
     setSelectedGeoid(geoid);
   }, []);
 
   return (
     <div className="app">
       <Map
-        districtData={districtData}
+        raceData={raceData}
+        tab={activeTab}
         hoveredGeoid={hoveredGeoid}
         selectedGeoid={selectedGeoid}
-        onDistrictHover={handleDistrictHover}
-        onDistrictSelect={handleDistrictSelect}
+        onRaceHover={handleHover}
+        onRaceSelect={handleSelect}
       />
       <InfoBox
-        districtData={districtData}
+        raceData={raceData}
+        activeTab={activeTab}
+        onTabChange={handleTabChange}
         hoveredGeoid={hoveredGeoid}
         selectedGeoid={selectedGeoid}
-        onDistrictHover={handleDistrictHover}
-        onDistrictSelect={handleDistrictSelect}
+        onRaceHover={handleHover}
+        onRaceSelect={handleSelect}
       />
     </div>
   );

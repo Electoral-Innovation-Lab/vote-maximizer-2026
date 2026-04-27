@@ -1,10 +1,89 @@
 import Papa from 'papaparse';
-import { getGEOID, STATE_ABBR } from './districtUtils.js';
+import { getGEOID, STATE_ABBR, STATE_FIPS } from './districtUtils.js';
 
 export async function loadHouseRaces() {
   const response = await fetch('/vm_data.csv');
   const text = await response.text();
   return parseHouseRaces(text);
+}
+
+export async function loadSenateRaces() {
+  const response = await fetch('/vm_data.csv');
+  const text = await response.text();
+  return parseStateRaces(text, 'US SENATE');
+}
+
+export async function loadGovernorRaces() {
+  const response = await fetch('/vm_data.csv');
+  const text = await response.text();
+  return parseStateRaces(text, 'GOVERNOR');
+}
+
+function parseStateRaces(csvText, sectionName) {
+  const lines = csvText.split('\n');
+
+  const sectionIdx = lines.findIndex((line) => line.includes(sectionName));
+  if (sectionIdx === -1) {
+    console.error(`${sectionName} section not found in CSV`);
+    return [];
+  }
+
+  const nextSectionIdx = lines
+    .slice(sectionIdx + 2)
+    .findIndex((line) => line.trimStart().startsWith('▶'));
+  const endIdx =
+    nextSectionIdx === -1
+      ? lines.length
+      : sectionIdx + 2 + nextSectionIdx;
+
+  const sectionLines = lines.slice(sectionIdx + 1, endIdx);
+  if (!sectionLines.length) return [];
+
+  const { data } = Papa.parse(sectionLines.join('\n'), {
+    skipEmptyLines: true,
+    header: false,
+  });
+
+  // Columns: 0: Race, 1: State, 2: Cook Rating, 3: Margin (pts),
+  // 4: Margin Source, 5: 2020 Turnout, 6: σ_eff, 7: σ ratio,
+  // 8: VP Raw, 9: Voter Power (0–100)
+  const COL = { RACE: 0, STATE: 1, COOK: 2, MARGIN: 3, SOURCE: 4, VP: 9 };
+
+  const races = [];
+
+  for (let i = 1; i < data.length; i++) {
+    const row = data[i];
+    if (!row || !row[COL.RACE]) continue;
+
+    const race = row[COL.RACE].trim();
+    const state = row[COL.STATE]?.trim();
+    const cookRating = row[COL.COOK]?.trim();
+    const margin = parseFloat(row[COL.MARGIN]);
+    const source = row[COL.SOURCE]?.trim();
+    const voterPower = parseFloat(row[COL.VP]);
+
+    if (!state || isNaN(voterPower)) continue;
+
+    const fips = STATE_FIPS[state];
+    if (!fips) continue;
+
+    const abbr = STATE_ABBR[state] ?? state;
+    const isSpecial = race.toLowerCase().includes('special');
+    const label = isSpecial ? `${abbr}*` : abbr;
+
+    races.push({
+      geoid: fips,
+      label,
+      race,
+      state,
+      cookRating,
+      margin,
+      source,
+      voterPower,
+    });
+  }
+
+  return races.sort((a, b) => b.voterPower - a.voterPower);
 }
 
 function parseHouseRaces(csvText) {
@@ -55,7 +134,8 @@ function parseHouseRaces(csvText) {
     if (!districtMatch) continue;
 
     const districtNum = parseInt(districtMatch[1], 10);
-    const state = row[COL.STATE]?.trim();
+    // Strip annotation markers (e.g. "Virginia ⚠️" → "Virginia")
+    const state = row[COL.STATE]?.trim().replace(/\s*⚠️.*$/, '');
     const cookRating = row[COL.COOK]?.trim();
     const margin = parseFloat(row[COL.MARGIN]);
     const source = row[COL.SOURCE]?.trim();

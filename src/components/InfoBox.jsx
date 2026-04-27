@@ -1,13 +1,25 @@
 import DistrictCard from './DistrictCard.jsx';
+import ContestDetail from './ContestDetail.jsx';
 import './InfoBox.css';
 
+const TABS = [
+  { id: 'house', label: 'US House' },
+  { id: 'senate', label: 'Senate' },
+  { id: 'governor', label: 'Governor' },
+];
+
 export default function InfoBox({
-  districtData,
+  raceData,
+  activeTab,
+  onTabChange,
   hoveredGeoid,
   selectedGeoid,
-  onDistrictHover,
-  onDistrictSelect,
+  onRaceHover,
+  onRaceSelect,
 }) {
+  const columnLabel = activeTab === 'house' ? 'District' : 'State';
+  const selectedRace = selectedGeoid ? raceData.find((r) => r.geoid === selectedGeoid) : null;
+
   return (
     <div className="info-box">
       {/* ── Fixed left header panel ─────────────────────────────────────── */}
@@ -41,32 +53,53 @@ export default function InfoBox({
         </div>
       </div>
 
-      {/* ── Scrollable district list ────────────────────────────────────── */}
+      {/* ── Right panel: tabs + list or detail ─────────────────────────── */}
       <div className="district-list">
-        {districtData.length === 0 ? (
-          <div className="list-loading">Loading district data…</div>
+        {/* Tab bar — always visible */}
+        <div className="race-tabs">
+          {TABS.map((t) => (
+            <button
+              key={t.id}
+              className={`tab-btn ${activeTab === t.id ? 'tab-btn--active' : ''}`}
+              onClick={() => onTabChange(t.id)}
+            >
+              {t.label}
+            </button>
+          ))}
+        </div>
+
+        {raceData.length === 0 ? (
+          <div className="list-loading">Loading data…</div>
+        ) : selectedRace ? (
+          /* ── Detail / compare panel ── */
+          <ContestDetail
+            race={selectedRace}
+            allRaces={raceData}
+            activeTab={activeTab}
+            onBack={() => onRaceSelect(null)}
+            onSelect={onRaceSelect}
+          />
         ) : (
+          /* ── Ranked list ── */
           <>
             <div className="list-header">
               <span className="lh-rank">#</span>
-              <span className="lh-district">District</span>
+              <span className="lh-district">{columnLabel}</span>
               <span className="lh-cook">Cook Rating</span>
               <span className="lh-vp">Voter Power</span>
             </div>
 
-            {districtData.map((district, idx) => (
+            {raceData.map((race, idx) => (
               <DistrictCard
-                key={district.geoid ?? district.label}
-                district={district}
+                key={race.geoid ?? race.label}
+                district={race}
                 rank={idx + 1}
-                isHovered={hoveredGeoid === district.geoid}
-                isSelected={selectedGeoid === district.geoid}
-                onHover={() => onDistrictHover(district.geoid)}
-                onLeave={() => onDistrictHover(null)}
+                isHovered={hoveredGeoid === race.geoid}
+                isSelected={selectedGeoid === race.geoid}
+                onHover={() => onRaceHover(race.geoid)}
+                onLeave={() => onRaceHover(null)}
                 onClick={() =>
-                  onDistrictSelect(
-                    selectedGeoid === district.geoid ? null : district.geoid
-                  )
+                  onRaceSelect(selectedGeoid === race.geoid ? null : race.geoid)
                 }
               />
             ))}
