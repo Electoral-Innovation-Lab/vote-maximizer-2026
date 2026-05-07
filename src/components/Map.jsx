@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
+import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { feature as topoFeature } from 'topojson-client';
 import statesData from 'us-atlas/states-10m.json';
 import { getDistrictColor } from '../utils/districtUtils.js';
@@ -38,14 +40,30 @@ function getStatesGeoJSON() {
   return geo;
 }
 
+function computeCentroid(geometry) {
+  const coords = [];
+  if (geometry.type === 'Polygon') {
+    geometry.coordinates[0].forEach((c) => coords.push(c));
+  } else if (geometry.type === 'MultiPolygon') {
+    geometry.coordinates.forEach((poly) => poly[0].forEach((c) => coords.push(c)));
+  }
+  if (!coords.length) return null;
+  return [
+    coords.reduce((s, c) => s + c[1], 0) / coords.length, // lat
+    coords.reduce((s, c) => s + c[0], 0) / coords.length, // lng
+  ];
+}
+
 function buildColorExpression(raceData) {
   const expr = ['match', ['get', 'GEOID']];
+  const seen = new Set();
   for (const d of raceData) {
-    if (d.geoid) {
+    if (d.geoid && !seen.has(d.geoid)) {
+      seen.add(d.geoid);
       expr.push(d.geoid, getDistrictColor(d.voterPower));
     }
   }
-  expr.push('#cbd5e1'); // default: no contest
+  expr.push('#cbd5e1');
   return expr;
 }
 
@@ -57,8 +75,12 @@ export default function Map({
   tab,
   hoveredGeoid,
   selectedGeoid,
+  previewCenter,
+  searchCenter,
   onRaceHover,
   onRaceSelect,
+  onLocationSearch,
+  onDistrictCentroidsReady,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -70,10 +92,14 @@ export default function Map({
   const raceDataRef = useRef(raceData);
   const onHoverRef = useRef(onRaceHover);
   const onSelectRef = useRef(onRaceSelect);
+  const onLocationSearchRef = useRef(onLocationSearch);
+  const onDistrictCentroidsReadyRef = useRef(onDistrictCentroidsReady);
   const tabRef = useRef(tab);
   useEffect(() => { raceDataRef.current = raceData; }, [raceData]);
   useEffect(() => { onHoverRef.current = onRaceHover; }, [onRaceHover]);
   useEffect(() => { onSelectRef.current = onRaceSelect; }, [onRaceSelect]);
+  useEffect(() => { onLocationSearchRef.current = onLocationSearch; }, [onLocationSearch]);
+  useEffect(() => { onDistrictCentroidsReadyRef.current = onDistrictCentroidsReady; }, [onDistrictCentroidsReady]);
   useEffect(() => { tabRef.current = tab; }, [tab]);
 
   // GEOID → Mapbox feature ID for each source
@@ -100,6 +126,28 @@ export default function Map({
 
     mapRef.current = map;
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
+    map.addControl(
+      new mapboxgl.GeolocateControl({
+        positionOptions: { enableHighAccuracy: true },
+        trackUserLocation: false,
+        showAccuracyCircle: false,
+        showUserLocation: true,
+      }),
+      'top-right'
+    );
+    const geocoder = new MapboxGeocoder({
+      accessToken: token,
+      mapboxgl,
+      placeholder: 'Search address or place…',
+      countries: 'us',
+      marker: { color: '#FF8F00' },
+      flyTo: { speed: 1.4, curve: 1.4 },
+    });
+    geocoder.on('result', (e) => {
+      const [lng, lat] = e.result.center;
+      onLocationSearchRef.current?.({ lat, lng });
+    });
+    map.addControl(geocoder, 'top-left');
 
     map.on('load', async () => {
       try {
@@ -108,11 +156,16 @@ export default function Map({
 
         if (!districtGeo.features?.length) throw new Error('No district features returned');
 
-        // Build GEOID → feature-id lookups
+        // Build GEOID → feature-id lookups + centroids
+        const centroids = {};
         districtGeo.features.forEach((f, idx) => {
           const geoid = f.properties?.GEOID;
-          if (geoid) districtFidMap.current[geoid] = idx;
+          if (geoid) {
+            districtFidMap.current[geoid] = idx;
+            centroids[geoid] = computeCentroid(f.geometry);
+          }
         });
+        onDistrictCentroidsReadyRef.current?.(centroids);
         stateGeo.features.forEach((f, idx) => {
           const geoid = f.properties?.GEOID;
           if (geoid) stateFidMap.current[geoid] = idx;
@@ -132,14 +185,14 @@ export default function Map({
         map.addLayer({
           id: 'districts-hover', type: 'fill', source: 'districts',
           paint: {
-            'fill-color': '#1d4ed8',
+            'fill-color': '#FF8F00',
             'fill-opacity': ['case', ['boolean', ['feature-state', 'hovered'], false], 0.25, 0],
           },
         });
         map.addLayer({
           id: 'districts-selected', type: 'line', source: 'districts',
           paint: {
-            'line-color': '#1d4ed8',
+            'line-color': '#FF8F00',
             'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0],
           },
         });
@@ -161,7 +214,7 @@ export default function Map({
           id: 'states-hover', type: 'fill', source: 'states',
           layout: { visibility: 'none' },
           paint: {
-            'fill-color': '#1d4ed8',
+            'fill-color': '#FF8F00',
             'fill-opacity': ['case', ['boolean', ['feature-state', 'hovered'], false], 0.25, 0],
           },
         });
@@ -169,7 +222,7 @@ export default function Map({
           id: 'states-selected', type: 'line', source: 'states',
           layout: { visibility: 'none' },
           paint: {
-            'line-color': '#1d4ed8',
+            'line-color': '#FF8F00',
             'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0],
           },
         });
@@ -240,6 +293,20 @@ export default function Map({
       mapRef.current = null;
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Fly to search location (landing page search) ─────────────────────────
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !isMapReady || !searchCenter) return;
+    map.flyTo({ center: searchCenter, zoom: 7, speed: 1.4, curve: 1.4 });
+  }, [searchCenter, isMapReady]);
+
+  // ── Fly to preview center (Top Contests hover) ───────────────────────────
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !isMapReady || !previewCenter) return;
+    map.flyTo({ center: previewCenter, zoom: Math.max(map.getZoom(), 5), speed: 1.2, curve: 1.2 });
+  }, [previewCenter, isMapReady]);
 
   // ── Toggle layer visibility when tab changes ──────────────────────────────
   useEffect(() => {
@@ -384,64 +451,48 @@ function formatCookLabel(cookRating) {
 }
 
 function formatMarginLabel(margin) {
+  if (margin == null || isNaN(margin)) return null;
   if (margin === 0) return 'Even';
-  return margin > 0 ? `+${margin} Dem` : `+${Math.abs(margin)} Rep`;
+  const abs = Math.abs(margin).toFixed(1).replace(/\.0$/, '');
+  return margin > 0 ? `+${abs} Dem` : `+${abs} Rep`;
+}
+
+function candidateRow(d, r) {
+  if (!d && !r) return '';
+  const parts = [];
+  if (d) parts.push(`<span style="color:#2563eb;font-weight:600;">D:</span> ${d}`);
+  if (r) parts.push(`<span style="color:#dc2626;font-weight:600;">R:</span> ${r}`);
+  return `<div class="popup-candidates">${parts.join('<br>')}</div>`;
 }
 
 function buildPopupHTML(race, tab) {
   const vpColor = getDistrictColor(race.voterPower);
   const cookLabel = formatCookLabel(race.cookRating);
   const marginLabel = formatMarginLabel(race.margin);
-  const sourceLabel = race.source === 'cook' ? 'Cook Political Report proxy' : 'Polling average';
 
-  if (tab === 'house') {
-    return `
-      <div class="map-popup">
-        <div class="popup-title">${race.label}</div>
-        <div class="popup-subtitle">${race.state}'s ${ordinal(race.districtNum)} Congressional District</div>
-        <div class="popup-row">
-          <span class="popup-label">Cook Rating</span>
-          <span class="popup-value">${cookLabel}</span>
-        </div>
-        <div class="popup-row">
-          <span class="popup-label">Projected Margin</span>
-          <span class="popup-value">${marginLabel}</span>
-        </div>
-        <div class="popup-row">
-          <span class="popup-label">Voter Power</span>
-          <span class="popup-value popup-vp" style="background:${vpColor}">${Math.round(race.voterPower)}</span>
-        </div>
-        <div class="popup-row">
-          <span class="popup-label">Data Source</span>
-          <span class="popup-value">${sourceLabel}</span>
-        </div>
-        <div class="popup-candidates"><em>Candidate info coming soon</em></div>
-      </div>
-    `;
-  }
+  const title = tab === 'house' ? race.label : (race.state ?? race.label);
+  const subtitle = tab === 'house'
+    ? `${race.state}'s ${ordinal(race.districtNum)} Congressional District`
+    : (race.race ?? '');
 
-  // Senate or Governor
+  const marginRow = marginLabel
+    ? `<div class="popup-row"><span class="popup-label">Est. Margin</span><span class="popup-value">${marginLabel}</span></div>`
+    : '';
+
   return `
     <div class="map-popup">
-      <div class="popup-title">${race.state}</div>
-      <div class="popup-subtitle">${race.race}</div>
+      <div class="popup-title">${title}</div>
+      ${subtitle ? `<div class="popup-subtitle">${subtitle}</div>` : ''}
       <div class="popup-row">
         <span class="popup-label">Cook Rating</span>
-        <span class="popup-value">${cookLabel}</span>
+        <span class="popup-value">${cookLabel ?? '—'}</span>
       </div>
-      <div class="popup-row">
-        <span class="popup-label">Projected Margin</span>
-        <span class="popup-value">${marginLabel}</span>
-      </div>
+      ${marginRow}
       <div class="popup-row">
         <span class="popup-label">Voter Power</span>
         <span class="popup-value popup-vp" style="background:${vpColor}">${Math.round(race.voterPower)}</span>
       </div>
-      <div class="popup-row">
-        <span class="popup-label">Data Source</span>
-        <span class="popup-value">${sourceLabel}</span>
-      </div>
-      <div class="popup-candidates"><em>Candidate info coming soon</em></div>
+      ${candidateRow(race.dCandidate, race.rCandidate)}
     </div>
   `;
 }

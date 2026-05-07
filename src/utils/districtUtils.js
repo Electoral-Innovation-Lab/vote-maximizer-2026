@@ -52,6 +52,37 @@ export function getDistrictColor(voterPower) {
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 
+export const STATE_CENTROIDS = {
+  Alabama: [32.779, -86.829], Alaska: [64.201, -153.494], Arizona: [34.274, -111.660],
+  Arkansas: [34.894, -92.443], California: [37.184, -119.470], Colorado: [38.997, -105.548],
+  Connecticut: [41.622, -72.727], Delaware: [38.990, -75.505], Florida: [28.631, -82.450],
+  Georgia: [32.642, -83.443], Hawaii: [20.293, -156.374], Idaho: [44.351, -114.613],
+  Illinois: [40.042, -89.197], Indiana: [39.894, -86.282], Iowa: [42.075, -93.496],
+  Kansas: [38.494, -98.380], Kentucky: [37.535, -85.302], Louisiana: [31.069, -91.997],
+  Maine: [45.370, -69.243], Maryland: [39.055, -76.791], Massachusetts: [42.260, -71.808],
+  Michigan: [44.347, -85.410], Minnesota: [46.281, -94.305], Mississippi: [32.736, -89.668],
+  Missouri: [38.357, -92.458], Montana: [46.880, -110.363], Nebraska: [41.538, -99.795],
+  Nevada: [38.420, -116.753], 'New Hampshire': [43.681, -71.581], 'New Jersey': [40.191, -74.673],
+  'New Mexico': [34.407, -106.113], 'New York': [42.954, -75.527], 'North Carolina': [35.556, -79.388],
+  'North Dakota': [47.450, -100.466], Ohio: [40.286, -82.794], Oklahoma: [35.589, -97.494],
+  Oregon: [43.934, -120.558], Pennsylvania: [40.878, -77.800], 'Rhode Island': [41.676, -71.556],
+  'South Carolina': [33.917, -80.896], 'South Dakota': [44.444, -100.226], Tennessee: [35.858, -86.351],
+  Texas: [31.476, -99.331], Utah: [39.321, -111.094], Vermont: [44.069, -72.666],
+  Virginia: [37.522, -78.854], Washington: [47.383, -120.447], 'West Virginia': [38.641, -80.623],
+  Wisconsin: [44.624, -89.994], Wyoming: [42.996, -107.551],
+};
+
+export function haversineDistance(lat1, lng1, lat2, lng2) {
+  const R = 3959;
+  const toRad = (x) => (x * Math.PI) / 180;
+  const dLat = toRad(lat2 - lat1);
+  const dLng = toRad(lng2 - lng1);
+  const a =
+    Math.sin(dLat / 2) ** 2 +
+    Math.cos(toRad(lat1)) * Math.cos(toRad(lat2)) * Math.sin(dLng / 2) ** 2;
+  return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+}
+
 export const COOK_CONFIG = {
   'toss-up':  { label: 'Toss-Up',  color: '#92400e', bg: '#fef3c7' },
   'lean-D':   { label: 'Lean D',   color: '#1e40af', bg: '#dbeafe' },

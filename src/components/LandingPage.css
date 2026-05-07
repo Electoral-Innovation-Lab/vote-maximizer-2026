@@ -1,0 +1,273 @@
+/* ── Landing overlay ───────────────────────────────────────────────────────── */
+.landing {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: #0f172a;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  /* Slide-up transition */
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.5s ease;
+}
+
+.landing--out {
+  transform: translateY(-100%);
+  opacity: 0;
+}
+
+/* ── Nav ────────────────────────────────────────────────────────────────────── */
+.landing-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 32px;
+  flex-shrink: 0;
+}
+
+.landing-wordmark {
+  font-size: 13px;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.5);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.landing-nav-link {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.5);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: color 0.15s;
+}
+.landing-nav-link:hover { color: rgba(255, 255, 255, 0.9); }
+
+/* ── Hero ───────────────────────────────────────────────────────────────────── */
+.landing-hero {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+  text-align: center;
+  gap: 0;
+}
+
+.landing-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #FF8F00;
+  margin-bottom: 18px;
+}
+
+.landing-headline {
+  font-size: clamp(36px, 6vw, 68px);
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin: 0 0 20px;
+}
+
+.landing-sub {
+  font-size: clamp(15px, 2vw, 18px);
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.6;
+  margin: 0 0 36px;
+  max-width: 540px;
+}
+
+.landing-br { display: none; }
+@media (min-width: 600px) { .landing-br { display: inline; } }
+
+/* ── Stats ──────────────────────────────────────────────────────────────────── */
+.landing-stats {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.landing-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+.stat-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.5px;
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.4);
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.landing-stat-divider {
+  width: 1px;
+  height: 32px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Search ─────────────────────────────────────────────────────────────────── */
+.landing-search {
+  width: 100%;
+  max-width: 480px;
+  margin-bottom: 16px;
+}
+
+.landing-search-inner {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 6px 6px 6px 14px;
+  gap: 8px;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.landing-search-inner:focus-within {
+  background: rgba(255, 255, 255, 0.09);
+  border-color: rgba(255, 143, 0, 0.6);
+}
+
+.landing-search-icon {
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.landing-search-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #fff;
+  min-width: 0;
+}
+
+.landing-search-input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.landing-search-btn {
+  padding: 10px 20px;
+  background: #FF8F00;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.landing-search-btn:hover:not(:disabled) { background: #E67E00; }
+.landing-search-btn:disabled { opacity: 0.6; cursor: default; }
+
+.landing-suggestions {
+  list-style: none;
+  margin: 4px 0 0;
+  padding: 4px 0;
+  background: #fff;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  overflow: hidden;
+}
+
+.landing-suggestion-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #0f172a;
+  cursor: pointer;
+  transition: background 0.1s;
+}
+.landing-suggestion-item:hover { background: #FFF8E1; }
+
+.landing-suggest-icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  color: #94a3b8;
+}
+
+.landing-search-error {
+  margin: 8px 0 0;
+  font-size: 12px;
+  color: #f87171;
+  text-align: center;
+}
+
+.landing-skip {
+  background: none;
+  border: none;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  padding: 4px;
+  transition: color 0.15s;
+}
+.landing-skip:hover { color: rgba(255, 255, 255, 0.7); }
+
+/* ── Scroll hint ────────────────────────────────────────────────────────────── */
+.landing-scroll-hint {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 0 0 28px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.landing-scroll-arrow {
+  width: 18px;
+  height: 18px;
+  border-right: 2px solid rgba(255,255,255,0.2);
+  border-bottom: 2px solid rgba(255,255,255,0.2);
+  transform: rotate(45deg);
+  animation: bounceDown 1.8s ease-in-out infinite;
+}
+
+@keyframes bounceDown {
+  0%, 100% { transform: rotate(45deg) translateY(0); opacity: 0.3; }
+  50%       { transform: rotate(45deg) translateY(4px); opacity: 0.7; }
+}
+
+/* ── Staggered entrance animations ─────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.anim-1 { animation: fadeInUp 0.55s ease both; animation-delay: 0.15s; }
+.anim-2 { animation: fadeInUp 0.6s  ease both; animation-delay: 0.3s;  }
+.anim-3 { animation: fadeInUp 0.6s  ease both; animation-delay: 0.5s;  }
+.anim-4 { animation: fadeInUp 0.55s ease both; animation-delay: 0.65s; }
+.anim-5 { animation: fadeInUp 0.55s ease both; animation-delay: 0.8s;  }
+.anim-6 { animation: fadeInUp 0.5s  ease both; animation-delay: 1.1s;  }

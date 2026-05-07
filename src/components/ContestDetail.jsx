@@ -22,8 +22,10 @@ function cookCfg(cookRating) {
 }
 
 function formatMargin(margin) {
-  if (margin === 0 || isNaN(margin)) return 'Even';
-  return margin > 0 ? `+${margin} Dem` : `+${Math.abs(margin)} Rep`;
+  if (margin == null || isNaN(margin)) return null;
+  if (margin === 0) return 'Even';
+  const abs = Math.abs(margin).toFixed(1).replace(/\.0$/, '');
+  return margin > 0 ? `+${abs} Dem` : `+${abs} Rep`;
 }
 
 function getNearby(race, allRaces) {
@@ -204,11 +206,40 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect }) {
           <span className="cd-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
         </div>
         <VPBar voterPower={race.voterPower} />
-        <div className="cd-meta">
-          <span>Margin: <strong>{formatMargin(race.margin)}</strong></span>
-          <span>Source: <strong>{race.source === 'cook' ? 'Cook proxy' : 'Poll'}</strong></span>
-        </div>
+        {formatMargin(race.margin) && (
+          <div className="cd-meta">
+            <span>Est. Margin: <strong>{formatMargin(race.margin)}</strong></span>
+          </div>
+        )}
       </div>
+
+      {/* ── Candidates ── */}
+      {(race.dCandidate || race.rCandidate) && (
+        <div className="cd-section">
+          <h3 className="cd-section-title">Candidates</h3>
+          <div className="cd-candidates">
+            {race.dCandidate && (
+              <div className="cd-candidate cd-candidate--d">
+                <span className="cd-cand-party">D</span>
+                <span className="cd-cand-name">
+                  {race.dLink ? <a href={race.dLink} target="_blank" rel="noopener noreferrer">{race.dCandidate}</a> : race.dCandidate}
+                </span>
+              </div>
+            )}
+            {race.rCandidate && (
+              <div className="cd-candidate cd-candidate--r">
+                <span className="cd-cand-party">R</span>
+                <span className="cd-cand-name">
+                  {race.rLink ? <a href={race.rLink} target="_blank" rel="noopener noreferrer">{race.rCandidate}</a> : race.rCandidate}
+                </span>
+              </div>
+            )}
+            {race.incumbent && (
+              <div className="cd-incumbent">Incumbent: {race.incumbent}</div>
+            )}
+          </div>
+        </div>
+      )}
 
       {/* ── Get Involved ── */}
       <div className="cd-section">
