@@ -188,12 +188,12 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect }) {
   const nearby = getNearby(race, allRaces);
   const isHouse = race.districtNum !== undefined;
   const nearbyTitle = isHouse && allRaces.some((r) => r.geoid !== race.geoid && r.state === race.state)
-    ? `Other races in ${race.state}`
-    : 'Other high-impact races';
+    ? `Other contests in ${race.state}`
+    : 'Other high-impact contests';
 
   return (
     <div className="contest-detail">
-      <button className="cd-back" onClick={onBack}>← All races</button>
+      <button className="cd-back" onClick={onBack}>← All contests</button>
 
       {/* ── Contest header ── */}
       <div className="cd-header">
@@ -257,21 +257,21 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect }) {
         </div>
       </div>
 
-      {/* ── Nearby races ── */}
+      {/* ── Nearby contests ── */}
       {nearby.length > 0 && (
         <div className="cd-section">
           <h3 className="cd-section-title">{nearbyTitle}</h3>
           {nearby.map((r, i) => (
-            <MiniCard key={r.geoid} race={r} rank={i + 1} onClick={() => onSelect(r.geoid)} />
+            <MiniCard key={`${r.raceType}-${r.geoid}`} race={r} rank={i + 1} onClick={() => onSelect(r.geoid)} />
           ))}
         </div>
       )}
 
       {/* ── Compare ── */}
       <div className="cd-section">
-        <h3 className="cd-section-title">Compare Races</h3>
+        <h3 className="cd-section-title">Compare Contests</h3>
         <button className="cd-compare-btn" onClick={() => setPicking(true)}>
-          Compare with another race →
+          Compare with another contest →
         </button>
       </div>
     </div>

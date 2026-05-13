@@ -35,7 +35,7 @@ function findNearbyRaces(lat, lng, datasets, districtCentroids) {
     }
   }
 
-  return nearby.sort((a, b) => b.voterPower - a.voterPower);
+  return nearby.sort((a, b) => a.distance - b.distance || b.voterPower - a.voterPower);
 }
 
 function parseUrlParams() {

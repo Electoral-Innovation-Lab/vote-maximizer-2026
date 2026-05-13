@@ -7,31 +7,25 @@ import statesData from 'us-atlas/states-10m.json';
 import { getDistrictColor } from '../utils/districtUtils.js';
 import './Map.css';
 
-// ── Census TIGERweb: 119th Congressional Districts ────────────────────────────
-const CENSUS_DISTRICTS_BASE =
-  'https://tigerweb.geo.census.gov/arcgis/rest/services/TIGERweb/Legislative/MapServer/0/query' +
-  '?where=1%3D1&outFields=GEOID,STATE,CD119,NAME&f=geojson&outSR=4326&resultRecordCount=25';
+// Congressional district boundaries — two options (set one in .env):
+//   VITE_DISTRICT_TILESET=mapbox://username.tileset-id   ← Mapbox vector tileset (recommended)
+//   Fallback: place districts.geojson in public/
+const DISTRICT_TILESET = import.meta.env.VITE_DISTRICT_TILESET ?? null;
+const DISTRICT_SRC_LAYER = import.meta.env.VITE_DISTRICT_LAYER ?? 'cd119';
 
-async function fetchAllDistricts() {
-  const features = [];
-  let offset = 0;
-  let hasMore = true;
-
-  while (hasMore) {
-    const url = `${CENSUS_DISTRICTS_BASE}&resultOffset=${offset}`;
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status} at offset ${offset}`);
-    const json = await res.json();
-    features.push(...(json.features ?? []));
-    hasMore = json.exceededTransferLimit === true;
-    offset += 25;
-  }
-
-  return { type: 'FeatureCollection', features };
+async function loadDistrictGeoJSON() {
+  const CACHE_KEY = 'vm_districts_v2';
+  try {
+    const cached = sessionStorage.getItem(CACHE_KEY);
+    if (cached) return JSON.parse(cached);
+  } catch (_) {}
+  const res = await fetch('/districts.geojson');
+  if (!res.ok) throw new Error('districts.geojson not found in public/');
+  const geo = await res.json();
+  try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(geo)); } catch (_) {}
+  return geo;
 }
 
-// State boundaries from bundled us-atlas TopoJSON (no external fetch needed).
-// Feature id is already a zero-padded FIPS string ("01", "04", …).
 function getStatesGeoJSON() {
   const geo = topoFeature(statesData, statesData.objects.states);
   geo.features.forEach((f) => {
@@ -49,8 +43,8 @@ function computeCentroid(geometry) {
   }
   if (!coords.length) return null;
   return [
-    coords.reduce((s, c) => s + c[1], 0) / coords.length, // lat
-    coords.reduce((s, c) => s + c[0], 0) / coords.length, // lng
+    coords.reduce((s, c) => s + c[1], 0) / coords.length,
+    coords.reduce((s, c) => s + c[0], 0) / coords.length,
   ];
 }
 
@@ -65,6 +59,17 @@ function buildColorExpression(raceData) {
   }
   expr.push('#cbd5e1');
   return expr;
+}
+
+function setFState(map, source, geoid, state) {
+  if (!geoid) return;
+  try {
+    if (source === 'districts' && DISTRICT_TILESET) {
+      map.setFeatureState({ source, sourceLayer: DISTRICT_SRC_LAYER, id: geoid }, state);
+    } else {
+      map.setFeatureState({ source, id: geoid }, state);
+    }
+  } catch (_) {}
 }
 
 const DISTRICT_LAYERS = ['districts-fill', 'districts-line', 'districts-hover', 'districts-selected'];
@@ -88,7 +93,6 @@ export default function Map({
   const [mapError, setMapError] = useState(null);
   const [isMapReady, setIsMapReady] = useState(false);
 
-  // Keep latest values accessible inside Mapbox event callbacks
   const raceDataRef = useRef(raceData);
   const onHoverRef = useRef(onRaceHover);
   const onSelectRef = useRef(onRaceSelect);
@@ -102,20 +106,18 @@ export default function Map({
   useEffect(() => { onDistrictCentroidsReadyRef.current = onDistrictCentroidsReady; }, [onDistrictCentroidsReady]);
   useEffect(() => { tabRef.current = tab; }, [tab]);
 
-  // GEOID → Mapbox feature ID for each source
-  const districtFidMap = useRef({});
-  const stateFidMap = useRef({});
+  const prevHoveredRef = useRef({ source: null, geoid: null });
+  const prevSelectedRef = useRef({ source: null, geoid: null });
 
-  // ── Initialize Mapbox ──────────────────────────────────────────────────────
+  // ── Map initialization ───────────────────────────────────────────────────
   useEffect(() => {
     const token = import.meta.env.VITE_MAPBOX_TOKEN;
     if (!token || token === 'your_mapbox_public_token_here') {
-      setMapError('No Mapbox token found. Create a .env file with VITE_MAPBOX_TOKEN.');
+      setMapError('No Mapbox token. Add VITE_MAPBOX_TOKEN to .env');
       return;
     }
 
     mapboxgl.accessToken = token;
-
     const map = new mapboxgl.Map({
       container: containerRef.current,
       style: 'mapbox://styles/mapbox/light-v11',
@@ -123,8 +125,8 @@ export default function Map({
       zoom: 3.5,
       minZoom: 2,
     });
-
     mapRef.current = map;
+
     map.addControl(new mapboxgl.NavigationControl({ showCompass: false }), 'top-right');
     map.addControl(
       new mapboxgl.GeolocateControl({
@@ -135,6 +137,7 @@ export default function Map({
       }),
       'top-right'
     );
+
     const geocoder = new MapboxGeocoder({
       accessToken: token,
       mapboxgl,
@@ -145,120 +148,112 @@ export default function Map({
     });
     geocoder.on('result', (e) => {
       const [lng, lat] = e.result.center;
-      onLocationSearchRef.current?.({ lat, lng });
+      onLocationSearchRef.current?.({ lat, lng, placeName: e.result.place_name });
     });
     map.addControl(geocoder, 'top-left');
 
     map.on('load', async () => {
       try {
-        const [districtGeo] = await Promise.all([fetchAllDistricts()]);
-        const stateGeo = getStatesGeoJSON();
-
-        if (!districtGeo.features?.length) throw new Error('No district features returned');
-
-        // Build GEOID → feature-id lookups + centroids
-        const centroids = {};
-        districtGeo.features.forEach((f, idx) => {
-          const geoid = f.properties?.GEOID;
-          if (geoid) {
-            districtFidMap.current[geoid] = idx;
-            centroids[geoid] = computeCentroid(f.geometry);
+        // ── Congressional district source ────────────────────────────────
+        if (DISTRICT_TILESET) {
+          map.addSource('districts', {
+            type: 'vector',
+            url: DISTRICT_TILESET,
+            promoteId: { [DISTRICT_SRC_LAYER]: 'GEOID' },
+          });
+          // Compute centroids lazily from rendered features at initial zoom
+          map.once('idle', () => {
+            const features = map.queryRenderedFeatures({ layers: ['districts-fill'] });
+            const centroids = {};
+            features.forEach((f) => {
+              const geoid = f.properties?.GEOID;
+              if (geoid) centroids[geoid] = computeCentroid(f.geometry);
+            });
+            onDistrictCentroidsReadyRef.current?.(centroids);
+          });
+        } else {
+          try {
+            const districtGeo = await loadDistrictGeoJSON();
+            const centroids = {};
+            districtGeo.features.forEach((f) => {
+              const geoid = f.properties?.GEOID;
+              if (geoid) centroids[geoid] = computeCentroid(f.geometry);
+            });
+            onDistrictCentroidsReadyRef.current?.(centroids);
+            map.addSource('districts', { type: 'geojson', data: districtGeo, promoteId: 'GEOID' });
+          } catch (err) {
+            console.warn('District boundaries unavailable:', err.message);
+            map.addSource('districts', {
+              type: 'geojson',
+              data: { type: 'FeatureCollection', features: [] },
+              promoteId: 'GEOID',
+            });
           }
-        });
-        onDistrictCentroidsReadyRef.current?.(centroids);
-        stateGeo.features.forEach((f, idx) => {
-          const geoid = f.properties?.GEOID;
-          if (geoid) stateFidMap.current[geoid] = idx;
-        });
+        }
 
-        // ── Congressional district layers ──────────────────────────────────
-        map.addSource('districts', { type: 'geojson', data: districtGeo, generateId: true });
+        // ── District layers ──────────────────────────────────────────────
+        const dsl = DISTRICT_TILESET ? { 'source-layer': DISTRICT_SRC_LAYER } : {};
+        map.addLayer({ id: 'districts-fill', type: 'fill', source: 'districts', ...dsl,
+          paint: { 'fill-color': '#cbd5e1', 'fill-opacity': 0.75 } });
+        map.addLayer({ id: 'districts-line', type: 'line', source: 'districts', ...dsl,
+          paint: { 'line-color': '#94a3b8', 'line-width': 0.6 } });
+        map.addLayer({ id: 'districts-hover', type: 'fill', source: 'districts', ...dsl,
+          paint: { 'fill-color': '#FF8F00',
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hovered'], false], 0.25, 0] } });
+        map.addLayer({ id: 'districts-selected', type: 'line', source: 'districts', ...dsl,
+          paint: { 'line-color': '#FF8F00',
+            'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0] } });
 
-        map.addLayer({
-          id: 'districts-fill', type: 'fill', source: 'districts',
-          paint: { 'fill-color': '#cbd5e1', 'fill-opacity': 0.75 },
-        });
-        map.addLayer({
-          id: 'districts-line', type: 'line', source: 'districts',
-          paint: { 'line-color': '#94a3b8', 'line-width': 0.6 },
-        });
-        map.addLayer({
-          id: 'districts-hover', type: 'fill', source: 'districts',
-          paint: {
-            'fill-color': '#FF8F00',
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hovered'], false], 0.25, 0],
-          },
-        });
-        map.addLayer({
-          id: 'districts-selected', type: 'line', source: 'districts',
-          paint: {
-            'line-color': '#FF8F00',
-            'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0],
-          },
-        });
-
-        // ── State boundary layers (initially hidden) ───────────────────────
-        map.addSource('states', { type: 'geojson', data: stateGeo, generateId: true });
-
-        map.addLayer({
-          id: 'states-fill', type: 'fill', source: 'states',
+        // ── State layers ─────────────────────────────────────────────────
+        const stateGeo = getStatesGeoJSON();
+        map.addSource('states', { type: 'geojson', data: stateGeo, promoteId: 'GEOID' });
+        map.addLayer({ id: 'states-fill', type: 'fill', source: 'states',
           layout: { visibility: 'none' },
-          paint: { 'fill-color': '#cbd5e1', 'fill-opacity': 0.75 },
-        });
-        map.addLayer({
-          id: 'states-line', type: 'line', source: 'states',
+          paint: { 'fill-color': '#cbd5e1', 'fill-opacity': 0.75 } });
+        map.addLayer({ id: 'states-line', type: 'line', source: 'states',
           layout: { visibility: 'none' },
-          paint: { 'line-color': '#94a3b8', 'line-width': 0.8 },
-        });
-        map.addLayer({
-          id: 'states-hover', type: 'fill', source: 'states',
+          paint: { 'line-color': '#94a3b8', 'line-width': 0.8 } });
+        map.addLayer({ id: 'states-hover', type: 'fill', source: 'states',
           layout: { visibility: 'none' },
-          paint: {
-            'fill-color': '#FF8F00',
-            'fill-opacity': ['case', ['boolean', ['feature-state', 'hovered'], false], 0.25, 0],
-          },
-        });
-        map.addLayer({
-          id: 'states-selected', type: 'line', source: 'states',
+          paint: { 'fill-color': '#FF8F00',
+            'fill-opacity': ['case', ['boolean', ['feature-state', 'hovered'], false], 0.25, 0] } });
+        map.addLayer({ id: 'states-selected', type: 'line', source: 'states',
           layout: { visibility: 'none' },
-          paint: {
-            'line-color': '#FF8F00',
-            'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0],
-          },
-        });
+          paint: { 'line-color': '#FF8F00',
+            'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0] } });
 
-        // Apply initial colors if data already loaded
         if (raceDataRef.current.length) {
           map.setPaintProperty('districts-fill', 'fill-color', buildColorExpression(raceDataRef.current));
         }
 
         setIsMapReady(true);
 
-        // ── Shared hover/click handler factory ──────────────────────────────
+        // ── Layer event handlers ─────────────────────────────────────────
         function setupLayerEvents(fillLayer, source) {
-          let prevHoveredId = null;
+          let prevId = null;
+          const mkRef = (id) => (source === 'districts' && DISTRICT_TILESET)
+            ? { source, sourceLayer: DISTRICT_SRC_LAYER, id }
+            : { source, id };
 
           map.on('mousemove', fillLayer, (e) => {
             map.getCanvas().style.cursor = 'pointer';
             const feature = e.features?.[0];
             if (!feature) return;
-
-            if (prevHoveredId !== null && prevHoveredId !== feature.id) {
-              map.setFeatureState({ source, id: prevHoveredId }, { hovered: false });
+            const geoid = feature.properties?.GEOID ?? String(feature.id);
+            if (prevId !== null && prevId !== geoid) {
+              try { map.setFeatureState(mkRef(prevId), { hovered: false }); } catch (_) {}
             }
-            prevHoveredId = feature.id;
-            map.setFeatureState({ source, id: feature.id }, { hovered: true });
-
-            const geoid = feature.properties?.GEOID;
+            prevId = geoid;
+            try { map.setFeatureState(mkRef(geoid), { hovered: true }); } catch (_) {}
             const race = raceDataRef.current.find((d) => d.geoid === geoid);
             onHoverRef.current(race ? geoid : null);
           });
 
           map.on('mouseleave', fillLayer, () => {
             map.getCanvas().style.cursor = '';
-            if (prevHoveredId !== null) {
-              map.setFeatureState({ source, id: prevHoveredId }, { hovered: false });
-              prevHoveredId = null;
+            if (prevId !== null) {
+              try { map.setFeatureState(mkRef(prevId), { hovered: false }); } catch (_) {}
+              prevId = null;
             }
             onHoverRef.current(null);
           });
@@ -266,7 +261,7 @@ export default function Map({
           map.on('click', fillLayer, (e) => {
             const feature = e.features?.[0];
             if (!feature) return;
-            const geoid = feature.properties?.GEOID;
+            const geoid = feature.properties?.GEOID ?? String(feature.id);
             const race = raceDataRef.current.find((d) => d.geoid === geoid);
             onSelectRef.current(race ? geoid : null);
           });
@@ -275,7 +270,6 @@ export default function Map({
         setupLayerEvents('districts-fill', 'districts');
         setupLayerEvents('states-fill', 'states');
 
-        // Click on empty area deselects
         map.on('click', (e) => {
           const activeLayer = tabRef.current === 'house' ? 'districts-fill' : 'states-fill';
           const features = map.queryRenderedFeatures(e.point, { layers: [activeLayer] });
@@ -283,144 +277,95 @@ export default function Map({
         });
 
       } catch (err) {
-        console.error('Failed to load boundaries:', err);
-        setMapError(`Could not load boundaries: ${err.message}`);
+        console.error('Map setup error:', err);
+        setMapError(`Map setup failed: ${err.message}`);
       }
     });
 
-    return () => {
-      map.remove();
-      mapRef.current = null;
-    };
+    return () => { map.remove(); mapRef.current = null; };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // ── Fly to search location (landing page search) ─────────────────────────
+  // ── Fly to landing page search ───────────────────────────────────────────
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !isMapReady || !searchCenter) return;
     map.flyTo({ center: searchCenter, zoom: 7, speed: 1.4, curve: 1.4 });
   }, [searchCenter, isMapReady]);
 
-  // ── Fly to preview center (Top Contests hover) ───────────────────────────
+  // ── Fly to Top Contests hover preview ────────────────────────────────────
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !isMapReady || !previewCenter) return;
     map.flyTo({ center: previewCenter, zoom: Math.max(map.getZoom(), 5), speed: 1.2, curve: 1.2 });
   }, [previewCenter, isMapReady]);
 
-  // ── Toggle layer visibility when tab changes ──────────────────────────────
+  // ── Toggle layer visibility ───────────────────────────────────────────────
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !isMapReady) return;
-
     const isHouse = tab === 'house';
-    const districtVis = isHouse ? 'visible' : 'none';
-    const stateVis = isHouse ? 'none' : 'visible';
-
-    DISTRICT_LAYERS.forEach((id) => map.setLayoutProperty(id, 'visibility', districtVis));
-    STATE_LAYERS.forEach((id) => map.setLayoutProperty(id, 'visibility', stateVis));
+    DISTRICT_LAYERS.forEach((id) => map.setLayoutProperty(id, 'visibility', isHouse ? 'visible' : 'none'));
+    STATE_LAYERS.forEach((id) => map.setLayoutProperty(id, 'visibility', isHouse ? 'none' : 'visible'));
   }, [tab, isMapReady]);
 
-  // ── Update fill colors when raceData or tab changes ───────────────────────
+  // ── Update choropleth colors ──────────────────────────────────────────────
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !isMapReady || !raceData.length) return;
-
     const fillLayer = tab === 'house' ? 'districts-fill' : 'states-fill';
     map.setPaintProperty(fillLayer, 'fill-color', buildColorExpression(raceData));
   }, [raceData, tab, isMapReady]);
 
-  // ── Sync hovered geoid from InfoBox → map ────────────────────────────────
+  // ── Sync hover from InfoBox → map ─────────────────────────────────────────
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !isMapReady) return;
-
-    // Clear both sources
-    Object.values(districtFidMap.current).forEach((id) =>
-      map.setFeatureState({ source: 'districts', id }, { hovered: false })
-    );
-    Object.values(stateFidMap.current).forEach((id) =>
-      map.setFeatureState({ source: 'states', id }, { hovered: false })
-    );
-
-    if (hoveredGeoid) {
-      if (tab === 'house') {
-        const fid = districtFidMap.current[hoveredGeoid];
-        if (fid !== undefined) map.setFeatureState({ source: 'districts', id: fid }, { hovered: true });
-      } else {
-        const fid = stateFidMap.current[hoveredGeoid];
-        if (fid !== undefined) map.setFeatureState({ source: 'states', id: fid }, { hovered: true });
-      }
-    }
+    const { source: ps, geoid: pg } = prevHoveredRef.current;
+    if (pg) setFState(map, ps, pg, { hovered: false });
+    const source = tab === 'house' ? 'districts' : 'states';
+    if (hoveredGeoid) setFState(map, source, hoveredGeoid, { hovered: true });
+    prevHoveredRef.current = { source, geoid: hoveredGeoid };
   }, [hoveredGeoid, tab, isMapReady]);
 
-  // ── Sync selected geoid from InfoBox → map (zoom + popup) ────────────────
+  // ── Sync selection + zoom + popup from InfoBox → map ─────────────────────
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !isMapReady) return;
 
-    // Clear both sources
-    Object.values(districtFidMap.current).forEach((id) =>
-      map.setFeatureState({ source: 'districts', id }, { selected: false })
-    );
-    Object.values(stateFidMap.current).forEach((id) =>
-      map.setFeatureState({ source: 'states', id }, { selected: false })
-    );
+    const { source: ps, geoid: pg } = prevSelectedRef.current;
+    if (pg) setFState(map, ps, pg, { selected: false });
+    if (popupRef.current) { popupRef.current.remove(); popupRef.current = null; }
 
-    if (popupRef.current) {
-      popupRef.current.remove();
-      popupRef.current = null;
-    }
-
-    if (!selectedGeoid) return;
+    if (!selectedGeoid) { prevSelectedRef.current = { source: null, geoid: null }; return; }
 
     const source = tab === 'house' ? 'districts' : 'states';
-    const fidMap = tab === 'house' ? districtFidMap.current : stateFidMap.current;
-    const fid = fidMap[selectedGeoid];
-    if (fid !== undefined) {
-      map.setFeatureState({ source, id: fid }, { selected: true });
-    }
+    setFState(map, source, selectedGeoid, { selected: true });
+    prevSelectedRef.current = { source, geoid: selectedGeoid };
 
     const race = raceData.find((d) => d.geoid === selectedGeoid);
     if (!race) return;
 
-    const features = map.querySourceFeatures(source, {
-      filter: ['==', ['get', 'GEOID'], selectedGeoid],
-    });
+    const queryOpts = (DISTRICT_TILESET && tab === 'house')
+      ? { filter: ['==', ['get', 'GEOID'], selectedGeoid], sourceLayer: DISTRICT_SRC_LAYER }
+      : { filter: ['==', ['get', 'GEOID'], selectedGeoid] };
+    const features = map.querySourceFeatures(source, queryOpts);
 
     if (features.length) {
       const coords = [];
-      const collectCoords = (geom) => {
-        if (geom.type === 'Polygon') {
-          geom.coordinates[0].forEach((c) => coords.push(c));
-        } else if (geom.type === 'MultiPolygon') {
-          geom.coordinates.forEach((poly) => poly[0].forEach((c) => coords.push(c)));
-        }
-      };
-      features.forEach((f) => collectCoords(f.geometry));
-
+      features.forEach((f) => {
+        if (f.geometry.type === 'Polygon') f.geometry.coordinates[0].forEach((c) => coords.push(c));
+        else if (f.geometry.type === 'MultiPolygon') f.geometry.coordinates.forEach((p) => p[0].forEach((c) => coords.push(c)));
+      });
       if (coords.length) {
         const lngs = coords.map((c) => c[0]);
         const lats = coords.map((c) => c[1]);
-        const bounds = [
-          [Math.min(...lngs), Math.min(...lats)],
-          [Math.max(...lngs), Math.max(...lats)],
-        ];
-        map.fitBounds(bounds, { padding: 120, maxZoom: tab === 'house' ? 9 : 7, duration: 800 });
-
-        const centerLng = (bounds[0][0] + bounds[1][0]) / 2;
-        const centerLat = (bounds[0][1] + bounds[1][1]) / 2;
-
+        const bounds = [[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]];
+        map.fitBounds(bounds, { padding: 80, maxZoom: tab === 'house' ? 9 : 7, duration: 800 });
         const popup = new mapboxgl.Popup({ closeButton: true, maxWidth: '260px' })
-          .setLngLat([centerLng, centerLat + (bounds[1][1] - bounds[0][1]) * 0.1])
+          .setLngLat([(bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2 + (bounds[1][1] - bounds[0][1]) * 0.1])
           .setHTML(buildPopupHTML(race, tab))
           .addTo(map);
-
-        popup.on('close', () => {
-          onSelectRef.current(null);
-          popupRef.current = null;
-        });
-
+        popup.on('close', () => { onSelectRef.current(null); popupRef.current = null; });
         popupRef.current = popup;
       }
     }
@@ -429,11 +374,7 @@ export default function Map({
   return (
     <div className="map-wrapper">
       <div ref={containerRef} className="map-container" />
-      {mapError && (
-        <div className="map-error">
-          <span>⚠️ {mapError}</span>
-        </div>
-      )}
+      {mapError && <div className="map-error"><span>⚠️ {mapError}</span></div>}
       <MapLegend />
     </div>
   );
@@ -469,32 +410,22 @@ function buildPopupHTML(race, tab) {
   const vpColor = getDistrictColor(race.voterPower);
   const cookLabel = formatCookLabel(race.cookRating);
   const marginLabel = formatMarginLabel(race.margin);
-
   const title = tab === 'house' ? race.label : (race.state ?? race.label);
   const subtitle = tab === 'house'
     ? `${race.state}'s ${ordinal(race.districtNum)} Congressional District`
     : (race.race ?? '');
-
-  const marginRow = marginLabel
-    ? `<div class="popup-row"><span class="popup-label">Est. Margin</span><span class="popup-value">${marginLabel}</span></div>`
-    : '';
-
   return `
     <div class="map-popup">
       <div class="popup-title">${title}</div>
       ${subtitle ? `<div class="popup-subtitle">${subtitle}</div>` : ''}
-      <div class="popup-row">
-        <span class="popup-label">Cook Rating</span>
-        <span class="popup-value">${cookLabel ?? '—'}</span>
-      </div>
-      ${marginRow}
+      <div class="popup-row"><span class="popup-label">Cook Rating</span><span class="popup-value">${cookLabel ?? '—'}</span></div>
+      ${marginLabel ? `<div class="popup-row"><span class="popup-label">Est. Margin</span><span class="popup-value">${marginLabel}</span></div>` : ''}
       <div class="popup-row">
         <span class="popup-label">Voter Power</span>
         <span class="popup-value popup-vp" style="background:${vpColor}">${Math.round(race.voterPower)}</span>
       </div>
       ${candidateRow(race.dCandidate, race.rCandidate)}
-    </div>
-  `;
+    </div>`;
 }
 
 function ordinal(n) {
@@ -508,10 +439,7 @@ function MapLegend() {
     <div className="map-legend">
       <div className="legend-title">Voter Power</div>
       <div className="legend-gradient" />
-      <div className="legend-labels">
-        <span>Low</span>
-        <span>High</span>
-      </div>
+      <div className="legend-labels"><span>Low</span><span>High</span></div>
       <div className="legend-no-contest">
         <span className="legend-swatch" style={{ background: '#cbd5e1' }} />
         No 2026 contest

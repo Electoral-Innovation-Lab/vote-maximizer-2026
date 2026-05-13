@@ -4,46 +4,50 @@ const SECTIONS = [
   {
     num: '01',
     title: 'What is Vote Maximizer?',
-    body: `Vote Maximizer is designed to maximize the power of individual voters. We perform mathematical and strategic analysis to identify the races and ballot questions where per-voter impact is greatest in the 2026 election cycle.
+    body: `Vote Maximizer uses mathematical and strategic analysis to identify the contests and ballot questions where per-voter impact is greatest in the 2026 election cycle. Our tool centers not on campaigns, but on the individual voter — giving you the kind of rigorous analysis that campaign strategists provide to politicians, so you can direct your time, money, and energy where they'll make the most difference.
 
-    Our tool centers not on campaigns, but on the individual voter. Our goal is to give you the kind of rigorous analysis that campaign strategists provide to politicians — so you can optimize your time and resources to make the most difference.`,
+    High-leverage races are also fragile ones. Where the margin is thin, voter suppression, misinformation, and administrative irregularities have outsized effect. Vote Maximizer helps you find both the races worth fighting for, and the ones most in need of protection.`,
   },
   {
     num: '02',
     title: 'The Principle of Voter Power',
-    body: `Not all votes are created equal. Voter power means choosing the races where a few votes can actually make the difference. Rather than sending you to certain winners or certain losers, Vote Maximizer shows you the high-leverage cases: close knife-edge races and ballot questions that can change policy — even when legislatures fail to act.
+    body: `Not all votes are created equal. Voter power means choosing the contests where a small number of votes can actually change the outcome: close, high-stakes elections where individual participation has measurable impact, rather than contests already decided by wide margins.
 
-    Voter power is especially high for ballot initiatives that can reshape policies and democracy itself for years to come. Examples include reproductive rights, ranked-choice voting, and anti-gerrymandering measures.`,
+    Voter power is especially high in competitive ballot initiatives, which can reshape policy for years to come. These races often receive less attention than candidate elections despite their direct impact on issues like voting rights, redistricting, and electoral reform.
+
+    A high voter power score also indicates a race competitive enough to be vulnerable. Close elections are where efforts to suppress turnout, spread misinformation about voting procedures, or challenge results are most likely to affect the outcome — making them both the highest-leverage races for civic action and the most important to protect.`,
   },
   {
     num: '03',
     title: 'The Mathematics',
-    body: `For each race, we ask: how much does a single additional vote shift the probability of a different outcome? We use a t-distribution probability density function centered on the projected margin, with an effective sigma (σ_eff) that blends polling uncertainty (σ ≈ 3.0 pts) with historical race-type volatility.
+    body: `Every voter power score answers one question: how much does a single additional vote shift the probability of a different outcome? We use a t-distribution probability density function centered on the projected margin, with an effective sigma (σ_eff) that blends polling uncertainty (σ ≈ 3.0 pts) with historical race-type volatility.
 
-    The voter power score (0–100) is normalized within each race type. Statewide races are adjusted for electorate size using a turnout scaling factor (÷ turnout^0.3). House districts use no scaling since they have equal populations by law.`,
+    Scores are normalized 0–100 within each race type. Statewide races are adjusted for electorate size using a turnout scaling factor (÷ turnout^0.3). House districts use no scaling since they have equal populations by law.`,
   },
   {
     num: '04',
     title: 'Data Sources',
     body: `Margins come from two sources, color-coded in the interface: real polling averages (sourced from Emerson, PPP, ASR, and Sabato's Crystal Ball, Jan–Mar 2026) shown in green, and Cook Political Report rating proxies shown in amber. Cook ratings are translated as: Toss-Up = 0, Lean = ±4 pts, Likely = ±9 pts, Solid = ±18 pts.
 
-    As more polls become available through the election cycle, the Cook proxies are replaced with real data, and all Voter Power scores update automatically.`,
+    As more polls become available through the election cycle, Cook proxies are replaced with real data and all voter power scores update automatically.`,
   },
+  // {
+  //   num: '05',
+  //   title: 'Effective Sigmas by Race Type',
+  //   items: [
+  //     { label: 'US Senate', value: '4.24 pts', note: 'Reference (1.00×)' },
+  //     { label: 'US House', value: '4.00 pts', note: 'Matches 2024 VM formula' },
+  //     { label: 'Governor', value: '5.18 pts', note: '1.22× Senate' },
+  //     { label: 'Attorney General / Sec. of State', value: '5.00 pts', note: '1.18× Senate' },
+  //     { label: 'Ballot Initiatives', value: '6.47 pts', note: '1.53× Senate — most volatile' },
+  //   ],
+  // },
   {
     num: '05',
-    title: 'Effective Sigmas by Race Type',
-    items: [
-      { label: 'US Senate', value: '4.24 pts', note: 'Reference (1.00×)' },
-      { label: 'US House', value: '4.00 pts', note: 'Matches 2024 VM formula' },
-      { label: 'Governor', value: '5.18 pts', note: '1.22× Senate' },
-      { label: 'Attorney General / Sec. of State', value: '5.00 pts', note: '1.18× Senate' },
-      { label: 'Ballot Initiatives', value: '6.47 pts', note: '1.53× Senate — most volatile' },
-    ],
-  },
-  {
-    num: '06',
     title: 'About the Electoral Innovation Lab',
-    body: `The Electoral Innovation Lab (EIL) is a research organization at Princeton University dedicated to improving the health of American democracy through rigorous quantitative analysis. Vote Maximizer is one of several tools EIL has developed to help citizens and researchers understand and strengthen democratic participation.`,
+    body: `The Electoral Innovation Lab (EIL) is a Princeton, NJ based non-profit dedicated to building a science of democracy reform. Vote Maximizer is one of several tools EIL has developed to help citizens, researchers, and partner organizations understand and strengthen democratic participation.
+
+    EIL's work is nonpartisan, independent, and evidence-driven. We believe that the same mathematical tools used by campaign strategists should be available to every voter — and that an informed, engaged citizenry is the most durable defense democracy has.`,
     link: { href: 'https://electoral-lab.org', label: 'Learn more at electoral-lab.org →' },
   },
 ];

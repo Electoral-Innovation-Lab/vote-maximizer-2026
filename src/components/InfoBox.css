@@ -7,6 +7,32 @@
   overflow: hidden;
 }
 
+@media (max-width: 640px) {
+  .info-box {
+    flex-direction: column;
+    height: 58vh;
+  }
+  .info-header {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e2e8f0;
+    flex-shrink: 0;
+  }
+  .info-header-top {
+    padding: 10px 14px;
+  }
+  .info-title { font-size: 15px; }
+  .info-subtitle { font-size: 10px; }
+  .info-description { display: none; }
+  .info-header-bottom { display: none; }
+  .tab-btn { font-size: 11px; padding: 5px 9px; }
+  .list-header { padding: 6px 10px; }
+  .district-card { padding: 8px 10px; }
+  .card-label { font-size: 12px; }
+  .lh-cook, .card-cook { width: 64px; font-size: 9px; }
+  .lh-vp, .card-vp { width: 76px; }
+}
+
 /* ── Fixed left header panel ───────────────────────────────────────────────── */
 .info-header {
   width: 260px;
@@ -158,11 +184,12 @@
   border: none;
   padding: 0;
   font-size: inherit;
-  color: #64748b;
+  color: #FF8F00;
   cursor: pointer;
-  text-decoration: none;
+  text-decoration: underline;
+  text-decoration-color: rgba(255,143,0,0.4);
 }
-.info-about-btn:hover { text-decoration: underline; }
+.info-about-btn:hover { text-decoration-color: #FF8F00; }
 
 /* ── Race tabs ─────────────────────────────────────────────────────────────── */
 .race-tabs {

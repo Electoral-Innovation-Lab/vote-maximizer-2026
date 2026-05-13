@@ -24,18 +24,13 @@ const ALL_TABS = [
 ];
 
 const TOP_TYPES = [
-  { id: 'house',           label: 'US House' },
-  { id: 'senate',          label: 'Senate' },
-  { id: 'governor',        label: 'Governor' },
-  { id: 'state_leg_upper', label: 'State Senate' },
-  { id: 'state_leg_lower', label: 'State House' },
-  { id: 'ag',              label: 'Atty General' },
-  { id: 'sos',             label: 'Sec. of State' },
-  { id: 'ballot',          label: 'Ballot' },
+  { id: 'house',    label: 'US House' },
+  { id: 'senate',   label: 'Senate' },
+  { id: 'governor', label: 'Governor' },
+  { id: 'ag',       label: 'Atty General' },
+  { id: 'sos',      label: 'Sec. of State' },
+  { id: 'ballot',   label: 'Ballot' },
 ];
-
-function searchUrl(q) { return `https://www.google.com/search?q=${encodeURIComponent(q)}`; }
-function bpUrl(q) { return `https://ballotpedia.org/wiki/index.php?search=${encodeURIComponent(q)}`; }
 
 function NearbyCard({ race, isHovered, isSelected, onHover, onLeave, onClick }) {
   const cfg = COOK_CONFIG[race.cookRating] ?? { label: race.cookRating, color: '#475569', bg: '#f1f5f9' };
@@ -77,10 +72,10 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
     onTopTypeChange?.(t);
   }
 
-  const top5 = (allData?.[topType] ?? [])
+  const top10 = (allData?.[topType] ?? [])
     .slice()
     .sort((a, b) => b.voterPower - a.voterPower || cookPriority(a) - cookPriority(b))
-    .slice(0, 5);
+    .slice(0, 10);
 
   return (
     <div className="tc-pane">
@@ -96,19 +91,13 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
         ))}
       </div>
       <div className="tc-list">
-        {top5.length === 0 ? (
+        {top10.length === 0 ? (
           <div className="tc-empty">Loading…</div>
         ) : (
-          top5.map((race, idx) => {
+          top10.map((race, idx) => {
             const cfg = COOK_CONFIG[race.cookRating] ?? { label: race.cookRating, color: '#475569', bg: '#f1f5f9' };
             const vpColor = getDistrictColor(race.voterPower);
             const vp = Math.round(race.voterPower);
-            const sq = topType === 'house'
-              ? `${race.label} 2026 congressional race`
-              : `${race.state} 2026 ${topType} race`;
-            const bq = topType === 'house'
-              ? `${race.label} congressional district`
-              : `${race.state} ${topType === 'senate' ? 'Senate' : topType} election`;
             return (
               <div
                 key={`${topType}-${idx}`}
@@ -130,10 +119,6 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
                     </div>
                     <span className="tc-vp-score" style={{ color: vpColor }}>{vp}</span>
                   </div>
-                </div>
-                <div className="tc-links">
-                  <a className="tc-link" href={searchUrl(sq)} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>Google →</a>
-                  <a className="tc-link" href={bpUrl(bq)} target="_blank" rel="noopener noreferrer" onClick={(e) => e.stopPropagation()}>Ballotpedia →</a>
                 </div>
               </div>
             );
@@ -187,34 +172,24 @@ export default function InfoBox({
       <div className="info-header">
         <div className="info-header-top">
           <h1 className="info-title">Vote Maximizer 2026</h1>
-          <p className="info-subtitle">Where does your vote have the most impact in 2026?</p>
+          <p className="info-subtitle">
+            Maximize the impact of your canvassing and donations.{' '}
+            <button className="info-about-btn" onClick={onAbout}>Learn more about Vote Maximizer.</button>
+          </p>
         </div>
 
         <div className="info-description">
-          <div className="info-desc-section">
-            <span className="info-desc-heading">What is Voter Power?</span>
-            <p className="info-desc-body">
-              Not all votes count equally. In a safe seat, one more vote barely
-              shifts the odds. In a close race, it can tip the balance.
-              Voter Power (0–100) measures exactly that probability.
-            </p>
-          </div>
-          <div className="info-desc-section">
-            <span className="info-desc-heading">Why it matters</span>
-            <p className="info-desc-body">
-              A volunteer hour or dollar in a high-power district has
-              10–100× more expected impact than in a safe seat.
-            </p>
-          </div>
-          <div className="info-desc-section">
-            <span className="info-desc-heading">How to use this tool</span>
-            <ul className="info-desc-list">
-              <li>Browse the ranked list by Voter Power score.</li>
-              <li>Click any race for details and ways to get involved.</li>
-              <li>Search for your location to see nearby contests.</li>
-              <li>Switch tabs to compare race types.</li>
-            </ul>
-          </div>
+          <p className="info-desc-body">
+            Vote Maximizer uses mathematical modeling to calculate per-vote leverage: the change in win
+            probability that comes from a single vote, or a handful of votes. Contests with high leverage
+            are close, consequential, and — because the margin for error is smallest — most vulnerable
+            to disruption from voter suppression, misinformation, or administrative failure.
+          </p>
+          <p className="info-desc-body">
+            Our analysis tells you where your donations and canvassing hours go furthest. And it shows
+            you where election protection efforts are most urgently needed. Use this tool to find
+            both — and to connect with the organizations already doing that work.
+          </p>
         </div>
 
         <div className="info-header-bottom">
@@ -228,8 +203,6 @@ export default function InfoBox({
             <a href="https://electoral-lab.org" target="_blank" rel="noopener noreferrer">
               the Electoral Innovation Lab
             </a>
-            {' · '}
-            <button className="info-about-btn" onClick={onAbout}>About</button>
           </div>
         </div>
       </div>
@@ -272,7 +245,7 @@ export default function InfoBox({
               <div className="list-header">
                 <span className="lh-rank">#</span>
                 <span className="lh-district">
-                  {searchPlaceName ? `Near ${searchPlaceName.split(',')[0]}` : 'Nearby races'}
+                  {searchPlaceName ? `Near ${searchPlaceName.split(',')[0]}` : 'Nearby contests'}
                 </span>
                 <span className="lh-cook">Cook</span>
                 <span className="lh-vp">Voter Power</span>
@@ -283,7 +256,7 @@ export default function InfoBox({
                 )}
               </div>
               {nearbyRaces.length === 0 ? (
-                <div className="list-loading">No competitive races found within range.</div>
+                <div className="list-loading">No competitive contests found within range.</div>
               ) : (
                 nearbyRaces.map((race) => (
                   <NearbyCard

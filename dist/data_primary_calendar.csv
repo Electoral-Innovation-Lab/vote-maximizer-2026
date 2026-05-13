@@ -1,0 +1,51 @@
+state_name,FP_code,primary_date,primary_type,senate_primary,governor_primary,house_primary,state_leg_primary,runoff_required,runoff_date,notes
+Alabama,1,"May 19, 2026",partisan,TRUE,TRUE,TRUE,TRUE,TRUE,"Jun 30, 2026",Majority threshold; D/R primaries
+Alaska,2,"Aug 18, 2026",top-4 RCV,TRUE,TRUE,TRUE,TRUE,FALSE,,Top-4 ranked-choice primary; jungle primary for all offices
+Arizona,4,"Aug 4, 2026",partisan,FALSE,TRUE,TRUE,TRUE,FALSE,,Closed partisan primary
+Arkansas,5,"May 19, 2026",partisan,TRUE,FALSE,TRUE,TRUE,TRUE,"Jun 16, 2026",Majority threshold for runoff
+California,6,"Jun 2, 2026",top-2,TRUE,TRUE,TRUE,TRUE,FALSE,,Jungle primary; top 2 advance regardless of party
+Colorado,8,"Jun 30, 2026",partisan,TRUE,FALSE,TRUE,TRUE,FALSE,,Closed partisan primary
+Connecticut,9,"Aug 11, 2026",partisan,TRUE,FALSE,TRUE,TRUE,FALSE,,Party-nominated or primary if challenged
+Delaware,10,"Sep 15, 2026",partisan,TRUE,FALSE,TRUE,TRUE,FALSE,,Late primary; partisan
+Florida,12,"Aug 18, 2026",partisan,TRUE,TRUE,TRUE,TRUE,FALSE,,Open partisan primary within parties
+Georgia,13,"May 19, 2026",partisan,TRUE,TRUE,TRUE,TRUE,TRUE,"Jun 16, 2026",Majority threshold; runoff if needed
+Hawaii,15,"Aug 8, 2026",partisan,FALSE,FALSE,TRUE,TRUE,FALSE,,Open primary
+Idaho,16,"May 19, 2026",partisan,FALSE,FALSE,TRUE,TRUE,FALSE,,Closed partisan primary
+Illinois,17,"Mar 17, 2026",partisan,TRUE,FALSE,TRUE,TRUE,FALSE,,March primary; open primary
+Indiana,18,"May 5, 2026",partisan,FALSE,FALSE,TRUE,TRUE,FALSE,,Open partisan primary
+Iowa,19,"Jun 2, 2026",partisan,TRUE,TRUE,TRUE,TRUE,FALSE,,Closed partisan primary
+Kansas,20,"Aug 4, 2026",partisan,FALSE,FALSE,TRUE,TRUE,FALSE,,Closed partisan primary; Senate not up
+Kentucky,21,"May 19, 2026",partisan,FALSE,FALSE,TRUE,TRUE,FALSE,,Closed partisan primary
+Louisiana,22,"Nov 3, 2026",jungle/open,TRUE,FALSE,TRUE,FALSE,TRUE,"Dec 5, 2026",New 2026: congressional primaries now jungle/open; state leg elections 2027
+Maine,23,"Jun 9, 2026",RCV,TRUE,TRUE,TRUE,TRUE,FALSE,,RCV primary; top RCV winner advances
+Maryland,24,"Jul 7, 2026",partisan,FALSE,TRUE,TRUE,TRUE,FALSE,,Closed partisan primary
+Massachusetts,25,"Sep 15, 2026",partisan,TRUE,FALSE,TRUE,TRUE,FALSE,,Semiopen primary
+Michigan,26,"Aug 4, 2026",partisan,TRUE,TRUE,TRUE,TRUE,FALSE,,Open partisan primary
+Minnesota,27,"Aug 11, 2026",partisan,TRUE,TRUE,TRUE,TRUE,FALSE,,Open partisan primary
+Mississippi,28,,n/a,FALSE,FALSE,TRUE,FALSE,FALSE,,"No 2026 state leg elections; US House primaries Mar 10, 2026"
+Missouri,29,"Aug 4, 2026",partisan,FALSE,FALSE,TRUE,TRUE,FALSE,,Open partisan primary
+Montana,30,"Jun 2, 2026",partisan,TRUE,FALSE,TRUE,TRUE,FALSE,,Open partisan primary
+Nebraska,31,"May 12, 2026",nonpartisan,TRUE,FALSE,TRUE,TRUE,FALSE,,Nonpartisan primary; top 2 advance; state leg nonpartisan
+Nevada,32,"Jun 9, 2026",partisan,FALSE,TRUE,TRUE,TRUE,FALSE,,Closed partisan primary
+New Hampshire,33,"Sep 9, 2026",partisan,TRUE,TRUE,TRUE,TRUE,FALSE,,Open partisan primary; late September primary
+New Jersey,34,"Jun 2, 2026",partisan,FALSE,FALSE,TRUE,FALSE,FALSE,,No state leg in 2026; US House primary Jun 2
+New Mexico,35,"Jun 2, 2026",partisan,FALSE,TRUE,TRUE,TRUE,FALSE,,Closed partisan primary
+New York,36,"Jun 23, 2026",partisan,TRUE,FALSE,TRUE,TRUE,FALSE,,Closed partisan primary
+North Carolina,37,"Mar 3, 2026",partisan,TRUE,FALSE,TRUE,TRUE,TRUE,"Apr 28, 2026",Runoff if no candidate gets 30%+ and requested by 2nd-place
+North Dakota,38,"Jun 9, 2026",partisan,FALSE,FALSE,TRUE,TRUE,FALSE,,Open primary
+Ohio,39,"May 5, 2026",partisan,TRUE,TRUE,TRUE,TRUE,FALSE,,Open partisan primary; special Senate primary same date
+Oklahoma,40,"Jun 16, 2026",partisan,FALSE,FALSE,TRUE,TRUE,TRUE,"Aug 25, 2026",Majority threshold; runoff Aug 25
+Oregon,41,"May 19, 2026",partisan,TRUE,TRUE,TRUE,TRUE,FALSE,,Closed partisan primary
+Pennsylvania,42,"May 19, 2026",partisan,FALSE,FALSE,TRUE,TRUE,FALSE,,Closed partisan primary; state leg same date
+Rhode Island,44,"Sep 9, 2026",partisan,TRUE,TRUE,TRUE,TRUE,FALSE,,Semiopen primary
+South Carolina,45,"Jun 9, 2026",partisan,TRUE,FALSE,TRUE,TRUE,TRUE,"Jun 23, 2026",Majority threshold; runoff Jun 23
+South Dakota,46,"Jun 2, 2026",partisan,FALSE,TRUE,TRUE,TRUE,TRUE,,Runoff if <35% for congressional/gubernatorial only
+Tennessee,47,"Aug 4, 2026",partisan,FALSE,FALSE,TRUE,TRUE,FALSE,,Open partisan primary
+Texas,48,"Mar 3, 2026",partisan,TRUE,TRUE,TRUE,TRUE,TRUE,"May 26, 2026","Majority threshold; runoff completed May 26, 2026"
+Utah,49,"Jun 23, 2026",partisan,FALSE,FALSE,TRUE,TRUE,FALSE,,Closed partisan primary
+Vermont,50,"Aug 11, 2026",partisan,FALSE,TRUE,TRUE,TRUE,FALSE,,Open primary
+Virginia,51,,n/a,FALSE,FALSE,FALSE,FALSE,FALSE,,No statewide elections in 2026; no state leg (odd-year cycle)
+Washington,53,"Aug 4, 2026",top-2,TRUE,FALSE,TRUE,TRUE,FALSE,,Jungle/top-2 primary; top 2 advance regardless of party
+West Virginia,54,"May 12, 2026",partisan,TRUE,FALSE,TRUE,TRUE,FALSE,,Open partisan primary
+Wisconsin,55,"Aug 11, 2026",partisan,FALSE,TRUE,TRUE,TRUE,FALSE,,Open partisan primary
+Wyoming,56,"Aug 18, 2026",partisan,FALSE,TRUE,TRUE,TRUE,FALSE,,Closed partisan primary

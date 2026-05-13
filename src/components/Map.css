@@ -4,6 +4,27 @@
   flex-shrink: 0;
 }
 
+@media (max-width: 640px) {
+  .map-wrapper { height: 42vh; }
+  .mapboxgl-ctrl-geocoder {
+    min-width: 160px !important;
+    max-width: calc(100vw - 110px) !important;
+    font-size: 12px !important;
+  }
+  .mapboxgl-ctrl-geocoder--input {
+    height: 34px !important;
+    font-size: 12px !important;
+  }
+  .map-legend {
+    bottom: 8px;
+    right: 8px;
+    padding: 6px 10px;
+    font-size: 10px;
+  }
+  .legend-title { font-size: 11px; margin-bottom: 4px; }
+  .legend-gradient { height: 8px; }
+}
+
 .map-container {
   width: 100%;
   height: 100%;

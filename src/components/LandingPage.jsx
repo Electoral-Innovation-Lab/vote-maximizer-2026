@@ -121,33 +121,22 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
 
       {/* Hero */}
       <div className="landing-hero">
-        <div className="landing-eyebrow anim-1">2026 Election Cycle</div>
+        <div className="landing-eyebrow anim-1">Vote Maximizer by The <a href="https://www.electoral-lab.org/" style={{ color: '#FF8F00', textDecoration: 'underline', textDecorationColor: 'rgba(255,143,0,0.4)' }}>Electoral Innovation Lab</a></div>
         <h1 className="landing-headline anim-2">
-          Maximize the impact of<br />your canvassing and donations.
+          Where every vote counts— <br />and every vote is at risk.
+          {/* Vote Maximizer calculates where individual votes carry the most weight.<br />In 2026, that's also where democracy is most fragile. */}
         </h1>
         <p className="landing-sub anim-3">
-          In a competitive race, a single vote can tip the balance.<br className="landing-br" />
-          We calculate exactly where that is.<br className="landing-br" />
-          A project of the <a href="https://www.electoral-lab.org/" style={{ color: 'rgba(255,255,255,0.45)', textDecoration: 'underline', textDecorationColor: 'rgba(255,255,255,0.2)' }}>Electoral Innovation Lab.</a>
+          Vote Maximizer calculates where individual votes carry the most weight.<br className="landing-br" />In 2026, that's also where democracy is most fragile.
+          {/* We calculate exactly where that is.<br className="landing-br" /> */}
         </p>
 
-        {/* Stat pills */}
-        <div className="landing-stats anim-4">
-          <div className="landing-stat">
-            <span className="stat-num">35</span>
-            <span className="stat-label">Senate races</span>
-          </div>
-          <div className="landing-stat-divider" />
-          <div className="landing-stat">
-            <span className="stat-num">3,000+</span>
-            <span className="stat-label">Competitive races</span>
-          </div>
-          <div className="landing-stat-divider" />
-          <div className="landing-stat">
-            <span className="stat-num">9</span>
-            <span className="stat-label">Race types</span>
-          </div>
-        </div>
+        {/* Stat tagline */}
+        <p className="landing-tagline anim-4">
+          <span className="landing-tagline-num">6,696</span> contests.{' '}
+          <span className="landing-tagline-num">50</span> states.{' '}
+          One question: where does one vote go furthest?
+        </p>
 
         {/* Search */}
         <form className="landing-search anim-5" onSubmit={handleSubmit}>
@@ -167,7 +156,7 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
               autoComplete="off"
             />
             <button className="landing-search-btn" type="submit" disabled={loading}>
-              {loading ? '…' : 'Find races'}
+              {loading ? '…' : 'Find contests'}
             </button>
           </div>
           {showSuggestions && suggestions.length > 0 && (

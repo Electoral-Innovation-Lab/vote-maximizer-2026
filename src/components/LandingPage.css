@@ -82,7 +82,7 @@
   color: rgba(255, 255, 255, 0.55);
   line-height: 1.6;
   margin: 0 0 36px;
-  max-width: 540px;
+  max-width: 580px;
 }
 
 .landing-br { display: none; }
@@ -122,6 +122,22 @@
   width: 1px;
   height: 32px;
   background: rgba(255, 255, 255, 0.12);
+}
+
+/* ── Tagline ────────────────────────────────────────────────────────────────── */
+.landing-tagline {
+  font-size: clamp(18px, 2.4vw, 22px);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.5;
+  margin: 0 0 36px;
+  max-width: 560px;
+}
+
+.landing-tagline-num {
+  font-weight: 800;
+  color: #fff;
+  font-size: 1.1em;
 }
 
 /* ── Search ─────────────────────────────────────────────────────────────────── */
