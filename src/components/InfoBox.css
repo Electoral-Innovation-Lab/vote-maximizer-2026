@@ -170,6 +170,7 @@
   flex: 1;
   overflow-y: auto;
   overscroll-behavior: contain;
+  padding-bottom: 48px;
 }
 
 .list-loading {

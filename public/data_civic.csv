@@ -273,9 +273,23 @@ LUCHA Arizona,state,Arizona,,https://luchaaz.org/,voter_engagement,FALSE,TRUE,St
 Voces de la Frontera (WI),state,Wisconsin,,https://vdlf.org/,voter_engagement,FALSE,TRUE,Statewide Latino civic engagement Wisconsin
 NextGen America (Michigan),state,Michigan,,https://nextgenamerica.org/state/michigan/,youth_engagement,FALSE,TRUE,Young voter outreach MI
 Black Voters Matter Fund,national,All,,https://blackvotersmatterfund.org/,voter_engagement,FALSE,TRUE,Black voter mobilization; operates in 12+ Southern states
-Mi Familia Vota,national,All,,https://www.mifamiliavota.org/,voter_engagement,FALSE,TRUE,"Latino voter mobilization; AZ, CA, CO, FL, NV, PA, TX"
+Mi Familia Vota,state,Arizona,,https://www.mifamiliavota.org/,voter_engagement,FALSE,TRUE,Latino voter mobilization
+Mi Familia Vota,state,California,,https://www.mifamiliavota.org/,voter_engagement,FALSE,TRUE,Latino voter mobilization
+Mi Familia Vota,state,Colorado,,https://www.mifamiliavota.org/,voter_engagement,FALSE,TRUE,Latino voter mobilization
+Mi Familia Vota,state,Florida,,https://www.mifamiliavota.org/,voter_engagement,FALSE,TRUE,Latino voter mobilization
+Mi Familia Vota,state,Nevada,,https://www.mifamiliavota.org/,voter_engagement,FALSE,TRUE,Latino voter mobilization
+Mi Familia Vota,state,Pennsylvania,,https://www.mifamiliavota.org/,voter_engagement,FALSE,TRUE,Latino voter mobilization
+Mi Familia Vota,state,Texas,,https://www.mifamiliavota.org/,voter_engagement,FALSE,TRUE,Latino voter mobilization
 Asian Americans Advancing Justice,national,All,,https://www.advancingjustice-aajc.org/,voter_protection,FALSE,TRUE,AAPI voter protection
-All Voting is Local,national,All,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,"Active in AZ, FL, GA, MI, NV, OH, PA, TX, WI"
+All Voting is Local,state,Arizona,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,Voting rights and election protection
+All Voting is Local,state,Florida,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,Voting rights and election protection
+All Voting is Local,state,Georgia,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,Voting rights and election protection
+All Voting is Local,state,Michigan,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,Voting rights and election protection
+All Voting is Local,state,Nevada,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,Voting rights and election protection
+All Voting is Local,state,Ohio,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,Voting rights and election protection
+All Voting is Local,state,Pennsylvania,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,Voting rights and election protection
+All Voting is Local,state,Texas,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,Voting rights and election protection
+All Voting is Local,state,Wisconsin,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,Voting rights and election protection
 Georgia Election Protection (ACLU GA),state,Georgia,,https://www.acluga.org/en/issues/voting-rights,election_protection,FALSE,TRUE,ACLU Georgia voting rights
 Texas Civil Rights Project,state,Texas,,https://txcivilrights.org/,voting_rights,FALSE,TRUE,Statewide voting rights org
 Pennsylvania Voice,state,Pennsylvania,,https://pavoice.org/,voter_engagement,FALSE,TRUE,Statewide civic engagement network

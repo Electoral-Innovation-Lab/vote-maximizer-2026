@@ -97,6 +97,7 @@ export default function App() {
   // Top Contests hover preview (map layer override)
   const [previewRace, setPreviewRace] = useState(null);
   const [topContestType, setTopContestType] = useState('house');
+  const [mapResetTrigger, setMapResetTrigger] = useState(0);
 
   const [civicOrgs, setCivicOrgs] = useState([]);
   const [primaryCalendar, setPrimaryCalendar] = useState([]);
@@ -189,6 +190,7 @@ export default function App() {
     setHoveredGeoid(null);
     setSelectedGeoid(null);
     setPreviewRace(null);
+    setMapResetTrigger((n) => n + 1);
   }, []);
 
   const handleHover = useCallback((geoid) => setHoveredGeoid(geoid), []);
@@ -259,6 +261,7 @@ export default function App() {
           selectedGeoid={selectedGeoid}
           previewCenter={previewCenter}
           searchCenter={searchCenter}
+          resetViewTrigger={mapResetTrigger}
           onRaceHover={handleHover}
           onRaceSelect={handleSelect}
           onLocationSearch={handleLocationSearch}

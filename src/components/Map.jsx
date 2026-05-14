@@ -115,6 +115,7 @@ export default function Map({
   selectedGeoid,
   previewCenter,
   searchCenter,
+  resetViewTrigger,
   onRaceHover,
   onRaceSelect,
   onLocationSearch,
@@ -308,6 +309,13 @@ export default function Map({
 
     return () => { map.remove(); mapRef.current = null; };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Zoom out to national view on tab change ───────────────────────────────
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !isMapReady || !resetViewTrigger) return;
+    map.flyTo({ center: [-98.5, 39.5], zoom: 3.5, speed: 1.2, curve: 1.4 });
+  }, [resetViewTrigger, isMapReady]);
 
   // ── Fly to landing page search ───────────────────────────────────────────
   useEffect(() => {

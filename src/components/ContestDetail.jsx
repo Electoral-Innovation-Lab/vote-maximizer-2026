@@ -72,12 +72,15 @@ function VPBar({ voterPower }) {
   );
 }
 
-function OrgList({ orgs, label }) {
+function OrgList({ orgs, label, limit }) {
+  const [expanded, setExpanded] = useState(false);
   if (!orgs?.length) return null;
+  const capped = limit && !expanded ? orgs.slice(0, limit) : orgs;
+  const hidden = limit ? orgs.length - limit : 0;
   return (
     <div className="cd-org-group">
       {label && <div className="cd-org-group-label">{label}</div>}
-      {orgs.map((org) => (
+      {capped.map((org) => (
         <a key={org.name} href={org.url} target="_blank" rel="noopener noreferrer" className="cd-org-link">
           <div>
             <div className="cd-org-name">{org.name}</div>
@@ -86,6 +89,11 @@ function OrgList({ orgs, label }) {
           <span className="cd-org-arrow">→</span>
         </a>
       ))}
+      {hidden > 0 && (
+        <button className="cd-org-more" onClick={() => setExpanded((e) => !e)}>
+          {expanded ? 'Show less' : `+${hidden} more`}
+        </button>
+      )}
     </div>
   );
 }
@@ -292,7 +300,7 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
         <h3 className="cd-section-title">Get Involved</h3>
         <OrgList orgs={localOrgs} label={localOrgs.length ? 'In your area' : null} />
         <OrgList orgs={stateOrgs} label={stateOrgs.length ? 'Statewide' : null} />
-        <OrgList orgs={nationalOrgs} label={nationalOrgs.length ? 'National' : null} />
+        <OrgList orgs={nationalOrgs} label={nationalOrgs.length ? 'National' : null} limit={3} />
         {!orgs.length && (
           <div className="cd-org-empty">Resources loading…</div>
         )}
