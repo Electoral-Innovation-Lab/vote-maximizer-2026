@@ -30,8 +30,8 @@ export const STATE_ABBR = {
   Wisconsin: 'WI', Wyoming: 'WY',
 };
 
-// States with a single at-large representative; Census uses CD "00" in GEOID
-const AT_LARGE_STATES = new Set([
+// States with a single at-large representative
+export const AT_LARGE_STATES = new Set([
   'Alaska', 'Delaware', 'North Dakota', 'South Dakota', 'Vermont', 'Wyoming',
 ]);
 

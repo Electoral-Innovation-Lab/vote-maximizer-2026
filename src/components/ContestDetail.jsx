@@ -2,18 +2,39 @@ import { useState, useEffect } from 'react';
 import { getDistrictColor, COOK_CONFIG } from '../utils/districtUtils.js';
 import './ContestDetail.css';
 
-const GET_INVOLVED_ORGS = [
-  {
-    name: 'League of Women Voters',
-    url: 'https://www.lwv.org/',
-    desc: 'Voter registration, education & election protection',
-  },
-  {
-    name: 'Common Cause',
-    url: 'https://www.commoncause.org/',
-    desc: 'Voting rights, accountability & election reform',
-  },
-];
+// Which primary column applies to each raceType
+const PRIMARY_COL = {
+  house:           'hasHouse',
+  senate:          'hasSenate',
+  governor:        'hasGovernor',
+  state_leg_upper: 'hasStateLeg',
+  state_leg_lower: 'hasStateLeg',
+};
+
+function getPrimaryBadge(primaryCalendar, race) {
+  if (!primaryCalendar?.length) return null;
+  const entry = primaryCalendar.find((p) => p.state === race.state);
+  if (!entry) return null;
+  const col = PRIMARY_COL[race.raceType];
+  const hasPrimary = col ? entry[col] : (entry.hasHouse || entry.hasSenate || entry.hasGovernor || entry.hasStateLeg);
+  if (!hasPrimary) return null;
+  const date = new Date(entry.primaryDate);
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  if (isNaN(date) || date < today) return null;
+  return { date: entry.primaryDate, type: entry.primaryType };
+}
+
+function filterOrgs(civicOrgs, race, userCounty) {
+  if (!civicOrgs?.length) return [];
+  return civicOrgs.filter((org) => {
+    if (org.level === 'national') return true;
+    if (org.level === 'state') return org.state === race.state;
+    if (org.level === 'county') {
+      return org.state === race.state && userCounty && org.county === userCounty;
+    }
+    return false;
+  });
+}
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -47,6 +68,24 @@ function VPBar({ voterPower }) {
         <div className="cd-vp-fill" style={{ width: `${Math.round(voterPower)}%`, background: color }} />
       </div>
       <span className="cd-vp-score">{Math.round(voterPower)}</span>
+    </div>
+  );
+}
+
+function OrgList({ orgs, label }) {
+  if (!orgs?.length) return null;
+  return (
+    <div className="cd-org-group">
+      {label && <div className="cd-org-group-label">{label}</div>}
+      {orgs.map((org) => (
+        <a key={org.name} href={org.url} target="_blank" rel="noopener noreferrer" className="cd-org-link">
+          <div>
+            <div className="cd-org-name">{org.name}</div>
+            {org.notes && <div className="cd-org-desc">{org.notes}</div>}
+          </div>
+          <span className="cd-org-arrow">→</span>
+        </a>
+      ))}
     </div>
   );
 }
@@ -89,7 +128,7 @@ function ComparePicker({ current, allRaces, onPick, onCancel }) {
   );
 }
 
-function CompareView({ raceA, raceB, onClose }) {
+function CompareView({ raceA, raceB, onClose, orgs }) {
   const cfgA = cookCfg(raceA.cookRating);
   const cfgB = cookCfg(raceB.cookRating);
 
@@ -145,14 +184,7 @@ function CompareView({ raceA, raceB, onClose }) {
 
       <div className="cd-section">
         <h3 className="cd-section-title">Get Involved</h3>
-        <div className="cd-org-list">
-          {GET_INVOLVED_ORGS.map((org) => (
-            <a key={org.name} href={org.url} target="_blank" rel="noopener noreferrer" className="cd-org-link">
-              <span className="cd-org-name">{org.name}</span>
-              <span className="cd-org-arrow">→</span>
-            </a>
-          ))}
-        </div>
+        <OrgList orgs={orgs?.filter((o) => o.level === 'national')} label={null} />
       </div>
     </div>
   );
@@ -160,7 +192,7 @@ function CompareView({ raceA, raceB, onClose }) {
 
 // ── Main detail view ──────────────────────────────────────────────────────────
 
-export default function ContestDetail({ race, allRaces, onBack, onSelect }) {
+export default function ContestDetail({ race, allRaces, onBack, onSelect, civicOrgs, primaryCalendar, userCounty }) {
   const [compareRace, setCompareRace] = useState(null);
   const [picking, setPicking] = useState(false);
 
@@ -170,7 +202,8 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect }) {
   }, [race?.geoid]);
 
   if (compareRace) {
-    return <CompareView raceA={race} raceB={compareRace} onClose={() => setCompareRace(null)} />;
+    const compareOrgs = filterOrgs(civicOrgs, race, userCounty);
+    return <CompareView raceA={race} raceB={compareRace} onClose={() => setCompareRace(null)} orgs={compareOrgs} />;
   }
 
   if (picking) {
@@ -191,6 +224,14 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect }) {
     ? `Other contests in ${race.state}`
     : 'Other high-impact contests';
 
+  const primaryBadge = getPrimaryBadge(primaryCalendar, race);
+  const orgs = filterOrgs(civicOrgs, race, userCounty);
+
+  // Group: county-level first, then state, then national
+  const localOrgs    = orgs.filter((o) => o.level === 'county');
+  const stateOrgs    = orgs.filter((o) => o.level === 'state');
+  const nationalOrgs = orgs.filter((o) => o.level === 'national');
+
   return (
     <div className="contest-detail">
       <button className="cd-back" onClick={onBack}>← All contests</button>
@@ -209,6 +250,11 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect }) {
         {formatMargin(race.margin) && (
           <div className="cd-meta">
             <span>Est. Margin: <strong>{formatMargin(race.margin)}</strong></span>
+          </div>
+        )}
+        {primaryBadge && (
+          <div className="cd-primary-badge">
+            Primary: {primaryBadge.date}
           </div>
         )}
       </div>
@@ -244,17 +290,12 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect }) {
       {/* ── Get Involved ── */}
       <div className="cd-section">
         <h3 className="cd-section-title">Get Involved</h3>
-        <div className="cd-org-list">
-          {GET_INVOLVED_ORGS.map((org) => (
-            <a key={org.name} href={org.url} target="_blank" rel="noopener noreferrer" className="cd-org-link">
-              <div>
-                <div className="cd-org-name">{org.name}</div>
-                <div className="cd-org-desc">{org.desc}</div>
-              </div>
-              <span className="cd-org-arrow">→</span>
-            </a>
-          ))}
-        </div>
+        <OrgList orgs={localOrgs} label={localOrgs.length ? 'In your area' : null} />
+        <OrgList orgs={stateOrgs} label={stateOrgs.length ? 'Statewide' : null} />
+        <OrgList orgs={nationalOrgs} label={nationalOrgs.length ? 'National' : null} />
+        {!orgs.length && (
+          <div className="cd-org-empty">Resources loading…</div>
+        )}
       </div>
 
       {/* ── Nearby contests ── */}

@@ -1,51 +1,51 @@
-state,FP Code,race_type,election_name,D_running,R_running,D_link,R_link,voter_power,cook_rating,pivotal election?,structural initiative?,liberties initiative?,election_type,current_majority,notes,incumbent
-Alabama,1,State Supreme Court,AL Supreme Court – Place 7,,Brady Mendheim,,,,solid-R,,,,partisan,Republican,Uncontested R; All-R court,Brady Mendheim (R)
-Alabama,1,State Supreme Court,AL Supreme Court – Place 4,,Bowden or Fridy,,,,solid-R,,,,partisan,Republican,R primary between Bowden and Matt Fridy,Benjamin Bowden (R)
-Illinois,17,State Supreme Court,IL Supreme Court – District 1,Bertina Lampkin,TBD,,,,likely-D,,,,partisan,Democratic 4-3,Retention-style partisan; D favored in Cook County district,Bertina Lampkin (D)
-Louisiana,22,State Supreme Court,LA Supreme Court – District 3 Pos 1 (special),TBD,TBD,,,,lean-R,,,,partisan,Republican,Special election; seat vacant,Vacant
-Louisiana,22,State Supreme Court,LA Supreme Court – District 3 Pos 2 (special),TBD,TBD,,,,lean-R,,,,partisan,Republican,Special election; seat vacant,Vacant
-Mississippi,28,State Supreme Court,MS Supreme Court – Seat 1,TBD,TBD,,,,solid-R,,,,nonpartisan,Conservative,Nonpartisan but conservative-leaning; 2 seats contested per Crystal Ball,TBD
-Mississippi,28,State Supreme Court,MS Supreme Court – Seat 2,TBD,TBD,,,,solid-R,,,,nonpartisan,Conservative,Incumbents favored,TBD
-New Mexico,35,State Supreme Court,NM Supreme Court – Seat,TBD,TBD,,,,solid-D,,,,partisan,Democratic,D-controlled court in D-leaning state,TBD (D)
-North Carolina,37,State Supreme Court,NC Supreme Court – Earls seat,Anita Earls,Sarah Stevens,,,,lean-R,,,,partisan,Republican 5-2,Earls (D incumbent) vs. Stevens (R). Last D win in NC supreme ct was 2018,Anita Earls (D)
-Ohio,39,State Supreme Court,OH Supreme Court – At-large (multiple seats),Jennifer Brunner / Marilyn Zayas,Dan Hawkins / others,,,,lean-R,,,,nonpartisan,Republican 4-3,"Nonpartisan label, partisan in practice; R court trending further R; multiple seats up",Multiple R incumbents
-Texas,48,State Supreme Court,TX Supreme Court – Place 1 (Chief),Maggie Ellis,Jimmy Blacklock,,,,solid-R,,,,partisan,Republican 9-0,All-R court; D challengers present but unlikely to win statewide in TX,Jimmy Blacklock (R)
-Texas,48,State Supreme Court,TX Supreme Court – Place 2,Chari Kelly,James Sullivan,,,,solid-R,,,,partisan,Republican 9-0,,James Sullivan (R)
-Texas,48,State Supreme Court,TX Supreme Court – Place 7,Kristen Hawkins,Kyle Hawkins,,,,solid-R,,,,partisan,Republican 9-0,,Kyle Hawkins (R)
-Texas,48,State Supreme Court,TX Supreme Court – Place 8,Gisela Triana,Brett Busby,,,,solid-R,,,,partisan,Republican 9-0,,Brett Busby (R)
-West Virginia,54,State Supreme Court,WV Supreme Court – Seat,TBD,TBD,,,,solid-R,,,,partisan,Republican,Partisan election; R-leaning state,TBD
-West Virginia,54,State Supreme Court,WV Supreme Court – Seat (special),TBD,TBD,,,,solid-R,,,,partisan,Republican,Special election seat,TBD
-Arkansas,5,State Supreme Court,AR Supreme Court – Seat (Hiland/Bronni swap),John Adams,Cody Hiland,,,,solid-R,,,,nonpartisan,Conservative,Hiland running for Bronni seat; Bronni running for Hiland seat. First such swap in 25 yrs,Cody Hiland (R-appt)
-Arkansas,5,State Supreme Court,AR Supreme Court – Seat (Bronni/Adams),John Adams,Nicholas Bronni,,,,solid-R,,,,nonpartisan,Conservative,Both justices appointed by Sanders; state law bars same-seat rerun,Nicholas Bronni (R-appt)
-Georgia,13,State Supreme Court,GA Supreme Court – Seat 1,,,,,,nonpartisan,,,,nonpartisan,Mixed,Nonpartisan; justices appointed then face nonpartisan election,TBD
-Georgia,13,State Supreme Court,GA Supreme Court – Seat 2,,,,,,nonpartisan,,,,nonpartisan,Mixed,,TBD
-Georgia,13,State Supreme Court,GA Supreme Court – Seat 3,,,,,,nonpartisan,,,,nonpartisan,Mixed,,TBD
-Idaho,16,State Supreme Court,ID Supreme Court – At-large,,,,,,nonpartisan,,,,nonpartisan,Conservative,Nonpartisan; ID is R-dominated,TBD
-Kentucky,21,State Supreme Court,KY Supreme Court – Open (VanMeter retired),Pamela Goodwine,Erin Izzo,,,,lean-R,,,,nonpartisan,Conservative,VanMeter (conservative CJ) retired. Goodwine (D-backed) vs. Izzo (R-backed). Competitive Lexington-area district,Open (VanMeter retired)
-Michigan,26,State Supreme Court,MI Supreme Court – Seat 1,TBD (D nominee),TBD (R nominee),,,,toss-up,,,,nonpartisan,Liberal 4-3,Court balance at stake. Michigan method: partisan nominating + nonpartisan general. Watched closely,TBD (Whitmer appt)
-Michigan,26,State Supreme Court,MI Supreme Court – Seat 2,TBD (D nominee),TBD (R nominee),,,,toss-up,,,,nonpartisan,Liberal 4-3,Second seat up; same stakes as Seat 1. Liberal majority could flip,TBD (Whitmer appt)
-Minnesota,27,State Supreme Court,MN Supreme Court – Gaïtas seat,Theodora Gaïtas,TBD,,,,likely-D,,,,nonpartisan,Liberal,First election for Walz appointee Gaïtas; D-leaning state,Theodora Gaïtas (Walz appt)
-Minnesota,27,State Supreme Court,MN Supreme Court – Hennesy seat,Sarah Hennesy,TBD,,,,likely-D,,,,nonpartisan,Liberal,First election for Walz appointee Hennesy,Sarah Hennesy (Walz appt)
-Montana,30,State Supreme Court,MT Supreme Court,,,,,,lean-R,,,,nonpartisan,Mixed,Notable race per Crystal Ball; state trending R; nonpartisan but ideologically contested,TBD
-Nevada,32,State Supreme Court,NV Supreme Court,,,,,,nonpartisan,,,,nonpartisan,Mixed,No challengers filed against sitting justices per State Court Report Feb 2026,TBD
-North Dakota,38,State Supreme Court,ND Supreme Court – Seat,,,,,,solid-R,,,,nonpartisan,Conservative,Nonpartisan; ND is solidly R,TBD
-Oregon,41,State Supreme Court,OR Supreme Court – Seat,,,,,,solid-D,,,,nonpartisan,Liberal,Nonpartisan; OR is solidly D,TBD
-Washington,53,State Supreme Court,WA Supreme Court – Seat 1,,,,,,solid-D,,,,nonpartisan,Liberal,Multiple seats up; WA is solidly D nonpartisan court,TBD
-Washington,53,State Supreme Court,WA Supreme Court – Seat 2,,,,,,solid-D,,,,nonpartisan,Liberal,,TBD
-Washington,53,State Supreme Court,WA Supreme Court – Seat 3,,,,,,solid-D,,,,nonpartisan,Liberal,,TBD
-Wisconsin,55,State Supreme Court,WI Supreme Court – Bradley seat (Open),Chris Taylor,Maria S. Lazar,,,,lean-D,,,,nonpartisan,Liberal 4-3,"April 7, 2026. Taylor (liberal) favored. Court majority not at stake this cycle",Rebecca Bradley (retiring)
-Alaska,2,State Supreme Court,AK Supreme Court – Retention,,,,,,retention,,,,retention,Nonpartisan,1 justice up for retention; 10-year terms,TBD
-Arizona,4,State Supreme Court,AZ Supreme Court – Retention,,,,,,retention,,,,retention,Conservative,1 justice up for retention; 6-year terms,TBD
-California,6,State Supreme Court,CA Supreme Court – Retention (multiple),,,,,,retention,,,,retention,Liberal,"Multiple justices face retention vote; CA court is D-appointed, liberal-leaning",Multiple justices
-Colorado,8,State Supreme Court,CO Supreme Court – Retention,,,,,,retention,,,,retention,Liberal,Multiple justices up for retention,Multiple justices
-Florida,12,State Supreme Court,FL Supreme Court – Retention,,,,,,retention,,,,retention,Conservative,DeSantis-appointed conservative majority; retention votes,Multiple justices
-Indiana,18,State Supreme Court,IN Supreme Court – Retention,,,,,,retention,,,,retention,Conservative,Assisted appointment then retention; R-controlled,TBD
-Iowa,19,State Supreme Court,IA Supreme Court – Retention,,,,,,retention,,,,retention,Conservative,Missouri Plan; retention elections,TBD
-Kansas,20,State Supreme Court,KS Supreme Court – Referendum on elections,,,,,,retention,,,,retention,Mixed,KS holding referendum in 2026 on whether to switch to elections starting 2028. Court currently appointed by governor,N/A (current: appointed)
-Maryland,24,State Supreme Court,MD Supreme Court – Retention,,,,,,retention,,,,retention,Mixed,Retention elections,Multiple justices
-Missouri,29,State Supreme Court,MO Supreme Court – Retention,,,,,,retention,,,,retention,Conservative,Missouri Plan birthplace; retention elections,TBD
-Nebraska,31,State Supreme Court,NE Supreme Court – Retention,,,,,,retention,,,,retention,Conservative,Nonpartisan retention,TBD
-Oklahoma,40,State Supreme Court,OK Supreme Court – Retention,,,,,,retention,,,,retention,Mixed,2024 saw first-ever OK retention loss; anti-retention campaigns possible,TBD
-South Dakota,46,State Supreme Court,SD Supreme Court – Retention,,,,,,retention,,,,retention,Conservative,Retention elections,TBD
-Utah,49,State Supreme Court,UT Supreme Court – Retention,,,,,,retention,,,,retention,Conservative,Retention elections,TBD
-Wyoming,56,State Supreme Court,WY Supreme Court – Jarosh Retention,,,,,,retention,,,,retention,Conservative,Jarosh in majority on abortion rights ruling; anti-retention campaign possible per State Court Report,Robert Jarosh
+state,FP Code,race_type,election_name,D_running,R_running,D_link,R_link,voter_power,cook_rating,pivotal election?,structural initiative?,liberties initiative?,election_type,current_majority,notes,incumbent,,,,,,,,,
+Alabama,1,State Supreme Court,AL Supreme Court – Place 7,,Brady Mendheim,,,3,solid-R,,,,partisan,Republican,Uncontested R; All-R court,Brady Mendheim (R),,,,,,,,,
+Alabama,1,State Supreme Court,AL Supreme Court – Place 4,,Bowden or Fridy,,,3,solid-R,,,,partisan,Republican,R primary between Bowden and Matt Fridy,Benjamin Bowden (R),,,,,,,,,
+Illinois,17,State Supreme Court,IL Supreme Court – District 1,Bertina Lampkin,TBD,,,12,likely-D,,,,partisan,Democratic 4-3,Retention-style partisan; D favored in Cook County district,Bertina Lampkin (D),,,,,,,,,
+Louisiana,22,State Supreme Court,LA Supreme Court – District 3 Pos 1 (special),TBD,TBD,,,57,lean-R,,,,partisan,Republican,Special election; seat vacant,Vacant,,,,,,,,,
+Louisiana,22,State Supreme Court,LA Supreme Court – District 3 Pos 2 (special),TBD,TBD,,,57,lean-R,,,,partisan,Republican,Special election; seat vacant,Vacant,,,,,,,,,
+Mississippi,28,State Supreme Court,MS Supreme Court – Seat 1,TBD,TBD,,,13,solid-R,,,,nonpartisan,Conservative,Nonpartisan but conservative-leaning; 2 seats contested per Crystal Ball,TBD,,,,,,,,,
+Mississippi,28,State Supreme Court,MS Supreme Court – Seat 2,TBD,TBD,,,13,solid-R,,,,nonpartisan,Conservative,Incumbents favored,TBD,,,,,,,,,
+New Mexico,35,State Supreme Court,NM Supreme Court – Seat,TBD,TBD,,,3,solid-D,,,,partisan,Democratic,D-controlled court in D-leaning state,TBD (D),,,,,,,,,
+North Carolina,37,State Supreme Court,NC Supreme Court – Earls seat,Anita Earls,Sarah Stevens,,,43,lean-R,,,,partisan,Republican 5-2,Earls (D incumbent) vs. Stevens (R). Last D win in NC supreme ct was 2018,Anita Earls (D),,,,,,,,,
+Ohio,39,State Supreme Court,OH Supreme Court – At-large (multiple seats),Jennifer Brunner / Marilyn Zayas,Dan Hawkins / others,,,42,lean-R,,,,nonpartisan,Republican 4-3,"Nonpartisan label, partisan in practice; R court trending further R; multiple seats up",Multiple R incumbents,,,,,,,,,
+Texas,48,State Supreme Court,TX Supreme Court – Place 1 (Chief),Maggie Ellis,Jimmy Blacklock,,,3,solid-R,,,,partisan,Republican 9-0,All-R court; D challengers present but unlikely to win statewide in TX,Jimmy Blacklock (R),,,,,,,,,
+Texas,48,State Supreme Court,TX Supreme Court – Place 2,Chari Kelly,James Sullivan,,,3,solid-R,,,,partisan,Republican 9-0,,James Sullivan (R),,,,,,,,,
+Texas,48,State Supreme Court,TX Supreme Court – Place 7,Kristen Hawkins,Kyle Hawkins,,,3,solid-R,,,,partisan,Republican 9-0,,Kyle Hawkins (R),,,,,,,,,
+Texas,48,State Supreme Court,TX Supreme Court – Place 8,Gisela Triana,Brett Busby,,,3,solid-R,,,,partisan,Republican 9-0,,Brett Busby (R),,,,,,,,,
+West Virginia,54,State Supreme Court,WV Supreme Court – Seat,TBD,TBD,,,3,solid-R,,,,partisan,Republican,Partisan election; R-leaning state,TBD,,,,,,,,,
+West Virginia,54,State Supreme Court,WV Supreme Court – Seat (special),TBD,TBD,,,3,solid-R,,,,partisan,Republican,Special election seat,TBD,,,,,,,,,
+Arkansas,5,State Supreme Court,AR Supreme Court – Seat (Hiland/Bronni swap),John Adams,Cody Hiland,,,13,solid-R,,,,nonpartisan,Conservative,Hiland running for Bronni seat; Bronni running for Hiland seat. First such swap in 25 yrs,Cody Hiland (R-appt),,,,,,,,,
+Arkansas,5,State Supreme Court,AR Supreme Court – Seat (Bronni/Adams),John Adams,Nicholas Bronni,,,13,solid-R,,,,nonpartisan,Conservative,Both justices appointed by Sanders; state law bars same-seat rerun,Nicholas Bronni (R-appt),,,,,,,,,
+Georgia,13,State Supreme Court,GA Supreme Court – Seat 1,,,,,68,nonpartisan,,,,nonpartisan,Mixed,Nonpartisan; justices appointed then face nonpartisan election,TBD,,,,,,,,,
+Georgia,13,State Supreme Court,GA Supreme Court – Seat 2,,,,,68,nonpartisan,,,,nonpartisan,Mixed,,TBD,,,,,,,,,
+Georgia,13,State Supreme Court,GA Supreme Court – Seat 3,,,,,68,nonpartisan,,,,nonpartisan,Mixed,,TBD,,,,,,,,,
+Idaho,16,State Supreme Court,ID Supreme Court – At-large,,,,,14,nonpartisan,,,,nonpartisan,Conservative,Nonpartisan; ID is R-dominated,TBD,,,,,,,,,
+Kentucky,21,State Supreme Court,KY Supreme Court – Open (VanMeter retired),Pamela Goodwine,Erin Izzo,,,57,lean-R,,,,nonpartisan,Conservative,VanMeter (conservative CJ) retired. Goodwine (D-backed) vs. Izzo (R-backed). Competitive Lexington-area district,Open (VanMeter retired),,,,,,,,,
+Michigan,26,State Supreme Court,MI Supreme Court – Seat 1,TBD (D nominee),TBD (R nominee),,,60,toss-up,,,,nonpartisan,Liberal 4-3,Court balance at stake. Michigan method: partisan nominating + nonpartisan general. Watched closely,TBD (Whitmer appt),,,,,,,,,
+Michigan,26,State Supreme Court,MI Supreme Court – Seat 2,TBD (D nominee),TBD (R nominee),,,60,toss-up,,,,nonpartisan,Liberal 4-3,Second seat up; same stakes as Seat 1. Liberal majority could flip,TBD (Whitmer appt),,,,,,,,,
+Minnesota,27,State Supreme Court,MN Supreme Court – Gaïtas seat,Theodora Gaïtas,TBD,,,15,likely-D,,,,nonpartisan,Liberal,First election for Walz appointee Gaïtas; D-leaning state,Theodora Gaïtas (Walz appt),,,,,,,,,
+Minnesota,27,State Supreme Court,MN Supreme Court – Hennesy seat,Sarah Hennesy,TBD,,,15,likely-D,,,,nonpartisan,Liberal,First election for Walz appointee Hennesy,Sarah Hennesy (Walz appt),,,,,,,,,
+Montana,30,State Supreme Court,MT Supreme Court,,,,,84,lean-R,,,,nonpartisan,Mixed,Notable race per Crystal Ball; state trending R; nonpartisan but ideologically contested,TBD,,,,,,,,,
+Nevada,32,State Supreme Court,NV Supreme Court,,,,,100,nonpartisan,,,,nonpartisan,Mixed,No challengers filed against sitting justices per State Court Report Feb 2026,TBD,,,,,,,,,
+North Dakota,38,State Supreme Court,ND Supreme Court – Seat,,,,,3,solid-R,,,,nonpartisan,Conservative,Nonpartisan; ND is solidly R,TBD,,,,,,,,,
+Oregon,41,State Supreme Court,OR Supreme Court – Seat,,,,,3,solid-D,,,,nonpartisan,Liberal,Nonpartisan; OR is solidly D,TBD,,,,,,,,,
+Washington,53,State Supreme Court,WA Supreme Court – Seat 1,,,,,3,solid-D,,,,nonpartisan,Liberal,Multiple seats up; WA is solidly D nonpartisan court,TBD,,,,,,,,,
+Washington,53,State Supreme Court,WA Supreme Court – Seat 2,,,,,3,solid-D,,,,nonpartisan,Liberal,,TBD,,,,,,,,,
+Washington,53,State Supreme Court,WA Supreme Court – Seat 3,,,,,3,solid-D,,,,nonpartisan,Liberal,,TBD,,,,,,,,,
+Wisconsin,55,State Supreme Court,WI Supreme Court – Bradley seat (Open),Chris Taylor,Maria S. Lazar,,,50,lean-D,,,,nonpartisan,Liberal 4-3,"April 7, 2026. Taylor (liberal) favored. Court majority not at stake this cycle",Rebecca Bradley (retiring),,,,,,,,,
+Alaska,2,State Supreme Court,AK Supreme Court – Retention,,,,,11,retention,,,,retention,Nonpartisan,1 justice up for retention; 10-year terms,TBD,,,,,,,,,
+Arizona,4,State Supreme Court,AZ Supreme Court – Retention,,,,,5,retention,,,,retention,Conservative,1 justice up for retention; 6-year terms,TBD,,,,,,,,,
+California,6,State Supreme Court,CA Supreme Court – Retention (multiple),,,,,3,retention,,,,retention,Liberal,"Multiple justices face retention vote; CA court is D-appointed, liberal-leaning",Multiple justices,,,,,,,,,
+Colorado,8,State Supreme Court,CO Supreme Court – Retention,,,,,3,retention,,,,retention,Liberal,Multiple justices up for retention,Multiple justices,,,,,,,,,
+Florida,12,State Supreme Court,FL Supreme Court – Retention,,,,,3,retention,,,,retention,Conservative,DeSantis-appointed conservative majority; retention votes,Multiple justices,,,,,,,,,
+Indiana,18,State Supreme Court,IN Supreme Court – Retention,,,,,3,retention,,,,retention,Conservative,Assisted appointment then retention; R-controlled,TBD,,,,,,,,,
+Iowa,19,State Supreme Court,IA Supreme Court – Retention,,,,,7,retention,,,,retention,Conservative,Missouri Plan; retention elections,TBD,,,,,,,,,
+Kansas,20,State Supreme Court,KS Supreme Court – Referendum on elections,,,,,97,retention,,,,retention,Mixed,KS holding referendum in 2026 on whether to switch to elections starting 2028. Court currently appointed by governor,N/A (current: appointed),,,,,,,,,
+Maryland,24,State Supreme Court,MD Supreme Court – Retention,,,,,3,retention,,,,retention,Mixed,Retention elections,Multiple justices,,,,,,,,,
+Missouri,29,State Supreme Court,MO Supreme Court – Retention,,,,,3,retention,,,,retention,Conservative,Missouri Plan birthplace; retention elections,TBD,,,,,,,,,
+Nebraska,31,State Supreme Court,NE Supreme Court – Retention,,,,,8,retention,,,,retention,Conservative,Nonpartisan retention,TBD,,,,,,,,,
+Oklahoma,40,State Supreme Court,OK Supreme Court – Retention,,,,,3,retention,,,,retention,Mixed,2024 saw first-ever OK retention loss; anti-retention campaigns possible,TBD,,,,,,,,,
+South Dakota,46,State Supreme Court,SD Supreme Court – Retention,,,,,3,retention,,,,retention,Conservative,Retention elections,TBD,,,,,,,,,
+Utah,49,State Supreme Court,UT Supreme Court – Retention,,,,,3,retention,,,,retention,Conservative,Retention elections,TBD,,,,,,,,,
+Wyoming,56,State Supreme Court,WY Supreme Court – Jarosh Retention,,,,,31,retention,,,,retention,Conservative,Jarosh in majority on abortion rights ruling; anti-retention campaign possible per State Court Report,Robert Jarosh,,,,,,,,,

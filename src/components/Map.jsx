@@ -7,11 +7,23 @@ import statesData from 'us-atlas/states-10m.json';
 import { getDistrictColor } from '../utils/districtUtils.js';
 import './Map.css';
 
-// Congressional district boundaries — two options (set one in .env):
-//   VITE_DISTRICT_TILESET=mapbox://username.tileset-id   ← Mapbox vector tileset (recommended)
-//   Fallback: place districts.geojson in public/
-const DISTRICT_TILESET = import.meta.env.VITE_DISTRICT_TILESET ?? null;
-const DISTRICT_SRC_LAYER = import.meta.env.VITE_DISTRICT_LAYER ?? 'cd119';
+const DISTRICT_TILESET  = import.meta.env.VITE_DISTRICT_TILESET  ?? null;
+const DISTRICT_SRC_LAYER = import.meta.env.VITE_DISTRICT_LAYER   ?? 'cd119';
+const SLD_UPPER_TILESET  = import.meta.env.VITE_SLD_UPPER_TILESET ?? null;
+const SLD_UPPER_LAYER    = import.meta.env.VITE_SLD_UPPER_LAYER   ?? 'sldu';
+const SLD_LOWER_TILESET  = import.meta.env.VITE_SLD_LOWER_TILESET ?? null;
+const SLD_LOWER_LAYER    = import.meta.env.VITE_SLD_LOWER_LAYER   ?? 'sldl';
+
+// Match expression for each map tab
+const GEOID_EXPR = {
+  house:     ['get', 'CONG119'],
+  sld_upper: ['concat', ['get', 'STATE'], '-', ['get', 'DISTRICT']],
+  sld_lower: ['concat', ['get', 'STATE'], '-', ['get', 'DISTRICT']],
+  state:     ['get', 'GEOID'],
+};
+
+// Empty filter that matches nothing (for filter-based hover/select reset)
+const NO_MATCH = ['==', ['literal', 1], 0];
 
 async function loadDistrictGeoJSON() {
   const CACHE_KEY = 'vm_districts_v2';
@@ -20,7 +32,8 @@ async function loadDistrictGeoJSON() {
     if (cached) return JSON.parse(cached);
   } catch (_) {}
   const res = await fetch('/districts.geojson');
-  if (!res.ok) throw new Error('districts.geojson not found in public/');
+  const ct = res.headers.get('content-type') ?? '';
+  if (!res.ok || ct.includes('text/html')) throw new Error('districts.geojson not found in public/');
   const geo = await res.json();
   try { sessionStorage.setItem(CACHE_KEY, JSON.stringify(geo)); } catch (_) {}
   return geo;
@@ -48,8 +61,8 @@ function computeCentroid(geometry) {
   ];
 }
 
-function buildColorExpression(raceData) {
-  const expr = ['match', ['get', 'GEOID']];
+function buildColorExpression(raceData, matchExpr) {
+  const expr = ['match', matchExpr];
   const seen = new Set();
   for (const d of raceData) {
     if (d.geoid && !seen.has(d.geoid)) {
@@ -61,6 +74,7 @@ function buildColorExpression(raceData) {
   return expr;
 }
 
+// Feature-state helper (house uses vector tile promoteId; states use geojson promoteId)
 function setFState(map, source, geoid, state) {
   if (!geoid) return;
   try {
@@ -72,8 +86,27 @@ function setFState(map, source, geoid, state) {
   } catch (_) {}
 }
 
-const DISTRICT_LAYERS = ['districts-fill', 'districts-line', 'districts-hover', 'districts-selected'];
-const STATE_LAYERS = ['states-fill', 'states-line', 'states-hover', 'states-selected'];
+// Filter-based select/hover for SLD layers (no unique per-feature ID available)
+function sldFilter(geoid) {
+  if (!geoid) return NO_MATCH;
+  const dash = geoid.indexOf('-');
+  const s = geoid.slice(0, dash);
+  const d = geoid.slice(dash + 1);
+  return ['all', ['==', ['get', 'STATE'], s], ['==', ['get', 'DISTRICT'], d]];
+}
+
+const HOUSE_LAYERS     = ['districts-fill', 'districts-line', 'districts-hover', 'districts-selected'];
+const SLD_UPPER_LAYERS = ['sld-upper-fill', 'sld-upper-line', 'sld-upper-hover', 'sld-upper-selected'];
+const SLD_LOWER_LAYERS = ['sld-lower-fill', 'sld-lower-line', 'sld-lower-hover', 'sld-lower-selected'];
+const STATE_LAYERS     = ['states-fill', 'states-line', 'states-hover', 'states-selected'];
+const ALL_LAYERS       = [...HOUSE_LAYERS, ...SLD_UPPER_LAYERS, ...SLD_LOWER_LAYERS, ...STATE_LAYERS];
+
+function activeLayersForTab(tab) {
+  if (tab === 'house')     return HOUSE_LAYERS;
+  if (tab === 'sld_upper') return SLD_UPPER_LAYERS;
+  if (tab === 'sld_lower') return SLD_LOWER_LAYERS;
+  return STATE_LAYERS;
+}
 
 export default function Map({
   raceData,
@@ -86,6 +119,7 @@ export default function Map({
   onRaceSelect,
   onLocationSearch,
   onDistrictCentroidsReady,
+  onSldCentroidsReady,
 }) {
   const containerRef = useRef(null);
   const mapRef = useRef(null);
@@ -98,14 +132,17 @@ export default function Map({
   const onSelectRef = useRef(onRaceSelect);
   const onLocationSearchRef = useRef(onLocationSearch);
   const onDistrictCentroidsReadyRef = useRef(onDistrictCentroidsReady);
+  const onSldCentroidsReadyRef = useRef(onSldCentroidsReady);
   const tabRef = useRef(tab);
   useEffect(() => { raceDataRef.current = raceData; }, [raceData]);
   useEffect(() => { onHoverRef.current = onRaceHover; }, [onRaceHover]);
   useEffect(() => { onSelectRef.current = onRaceSelect; }, [onRaceSelect]);
   useEffect(() => { onLocationSearchRef.current = onLocationSearch; }, [onLocationSearch]);
   useEffect(() => { onDistrictCentroidsReadyRef.current = onDistrictCentroidsReady; }, [onDistrictCentroidsReady]);
+  useEffect(() => { onSldCentroidsReadyRef.current = onSldCentroidsReady; }, [onSldCentroidsReady]);
   useEffect(() => { tabRef.current = tab; }, [tab]);
 
+  // Tracks previous hovered/selected for feature-state sources (house, state)
   const prevHoveredRef = useRef({ source: null, geoid: null });
   const prevSelectedRef = useRef({ source: null, geoid: null });
 
@@ -154,20 +191,19 @@ export default function Map({
 
     map.on('load', async () => {
       try {
-        // ── Congressional district source ────────────────────────────────
+        // ── US House district source ─────────────────────────────────────
         if (DISTRICT_TILESET) {
           map.addSource('districts', {
             type: 'vector',
             url: DISTRICT_TILESET,
-            promoteId: { [DISTRICT_SRC_LAYER]: 'GEOID' },
+            promoteId: { [DISTRICT_SRC_LAYER]: 'CONG119' },
           });
-          // Compute centroids lazily from rendered features at initial zoom
           map.once('idle', () => {
             const features = map.queryRenderedFeatures({ layers: ['districts-fill'] });
             const centroids = {};
             features.forEach((f) => {
-              const geoid = f.properties?.GEOID;
-              if (geoid) centroids[geoid] = computeCentroid(f.geometry);
+              const key = f.properties?.CONG119;
+              if (key) centroids[key] = computeCentroid(f.geometry);
             });
             onDistrictCentroidsReadyRef.current?.(centroids);
           });
@@ -176,22 +212,22 @@ export default function Map({
             const districtGeo = await loadDistrictGeoJSON();
             const centroids = {};
             districtGeo.features.forEach((f) => {
-              const geoid = f.properties?.GEOID;
-              if (geoid) centroids[geoid] = computeCentroid(f.geometry);
+              const key = f.properties?.CONG119 ?? f.properties?.GEOID;
+              if (key) centroids[key] = computeCentroid(f.geometry);
             });
             onDistrictCentroidsReadyRef.current?.(centroids);
-            map.addSource('districts', { type: 'geojson', data: districtGeo, promoteId: 'GEOID' });
+            map.addSource('districts', { type: 'geojson', data: districtGeo, promoteId: 'CONG119' });
           } catch (err) {
             console.warn('District boundaries unavailable:', err.message);
             map.addSource('districts', {
               type: 'geojson',
               data: { type: 'FeatureCollection', features: [] },
-              promoteId: 'GEOID',
+              promoteId: 'CONG119',
             });
           }
         }
 
-        // ── District layers ──────────────────────────────────────────────
+        // ── House layers ─────────────────────────────────────────────────
         const dsl = DISTRICT_TILESET ? { 'source-layer': DISTRICT_SRC_LAYER } : {};
         map.addLayer({ id: 'districts-fill', type: 'fill', source: 'districts', ...dsl,
           paint: { 'fill-color': '#cbd5e1', 'fill-opacity': 0.75 } });
@@ -204,7 +240,19 @@ export default function Map({
           paint: { 'line-color': '#FF8F00',
             'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0] } });
 
-        // ── State layers ─────────────────────────────────────────────────
+        // ── SLD upper source + layers ────────────────────────────────────
+        if (SLD_UPPER_TILESET) {
+          map.addSource('sld-upper', { type: 'vector', url: SLD_UPPER_TILESET });
+          addSldLayers(map, 'sld-upper', SLD_UPPER_LAYER);
+        }
+
+        // ── SLD lower source + layers ────────────────────────────────────
+        if (SLD_LOWER_TILESET) {
+          map.addSource('sld-lower', { type: 'vector', url: SLD_LOWER_TILESET });
+          addSldLayers(map, 'sld-lower', SLD_LOWER_LAYER);
+        }
+
+        // ── State source + layers ────────────────────────────────────────
         const stateGeo = getStatesGeoJSON();
         map.addSource('states', { type: 'geojson', data: stateGeo, promoteId: 'GEOID' });
         map.addLayer({ id: 'states-fill', type: 'fill', source: 'states',
@@ -223,56 +271,32 @@ export default function Map({
             'line-width': ['case', ['boolean', ['feature-state', 'selected'], false], 2.5, 0] } });
 
         if (raceDataRef.current.length) {
-          map.setPaintProperty('districts-fill', 'fill-color', buildColorExpression(raceDataRef.current));
+          map.setPaintProperty('districts-fill', 'fill-color',
+            buildColorExpression(raceDataRef.current, GEOID_EXPR.house));
         }
 
         setIsMapReady(true);
 
-        // ── Layer event handlers ─────────────────────────────────────────
-        function setupLayerEvents(fillLayer, source) {
-          let prevId = null;
-          const mkRef = (id) => (source === 'districts' && DISTRICT_TILESET)
-            ? { source, sourceLayer: DISTRICT_SRC_LAYER, id }
-            : { source, id };
+        // ── Event handlers ───────────────────────────────────────────────
+        setupFeatureStateEvents(map, 'districts-fill', 'districts',
+          (props) => props?.CONG119);
+        setupFeatureStateEvents(map, 'states-fill', 'states',
+          (props) => props?.GEOID);
 
-          map.on('mousemove', fillLayer, (e) => {
-            map.getCanvas().style.cursor = 'pointer';
-            const feature = e.features?.[0];
-            if (!feature) return;
-            const geoid = feature.properties?.GEOID ?? String(feature.id);
-            if (prevId !== null && prevId !== geoid) {
-              try { map.setFeatureState(mkRef(prevId), { hovered: false }); } catch (_) {}
-            }
-            prevId = geoid;
-            try { map.setFeatureState(mkRef(geoid), { hovered: true }); } catch (_) {}
-            const race = raceDataRef.current.find((d) => d.geoid === geoid);
-            onHoverRef.current(race ? geoid : null);
-          });
-
-          map.on('mouseleave', fillLayer, () => {
-            map.getCanvas().style.cursor = '';
-            if (prevId !== null) {
-              try { map.setFeatureState(mkRef(prevId), { hovered: false }); } catch (_) {}
-              prevId = null;
-            }
-            onHoverRef.current(null);
-          });
-
-          map.on('click', fillLayer, (e) => {
-            const feature = e.features?.[0];
-            if (!feature) return;
-            const geoid = feature.properties?.GEOID ?? String(feature.id);
-            const race = raceDataRef.current.find((d) => d.geoid === geoid);
-            onSelectRef.current(race ? geoid : null);
-          });
+        if (SLD_UPPER_TILESET) {
+          setupFilterEvents(map, 'sld-upper-fill', 'sld-upper-hover');
+        }
+        if (SLD_LOWER_TILESET) {
+          setupFilterEvents(map, 'sld-lower-fill', 'sld-lower-hover');
         }
 
-        setupLayerEvents('districts-fill', 'districts');
-        setupLayerEvents('states-fill', 'states');
-
         map.on('click', (e) => {
-          const activeLayer = tabRef.current === 'house' ? 'districts-fill' : 'states-fill';
-          const features = map.queryRenderedFeatures(e.point, { layers: [activeLayer] });
+          const t = tabRef.current;
+          const layer = t === 'house' ? 'districts-fill'
+            : t === 'sld_upper' ? 'sld-upper-fill'
+            : t === 'sld_lower' ? 'sld-lower-fill'
+            : 'states-fill';
+          const features = map.queryRenderedFeatures(e.point, { layers: [layer] });
           if (!features.length) onSelectRef.current(null);
         });
 
@@ -299,31 +323,80 @@ export default function Map({
     map.flyTo({ center: previewCenter, zoom: Math.max(map.getZoom(), 5), speed: 1.2, curve: 1.2 });
   }, [previewCenter, isMapReady]);
 
-  // ── Toggle layer visibility ───────────────────────────────────────────────
+  // ── Toggle layer visibility + clear SLD filters when leaving SLD tabs ────
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !isMapReady) return;
-    const isHouse = tab === 'house';
-    DISTRICT_LAYERS.forEach((id) => map.setLayoutProperty(id, 'visibility', isHouse ? 'visible' : 'none'));
-    STATE_LAYERS.forEach((id) => map.setLayoutProperty(id, 'visibility', isHouse ? 'none' : 'visible'));
+    const active = activeLayersForTab(tab);
+    ALL_LAYERS.forEach((id) => {
+      try { map.setLayoutProperty(id, 'visibility', active.includes(id) ? 'visible' : 'none'); } catch (_) {}
+    });
+    if (tab !== 'sld_upper') {
+      try { map.setFilter('sld-upper-hover', NO_MATCH); map.setFilter('sld-upper-selected', NO_MATCH); } catch (_) {}
+    }
+    if (tab !== 'sld_lower') {
+      try { map.setFilter('sld-lower-hover', NO_MATCH); map.setFilter('sld-lower-selected', NO_MATCH); } catch (_) {}
+    }
   }, [tab, isMapReady]);
 
   // ── Update choropleth colors ──────────────────────────────────────────────
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !isMapReady || !raceData.length) return;
-    const fillLayer = tab === 'house' ? 'districts-fill' : 'states-fill';
-    map.setPaintProperty(fillLayer, 'fill-color', buildColorExpression(raceData));
+    const matchExpr = GEOID_EXPR[tab] ?? GEOID_EXPR.state;
+    const fillLayer =
+      tab === 'house'     ? 'districts-fill' :
+      tab === 'sld_upper' ? 'sld-upper-fill'  :
+      tab === 'sld_lower' ? 'sld-lower-fill'  :
+      'states-fill';
+    try {
+      map.setPaintProperty(fillLayer, 'fill-color', buildColorExpression(raceData, matchExpr));
+    } catch (_) {}
   }, [raceData, tab, isMapReady]);
+
+  // ── Compute SLD centroids when SLD tab becomes active ────────────────────
+  useEffect(() => {
+    const map = mapRef.current;
+    if (!map || !isMapReady) return;
+    if (tab !== 'sld_upper' && tab !== 'sld_lower') return;
+    const fillLayer = tab === 'sld_upper' ? 'sld-upper-fill' : 'sld-lower-fill';
+    const onIdle = () => {
+      const features = map.queryRenderedFeatures({ layers: [fillLayer] });
+      const centroids = {};
+      features.forEach((f) => {
+        const { STATE: s, DISTRICT: d } = f.properties ?? {};
+        if (s && d) centroids[`${s}-${d}`] = computeCentroid(f.geometry);
+      });
+      if (Object.keys(centroids).length > 0) {
+        onSldCentroidsReadyRef.current?.(tab, centroids);
+      }
+    };
+    map.once('idle', onIdle);
+  }, [tab, isMapReady]);
 
   // ── Sync hover from InfoBox → map ─────────────────────────────────────────
   useEffect(() => {
     const map = mapRef.current;
     if (!map || !isMapReady) return;
+
+    // Clear previous
     const { source: ps, geoid: pg } = prevHoveredRef.current;
-    if (pg) setFState(map, ps, pg, { hovered: false });
-    const source = tab === 'house' ? 'districts' : 'states';
-    if (hoveredGeoid) setFState(map, source, hoveredGeoid, { hovered: true });
+    if (pg && ps !== 'sld-upper' && ps !== 'sld-lower') {
+      setFState(map, ps, pg, { hovered: false });
+    }
+
+    const isSldUpper = tab === 'sld_upper';
+    const isSldLower = tab === 'sld_lower';
+    const source = isSldUpper ? 'sld-upper' : isSldLower ? 'sld-lower'
+      : tab === 'house' ? 'districts' : 'states';
+
+    if (isSldUpper || isSldLower) {
+      const hoverLayerId = isSldUpper ? 'sld-upper-hover' : 'sld-lower-hover';
+      try { map.setFilter(hoverLayerId, hoveredGeoid ? sldFilter(hoveredGeoid) : NO_MATCH); } catch (_) {}
+    } else {
+      if (hoveredGeoid) setFState(map, source, hoveredGeoid, { hovered: true });
+    }
+
     prevHoveredRef.current = { source, geoid: hoveredGeoid };
   }, [hoveredGeoid, tab, isMapReady]);
 
@@ -332,42 +405,43 @@ export default function Map({
     const map = mapRef.current;
     if (!map || !isMapReady) return;
 
+    // Clear previous
     const { source: ps, geoid: pg } = prevSelectedRef.current;
-    if (pg) setFState(map, ps, pg, { selected: false });
+    if (pg) {
+      if (ps === 'sld-upper' || ps === 'sld-lower') {
+        const sel = ps === 'sld-upper' ? 'sld-upper-selected' : 'sld-lower-selected';
+        try { map.setFilter(sel, NO_MATCH); } catch (_) {}
+      } else {
+        setFState(map, ps, pg, { selected: false });
+      }
+    }
     if (popupRef.current) { popupRef.current.remove(); popupRef.current = null; }
 
     if (!selectedGeoid) { prevSelectedRef.current = { source: null, geoid: null }; return; }
 
-    const source = tab === 'house' ? 'districts' : 'states';
-    setFState(map, source, selectedGeoid, { selected: true });
-    prevSelectedRef.current = { source, geoid: selectedGeoid };
+    const isSldUpper = tab === 'sld_upper';
+    const isSldLower = tab === 'sld_lower';
+    const source = isSldUpper ? 'sld-upper' : isSldLower ? 'sld-lower'
+      : tab === 'house' ? 'districts' : 'states';
 
+    prevSelectedRef.current = { source, geoid: selectedGeoid };
     const race = raceData.find((d) => d.geoid === selectedGeoid);
     if (!race) return;
 
-    const queryOpts = (DISTRICT_TILESET && tab === 'house')
-      ? { filter: ['==', ['get', 'GEOID'], selectedGeoid], sourceLayer: DISTRICT_SRC_LAYER }
-      : { filter: ['==', ['get', 'GEOID'], selectedGeoid] };
-    const features = map.querySourceFeatures(source, queryOpts);
-
-    if (features.length) {
-      const coords = [];
-      features.forEach((f) => {
-        if (f.geometry.type === 'Polygon') f.geometry.coordinates[0].forEach((c) => coords.push(c));
-        else if (f.geometry.type === 'MultiPolygon') f.geometry.coordinates.forEach((p) => p[0].forEach((c) => coords.push(c)));
-      });
-      if (coords.length) {
-        const lngs = coords.map((c) => c[0]);
-        const lats = coords.map((c) => c[1]);
-        const bounds = [[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]];
-        map.fitBounds(bounds, { padding: 80, maxZoom: tab === 'house' ? 9 : 7, duration: 800 });
-        const popup = new mapboxgl.Popup({ closeButton: true, maxWidth: '260px' })
-          .setLngLat([(bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2 + (bounds[1][1] - bounds[0][1]) * 0.1])
-          .setHTML(buildPopupHTML(race, tab))
-          .addTo(map);
-        popup.on('close', () => { onSelectRef.current(null); popupRef.current = null; });
-        popupRef.current = popup;
-      }
+    if (isSldUpper || isSldLower) {
+      const selLayerId = isSldUpper ? 'sld-upper-selected' : 'sld-lower-selected';
+      const srcLayer   = isSldUpper ? SLD_UPPER_LAYER : SLD_LOWER_LAYER;
+      const f = sldFilter(selectedGeoid);
+      try { map.setFilter(selLayerId, f); } catch (_) {}
+      const features = map.querySourceFeatures(source, { filter: f, sourceLayer: srcLayer });
+      fitAndPopup(map, features, race, tab);
+    } else {
+      setFState(map, source, selectedGeoid, { selected: true });
+      const queryOpts = (DISTRICT_TILESET && tab === 'house')
+        ? { filter: ['==', ['get', 'CONG119'], selectedGeoid], sourceLayer: DISTRICT_SRC_LAYER }
+        : { filter: ['==', ['get', 'GEOID'], selectedGeoid] };
+      const features = map.querySourceFeatures(source, queryOpts);
+      fitAndPopup(map, features, race, tab);
     }
   }, [selectedGeoid, tab, isMapReady]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -378,6 +452,120 @@ export default function Map({
       <MapLegend />
     </div>
   );
+
+  // ── Helpers defined inside component to close over map instance ──────────
+  function setupFeatureStateEvents(map, fillLayer, source, geoidFn) {
+    let prevId = null;
+    const mkRef = (id) => (source === 'districts' && DISTRICT_TILESET)
+      ? { source, sourceLayer: DISTRICT_SRC_LAYER, id }
+      : { source, id };
+
+    map.on('mousemove', fillLayer, (e) => {
+      map.getCanvas().style.cursor = 'pointer';
+      const feature = e.features?.[0];
+      if (!feature) return;
+      const geoid = geoidFn(feature.properties);
+      if (!geoid) return;
+      if (prevId !== null && prevId !== geoid) {
+        try { map.setFeatureState(mkRef(prevId), { hovered: false }); } catch (_) {}
+      }
+      prevId = geoid;
+      try { map.setFeatureState(mkRef(geoid), { hovered: true }); } catch (_) {}
+      const race = raceDataRef.current.find((d) => d.geoid === geoid);
+      onHoverRef.current(race ? geoid : null);
+    });
+
+    map.on('mouseleave', fillLayer, () => {
+      map.getCanvas().style.cursor = '';
+      if (prevId !== null) {
+        try { map.setFeatureState(mkRef(prevId), { hovered: false }); } catch (_) {}
+        prevId = null;
+      }
+      onHoverRef.current(null);
+    });
+
+    map.on('click', fillLayer, (e) => {
+      const feature = e.features?.[0];
+      if (!feature) return;
+      const geoid = geoidFn(feature.properties);
+      const race = raceDataRef.current.find((d) => d.geoid === geoid);
+      onSelectRef.current(race ? geoid : null);
+    });
+  }
+
+  function setupFilterEvents(map, fillLayer, hoverLayerId) {
+    let prevGeoid = null;
+
+    map.on('mousemove', fillLayer, (e) => {
+      map.getCanvas().style.cursor = 'pointer';
+      const feature = e.features?.[0];
+      if (!feature) return;
+      const { STATE: s, DISTRICT: d } = feature.properties ?? {};
+      if (!s || !d) return;
+      const geoid = `${s}-${d}`;
+      if (geoid !== prevGeoid) {
+        prevGeoid = geoid;
+        try { map.setFilter(hoverLayerId, sldFilter(geoid)); } catch (_) {}
+      }
+      const race = raceDataRef.current.find((r) => r.geoid === geoid);
+      onHoverRef.current(race ? geoid : null);
+    });
+
+    map.on('mouseleave', fillLayer, () => {
+      map.getCanvas().style.cursor = '';
+      prevGeoid = null;
+      try { map.setFilter(hoverLayerId, NO_MATCH); } catch (_) {}
+      onHoverRef.current(null);
+    });
+
+    map.on('click', fillLayer, (e) => {
+      const feature = e.features?.[0];
+      if (!feature) return;
+      const { STATE: s, DISTRICT: d } = feature.properties ?? {};
+      if (!s || !d) return;
+      const geoid = `${s}-${d}`;
+      const race = raceDataRef.current.find((r) => r.geoid === geoid);
+      onSelectRef.current(race ? geoid : null);
+    });
+  }
+
+  function fitAndPopup(map, features, race, tab) {
+    if (!features.length) return;
+    const coords = [];
+    features.forEach((f) => {
+      if (f.geometry.type === 'Polygon') f.geometry.coordinates[0].forEach((c) => coords.push(c));
+      else if (f.geometry.type === 'MultiPolygon') f.geometry.coordinates.forEach((p) => p[0].forEach((c) => coords.push(c)));
+    });
+    if (!coords.length) return;
+    const lngs = coords.map((c) => c[0]);
+    const lats = coords.map((c) => c[1]);
+    const bounds = [[Math.min(...lngs), Math.min(...lats)], [Math.max(...lngs), Math.max(...lats)]];
+    map.fitBounds(bounds, { padding: 80, maxZoom: tab === 'state' ? 7 : 9, duration: 800 });
+    const popup = new mapboxgl.Popup({ closeButton: true, maxWidth: '260px' })
+      .setLngLat([(bounds[0][0] + bounds[1][0]) / 2, (bounds[0][1] + bounds[1][1]) / 2 + (bounds[1][1] - bounds[0][1]) * 0.1])
+      .setHTML(buildPopupHTML(race, tab))
+      .addTo(map);
+    popup.on('close', () => { onSelectRef.current(null); popupRef.current = null; });
+    popupRef.current = popup;
+  }
+}
+
+function addSldLayers(map, srcId, srcLayer) {
+  const dsl = { 'source-layer': srcLayer };
+  map.addLayer({ id: `${srcId}-fill`, type: 'fill', source: srcId, ...dsl,
+    layout: { visibility: 'none' },
+    paint: { 'fill-color': '#cbd5e1', 'fill-opacity': 0.75 } });
+  map.addLayer({ id: `${srcId}-line`, type: 'line', source: srcId, ...dsl,
+    layout: { visibility: 'none' },
+    paint: { 'line-color': '#94a3b8', 'line-width': 0.4 } });
+  map.addLayer({ id: `${srcId}-hover`, type: 'fill', source: srcId, ...dsl,
+    layout: { visibility: 'none' },
+    filter: ['==', ['literal', 1], 0],
+    paint: { 'fill-color': '#FF8F00', 'fill-opacity': 0.3 } });
+  map.addLayer({ id: `${srcId}-selected`, type: 'line', source: srcId, ...dsl,
+    layout: { visibility: 'none' },
+    filter: ['==', ['literal', 1], 0],
+    paint: { 'line-color': '#FF8F00', 'line-width': 2.5 } });
 }
 
 function formatCookLabel(cookRating) {
@@ -410,9 +598,11 @@ function buildPopupHTML(race, tab) {
   const vpColor = getDistrictColor(race.voterPower);
   const cookLabel = formatCookLabel(race.cookRating);
   const marginLabel = formatMarginLabel(race.margin);
-  const title = tab === 'house' ? race.label : (race.state ?? race.label);
+  const isSld = tab === 'sld_upper' || tab === 'sld_lower';
+  const title = isSld ? race.label : tab === 'house' ? race.label : (race.state ?? race.label);
   const subtitle = tab === 'house'
     ? `${race.state}'s ${ordinal(race.districtNum)} Congressional District`
+    : isSld ? (race.state ?? '')
     : (race.race ?? '');
   return `
     <div class="map-popup">

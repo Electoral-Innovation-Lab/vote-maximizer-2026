@@ -7,6 +7,7 @@ import {
   loadHouseRaces, loadSenateRaces, loadGovernorRaces,
   loadAGRaces, loadSOSRaces, loadJudicialRaces, loadBallotRaces,
   loadStateLegUpperRaces, loadStateLegLowerRaces, aggregateByState,
+  loadCivicOrgs, loadPrimaryCalendar,
 } from './utils/parseCSV.js';
 import { STATE_CENTROIDS, haversineDistance } from './utils/districtUtils.js';
 import './App.css';
@@ -14,9 +15,9 @@ import './App.css';
 const RADIUS_HOUSE_MI = 200;
 const RADIUS_STATE_MI = 450;
 
-const STATE_LEVEL_TYPES = ['senate', 'governor', 'ag', 'sos', 'judicial', 'ballot', 'state_leg_upper', 'state_leg_lower'];
+const STATEWIDE_TYPES = ['senate', 'governor', 'ag', 'sos', 'judicial', 'ballot'];
 
-function findNearbyRaces(lat, lng, datasets, districtCentroids) {
+function findNearbyRaces(lat, lng, datasets, districtCentroids, sldUpperCentroids, sldLowerCentroids) {
   const nearby = [];
 
   for (const race of datasets.house) {
@@ -26,13 +27,31 @@ function findNearbyRaces(lat, lng, datasets, districtCentroids) {
     if (dist <= RADIUS_HOUSE_MI) nearby.push({ ...race, distance: Math.round(dist) });
   }
 
-  for (const type of STATE_LEVEL_TYPES) {
+  for (const type of STATEWIDE_TYPES) {
     for (const race of (datasets[type] ?? [])) {
       const c = STATE_CENTROIDS[race.state];
       if (!c) continue;
       const dist = haversineDistance(lat, lng, c[0], c[1]);
       if (dist <= RADIUS_STATE_MI) nearby.push({ ...race, distance: Math.round(dist) });
     }
+  }
+
+  for (const race of (datasets.state_leg_upper ?? [])) {
+    const dc = sldUpperCentroids[race.geoid];
+    const c = dc || STATE_CENTROIDS[race.state];
+    if (!c) continue;
+    const dist = haversineDistance(lat, lng, c[0], c[1]);
+    const radius = dc ? RADIUS_HOUSE_MI : RADIUS_STATE_MI;
+    if (dist <= radius) nearby.push({ ...race, distance: Math.round(dist) });
+  }
+
+  for (const race of (datasets.state_leg_lower ?? [])) {
+    const dc = sldLowerCentroids[race.geoid];
+    const c = dc || STATE_CENTROIDS[race.state];
+    if (!c) continue;
+    const dist = haversineDistance(lat, lng, c[0], c[1]);
+    const radius = dc ? RADIUS_HOUSE_MI : RADIUS_STATE_MI;
+    if (dist <= radius) nearby.push({ ...race, distance: Math.round(dist) });
   }
 
   return nearby.sort((a, b) => a.distance - b.distance || b.voterPower - a.voterPower);
@@ -72,10 +91,15 @@ export default function App() {
   const [searchCoords, setSearchCoords] = useState(null);
   const [searchCenter, setSearchCenter] = useState(null);
   const [districtCentroids, setDistrictCentroids] = useState({});
+  const [sldUpperCentroids, setSldUpperCentroids] = useState({});
+  const [sldLowerCentroids, setSldLowerCentroids] = useState({});
 
   // Top Contests hover preview (map layer override)
   const [previewRace, setPreviewRace] = useState(null);
   const [topContestType, setTopContestType] = useState('house');
+
+  const [civicOrgs, setCivicOrgs] = useState([]);
+  const [primaryCalendar, setPrimaryCalendar] = useState([]);
 
   useEffect(() => {
     Promise.all([
@@ -93,6 +117,10 @@ export default function App() {
       setStateLegUpperData(legUpper);
       setStateLegLowerData(legLower);
     }).catch((err) => console.error('Failed to load data:', err));
+
+    Promise.all([loadCivicOrgs(), loadPrimaryCalendar()])
+      .then(([orgs, primaries]) => { setCivicOrgs(orgs); setPrimaryCalendar(primaries); })
+      .catch((err) => console.warn('Failed to load civic/primary data:', err));
   }, []);
 
   const allDatasets = useMemo(() => ({
@@ -100,10 +128,6 @@ export default function App() {
     ag: agData, sos: sosData, judicial: judicialData,
     ballot: ballotData, state_leg_upper: stateLegUpperData, state_leg_lower: stateLegLowerData,
   }), [houseData, senateData, governorData, agData, sosData, judicialData, ballotData, stateLegUpperData, stateLegLowerData]);
-
-  // Aggregated state-level data for state_leg map layers
-  const stateLegUpperMapData = useMemo(() => aggregateByState(stateLegUpperData), [stateLegUpperData]);
-  const stateLegLowerMapData = useMemo(() => aggregateByState(stateLegLowerData), [stateLegLowerData]);
 
   // raceData for the current InfoBox list (not the map)
   const raceData = useMemo(() => {
@@ -125,8 +149,10 @@ export default function App() {
     if (previewRace) {
       const { raceType } = previewRace;
       const data = allDatasets[raceType] ?? houseData;
-      const aggregated = raceType.includes('state_leg') ? aggregateByState(data) : data;
-      return { mapTab: raceType === 'house' ? 'house' : 'state', mapRaceData: aggregated };
+      if (raceType === 'state_leg_upper') return { mapTab: 'sld_upper', mapRaceData: data };
+      if (raceType === 'state_leg_lower') return { mapTab: 'sld_lower', mapRaceData: data };
+      if (raceType === 'house') return { mapTab: 'house', mapRaceData: data };
+      return { mapTab: 'state', mapRaceData: aggregateByState(data) };
     }
     if (activeTab === 'top') {
       const data = allDatasets[topContestType] ?? houseData;
@@ -141,11 +167,11 @@ export default function App() {
       case 'sos':             return { mapTab: 'state',  mapRaceData: sosData };
       case 'judicial':        return { mapTab: 'state',  mapRaceData: judicialData };
       case 'ballot':          return { mapTab: 'state',  mapRaceData: ballotData };
-      case 'state_leg_upper': return { mapTab: 'state',  mapRaceData: stateLegUpperMapData };
-      case 'state_leg_lower': return { mapTab: 'state',  mapRaceData: stateLegLowerMapData };
+      case 'state_leg_upper': return { mapTab: 'sld_upper', mapRaceData: stateLegUpperData };
+      case 'state_leg_lower': return { mapTab: 'sld_lower', mapRaceData: stateLegLowerData };
       default:                return { mapTab: 'house',  mapRaceData: houseData };
     }
-  }, [previewRace, activeTab, topContestType, allDatasets, houseData, senateData, governorData, agData, sosData, judicialData, ballotData, stateLegUpperMapData, stateLegLowerMapData]);
+  }, [previewRace, activeTab, topContestType, allDatasets, houseData, senateData, governorData, agData, sosData, judicialData, ballotData, stateLegUpperData, stateLegLowerData]);
 
   const previewCenter = useMemo(() => {
     if (!previewRace) return null;
@@ -169,7 +195,7 @@ export default function App() {
   const handleSelect = useCallback((geoid) => setSelectedGeoid(geoid), []);
 
   const handleLocationSearch = useCallback(({ lat, lng, placeName }) => {
-    const nearby = findNearbyRaces(lat, lng, allDatasets, districtCentroids);
+    const nearby = findNearbyRaces(lat, lng, allDatasets, districtCentroids, sldUpperCentroids, sldLowerCentroids);
     setNearbyRaces(nearby);
     setSearchPlaceName(placeName ?? '');
     setSearchCoords({ lat, lng });
@@ -177,7 +203,7 @@ export default function App() {
     setHoveredGeoid(null);
     setSelectedGeoid(null);
     setSearchCenter([lng, lat]);
-  }, [allDatasets, districtCentroids]);
+  }, [allDatasets, districtCentroids, sldUpperCentroids, sldLowerCentroids]);
 
   // Auto-trigger nearby search from URL params after data loads
   const urlParamsRef = useRef(urlParams);
@@ -191,6 +217,11 @@ export default function App() {
 
   const handleDistrictCentroidsReady = useCallback((centroids) => {
     setDistrictCentroids(centroids);
+  }, []);
+
+  const handleSldCentroidsReady = useCallback((mapTab, centroids) => {
+    if (mapTab === 'sld_upper') setSldUpperCentroids((prev) => ({ ...prev, ...centroids }));
+    else if (mapTab === 'sld_lower') setSldLowerCentroids((prev) => ({ ...prev, ...centroids }));
   }, []);
 
   const handleClearNearby = useCallback(() => {
@@ -232,6 +263,7 @@ export default function App() {
           onRaceSelect={handleSelect}
           onLocationSearch={handleLocationSearch}
           onDistrictCentroidsReady={handleDistrictCentroidsReady}
+          onSldCentroidsReady={handleSldCentroidsReady}
         />
         <InfoBox
           raceData={raceData}
@@ -249,6 +281,8 @@ export default function App() {
           allData={allDatasets}
           onRacePreview={handleRacePreview}
           onTopTypeChange={setTopContestType}
+          civicOrgs={civicOrgs}
+          primaryCalendar={primaryCalendar}
         />
       </div>
 

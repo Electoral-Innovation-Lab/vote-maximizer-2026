@@ -1,0 +1,284 @@
+organization,chapter_level,state,county_or_city,url,organization_type,poll_worker_signup,election_protection,notes
+League of Women Voters (National),national,All,,https://www.lwv.org/,voter_education,FALSE,TRUE,Find 800+ local chapters at lwv.org; VOTE411 voter guide
+Common Cause (National),national,All,,https://www.commoncause.org/,election_protection,FALSE,TRUE,866-OUR-VOTE hotline; volunteer sign-up at commoncause.org/work/election-protection/
+Election Protection Coalition (866-OUR-VOTE),national,All,,https://www.866ourvote.org/,hotline,FALSE,TRUE,"Nonpartisan hotline: 1-866-OUR-VOTE (English), 1-888-VE-Y-VOTA (Spanish)"
+VOTE411.org (LWV Education Fund),national,All,,https://www.vote411.org/,voter_information,FALSE,FALSE,"Find polling place, registration info, sample ballots; 2026 primary dates"
+PowerThePolls.org,national,All,,https://www.powerthepolls.org/,poll_worker_recruitment,TRUE,FALSE,Sign up to be a poll worker in any state; matched to local county
+NAACP Legal Defense Fund,national,All,,https://www.naacpldf.org/,voting_rights,FALSE,TRUE,Voting rights litigation and election protection
+Lawyers Committee - Election Protection,national,All,,https://lawyerscommittee.org/project/election-protection/,election_protection,FALSE,TRUE,Leads Election Protection coalition with Common Cause and NAACP LDF
+Brennan Center for Justice,national,All,,https://www.brennancenter.org/,voting_rights,FALSE,FALSE,"Voting rights research, litigation, and policy; nonpartisan"
+Fair Elections Center,national,All,,https://www.fairelectionscenter.org/,voting_rights,FALSE,FALSE,Voting rights litigation and training
+National Vote at Home Institute,national,All,,https://www.voteathome.org/,vote_by_mail,FALSE,FALSE,Promotes vote by mail and ballot drop boxes
+LWV Alabama,state,Alabama,,https://www.lwval.org/,voter_education,FALSE,TRUE,Statewide; primary May 19
+LWV Alaska,state,Alaska,,https://www.lwvak.org/,voter_education,FALSE,TRUE,Statewide; primary Aug 18
+LWV Arizona,state,Arizona,,https://www.lwvaz.org/,voter_education,FALSE,TRUE,Statewide; competitive chambers toss-up
+LWV Arkansas,state,Arkansas,,https://www.lwvar.org/,voter_education,FALSE,TRUE,Statewide
+LWV California,state,California,,https://lwvc.org/,voter_education,TRUE,TRUE,Statewide; 61 local leagues; primary Jun 2
+LWV Colorado,state,Colorado,,https://www.lwvco.org/,voter_education,FALSE,TRUE,Statewide
+LWV Connecticut,state,Connecticut,,https://www.lwvct.org/,voter_education,FALSE,TRUE,Statewide
+LWV Delaware,state,Delaware,,https://www.lwvde.org/,voter_education,FALSE,TRUE,Statewide
+LWV Florida,state,Florida,,https://www.lwvfl.org/,voter_education,FALSE,TRUE,Statewide; litigation active 2026
+LWV Georgia,state,Georgia,,https://www.lwvga.org/,voter_education,FALSE,TRUE,Statewide; competitive chamber
+LWV Hawaii,state,Hawaii,,https://www.lwvhi.org/,voter_education,FALSE,FALSE,Statewide
+LWV Idaho,state,Idaho,,https://www.lwvid.org/,voter_education,FALSE,FALSE,Statewide
+LWV Illinois,state,Illinois,,https://www.lwvil.org/,voter_education,FALSE,TRUE,Statewide; active SAVE Act litigation
+LWV Indiana,state,Indiana,,https://www.lwvin.org/,voter_education,FALSE,TRUE,Statewide
+LWV Iowa,state,Iowa,,https://www.lwvia.org/,voter_education,FALSE,TRUE,Statewide
+LWV Kansas,state,Kansas,,https://www.lwvk.org/,voter_education,FALSE,TRUE,Statewide
+LWV Kentucky,state,Kentucky,,https://www.lwvky.org/,voter_education,FALSE,FALSE,Statewide
+LWV Louisiana,state,Louisiana,,https://www.lwvla.org/,voter_education,FALSE,FALSE,Statewide
+LWV Maine,state,Maine,,https://www.lwvme.org/,voter_education,FALSE,TRUE,Statewide; competitive chambers
+LWV Maryland,state,Maryland,,https://www.lwvmd.org/,voter_education,FALSE,TRUE,Statewide
+LWV Massachusetts,state,Massachusetts,,https://www.lwvma.org/,voter_education,FALSE,TRUE,Statewide
+LWV Michigan,state,Michigan,,https://www.lwvmi.org/,voter_education,FALSE,TRUE,Statewide; competitive chambers toss-up
+LWV Minnesota,state,Minnesota,,https://www.lwvmn.org/,voter_education,FALSE,TRUE,Statewide; both chambers toss-up; special elections 2026
+LWV Mississippi,state,Mississippi,,https://www.lwvms.org/,voter_education,FALSE,FALSE,Statewide
+LWV Missouri,state,Missouri,,https://www.lwvmo.org/,voter_education,FALSE,TRUE,Statewide; Amendment 3 abortion rights ballot initiative
+LWV Montana,state,Montana,,https://www.lwvmt.org/,voter_education,FALSE,TRUE,Statewide
+LWV Nebraska,state,Nebraska,,https://www.lwvne.org/,voter_education,FALSE,TRUE,Statewide; nonpartisan legislature elections
+LWV Nevada,state,Nevada,,https://www.lwvnv.org/,voter_education,FALSE,TRUE,Statewide; multiple competitive races
+LWV New Hampshire,state,New Hampshire,,https://www.lwvnh.org/,voter_education,FALSE,TRUE,Statewide; both chambers competitive
+LWV New Jersey,state,New Jersey,,https://www.lwvnj.org/,voter_education,FALSE,TRUE,Statewide
+LWV New Mexico,state,New Mexico,,https://www.lwvnm.org/,voter_education,FALSE,TRUE,Statewide
+LWV New York,state,New York,,https://www.lwvny.org/,voter_education,FALSE,TRUE,Statewide
+LWV North Carolina,state,North Carolina,,https://www.lwvnc.org/,voter_education,FALSE,TRUE,Statewide
+LWV North Dakota,state,North Dakota,,https://www.lwvnd.org/,voter_education,FALSE,FALSE,Statewide
+LWV Ohio,state,Ohio,,https://www.lwvohio.org/,voter_education,FALSE,TRUE,Statewide; active election protection program
+LWV Oklahoma,state,Oklahoma,,https://www.lwvok.org/,voter_education,FALSE,FALSE,Statewide
+LWV Oregon,state,Oregon,,https://www.lwvor.org/,voter_education,FALSE,TRUE,Statewide
+LWV Pennsylvania,state,Pennsylvania,,https://www.lwvpa.org/,voter_education,FALSE,TRUE,Statewide; competitive chambers
+LWV Rhode Island,state,Rhode Island,,https://www.lwvri.org/,voter_education,FALSE,TRUE,Statewide
+LWV South Carolina,state,South Carolina,,https://www.lwvsc.org/,voter_education,FALSE,FALSE,Statewide
+LWV South Dakota,state,South Dakota,,https://www.lwvsd.org/,voter_education,FALSE,FALSE,Statewide
+LWV Tennessee,state,Tennessee,,https://www.lwvtn.org/,voter_education,FALSE,FALSE,Statewide
+LWV Texas,state,Texas,,https://www.lwvtx.org/,voter_education,FALSE,TRUE,Statewide
+LWV Utah,state,Utah,,https://www.lwvutah.org/,voter_education,FALSE,FALSE,Statewide
+LWV Vermont,state,Vermont,,https://www.lwvvt.org/,voter_education,FALSE,TRUE,Statewide
+LWV Virginia,state,Virginia,,https://www.lwv-va.org/,voter_education,FALSE,TRUE,Statewide
+LWV Washington,state,Washington,,https://www.lwvwa.org/,voter_education,FALSE,TRUE,Statewide
+LWV West Virginia,state,West Virginia,,https://www.lwvwv.org/,voter_education,FALSE,FALSE,Statewide
+LWV Wisconsin,state,Wisconsin,,https://www.lwvwi.org/,voter_education,FALSE,TRUE,Statewide; both chambers toss-up
+LWV Wyoming,state,Wyoming,,https://www.lwvwy.org/,voter_education,FALSE,FALSE,Statewide
+Common Cause Alabama,state,Alabama,,https://www.commoncause.org/alabama/,election_protection,FALSE,TRUE,Election protection volunteers; statewide
+Common Cause Alaska,state,Alaska,,https://www.commoncause.org/alaska/,election_protection,FALSE,TRUE,Statewide
+Common Cause Arizona,state,Arizona,,https://www.commoncause.org/arizona/,election_protection,FALSE,TRUE,Statewide; competitive chambers
+Common Cause California,state,California,,https://www.commoncause.org/california/,election_protection,TRUE,TRUE,Statewide; poll monitor signup available; 866-OUR-VOTE
+Common Cause Colorado,state,Colorado,,https://www.commoncause.org/colorado/,election_protection,FALSE,TRUE,Statewide
+Common Cause Connecticut,state,Connecticut,,https://www.commoncause.org/connecticut/,election_protection,FALSE,TRUE,Statewide
+Common Cause Florida,state,Florida,,https://www.commoncause.org/florida/,election_protection,TRUE,TRUE,Statewide; poll worker + canvassing board monitor signup
+Common Cause Georgia,state,Georgia,,https://www.commoncause.org/georgia/,election_protection,FALSE,TRUE,Statewide
+Common Cause Hawaii,state,Hawaii,,https://www.commoncause.org/hawaii/,election_protection,FALSE,TRUE,Statewide
+Common Cause Idaho,state,Idaho,,https://www.commoncause.org/idaho/,election_protection,FALSE,FALSE,Statewide
+Common Cause Illinois,state,Illinois,,https://www.commoncause.org/illinois/,election_protection,FALSE,TRUE,Statewide
+Common Cause Iowa,state,Iowa,,https://www.commoncause.org/iowa/,election_protection,FALSE,TRUE,Statewide
+Common Cause Kansas,state,Kansas,,https://www.commoncause.org/kansas/,election_protection,FALSE,TRUE,Statewide
+Common Cause Louisiana,state,Louisiana,,https://www.commoncause.org/louisiana/,election_protection,FALSE,TRUE,Statewide
+Common Cause Maine,state,Maine,,https://www.commoncause.org/maine/,election_protection,FALSE,TRUE,Statewide
+Common Cause Maryland,state,Maryland,,https://www.commoncause.org/maryland/,election_protection,FALSE,TRUE,Statewide; 2026 cycle active
+Common Cause Massachusetts,state,Massachusetts,,https://www.commoncause.org/massachusetts/,election_protection,FALSE,TRUE,Statewide
+Common Cause Michigan,state,Michigan,,https://www.commoncause.org/michigan/,election_protection,FALSE,TRUE,Statewide; competitive chambers toss-up
+Common Cause Minnesota,state,Minnesota,,https://www.commoncause.org/minnesota/,election_protection,FALSE,TRUE,Statewide; both chambers toss-up
+Common Cause Mississippi,state,Mississippi,,https://www.commoncause.org/mississippi/,election_protection,FALSE,FALSE,Statewide
+Common Cause Missouri,state,Missouri,,https://www.commoncause.org/missouri/,election_protection,FALSE,TRUE,Statewide
+Common Cause Montana,state,Montana,,https://www.commoncause.org/montana/,election_protection,FALSE,TRUE,Statewide
+Common Cause Nebraska,state,Nebraska,,https://www.commoncause.org/nebraska/,election_protection,FALSE,TRUE,Statewide
+Common Cause Nevada,state,Nevada,,https://www.commoncause.org/nevada/,election_protection,FALSE,TRUE,Statewide; competitive governor race
+Common Cause New Hampshire,state,New Hampshire,,https://www.commoncause.org/new-hampshire/,election_protection,FALSE,TRUE,Statewide; competitive chambers
+Common Cause New Jersey,state,New Jersey,,https://www.commoncause.org/new-jersey/,election_protection,FALSE,TRUE,Statewide
+Common Cause New Mexico,state,New Mexico,,https://www.commoncause.org/new-mexico/,election_protection,FALSE,TRUE,Statewide
+Common Cause New York,state,New York,,https://www.commoncause.org/new-york/,election_protection,TRUE,TRUE,Statewide; trained 570+ poll volunteers 2024; 37 counties
+Common Cause North Carolina,state,North Carolina,,https://www.commoncause.org/north-carolina/,election_protection,FALSE,TRUE,Statewide
+Common Cause Ohio,state,Ohio,,https://www.commoncause.org/ohio/,election_protection,FALSE,TRUE,Statewide; toss-up Senate and Governor races
+Common Cause Oregon,state,Oregon,,https://www.commoncause.org/oregon/,election_protection,FALSE,TRUE,Statewide
+Common Cause Pennsylvania,state,Pennsylvania,,https://www.commoncause.org/pennsylvania/,election_protection,TRUE,TRUE,Statewide; leads election protection coalition in PA; poll monitor and social media monitor signup
+Common Cause Rhode Island,state,Rhode Island,,https://www.commoncause.org/rhode-island/,election_protection,FALSE,TRUE,Statewide
+Common Cause South Carolina,state,South Carolina,,https://www.commoncause.org/south-carolina/,election_protection,FALSE,FALSE,Statewide
+Common Cause Texas,state,Texas,,https://www.commoncause.org/texas/,election_protection,FALSE,TRUE,Statewide
+Common Cause Utah,state,Utah,,https://www.commoncause.org/utah/,election_protection,FALSE,FALSE,Statewide
+Common Cause Virginia,state,Virginia,,https://www.commoncause.org/virginia/,election_protection,FALSE,TRUE,Statewide
+Common Cause Washington,state,Washington,,https://www.commoncause.org/washington/,election_protection,FALSE,TRUE,Statewide
+Common Cause Wisconsin,state,Wisconsin,,https://www.commoncause.org/wisconsin/,election_protection,TRUE,TRUE,Statewide; poll worker signup via Protect the Vote; competitive chambers toss-up
+USA.gov Poll Worker Signup,national,All,,https://www.usa.gov/poll-worker,poll_worker_recruitment,TRUE,FALSE,Official federal portal linking to each state/county election office poll worker signup
+ElectionHeroes.org (CEIR),national,All,,https://electionheroes.org/,poll_worker_recruitment,TRUE,FALSE,Center for Election Innovation and Research; connects volunteers to local election offices
+ACLU Voting Rights Project,national,All,,https://www.aclu.org/voting-rights,voting_rights,FALSE,TRUE,Voting rights litigation; state chapter ACLU chapters organize legal observers
+Protect Democracy,national,All,,https://protectdemocracy.org/,election_integrity,FALSE,FALSE,Nonpartisan election integrity litigation and policy
+Democracy Docket (Marc Elias),national,All,,https://www.democracydocket.com/,voting_rights_litigation,FALSE,FALSE,Tracks voting rights lawsuits across all states; litigation updates
+Verified Voting Foundation,national,All,,https://verifiedvoting.org/,election_integrity,FALSE,FALSE,Advocates for paper ballots and auditable election systems
+State Voices,national,All,,https://statevoices.org/,voter_registration,TRUE,TRUE,State-based civic engagement tables; 20+ state tables
+Rock the Vote,national,All,,https://www.rockthevote.org/,voter_registration,FALSE,FALSE,Youth voter registration and civic engagement
+When We All Vote,national,All,,https://whenweallvote.org/,voter_registration,TRUE,FALSE,Voter registration and participation; Michelle Obama co-chair
+Fair Fight Action (Stacey Abrams),national,All,,https://fairfight.com/,voting_rights,FALSE,TRUE,Voter protection programs; especially active in Georgia and other battleground states
+Advancement Project,national,All,,https://advancementproject.org/,voting_rights,FALSE,TRUE,Voting rights advocacy and litigation; racial equity focus
+LWV Los Angeles County (ILO),county,California,Los Angeles County,https://www.lwvlacounty.org/,voter_education,FALSE,TRUE,Inter-League Org covering 11 local leagues across LA County
+LWV of Greater Los Angeles,county,California,Los Angeles County,https://my.lwv.org/california/greater-los-angeles,voter_education,FALSE,TRUE,Central LA local league
+LWV of Pasadena Area,county,California,Los Angeles County,https://my.lwv.org/california/pasadena-area,voter_education,FALSE,TRUE,Pasadena area; CD-28/CA Asm-41
+LWV of Long Beach Area,county,California,Los Angeles County,https://my.lwv.org/california/long-beach-area,voter_education,FALSE,TRUE,Long Beach area
+LWV of Beverly Hills/Greater LA,county,California,Los Angeles County,https://my.lwv.org/california/beverly-hillsgreater-los-angeles,voter_education,FALSE,FALSE,BH/Greater LA area
+LWV of San Diego,county,California,San Diego County,https://www.lwvsandiego.org/,voter_education,FALSE,TRUE,San Diego County coverage; CA-49 battleground area
+LWV of Orange County (ILO),county,California,Orange County,https://lwvoc.org/,voter_education,FALSE,TRUE,Orange County ILO; CA-45/47 battlegrounds
+LWV Bay Area (Inter-League Org),county,California,San Francisco Bay Area (9 counties),https://lwvbayarea.org/,voter_education,FALSE,TRUE,Covers 9 Bay Area counties
+LWV San Francisco,county,California,San Francisco County,https://www.lwvsf.org/,voter_education,FALSE,TRUE,SF County
+LWV of Oakland,county,California,Alameda County,https://lwvoakland.org/,voter_education,FALSE,TRUE,Oakland/Alameda County
+LWV San Jose/Santa Clara,county,California,Santa Clara County,https://lwvsjsc.org/,voter_education,FALSE,TRUE,Santa Clara County
+LWV of Sacramento County,county,California,Sacramento County,https://www.lwvsacramento.org/,voter_education,FALSE,TRUE,Sacramento County
+LWV of Fresno,county,California,Fresno County,https://www.lwvfresno.org/,voter_education,FALSE,FALSE,Central Valley; CA-22 battleground
+LWV of the City of New York,county,New York,New York City (5 boroughs),https://www.lwvnyc.org/,voter_education,FALSE,TRUE,Covers 5 NYC boroughs
+LWV of Westchester,county,New York,Westchester County,https://lwvw.org/,voter_education,FALSE,TRUE,Westchester County; NY-17 battleground
+LWV of Suffolk County,county,New York,Suffolk County,https://www.lwv-suffolkcounty.org/,voter_education,FALSE,TRUE,Long Island; NY-1/2 area
+LWV of Nassau County,county,New York,Nassau County,https://www.lwv-nassauny.org/,voter_education,FALSE,TRUE,Long Island; NY-3/4 battleground
+LWV of Rochester Metropolitan Area,county,New York,Monroe County,https://www.lwvrma.org/,voter_education,FALSE,TRUE,Rochester area; NY-25 area
+LWV of Buffalo/Niagara,county,New York,Erie County,https://lwvbn.org/,voter_education,FALSE,TRUE,Buffalo metro
+LWV of Albany County,county,New York,Albany County,https://www.lwvalbany.org/,voter_education,FALSE,TRUE,Capital region
+LWV of Saratoga County,county,New York,Saratoga County,https://www.lwvsaratoga.org/,voter_education,FALSE,FALSE,Saratoga County
+LWV of Cook County (ILO),county,Illinois,Cook County,https://www.lwvcookcounty.org/,voter_education,FALSE,TRUE,Cook County ILO covering Chicago area
+LWV of Chicago,county,Illinois,Cook County,https://lwvchicago.org/,voter_education,FALSE,TRUE,City of Chicago local league
+LWV of Evanston,county,Illinois,Cook County,https://www.lwvevanston.org/,voter_education,FALSE,TRUE,Evanston area
+LWV of DuPage County,county,Illinois,DuPage County,https://www.lwvdupage.org/,voter_education,FALSE,TRUE,DuPage suburbs
+LWV of Lake County,county,Illinois,Lake County,https://lwvlcil.org/,voter_education,FALSE,TRUE,Lake County
+LWV of Champaign County,county,Illinois,Champaign County,https://www.lwvcc.org/,voter_education,FALSE,FALSE,Champaign-Urbana
+LWV of Houston,county,Texas,Harris County,https://lwvhouston.org/,voter_education,FALSE,TRUE,Houston metro; TX-7/22/38 battlegrounds
+LWV of Austin Area,county,Texas,Travis County,https://lwvaustin.org/,voter_education,FALSE,TRUE,Travis County
+LWV of Dallas,county,Texas,Dallas County,https://www.lwvdallas.org/,voter_education,FALSE,TRUE,Dallas County
+LWV of San Antonio,county,Texas,Bexar County,https://www.lwvsa.org/,voter_education,FALSE,TRUE,Bexar County; TX-15/28 battleground areas
+LWV of Tarrant County,county,Texas,Tarrant County,https://www.lwvtarrant.org/,voter_education,FALSE,TRUE,Fort Worth area
+LWV of El Paso,county,Texas,El Paso County,https://www.lwvelpaso.org/,voter_education,FALSE,FALSE,El Paso
+LWV of Allegheny County,county,Pennsylvania,Allegheny County,https://lwvpgh.org/,voter_education,FALSE,TRUE,Pittsburgh metro; PA-17 area
+LWV of Philadelphia,county,Pennsylvania,Philadelphia County,https://www.lwvphilly.org/,voter_education,FALSE,TRUE,Philadelphia
+LWV of Bucks County,county,Pennsylvania,Bucks County,https://www.lwvbucks.org/,voter_education,FALSE,TRUE,Bucks Co; PA-1 battleground; competitive state leg
+LWV of Chester County,county,Pennsylvania,Chester County,https://www.lwvchestercounty.org/,voter_education,FALSE,TRUE,Chester Co; competitive state leg
+LWV of Montgomery County,county,Pennsylvania,Montgomery County,https://lwvmontcopa.org/,voter_education,FALSE,TRUE,PA SD-18 DLCC target area
+LWV of Delaware County,county,Pennsylvania,Delaware County,https://lwv-pgh-mc-dc.org/,voter_education,FALSE,TRUE,Delaware Co; PA-5/PA-7 battleground
+LWV of Lehigh County,county,Pennsylvania,Lehigh County,https://lwvpa-lehigh.org/,voter_education,FALSE,TRUE,Lehigh Valley; PA SD-14 DLCC target
+LWV of Northampton County,county,Pennsylvania,Northampton County,https://lwvnorthampton.org/,voter_education,FALSE,TRUE,Lehigh Valley; competitive state leg
+LWV of Lancaster County,county,Pennsylvania,Lancaster County,https://lwvlancaster.org/,voter_education,FALSE,TRUE,Lancaster Co; PA SD-36 DLCC target
+LWV of Greater Pittsburgh,county,Pennsylvania,Allegheny County,https://lwvpgh.org/,voter_education,FALSE,TRUE,Pittsburgh metro
+LWV of Cumberland County (Carlisle Area),county,Pennsylvania,Cumberland County,https://my.lwv.org/pennsylvania/carlisle-area,voter_education,FALSE,FALSE,Carlisle area
+LWV of York County,county,Pennsylvania,York County,https://my.lwv.org/pennsylvania/york-county,voter_education,FALSE,TRUE,York Co; competitive state leg
+LWV of Milwaukee County,county,Wisconsin,Milwaukee County,https://www.lwvmilwaukee.org/,voter_education,TRUE,TRUE,Milwaukee Co; high-impact WI Senate races
+LWV of Dane County,county,Wisconsin,Dane County,https://www.lwvdanecounty.org/,voter_education,TRUE,TRUE,Madison/Dane Co; D base
+LWV of Greater Green Bay,county,Wisconsin,Brown County,https://my.lwv.org/wisconsin/greater-green-bay,voter_education,FALSE,TRUE,Green Bay; WI AD-89 DLCC target
+LWV of La Crosse Area,county,Wisconsin,La Crosse County,https://my.lwv.org/wisconsin/la-crosse-area,voter_education,FALSE,TRUE,La Crosse; WI AD-94 DLCC target
+LWV of Appleton,county,Wisconsin,Outagamie County,https://my.lwv.org/wisconsin/appleton,voter_education,FALSE,TRUE,Appleton/Fox Valley
+LWV of Greater Chippewa Valley,county,Wisconsin,Eau Claire County,https://my.lwv.org/wisconsin/greater-chippewa-valley,voter_education,FALSE,TRUE,Eau Claire; WI AD-91 DLCC target
+LWV of Winnebago County,county,Wisconsin,Winnebago County,https://my.lwv.org/wisconsin/winnebago-county,voter_education,FALSE,TRUE,Winnebago; WI Senate SD-17 area
+LWV of Sheboygan County,county,Wisconsin,Sheboygan County,https://my.lwv.org/wisconsin/sheboygan-county,voter_education,FALSE,FALSE,Sheboygan
+LWV of Ozaukee-Washington Counties,county,Wisconsin,Ozaukee/Washington Counties,https://my.lwv.org/wisconsin/ozaukee-washington-counties,voter_education,FALSE,FALSE,Milwaukee suburbs
+LWV of Door County,county,Wisconsin,Door County,https://my.lwv.org/wisconsin/door-county,voter_education,FALSE,FALSE,Door County
+LWV of Marathon County,county,Wisconsin,Marathon County,https://my.lwv.org/wisconsin/marathon-county,voter_education,FALSE,FALSE,Wausau area
+LWV of Janesville,county,Wisconsin,Rock County,https://my.lwv.org/wisconsin/janesville,voter_education,FALSE,TRUE,Janesville/Rock County
+LWV of Manitowoc County,county,Wisconsin,Manitowoc County,https://my.lwv.org/wisconsin/manitowoc-county,voter_education,FALSE,FALSE,Manitowoc
+LWV of Northwoods,county,Wisconsin,Vilas/Oneida/Forest Counties,https://my.lwv.org/wisconsin/northwoods,voter_education,FALSE,FALSE,Northwoods region
+LWV of Whitewater Area,county,Wisconsin,Walworth County,https://my.lwv.org/wisconsin/whitewater-area,voter_education,FALSE,FALSE,Whitewater area
+LWV of Oakland Area,county,Michigan,Oakland County,https://www.lwvoa.org/,voter_education,FALSE,TRUE,Oakland Co; MI HD cluster D targets
+LWV of Detroit,county,Michigan,Wayne County,https://www.lwvdetroit.org/,voter_education,FALSE,TRUE,Detroit metro
+LWV of Northwest Wayne County,county,Michigan,Wayne County,https://my.lwv.org/michigan/northwest-wayne-county,voter_education,FALSE,TRUE,NW Wayne Co; MI HD-13 DLCC area
+LWV of Washtenaw County,county,Michigan,Washtenaw County,https://my.lwv.org/michigan/washtenaw-county,voter_education,FALSE,TRUE,Ann Arbor; MI SD-14 DLCC target area
+LWV of Grand Rapids Area,county,Michigan,Kent County,https://www.lwvgrandrapids.org/,voter_education,FALSE,TRUE,Kent Co; MI House targets
+LWV of the Berrien & Cass Counties,county,Michigan,Berrien/Cass Counties,https://my.lwv.org/michigan/berrien-cass-counties,voter_education,FALSE,TRUE,SW MI; MI HD-38 DLCC target
+LWV of Macomb County,county,Michigan,Macomb County,https://www.lwvmacombcounty.org/,voter_education,FALSE,TRUE,Macomb Co; MI SD-4/12 DLCC targets
+LWV of Dearborn-Dearborn Heights,county,Michigan,Wayne County,https://my.lwv.org/michigan/dearborn-dearborn-heights,voter_education,FALSE,FALSE,Dearborn area
+LWV of Copper Country,county,Michigan,Houghton/Keweenaw Counties,https://my.lwv.org/michigan/copper-country,voter_education,FALSE,FALSE,Upper Peninsula
+LWV of Eastern Upper Peninsula,county,Michigan,Chippewa/Mackinac Counties,https://my.lwv.org/michigan/eastern-upper-peninsula,voter_education,FALSE,FALSE,Eastern UP
+LWV of Minneapolis,county,Minnesota,Hennepin County,https://www.lwvmpls.org/,voter_education,FALSE,TRUE,Minneapolis; D base
+LWV of St. Paul,county,Minnesota,Ramsey County,https://www.lwvsp.org/,voter_education,FALSE,TRUE,St. Paul; D base
+"LWV of Anoka, Blaine, Coon Rapids Area",county,Minnesota,Anoka County,https://my.lwv.org/minnesota/anoka-blaine-coon-rapids-area,voter_education,FALSE,TRUE,Anoka Co; MN HD-39 DLCC area
+LWV of Duluth,county,Minnesota,St. Louis County,https://www.lwvduluth.org/,voter_education,FALSE,TRUE,Duluth/Iron Range
+LWV of Rochester,county,Minnesota,Olmsted County,https://www.lwvrochestermn.org/,voter_education,FALSE,TRUE,Rochester area
+LWV of Edina,county,Minnesota,Hennepin County,https://www.lwvedina.org/,voter_education,FALSE,TRUE,Edina suburb
+LWV of Bloomington,county,Minnesota,Hennepin County,https://www.lwvbloomingtonmn.org/,voter_education,FALSE,TRUE,Bloomington; MN HD-45 area
+LWV of Metro Phoenix,county,Arizona,Maricopa County,https://www.lwvazmp.org/,voter_education,FALSE,TRUE,Phoenix metro; AZ LD-4/13/17 DLCC targets
+LWV of Greater Tucson,county,Arizona,Pima County,https://www.lwvgt.org/,voter_education,FALSE,TRUE,Tucson; AZ LD-23 area
+LWV of Northwest Maricopa County,county,Arizona,Maricopa County,https://my.lwv.org/arizona/northwest-maricopa-county,voter_education,FALSE,TRUE,NW Maricopa suburbs
+LWV of the Charlotte/Mecklenburg,county,North Carolina,Mecklenburg County,https://www.lwvcm.org/,voter_education,FALSE,TRUE,Charlotte metro; NC HD-98/105 DLCC targets
+LWV of Wake County,county,North Carolina,Wake County,https://www.lwvwake.org/,voter_education,FALSE,TRUE,Raleigh area; NC HD-35/37 DLCC targets
+"LWV of Orange, Durham and Chatham Counties",county,North Carolina,Orange/Durham/Chatham Counties,https://www.lwvodc.org/,voter_education,FALSE,TRUE,Research Triangle
+LWV of the Lower Cape Fear,county,North Carolina,New Hanover County,https://www.lwvlcf.org/,voter_education,FALSE,FALSE,Wilmington area
+LWV of Buncombe County,county,North Carolina,Buncombe County,https://lwv-avlbc.org/,voter_education,FALSE,TRUE,Asheville; NC HD-115 DLCC target
+LWV of Forsyth County,county,North Carolina,Forsyth County,https://www.lwvforsyth.org/,voter_education,FALSE,TRUE,Winston-Salem; NC HD-74 DLCC target
+LWV of the Piedmont Triad,county,North Carolina,Guilford County,https://www.lwvpt.org/,voter_education,FALSE,TRUE,Greensboro area
+LWV of Atlanta-Fulton County,county,Georgia,Fulton County,https://www.lwvatl.org/,voter_education,FALSE,TRUE,Atlanta metro
+LWV of Cobb County,county,Georgia,Cobb County,https://www.lwvcobb.org/,voter_education,FALSE,TRUE,Cobb Co; competitive state leg
+LWV of Gwinnett County,county,Georgia,Gwinnett County,https://www.lwvgwinnett.org/,voter_education,FALSE,TRUE,Gwinnett Co; competitive state leg
+LWV of DeKalb County,county,Georgia,DeKalb County,https://www.lwvdekalb.org/,voter_education,FALSE,TRUE,DeKalb Co
+LWV of Greater Cleveland,county,Ohio,Cuyahoga County,https://www.lwvgreatercleveland.org/,voter_education,FALSE,TRUE,Cleveland metro; toss-up Sen/Gov races
+LWV of Metropolitan Columbus,county,Ohio,Franklin County,https://www.lwvcols.org/,voter_education,FALSE,TRUE,Columbus; OH HD-1/9 area
+LWV of Cincinnati Area,county,Ohio,Hamilton County,https://www.lwvcincinnati.org/,voter_education,FALSE,TRUE,Cincinnati area
+LWV of Akron Area,county,Ohio,Summit County,https://www.lwvakronarea.org/,voter_education,FALSE,TRUE,Akron area; OH-13 area
+LWV of Hudson,county,Ohio,Summit County,https://my.lwv.org/ohio/hudson,voter_education,FALSE,FALSE,Hudson area
+LWV of Greater Youngstown,county,Ohio,Mahoning County,https://www.lwvyoungstown.org/,voter_education,FALSE,FALSE,Youngstown area
+LWV of Oxford,county,Ohio,Butler County,https://my.lwv.org/ohio/oxford,voter_education,FALSE,FALSE,Oxford/Miami University area
+LWV of Miami-Dade County,county,Florida,Miami-Dade County,https://lwvmiamidade.org/,voter_education,TRUE,TRUE,Miami-Dade; FL-26/27/28 battlegrounds
+LWV of Broward County,county,Florida,Broward County,https://www.lwvbroward.org/,voter_education,FALSE,TRUE,Broward; FL-23/25 battlegrounds
+LWV of Hillsborough County,county,Florida,Hillsborough County,https://www.lwvhillsborough.org/,voter_education,FALSE,TRUE,Tampa metro; FL-14 battleground
+LWV of Orange County,county,Florida,Orange County,https://lwvoc-fl.org/,voter_education,FALSE,TRUE,Orlando metro
+LWV of Palm Beach County,county,Florida,Palm Beach County,https://lwvpbc.org/,voter_education,FALSE,TRUE,Palm Beach Co; FL-22 battleground
+LWV of Pinellas County,county,Florida,Pinellas County,https://www.lwvpinellas.org/,voter_education,FALSE,TRUE,St. Petersburg/Pinellas
+LWV of Fairfax Area,county,Virginia,Fairfax County,https://www.lwv-fairfax.org/,voter_education,FALSE,TRUE,NoVA; VA-7/11 area
+LWV of Arlington and Alexandria,county,Virginia,Arlington/Alexandria,https://www.lwv-va.org/arlington,voter_education,FALSE,TRUE,Arlington/Alexandria; VA-8
+LWV of Loudoun County,county,Virginia,Loudoun County,https://www.lwv-loudoun.org/,voter_education,FALSE,TRUE,Loudoun Co; VA-10 area
+LWV of Richmond Metropolitan Area,county,Virginia,Richmond/Henrico/Chesterfield,https://www.lwvrma.org/,voter_education,FALSE,TRUE,Richmond metro
+LWV of Seattle/King County,county,Washington,King County,https://seattlelwv.org/,voter_education,FALSE,TRUE,Seattle metro
+LWV of Snohomish County,county,Washington,Snohomish County,https://www.lwvsnoho.org/,voter_education,FALSE,TRUE,Snohomish; WA-2 area
+LWV of Tacoma-Pierce County,county,Washington,Pierce County,https://www.lwvtacoma.org/,voter_education,FALSE,TRUE,Tacoma; WA-10 area
+LWV of Spokane Area,county,Washington,Spokane County,https://www.lwvspokane.org/,voter_education,FALSE,TRUE,Spokane; WA-5
+LWV of Clark County,county,Washington,Clark County,https://www.lwvclarkcountywa.org/,voter_education,FALSE,TRUE,Vancouver; WA-3 toss-up area
+LWV of Denver,county,Colorado,Denver County,https://www.lwvdenver.org/,voter_education,FALSE,TRUE,Denver
+LWV of Boulder County,county,Colorado,Boulder County,https://www.lwvbc.org/,voter_education,FALSE,TRUE,Boulder County
+LWV of Larimer County,county,Colorado,Larimer County,https://www.lwv-larimercounty.org/,voter_education,FALSE,TRUE,Fort Collins/Larimer Co
+LWV of Arapahoe & Douglas Counties,county,Colorado,Arapahoe/Douglas Counties,https://www.lwv-ad.org/,voter_education,FALSE,TRUE,CO-8 battleground area
+LWV of Hillsborough County (NH),county,New Hampshire,Hillsborough County,https://my.lwv.org/new-hampshire/hillsborough-county,voter_education,FALSE,TRUE,Manchester/Nashua area
+LWV of New Hampshire Seacoast,county,New Hampshire,Rockingham/Strafford Counties,https://my.lwv.org/new-hampshire/seacoast,voter_education,FALSE,TRUE,NH Seacoast region
+LWV of Las Vegas Valley,county,Nevada,Clark County,https://www.lwvlvv.org/,voter_education,FALSE,TRUE,Las Vegas metro; NV-1/3/4 area
+LWV of Northern Nevada,county,Nevada,Washoe County,https://www.lwvnnv.org/,voter_education,FALSE,TRUE,Reno/Washoe Co; NV-2 area
+LWV of Johnson County (IA),county,Iowa,Johnson County,https://www.lwvjc.org/,voter_education,FALSE,TRUE,Iowa City
+LWV of Linn County,county,Iowa,Linn County,https://www.lwvlinncounty.org/,voter_education,FALSE,TRUE,Cedar Rapids; IA-1 area
+LWV of Des Moines Metro,county,Iowa,Polk County,https://www.lwvdesmoinesmetro.org/,voter_education,FALSE,TRUE,Des Moines metro; IA-3 area
+LWV of Baltimore City,county,Maryland,Baltimore City,https://www.lwvmd.org/baltimore,voter_education,FALSE,TRUE,Baltimore City
+LWV of Montgomery County (MD),county,Maryland,Montgomery County,https://www.lwvmocomd.org/,voter_education,FALSE,TRUE,DC suburbs MD
+LWV of Prince George's County,county,Maryland,Prince George's County,https://my.lwv.org/maryland/prince-georges-county,voter_education,FALSE,TRUE,PG County MD
+LWV of Boston,county,Massachusetts,Suffolk County,https://www.lwvboston.org/,voter_education,FALSE,TRUE,Boston
+LWV of Cambridge,county,Massachusetts,Middlesex County,https://lwvcambridge.org/,voter_education,FALSE,TRUE,Cambridge
+LWV of Cape Cod Area,county,Massachusetts,Barnstable County,https://www.lwvcapecod.org/,voter_education,FALSE,TRUE,Cape Cod
+LWV of Bergen County,county,New Jersey,Bergen County,https://www.lwvbergen.org/,voter_education,FALSE,TRUE,Bergen; NJ-5 area
+LWV of Essex County,county,New Jersey,Essex County,https://www.lwvnewark.org/,voter_education,FALSE,TRUE,Newark/Essex Co
+LWV of Monmouth County,county,New Jersey,Monmouth County,https://www.lwvmonmouth.org/,voter_education,FALSE,TRUE,Monmouth Co; NJ-4 area
+LWV of Greater Birmingham,county,Alabama,Jefferson County,https://lwvbirmingham.org/,voter_education,FALSE,TRUE,Birmingham; AL-7 area
+LWV of Mobile,county,Alabama,Mobile County,https://lwvmobile.org/,voter_education,FALSE,FALSE,Mobile
+LWV of Pulaski County (AR),county,Arkansas,Pulaski County,https://lwvpulaski.org/,voter_education,FALSE,FALSE,Little Rock
+LWV of Louisville,county,Kentucky,Jefferson County,https://www.lwvlouisville.org/,voter_education,FALSE,TRUE,Louisville/Jefferson Co
+LWV of Lexington,county,Kentucky,Fayette County,https://www.lwvlex.org/,voter_education,FALSE,TRUE,Lexington
+LWV of Greater Memphis,county,Tennessee,Shelby County,https://www.lwvgm.org/,voter_education,FALSE,TRUE,Memphis
+LWV of Nashville,county,Tennessee,Davidson County,https://www.lwvnashville.org/,voter_education,FALSE,TRUE,Nashville
+LWV of Portland,county,Oregon,Multnomah County,https://www.lwvpdx.org/,voter_education,FALSE,TRUE,Portland
+LWV of Clackamas County,county,Oregon,Clackamas County,https://www.lwvclackamas.org/,voter_education,FALSE,TRUE,Clackamas Co; OR-5 area
+LWV of Lane County,county,Oregon,Lane County,https://www.lwvlanecounty.org/,voter_education,FALSE,TRUE,Eugene/Lane Co
+LWV of Indianapolis,county,Indiana,Marion County,https://www.lwvindy.org/,voter_education,FALSE,TRUE,Indianapolis; IN-1 battleground
+LWV of South Bend Area,county,Indiana,St. Joseph County,https://www.lwvsbarea.org/,voter_education,FALSE,FALSE,South Bend area
+LWV of Fort Wayne,county,Indiana,Allen County,https://www.lwv-fw.org/,voter_education,FALSE,FALSE,Fort Wayne
+LWV of Greater Omaha,county,Nebraska,Douglas County,https://www.lwvomaha.org/,voter_education,FALSE,TRUE,Omaha; NE-2 battleground
+LWV of Lincoln-Lancaster County,county,Nebraska,Lancaster County,https://www.lwvlnk.org/,voter_education,FALSE,TRUE,Lincoln
+LWV of Metro St. Louis,county,Missouri,St. Louis City/County,https://www.lwvstl.org/,voter_education,FALSE,TRUE,St. Louis metro
+LWV of Kansas City,county,Missouri,Jackson County,https://www.lwvkc.org/,voter_education,FALSE,TRUE,KC metro MO side
+LWV of Johnson County (KS),county,Kansas,Johnson County,https://www.lwvjoco.org/,voter_education,FALSE,TRUE,Overland Park; KC metro KS side; KS-3 battleground
+LWV of Topeka-Shawnee County,county,Kansas,Shawnee County,https://www.lwvtopeka.org/,voter_education,FALSE,FALSE,Topeka
+LWV of Portland Area (ME),county,Maine,Cumberland County,https://www.lwvme.org/portland,voter_education,FALSE,TRUE,Portland area; ME-1
+NAACP Atlanta Branch,county,Georgia,Fulton County,https://www.naacpatlanta.org/,civil_rights,FALSE,TRUE,Atlanta NAACP; voter protection
+NAACP Detroit Branch,county,Michigan,Wayne County,https://detroitnaacp.org/,civil_rights,FALSE,TRUE,Detroit NAACP; voter protection in MI
+NAACP Houston Branch,county,Texas,Harris County,https://www.naacphouston.org/,civil_rights,FALSE,TRUE,Houston NAACP
+NAACP Philadelphia Branch,county,Pennsylvania,Philadelphia County,https://www.philadelphianaacp.org/,civil_rights,FALSE,TRUE,Philadelphia NAACP
+NAACP Milwaukee Branch,county,Wisconsin,Milwaukee County,https://naacpmke.org/,civil_rights,FALSE,TRUE,Milwaukee NAACP
+New Georgia Project,state,Georgia,,https://newgeorgiaproject.org/,voter_registration,FALSE,TRUE,Statewide voter registration org founded by Stacey Abrams
+Florida Rising,state,Florida,,https://floridarising.org/,voter_engagement,FALSE,TRUE,Statewide civic engagement
+LUCHA Arizona,state,Arizona,,https://luchaaz.org/,voter_engagement,FALSE,TRUE,Statewide Latino civic engagement
+Voces de la Frontera (WI),state,Wisconsin,,https://vdlf.org/,voter_engagement,FALSE,TRUE,Statewide Latino civic engagement Wisconsin
+NextGen America (Michigan),state,Michigan,,https://nextgenamerica.org/state/michigan/,youth_engagement,FALSE,TRUE,Young voter outreach MI
+Black Voters Matter Fund,national,All,,https://blackvotersmatterfund.org/,voter_engagement,FALSE,TRUE,Black voter mobilization; operates in 12+ Southern states
+Mi Familia Vota,national,All,,https://www.mifamiliavota.org/,voter_engagement,FALSE,TRUE,"Latino voter mobilization; AZ, CA, CO, FL, NV, PA, TX"
+Asian Americans Advancing Justice,national,All,,https://www.advancingjustice-aajc.org/,voter_protection,FALSE,TRUE,AAPI voter protection
+All Voting is Local,national,All,,https://allvotingislocal.org/,voting_rights,FALSE,TRUE,"Active in AZ, FL, GA, MI, NV, OH, PA, TX, WI"
+Georgia Election Protection (ACLU GA),state,Georgia,,https://www.acluga.org/en/issues/voting-rights,election_protection,FALSE,TRUE,ACLU Georgia voting rights
+Texas Civil Rights Project,state,Texas,,https://txcivilrights.org/,voting_rights,FALSE,TRUE,Statewide voting rights org
+Pennsylvania Voice,state,Pennsylvania,,https://pavoice.org/,voter_engagement,FALSE,TRUE,Statewide civic engagement network
+Detroit Action,county,Michigan,Wayne County,https://www.detroitaction.org/,voter_engagement,FALSE,TRUE,Detroit voter mobilization
+We the People Michigan,state,Michigan,,https://www.wethepeoplemi.org/,voter_engagement,FALSE,TRUE,Statewide MI
+OPAL (Organization of Asian Pacific Americans for Action),national,All,,https://www.opalnow.org/,voter_engagement,FALSE,TRUE,AAPI civic engagement

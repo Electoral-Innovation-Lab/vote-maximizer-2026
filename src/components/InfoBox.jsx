@@ -129,6 +129,12 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
   );
 }
 
+function extractCounty(placeName) {
+  if (!placeName) return null;
+  const m = placeName.match(/([^,]+County)/);
+  return m ? m[1].trim() : null;
+}
+
 export default function InfoBox({
   raceData,
   activeTab,
@@ -145,6 +151,8 @@ export default function InfoBox({
   allData,
   onRacePreview,
   onTopTypeChange,
+  civicOrgs,
+  primaryCalendar,
 }) {
   const [copied, setCopied] = useState(false);
 
@@ -165,6 +173,8 @@ export default function InfoBox({
   const selectedRace = selectedGeoid
     ? (activeTab === 'nearby' ? nearbyRaces : raceData)?.find((r) => r.geoid === selectedGeoid)
     : null;
+
+  const userCounty = extractCounty(searchPlaceName);
 
   return (
     <div className="info-box">
@@ -239,6 +249,9 @@ export default function InfoBox({
               activeTab={activeTab}
               onBack={() => onRaceSelect(null)}
               onSelect={onRaceSelect}
+              civicOrgs={civicOrgs}
+              primaryCalendar={primaryCalendar}
+              userCounty={userCounty}
             />
           ) : (
             <>
@@ -285,6 +298,9 @@ export default function InfoBox({
               activeTab={activeTab}
               onBack={() => onRaceSelect(null)}
               onSelect={onRaceSelect}
+              civicOrgs={civicOrgs}
+              primaryCalendar={primaryCalendar}
+              userCounty={userCounty}
             />
           ) : (
             <>
