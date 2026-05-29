@@ -4,9 +4,9 @@ const SECTIONS = [
   {
     num: '01',
     title: 'What is Vote Maximizer?',
-    body: `Vote Maximizer uses mathematical and strategic analysis to identify the contests and ballot questions where per-voter impact is greatest in the 2026 election cycle. Our tool centers not on campaigns, but on the individual voter — giving you the kind of rigorous analysis that campaign strategists provide to politicians, so you can direct your time, money, and energy where they'll make the most difference.
+    body: `Vote Maximizer uses mathematical and strategic analysis to find the 2026 contests where your donation, canvassing hours, or vote will have the greatest impact. Our tool centers on the individual voter — giving you the kind of rigorous strategic analysis that campaign teams use, so you can direct your time and money where they'll make the most difference.
 
-    High-leverage races are also fragile ones. Where the margin is thin, voter suppression, misinformation, and administrative irregularities have outsized effect. Vote Maximizer helps you find both the races worth fighting for, and the ones most in need of protection.`,
+    High-impact races are also the ones most worth defending. Where the margin is thin, voter suppression, misinformation, and administrative irregularities have the most effect. Vote Maximizer helps you find the contests where you can drive outcomes — and where defending democracy matters most.`,
   },
   {
     num: '02',
@@ -15,7 +15,7 @@ const SECTIONS = [
 
     Voter power is especially high in competitive ballot initiatives, which can reshape policy for years to come. These races often receive less attention than candidate elections despite their direct impact on issues like voting rights, redistricting, and electoral reform.
 
-    A high voter power score also indicates a race competitive enough to be vulnerable. Close elections are where efforts to suppress turnout, spread misinformation about voting procedures, or challenge results are most likely to affect the outcome — making them both the highest-leverage races for civic action and the most important to protect.`,
+    A high voter power score also indicates a race worth defending. Close elections are where voter suppression, misinformation, and administrative interference have the most effect — making them both the highest-impact races for your participation, and the ones where defending democracy is most meaningful.`,
   },
   {
     num: '03',

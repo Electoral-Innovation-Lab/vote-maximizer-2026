@@ -190,15 +190,14 @@ export default function InfoBox({
 
         <div className="info-description">
           <p className="info-desc-body">
-            Vote Maximizer uses mathematical modeling to calculate per-vote leverage: the change in win
-            probability that comes from a single vote, or a handful of votes. Contests with high leverage
-            are close, consequential, and — because the margin for error is smallest — most vulnerable
-            to disruption from voter suppression, misinformation, or administrative failure.
+            Vote Maximizer uses mathematical modeling to calculate where a single vote — or a donation,
+            or a canvassing shift — can make the biggest difference. The races that score highest are
+            the contests so close that a handful of votes could change the winner.
           </p>
           <p className="info-desc-body">
-            Our analysis tells you where your donations and canvassing hours go furthest. And it shows
-            you where election protection efforts are most urgently needed. Use this tool to find
-            both — and to connect with the organizations already doing that work.
+            Use the tool to find where your time and money will have the most impact. And because close
+            races are also the ones most vulnerable to suppression and misinformation, you're not just
+            maximizing your impact — you're helping defend democracy where it counts.
           </p>
         </div>
 

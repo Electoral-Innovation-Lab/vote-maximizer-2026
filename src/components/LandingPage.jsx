@@ -123,12 +123,10 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
       <div className="landing-hero">
         <div className="landing-eyebrow anim-1">Vote Maximizer by The <a href="https://www.electoral-lab.org/" style={{ color: '#FF8F00', textDecoration: 'underline', textDecorationColor: 'rgba(255,143,0,0.4)' }}>Electoral Innovation Lab</a></div>
         <h1 className="landing-headline anim-2">
-          Where every vote counts— <br />and every vote is at risk.
-          {/* Vote Maximizer calculates where individual votes carry the most weight.<br />In 2026, that's also where democracy is most fragile. */}
+          Find the races where<br />your vote matters most.
         </h1>
         <p className="landing-sub anim-3">
-          Vote Maximizer calculates where individual votes carry the most weight.<br className="landing-br" />In 2026, that's also where democracy is most fragile.
-          {/* We calculate exactly where that is.<br className="landing-br" /> */}
+          Vote Maximizer shows you which 2026 contests are close enough that a few votes could change the winner — so your donations and canvassing hours go exactly where they'll count.<br className="landing-br" />These are also the races most worth defending.
         </p>
 
         {/* Stat tagline */}
