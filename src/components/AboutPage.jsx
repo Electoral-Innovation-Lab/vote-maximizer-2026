@@ -20,9 +20,10 @@ const SECTIONS = [
   {
     num: '03',
     title: 'The Mathematics',
-    body: `Every voter power score answers one question: how much does a single additional vote shift the probability of a different outcome? We use a t-distribution probability density function centered on the projected margin, with an effective sigma (σ_eff) that blends polling uncertainty (σ ≈ 3.0 pts) with historical race-type volatility.
-
-    Scores are normalized 0–100 within each race type. Statewide races are adjusted for electorate size using a turnout scaling factor (÷ turnout^0.3). House districts use no scaling since they have equal populations by law.`,
+    paragraphs: [
+      `Every voter power score answers one question: how much does a single additional vote shift the probability of a different outcome? We use a t-distribution probability density function centered on the projected margin, with an effective sigma (σ<sub>eff</sub>) that blends polling uncertainty (σ ≈ 3.0 pts) with historical race-type volatility.`,
+      `Scores are normalized 0–100 within each race type. Statewide races are adjusted for electorate size using a turnout scaling factor (÷ turnout<sup>0.3</sup>). House districts use no scaling since they have equal populations by law.`,
+    ],
   },
   {
     num: '04',
@@ -73,9 +74,14 @@ export default function AboutPage({ onClose }) {
               <div className="about-section-body">
                 <h3 className="about-section-title">{s.title}</h3>
 
-                {s.body && s.body.split('\n\n').map((para, i) => (
-                  <p className="about-para" key={i}>{para.trim()}</p>
-                ))}
+                {s.paragraphs
+                  ? s.paragraphs.map((html, i) => (
+                      <p className="about-para" key={i} dangerouslySetInnerHTML={{ __html: html }} />
+                    ))
+                  : s.body && s.body.split('\n\n').map((para, i) => (
+                      <p className="about-para" key={i}>{para.trim()}</p>
+                    ))
+                }
 
                 {s.items && (
                   <div className="about-table">

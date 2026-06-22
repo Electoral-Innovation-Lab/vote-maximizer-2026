@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { getDistrictColor, COOK_CONFIG } from '../utils/districtUtils.js';
+import InfoTip from './InfoTip.jsx';
 import './ContestDetail.css';
 
 // Which primary column applies to each raceType
@@ -68,6 +69,7 @@ function VPBar({ voterPower }) {
         <div className="cd-vp-fill" style={{ width: `${Math.round(voterPower)}%`, background: color }} />
       </div>
       <span className="cd-vp-score">{Math.round(voterPower)}</span>
+      <InfoTip text="Voter Power scores how much a single vote could change the outcome here. Higher = more impact. Scores run 0–100 within each race type. [Full explanation — policy team copy pending]" />
     </div>
   );
 }
@@ -252,7 +254,10 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
             <span className="cd-state">{race.state}</span>
             {!isHouse && <span className="cd-race-name">{race.race}</span>}
           </div>
-          <span className="cd-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
+          <span className="cd-cook-wrap">
+            <span className="cd-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
+            <InfoTip text="Cook Political Report race rating. Toss-Up: essentially tied. Lean: slight party advantage. Likely: substantial advantage, but not locked up. Solid: not competitive. Used as a margin proxy before polls are available. [Definitions — policy team copy pending]" />
+          </span>
         </div>
         <VPBar voterPower={race.voterPower} />
         {formatMargin(race.margin) && (

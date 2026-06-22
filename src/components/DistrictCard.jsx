@@ -1,5 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { getDistrictColor, COOK_CONFIG } from '../utils/districtUtils.js';
+import InfoTip from './InfoTip.jsx';
 import './InfoBox.css';
 
 export default function DistrictCard({
@@ -42,11 +43,14 @@ export default function DistrictCard({
         <div className="card-state">{district.state}</div>
       </div>
 
-      <span
-        className="card-cook"
-        style={{ color: cookCfg.color, background: cookCfg.bg }}
-      >
-        {cookCfg.label}
+      <span className="card-cook-wrap">
+        <span
+          className="card-cook"
+          style={{ color: cookCfg.color, background: cookCfg.bg }}
+        >
+          {cookCfg.label}
+        </span>
+        <InfoTip text="Cook Political Report race rating. Toss-Up: essentially tied. Lean: slight party advantage. Likely: substantial advantage, but not locked up. Solid: not competitive. Used as a margin proxy before polls are available. [Definitions — policy team copy pending]" />
       </span>
 
       <div className="card-vp">

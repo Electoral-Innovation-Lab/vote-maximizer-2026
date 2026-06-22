@@ -42,7 +42,7 @@ async function loadDistrictGeoJSON() {
 function getStatesGeoJSON() {
   const geo = topoFeature(statesData, statesData.objects.states);
   geo.features.forEach((f) => {
-    f.properties = { ...f.properties, GEOID: String(f.id) };
+    f.properties = { ...f.properties, GEOID: String(f.id).padStart(2, '0') };
   });
   return geo;
 }
@@ -125,6 +125,8 @@ export default function Map({
   const containerRef = useRef(null);
   const mapRef = useRef(null);
   const popupRef = useRef(null);
+  const hoverPopupRef = useRef(null);
+  const layerClickHandledRef = useRef(false);
   const [mapError, setMapError] = useState(null);
   const [isMapReady, setIsMapReady] = useState(false);
 
@@ -292,6 +294,7 @@ export default function Map({
         }
 
         map.on('click', (e) => {
+          if (layerClickHandledRef.current) { layerClickHandledRef.current = false; return; }
           const t = tabRef.current;
           const layer = t === 'house' ? 'districts-fill'
             : t === 'sld_upper' ? 'sld-upper-fill'
@@ -474,13 +477,22 @@ export default function Map({
       if (!feature) return;
       const geoid = geoidFn(feature.properties);
       if (!geoid) return;
-      if (prevId !== null && prevId !== geoid) {
+      const changedFeature = geoid !== prevId;
+      if (prevId !== null && changedFeature) {
         try { map.setFeatureState(mkRef(prevId), { hovered: false }); } catch (_) {}
       }
       prevId = geoid;
       try { map.setFeatureState(mkRef(geoid), { hovered: true }); } catch (_) {}
       const race = raceDataRef.current.find((d) => d.geoid === geoid);
-      onHoverRef.current(race ? geoid : null);
+      if (race) {
+        if (changedFeature || !hoverPopupRef.current) {
+          hoverPopupRef.current?.remove();
+          hoverPopupRef.current = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 12, className: 'hover-tooltip' })
+            .setLngLat(e.lngLat).setHTML(buildHoverHTML(race)).addTo(map);
+        } else {
+          hoverPopupRef.current.setLngLat(e.lngLat);
+        }
+      }
     });
 
     map.on('mouseleave', fillLayer, () => {
@@ -489,7 +501,7 @@ export default function Map({
         try { map.setFeatureState(mkRef(prevId), { hovered: false }); } catch (_) {}
         prevId = null;
       }
-      onHoverRef.current(null);
+      if (hoverPopupRef.current) { hoverPopupRef.current.remove(); hoverPopupRef.current = null; }
     });
 
     map.on('click', fillLayer, (e) => {
@@ -497,6 +509,8 @@ export default function Map({
       if (!feature) return;
       const geoid = geoidFn(feature.properties);
       const race = raceDataRef.current.find((d) => d.geoid === geoid);
+      if (hoverPopupRef.current) { hoverPopupRef.current.remove(); hoverPopupRef.current = null; }
+      layerClickHandledRef.current = true;
       onSelectRef.current(race ? geoid : null);
     });
   }
@@ -511,19 +525,28 @@ export default function Map({
       const { STATE: s, DISTRICT: d } = feature.properties ?? {};
       if (!s || !d) return;
       const geoid = `${s}-${d}`;
-      if (geoid !== prevGeoid) {
+      const changedGeoid = geoid !== prevGeoid;
+      if (changedGeoid) {
         prevGeoid = geoid;
         try { map.setFilter(hoverLayerId, sldFilter(geoid)); } catch (_) {}
       }
       const race = raceDataRef.current.find((r) => r.geoid === geoid);
-      onHoverRef.current(race ? geoid : null);
+      if (race) {
+        if (changedGeoid || !hoverPopupRef.current) {
+          hoverPopupRef.current?.remove();
+          hoverPopupRef.current = new mapboxgl.Popup({ closeButton: false, closeOnClick: false, offset: 12, className: 'hover-tooltip' })
+            .setLngLat(e.lngLat).setHTML(buildHoverHTML(race)).addTo(map);
+        } else {
+          hoverPopupRef.current.setLngLat(e.lngLat);
+        }
+      }
     });
 
     map.on('mouseleave', fillLayer, () => {
       map.getCanvas().style.cursor = '';
       prevGeoid = null;
       try { map.setFilter(hoverLayerId, NO_MATCH); } catch (_) {}
-      onHoverRef.current(null);
+      if (hoverPopupRef.current) { hoverPopupRef.current.remove(); hoverPopupRef.current = null; }
     });
 
     map.on('click', fillLayer, (e) => {
@@ -533,6 +556,8 @@ export default function Map({
       if (!s || !d) return;
       const geoid = `${s}-${d}`;
       const race = raceDataRef.current.find((r) => r.geoid === geoid);
+      if (hoverPopupRef.current) { hoverPopupRef.current.remove(); hoverPopupRef.current = null; }
+      layerClickHandledRef.current = true;
       onSelectRef.current(race ? geoid : null);
     });
   }
@@ -600,6 +625,11 @@ function candidateRow(d, r) {
   if (d) parts.push(`<span style="color:#2563eb;font-weight:600;">D:</span> ${d}`);
   if (r) parts.push(`<span style="color:#dc2626;font-weight:600;">R:</span> ${r}`);
   return `<div class="popup-candidates">${parts.join('<br>')}</div>`;
+}
+
+function buildHoverHTML(race) {
+  const vpColor = getDistrictColor(race.voterPower);
+  return `<div class="map-hover-popup"><span class="hover-label">${race.label}</span><span class="hover-vp" style="background:${vpColor}">${Math.round(race.voterPower)}</span></div>`;
 }
 
 function buildPopupHTML(race, tab) {
