@@ -150,6 +150,13 @@
   text-decoration: underline;
 }
 
+.info-api-coming-soon {
+  color: #94a3b8;
+  cursor: default;
+  font-size: 11px;
+  line-height: 1.4;
+}
+
 .info-org {
   font-size: 10px;
   color: #94a3b8;
@@ -228,9 +235,20 @@
 }
 
 .tab-btn--active {
-  color: #FF8F00;
+  color: #fff;
+  background: #FF8F00;
   border-bottom-color: #FF8F00;
-  background: #fff;
+  border-radius: 4px 4px 0 0;
+}
+.tab-btn--active:hover {
+  color: #fff;
+}
+
+.tab-context {
+  font-size: 10px;
+  color: #94a3b8;
+  padding: 4px 14px 0;
+  letter-spacing: 0.02em;
 }
 
 .tab-clear-btn {
@@ -378,6 +396,8 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+.card-cook-wrap { display: inline-flex; align-items: center; gap: 2px; }
 
 .card-cook {
   width: 78px;
@@ -582,3 +602,28 @@
   transition: background 0.1s;
 }
 .tc-link:hover { background: #FFE0B2; }
+
+/* ── Collapsible panel ─────────────────────────────────────────────────────── */
+.tab-collapse-btn {
+  margin-left: auto;
+  padding: 4px 8px;
+  font-size: 11px;
+  color: #94a3b8;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  align-self: center;
+  flex-shrink: 0;
+  line-height: 1;
+  transition: color 0.1s;
+}
+.tab-collapse-btn:hover { color: #475569; background: #f1f5f9; }
+
+.info-box--collapsed .info-header {
+  display: none;
+}
+.info-box--collapsed .district-list {
+  overflow: hidden;
+  height: 44px;   /* just enough for the sticky tab bar */
+}

@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import DistrictCard from './DistrictCard.jsx';
 import ContestDetail from './ContestDetail.jsx';
+import InfoTip from './InfoTip.jsx';
 import { COOK_CONFIG, getDistrictColor } from '../utils/districtUtils.js';
 import './InfoBox.css';
 
@@ -32,14 +33,12 @@ const TOP_TYPES = [
   { id: 'ballot',   label: 'Ballot' },
 ];
 
-function NearbyCard({ race, isHovered, isSelected, onHover, onLeave, onClick }) {
+function NearbyCard({ race, isHovered, isSelected, onClick }) {
   const cfg = COOK_CONFIG[race.cookRating] ?? { label: race.cookRating, color: '#475569', bg: '#f1f5f9' };
   const vpColor = getDistrictColor(race.voterPower);
   return (
     <div
       className={`district-card nearby-card ${isHovered ? 'hovered' : ''} ${isSelected ? 'selected' : ''}`}
-      onMouseEnter={onHover}
-      onMouseLeave={onLeave}
       onClick={onClick}
     >
       <div className="card-info" style={{ flex: 1 }}>
@@ -49,7 +48,10 @@ function NearbyCard({ race, isHovered, isSelected, onHover, onLeave, onClick }) 
         </div>
         <div className="card-state">{race.state} · {race.distance} mi</div>
       </div>
-      <span className="card-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
+      <span className="card-cook-wrap">
+        <span className="card-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
+        <InfoTip text="Cook Political Report race rating. Toss-Up: essentially tied. Lean: slight party advantage. Likely: substantial advantage, but not locked up. Solid: not competitive. Used as a margin proxy before polls are available. [Definitions — policy team copy pending]" />
+      </span>
       <div className="card-vp">
         <div className="vp-bar-track">
           <div className="vp-bar-fill" style={{ width: `${Math.round(race.voterPower)}%`, background: vpColor }} />
@@ -102,8 +104,6 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
               <div
                 key={`${topType}-${idx}`}
                 className="tc-entry"
-                onMouseEnter={() => onRacePreview?.({ race, raceType: topType })}
-                onMouseLeave={() => onRacePreview?.(null)}
                 onClick={() => onRacePreview?.({ race, raceType: topType, select: true })}
               >
                 <div className="tc-entry-header">
@@ -155,6 +155,28 @@ export default function InfoBox({
   primaryCalendar,
 }) {
   const [copied, setCopied] = useState(false);
+  const [panelCollapsed, setPanelCollapsed] = useState(false);
+  const districtListRef = useRef(null);
+  const savedScrollRef = useRef(0);
+  const prevSelectedRef = useRef(null);
+
+  // Bug 1 — scroll district list to top on tab change
+  useEffect(() => {
+    if (districtListRef.current) districtListRef.current.scrollTop = 0;
+  }, [activeTab]);
+
+  // Bug 7 — save scroll position when drilling in, restore when going back
+  useEffect(() => {
+    if (selectedGeoid && !prevSelectedRef.current && districtListRef.current) {
+      savedScrollRef.current = districtListRef.current.scrollTop;
+    } else if (!selectedGeoid && prevSelectedRef.current && districtListRef.current) {
+      const saved = savedScrollRef.current;
+      requestAnimationFrame(() => {
+        if (districtListRef.current) districtListRef.current.scrollTop = saved;
+      });
+    }
+    prevSelectedRef.current = selectedGeoid;
+  }, [selectedGeoid]);
 
   function handleShare() {
     if (!shareUrl) return;
@@ -177,7 +199,7 @@ export default function InfoBox({
   const userCounty = extractCounty(searchPlaceName);
 
   return (
-    <div className="info-box">
+    <div className={`info-box${panelCollapsed ? ' info-box--collapsed' : ''}`}>
       {/* ── Fixed left header panel ─────────────────────────────────────── */}
       <div className="info-header">
         <div className="info-header-top">
@@ -203,9 +225,9 @@ export default function InfoBox({
 
         <div className="info-header-bottom">
           <div className="info-links">
-            <a href="#api-docs" className="info-api-link" onClick={(e) => e.preventDefault()}>
-              Use Vote Maximizer data with our API →
-            </a>
+            <span className="info-api-coming-soon">
+              API access — coming soon
+            </span>
           </div>
           <div className="info-org">
             A project by{' '}
@@ -217,7 +239,7 @@ export default function InfoBox({
       </div>
 
       {/* ── Right panel ─────────────────────────────────────────────────── */}
-      <div className="district-list">
+      <div className="district-list" ref={districtListRef}>
         {/* Scrollable tab bar */}
         <div className="race-tabs">
           {visibleTabs.map((t) => (
@@ -232,7 +254,28 @@ export default function InfoBox({
           {nearbyRaces && (
             <button className="tab-clear-btn" onClick={onClearNearby} title="Clear location search">✕</button>
           )}
+          <button
+            className="tab-collapse-btn"
+            onClick={() => setPanelCollapsed((c) => !c)}
+            aria-label={panelCollapsed ? 'Expand panel' : 'Collapse panel'}
+            title={panelCollapsed ? 'Expand panel' : 'Collapse panel'}
+          >
+            {panelCollapsed ? '▲' : '▼'}
+          </button>
         </div>
+        {activeTab !== 'top' && activeTab !== 'nearby' && !selectedRace && (
+          <div className="tab-context">
+            {activeTab === 'house' && 'US House congressional districts, ranked by voter impact'}
+            {activeTab === 'senate' && 'US Senate races, ranked by voter impact'}
+            {activeTab === 'governor' && 'Governor races, ranked by voter impact'}
+            {activeTab === 'state_leg_upper' && 'State Senate districts, ranked by voter impact'}
+            {activeTab === 'state_leg_lower' && 'State House districts, ranked by voter impact'}
+            {activeTab === 'ag' && 'Attorney General races, ranked by voter impact'}
+            {activeTab === 'sos' && 'Secretary of State races, ranked by voter impact'}
+            {activeTab === 'judicial' && 'Judicial retention races, ranked by voter impact'}
+            {activeTab === 'ballot' && 'Ballot initiatives, ranked by voter impact'}
+          </div>
+        )}
 
         {/* ── Top Contests tab ──────────────────────────────────────────── */}
         {activeTab === 'top' && (
@@ -260,7 +303,7 @@ export default function InfoBox({
                   {searchPlaceName ? `Near ${searchPlaceName.split(',')[0]}` : 'Nearby contests'}
                 </span>
                 <span className="lh-cook">Cook</span>
-                <span className="lh-vp">Voter Power</span>
+                <span className="lh-vp">Voter Power <InfoTip text="Voter Power scores how much a single vote could change the outcome here. Higher = more impact. Scores run 0–100 within each race type. [Full explanation — policy team copy pending]" /></span>
                 {shareUrl && (
                   <button className="tab-share-btn" onClick={handleShare} title="Copy shareable link">
                     {copied ? '✓ Copied' : '⤴ Share'}
@@ -276,8 +319,6 @@ export default function InfoBox({
                     race={race}
                     isHovered={hoveredGeoid === race.geoid}
                     isSelected={selectedGeoid === race.geoid}
-                    onHover={() => onRacePreview?.({ race, raceType: race.raceType })}
-                    onLeave={() => onRacePreview?.(null)}
                     onClick={() => onRaceSelect(selectedGeoid === race.geoid ? null : race.geoid)}
                   />
                 ))
@@ -307,7 +348,7 @@ export default function InfoBox({
                 <span className="lh-rank">#</span>
                 <span className="lh-district">{columnLabel}</span>
                 <span className="lh-cook">Cook Rating</span>
-                <span className="lh-vp">Voter Power</span>
+                <span className="lh-vp">Voter Power <InfoTip text="Voter Power scores how much a single vote could change the outcome here. Higher = more impact. Scores run 0–100 within each race type. [Full explanation — policy team copy pending]" /></span>
               </div>
               {raceData.map((race, idx) => (
                 <DistrictCard
@@ -316,8 +357,6 @@ export default function InfoBox({
                   rank={idx + 1}
                   isHovered={hoveredGeoid === race.geoid}
                   isSelected={selectedGeoid === race.geoid}
-                  onHover={() => onRaceHover(race.geoid)}
-                  onLeave={() => onRaceHover(null)}
                   onClick={() => onRaceSelect(selectedGeoid === race.geoid ? null : race.geoid)}
                 />
               ))}
