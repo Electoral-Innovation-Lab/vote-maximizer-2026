@@ -83,6 +83,12 @@ export function haversineDistance(lat1, lng1, lat2, lng2) {
   return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 }
 
+export const URBANICITY_CONFIG = {
+  urban:    { label: 'Urban',    color: '#6d28d9', bg: '#ede9fe' },
+  suburban: { label: 'Suburban', color: '#0f766e', bg: '#ccfbf1' },
+  rural:    { label: 'Rural',    color: '#65a30d', bg: '#ecfccb' },
+};
+
 export const COOK_CONFIG = {
   'toss-up':  { label: 'Toss-Up',  color: '#92400e', bg: '#fef3c7' },
   'lean-D':   { label: 'Lean D',   color: '#1e40af', bg: '#dbeafe' },

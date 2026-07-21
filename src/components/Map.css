@@ -180,10 +180,26 @@
   color: #1e293b;
 }
 
+.popup-title-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 2px;
+}
+
 .popup-title {
   font-size: 16px;
   font-weight: 700;
-  margin-bottom: 2px;
+}
+
+.popup-urbanicity {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
 }
 
 .popup-subtitle {

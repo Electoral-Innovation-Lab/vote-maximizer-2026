@@ -191,6 +191,16 @@ export async function loadPrimaryCalendar() {
   })).filter((r) => r.state);
 }
 
+export async function loadUrbanicity() {
+  const rows = await fetchRows('/data_urbanicity.csv');
+  const byGeoid = {};
+  for (const r of rows) {
+    if (!r.geoid) continue;
+    byGeoid[r.geoid] = { urbanicity: r.urbanicity, urbanPct: toFloat(r.urbanPct) };
+  }
+  return byGeoid;
+}
+
 // For map: aggregate state_leg races to one entry per state (max VP)
 export function aggregateByState(races) {
   const byState = {};

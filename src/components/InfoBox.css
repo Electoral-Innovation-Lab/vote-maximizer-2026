@@ -30,6 +30,7 @@
   .district-card { padding: 8px 10px; }
   .card-label { font-size: 12px; }
   .lh-cook, .card-cook { width: 64px; font-size: 9px; }
+  .card-urbanicity { width: 56px; font-size: 9px; }
   .lh-vp, .card-vp { width: 76px; }
 }
 
@@ -392,6 +393,19 @@
   white-space: nowrap;
 }
 
+.card-urbanicity {
+  width: 68px;
+  flex-shrink: 0;
+  display: inline-block;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
 .card-vp {
   width: 96px;
   flex-shrink: 0;
@@ -525,6 +539,16 @@
 }
 
 .tc-cook {
+  flex-shrink: 0;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.tc-urbanicity {
   flex-shrink: 0;
   font-size: 9px;
   font-weight: 700;

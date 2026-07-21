@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import DistrictCard from './DistrictCard.jsx';
 import ContestDetail from './ContestDetail.jsx';
-import { COOK_CONFIG, getDistrictColor } from '../utils/districtUtils.js';
+import { COOK_CONFIG, getDistrictColor, URBANICITY_CONFIG } from '../utils/districtUtils.js';
 import './InfoBox.css';
 
 const RACE_TYPE_LABELS = {
@@ -96,6 +96,7 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
         ) : (
           top10.map((race, idx) => {
             const cfg = COOK_CONFIG[race.cookRating] ?? { label: race.cookRating, color: '#475569', bg: '#f1f5f9' };
+            const urbanicityCfg = URBANICITY_CONFIG[race.urbanicity];
             const vpColor = getDistrictColor(race.voterPower);
             const vp = Math.round(race.voterPower);
             return (
@@ -113,6 +114,11 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
                     <span className="tc-sublabel">{race.state}</span>
                   </div>
                   <span className="tc-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
+                  {urbanicityCfg && (
+                    <span className="tc-urbanicity" style={{ color: urbanicityCfg.color, background: urbanicityCfg.bg }}>
+                      {urbanicityCfg.label}
+                    </span>
+                  )}
                   <div className="tc-vp-block">
                     <div className="tc-vp-track">
                       <div className="tc-vp-fill" style={{ width: `${vp}%`, background: vpColor }} />

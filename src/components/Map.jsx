@@ -4,7 +4,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { feature as topoFeature } from 'topojson-client';
 import statesData from 'us-atlas/states-10m.json';
-import { getDistrictColor } from '../utils/districtUtils.js';
+import { getDistrictColor, URBANICITY_CONFIG } from '../utils/districtUtils.js';
 import './Map.css';
 
 const DISTRICT_TILESET  = import.meta.env.VITE_DISTRICT_TILESET  ?? null;
@@ -612,9 +612,16 @@ function buildPopupHTML(race, tab) {
     ? `${race.state}'s ${ordinal(race.districtNum)} Congressional District`
     : isSld ? (race.state ?? '')
     : (race.race ?? '');
+  const urbanicityCfg = URBANICITY_CONFIG[race.urbanicity];
+  const urbanicityBadge = urbanicityCfg
+    ? `<span class="popup-urbanicity" style="color:${urbanicityCfg.color};background:${urbanicityCfg.bg}">${urbanicityCfg.label}</span>`
+    : '';
   return `
     <div class="map-popup">
-      <div class="popup-title">${title}</div>
+      <div class="popup-title-row">
+        <span class="popup-title">${title}</span>
+        ${urbanicityBadge}
+      </div>
       ${subtitle ? `<div class="popup-subtitle">${subtitle}</div>` : ''}
       <div class="popup-row"><span class="popup-label">Cook Rating</span><span class="popup-value">${cookLabel ?? '—'}</span></div>
       ${marginLabel ? `<div class="popup-row"><span class="popup-label">Est. Margin</span><span class="popup-value">${marginLabel}</span></div>` : ''}
