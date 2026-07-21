@@ -91,4 +91,6 @@ export const COOK_CONFIG = {
   'likely-R': { label: 'Likely R', color: '#7f1d1d', bg: '#fecaca' },
   'solid-D':  { label: 'Solid D',  color: '#1e3a8a', bg: '#93c5fd' },
   'solid-R':  { label: 'Solid R',  color: '#7f1d1d', bg: '#fca5a5' },
+  retention:    { label: 'Retention',   color: '#3f3f46', bg: '#e4e4e7' },
+  nonpartisan:  { label: 'Nonpartisan', color: '#3f3f46', bg: '#e4e4e7' },
 };

@@ -61,7 +61,9 @@ function NearbyCard({ race, isHovered, isSelected, onHover, onLeave, onClick }) 
 }
 
 // Now each rating is its own priority level so D/R stay visually separate when grouped.
-const COOK_ORDER = ['toss-up', 'lean-D', 'lean-R', 'likely-D', 'likely-R', 'solid-D', 'solid-R'];
+// Retention and nonpartisan races have their own tier too, distinct from truly-unrated races,
+// so they don't get interleaved with each other (or with missing ratings) when sorted.
+const COOK_ORDER = ['toss-up', 'lean-D', 'lean-R', 'likely-D', 'likely-R', 'solid-D', 'solid-R', 'retention', 'nonpartisan'];
 const COOK_PRIORITY = Object.fromEntries(COOK_ORDER.map((rating, i) => [rating, i]));
 
 function cookPriority(r) { return COOK_PRIORITY[r.cookRating] ?? COOK_ORDER.length; }
