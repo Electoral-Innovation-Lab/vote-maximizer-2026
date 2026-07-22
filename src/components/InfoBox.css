@@ -418,6 +418,19 @@
   white-space: nowrap;
 }
 
+.card-urbanicity {
+  width: 68px;
+  flex-shrink: 0;
+  display: inline-block;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 10px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
 .card-vp {
   width: 96px;
   flex-shrink: 0;
@@ -551,6 +564,16 @@
 }
 
 .tc-cook {
+  flex-shrink: 0;
+  font-size: 9px;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 8px;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.tc-urbanicity {
   flex-shrink: 0;
   font-size: 9px;
   font-weight: 700;

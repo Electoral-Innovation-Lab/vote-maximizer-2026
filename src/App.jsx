@@ -7,7 +7,7 @@ import {
   loadHouseRaces, loadSenateRaces, loadGovernorRaces,
   loadAGRaces, loadSOSRaces, loadJudicialRaces, loadBallotRaces,
   loadStateLegUpperRaces, loadStateLegLowerRaces, aggregateByState,
-  loadCivicOrgs, loadPrimaryCalendar,
+  loadCivicOrgs, loadPrimaryCalendar, loadUrbanicity,
 } from './utils/parseCSV.js';
 import { STATE_CENTROIDS, haversineDistance } from './utils/districtUtils.js';
 import './App.css';
@@ -66,6 +66,20 @@ function parseUrlParams() {
   return null;
 }
 
+const LAST_ADDRESS_KEY = 'voteMaximizer:lastAddress';
+
+function saveLastAddress(address) {
+  localStorage.setItem(LAST_ADDRESS_KEY, JSON.stringify(address));
+}
+
+function getLastAddress() {
+  try {
+    return JSON.parse(localStorage.getItem(LAST_ADDRESS_KEY));
+  } catch {
+    return null;
+  }
+}
+
 export default function App() {
   const [houseData, setHouseData] = useState([]);
   const [senateData, setSenateData] = useState([]);
@@ -82,7 +96,8 @@ export default function App() {
   const [selectedGeoid, setSelectedGeoid] = useState(null);
 
   const urlParams = parseUrlParams();
-  const [showLanding, setShowLanding] = useState(!urlParams);
+  const initialSearch = urlParams ?? getLastAddress();
+  const [showLanding, setShowLanding] = useState(!initialSearch);
   const [showAbout, setShowAbout] = useState(false);
 
   // "My Area" state
@@ -107,7 +122,9 @@ export default function App() {
       loadHouseRaces(), loadSenateRaces(), loadGovernorRaces(),
       loadAGRaces(), loadSOSRaces(), loadJudicialRaces(),
       loadBallotRaces(), loadStateLegUpperRaces(), loadStateLegLowerRaces(),
-    ]).then(([house, senate, gov, ag, sos, judicial, ballot, legUpper, legLower]) => {
+      loadUrbanicity(),
+    ]).then(([house, senate, gov, ag, sos, judicial, ballot, legUpper, legLower, urbanicity]) => {
+      house = house.map((r) => ({ ...r, ...urbanicity[r.geoid] }));
       setHouseData(house);
       setSenateData(senate);
       setGovernorData(gov);
@@ -205,16 +222,17 @@ export default function App() {
     setHoveredGeoid(null);
     setSelectedGeoid(null);
     setSearchCenter([lng, lat]);
+    saveLastAddress({ lat, lng, placeName });
   }, [allDatasets, districtCentroids, sldUpperCentroids, sldLowerCentroids]);
 
-  // Auto-trigger nearby search from URL params after data loads
-  const urlParamsRef = useRef(urlParams);
+  // Auto-trigger nearby search from URL params (or last saved address) after data loads
+  const initialSearchRef = useRef(initialSearch);
   const didAutoSearch = useRef(false);
   useEffect(() => {
-    if (didAutoSearch.current || !urlParamsRef.current) return;
+    if (didAutoSearch.current || !initialSearchRef.current) return;
     if (!houseData.length) return;
     didAutoSearch.current = true;
-    handleLocationSearch(urlParamsRef.current);
+    handleLocationSearch(initialSearchRef.current);
   }, [houseData, handleLocationSearch]);
 
   const handleDistrictCentroidsReady = useCallback((centroids) => {

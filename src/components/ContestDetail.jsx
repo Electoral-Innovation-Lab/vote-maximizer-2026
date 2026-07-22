@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getDistrictColor, COOK_CONFIG } from '../utils/districtUtils.js';
+import { getDistrictColor, COOK_CONFIG, URBANICITY_CONFIG } from '../utils/districtUtils.js';
 import './ContestDetail.css';
 
 // Which primary column applies to each raceType
@@ -100,6 +100,7 @@ function OrgList({ orgs, label, limit }) {
 
 function MiniCard({ race, rank, onClick }) {
   const cfg = cookCfg(race.cookRating);
+  const urbanicityCfg = URBANICITY_CONFIG[race.urbanicity];
   return (
     <button className="cd-mini-card" onClick={onClick}>
       <span className="cd-mini-rank">{rank}</span>
@@ -110,6 +111,11 @@ function MiniCard({ race, rank, onClick }) {
       <span className="cd-mini-cook" style={{ color: cfg.color, background: cfg.bg }}>
         {cfg.label}
       </span>
+      {urbanicityCfg && (
+        <span className="cd-mini-cook" style={{ color: urbanicityCfg.color, background: urbanicityCfg.bg }}>
+          {urbanicityCfg.label}
+        </span>
+      )}
       <span className="cd-mini-vp" style={{ color: getDistrictColor(race.voterPower) }}>
         {Math.round(race.voterPower)}
       </span>
@@ -139,6 +145,8 @@ function ComparePicker({ current, allRaces, onPick, onCancel }) {
 function CompareView({ raceA, raceB, onClose, orgs }) {
   const cfgA = cookCfg(raceA.cookRating);
   const cfgB = cookCfg(raceB.cookRating);
+  const urbA = URBANICITY_CONFIG[raceA.urbanicity];
+  const urbB = URBANICITY_CONFIG[raceB.urbanicity];
 
   const rows = [
     { label: 'Cook Rating', a: cfgA.label, b: cfgB.label },
@@ -159,12 +167,14 @@ function CompareView({ raceA, raceB, onClose, orgs }) {
           <span className="cd-cmp-label">{raceA.label}</span>
           <span className="cd-cmp-state">{raceA.state}</span>
           <span className="cd-cmp-cook" style={{ color: cfgA.color, background: cfgA.bg }}>{cfgA.label}</span>
+          {urbA && <span className="cd-cmp-cook" style={{ color: urbA.color, background: urbA.bg }}>{urbA.label}</span>}
         </div>
         <div className="cd-cmp-vs">vs</div>
         <div className="cd-cmp-col">
           <span className="cd-cmp-label">{raceB.label}</span>
           <span className="cd-cmp-state">{raceB.state}</span>
           <span className="cd-cmp-cook" style={{ color: cfgB.color, background: cfgB.bg }}>{cfgB.label}</span>
+          {urbB && <span className="cd-cmp-cook" style={{ color: urbB.color, background: urbB.bg }}>{urbB.label}</span>}
         </div>
       </div>
 
@@ -226,6 +236,7 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
   }
 
   const cfg = cookCfg(race.cookRating);
+  const urbanicityCfg = URBANICITY_CONFIG[race.urbanicity];
   const nearby = getNearby(race, allRaces);
   const isHouse = race.districtNum !== undefined;
   const nearbyTitle = isHouse && allRaces.some((r) => r.geoid !== race.geoid && r.state === race.state)
@@ -252,7 +263,14 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
             <span className="cd-state">{race.state}</span>
             {!isHouse && <span className="cd-race-name">{race.race}</span>}
           </div>
-          <span className="cd-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
+          <div className="cd-header-badges">
+            <span className="cd-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
+            {urbanicityCfg && (
+              <span className="cd-urbanicity" style={{ color: urbanicityCfg.color, background: urbanicityCfg.bg }}>
+                {urbanicityCfg.label}
+              </span>
+            )}
+          </div>
         </div>
         <VPBar voterPower={race.voterPower} />
         {formatMargin(race.margin) && (
