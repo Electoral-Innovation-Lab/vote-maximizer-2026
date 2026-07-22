@@ -29,8 +29,8 @@
   .list-header { padding: 6px 10px; }
   .district-card { padding: 8px 10px; }
   .card-label { font-size: 12px; }
-  .lh-cook, .card-cook { width: 64px; font-size: 9px; }
-  .card-urbanicity { width: 56px; font-size: 9px; }
+  .lh-cook { width: 84px; font-size: 9px; }
+  .card-cook { width: 64px; font-size: 9px; }
   .lh-vp, .card-vp { width: 76px; }
 }
 
@@ -311,7 +311,7 @@
 }
 
 .lh-cook {
-  width: 78px;
+  width: 98px;
   flex-shrink: 0;
   font-size: 10px;
   font-weight: 600;
@@ -328,6 +328,31 @@
   color: #94a3b8;
   text-transform: uppercase;
   letter-spacing: 0.05em;
+}
+
+.lh-sort-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  text-align: left;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.1s;
+}
+.lh-sort-btn:hover { color: #475569; }
+.lh-sort-btn--active { color: #FF8F00; }
+
+/* ── Cook-rating group header (shown between tiers when sorted by Cook Rating) ─ */
+.list-group-header {
+  padding: 5px 14px;
+  font-size: 10px;
+  font-weight: 700;
+  color: #64748b;
+  background: #f1f5f9;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  border-bottom: 1px solid #e2e8f0;
 }
 
 /* ── District card ─────────────────────────────────────────────────────────── */
