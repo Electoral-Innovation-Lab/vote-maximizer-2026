@@ -7,7 +7,7 @@ import {
   loadHouseRaces, loadSenateRaces, loadGovernorRaces,
   loadAGRaces, loadSOSRaces, loadJudicialRaces, loadBallotRaces,
   loadStateLegUpperRaces, loadStateLegLowerRaces, aggregateByState,
-  loadCivicOrgs, loadPrimaryCalendar, loadUrbanicity,
+  loadCivicOrgs, loadPrimaryCalendar, loadUrbanicity, loadParties,
 } from './utils/parseCSV.js';
 import { STATE_CENTROIDS, haversineDistance } from './utils/districtUtils.js';
 import './App.css';
@@ -116,6 +116,7 @@ export default function App() {
 
   const [civicOrgs, setCivicOrgs] = useState([]);
   const [primaryCalendar, setPrimaryCalendar] = useState([]);
+  const [partiesData, setPartiesData] = useState([]);
 
   useEffect(() => {
     Promise.all([
@@ -136,8 +137,12 @@ export default function App() {
       setStateLegLowerData(legLower);
     }).catch((err) => console.error('Failed to load data:', err));
 
-    Promise.all([loadCivicOrgs(), loadPrimaryCalendar()])
-      .then(([orgs, primaries]) => { setCivicOrgs(orgs); setPrimaryCalendar(primaries); })
+    Promise.all([loadCivicOrgs(), loadPrimaryCalendar(), loadParties()])
+      .then(([orgs, primaries, parties]) => {
+        setCivicOrgs(orgs);
+        setPrimaryCalendar(primaries);
+        setPartiesData(parties);
+      })
       .catch((err) => console.warn('Failed to load civic/primary data:', err));
   }, []);
 
@@ -304,6 +309,7 @@ export default function App() {
           onTopTypeChange={setTopContestType}
           civicOrgs={civicOrgs}
           primaryCalendar={primaryCalendar}
+          partiesData={partiesData}
         />
       </div>
 

@@ -157,6 +157,13 @@
   line-height: 1.4;
 }
 
+.info-donate-link {
+  color: #FF8F00;
+  text-decoration: none;
+  font-weight: 600;
+}
+.info-donate-link:hover { text-decoration: underline; }
+
 .info-org a {
   color: #64748b;
   text-decoration: none;

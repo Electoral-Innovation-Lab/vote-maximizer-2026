@@ -194,6 +194,12 @@ export default function Map({
       try {
         // ── US House district source ─────────────────────────────────────
         if (DISTRICT_TILESET) {
+          // DEBUG: log actual source layer names from tileset metadata
+          const tilesetId = DISTRICT_TILESET.replace('mapbox://', '');
+          fetch(`https://api.mapbox.com/v4/${tilesetId}.json?access_token=${import.meta.env.VITE_MAPBOX_TOKEN}`)
+            .then(r => r.json())
+            .then(tj => console.log('[tileset layers]', tj.vector_layers?.map(l => l.id)));
+
           map.addSource('districts', {
             type: 'vector',
             url: DISTRICT_TILESET,
@@ -201,6 +207,7 @@ export default function Map({
           });
           map.once('idle', () => {
             const features = map.queryRenderedFeatures({ layers: ['districts-fill'] });
+            if (features.length) console.log('[feature props sample]', features[0].properties);
             const centroids = {};
             features.forEach((f) => {
               const key = f.properties?.CONG119;

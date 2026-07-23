@@ -250,6 +250,7 @@ export default function InfoBox({
   onTopTypeChange,
   civicOrgs,
   primaryCalendar,
+  partiesData,
 }) {
   const [copied, setCopied] = useState(false);
   const [sortBy, setSortBy] = useState('voterPower');
@@ -305,28 +306,34 @@ export default function InfoBox({
         </div>
 
         <div className="info-description">
-          <p className="info-desc-body">
-            Vote Maximizer uses mathematical modeling to calculate where a single vote — or a donation,
-            or a canvassing shift — can make the biggest difference. The races that score highest are
-            the contests so close that a handful of votes could change the winner.
-          </p>
-          <p className="info-desc-body">
-            Use the tool to find where your time and money will have the most impact. And because close
-            races are also the ones most vulnerable to suppression and misinformation, you're not just
-            maximizing your impact — you're helping defend democracy where it counts.
-          </p>
+          <div className="info-desc-section">
+            <span className="info-desc-heading">Democracy Moneyball</span>
+            <p className="info-desc-body">Find the races where your dollar swings the most. In a close contest, small donations shift real resources where they're needed most.</p>
+          </div>
+          <div className="info-desc-section">
+            <span className="info-desc-heading">Election Hotspots</span>
+            <p className="info-desc-body">Canvass where it counts. The highest-scoring races are the ones where a weekend shift can actually change the outcome.</p>
+          </div>
+          <div className="info-desc-section">
+            <span className="info-desc-heading">Civic Leverage</span>
+            <p className="info-desc-body">See which elections are most at risk. Close races are where voter suppression and misinformation have the biggest effect — and where defending democracy matters most.</p>
+          </div>
         </div>
 
         <div className="info-header-bottom">
-          <div className="info-links">
+          {/* <div className="info-links">
             <a href="#api-docs" className="info-api-link" onClick={(e) => e.preventDefault()}>
               Use Vote Maximizer data with our API →
             </a>
-          </div>
+          </div> */}
           <div className="info-org">
             A project by{' '}
             <a href="https://electoral-lab.org" target="_blank" rel="noopener noreferrer">
               the Electoral Innovation Lab
+            </a>
+            {' '}·{' '}
+            <a href="https://www.electoral-lab.org/donate" target="_blank" rel="noopener noreferrer" className="info-donate-link">
+              Support our work →
             </a>
           </div>
         </div>
@@ -367,6 +374,7 @@ export default function InfoBox({
               civicOrgs={civicOrgs}
               primaryCalendar={primaryCalendar}
               userCounty={userCounty}
+              parties={partiesData}
             />
           ) : (
             <>
@@ -445,6 +453,7 @@ export default function InfoBox({
               civicOrgs={civicOrgs}
               primaryCalendar={primaryCalendar}
               userCounty={userCounty}
+              parties={partiesData}
             />
           ) : (
             <>

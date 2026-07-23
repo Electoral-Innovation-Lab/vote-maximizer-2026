@@ -24,6 +24,17 @@ function getPrimaryBadge(primaryCalendar, race) {
   return { date: entry.primaryDate, type: entry.primaryType };
 }
 
+function filterParties(parties, race) {
+  if (!parties?.length) return [];
+  return parties
+    .filter((p) => p.state?.trim() === race.state)
+    .map((p) => ({
+      name: `${p.state} ${p.affiliation === 'Democratic' ? 'Democrats' : 'Republicans'}`,
+      url: p.url,
+      notes: `${p.affiliation} state party`,
+    }));
+}
+
 function filterOrgs(civicOrgs, race, userCounty) {
   if (!civicOrgs?.length) return [];
   return civicOrgs.filter((org) => {
@@ -210,7 +221,7 @@ function CompareView({ raceA, raceB, onClose, orgs }) {
 
 // ── Main detail view ──────────────────────────────────────────────────────────
 
-export default function ContestDetail({ race, allRaces, onBack, onSelect, civicOrgs, primaryCalendar, userCounty }) {
+export default function ContestDetail({ race, allRaces, onBack, onSelect, civicOrgs, primaryCalendar, userCounty, parties }) {
   const [compareRace, setCompareRace] = useState(null);
   const [picking, setPicking] = useState(false);
 
@@ -245,6 +256,8 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
 
   const primaryBadge = getPrimaryBadge(primaryCalendar, race);
   const orgs = filterOrgs(civicOrgs, race, userCounty);
+
+  const stateParties = filterParties(parties, race);
 
   // Group: county-level first, then state, then national
   const localOrgs    = orgs.filter((o) => o.level === 'county');
@@ -317,9 +330,10 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
       <div className="cd-section">
         <h3 className="cd-section-title">Get Involved</h3>
         <OrgList orgs={localOrgs} label={localOrgs.length ? 'In your area' : null} />
+        <OrgList orgs={stateParties} label={stateParties.length ? 'State parties' : null} />
         <OrgList orgs={stateOrgs} label={stateOrgs.length ? 'Statewide' : null} />
         <OrgList orgs={nationalOrgs} label={nationalOrgs.length ? 'National' : null} limit={3} />
-        {!orgs.length && (
+        {!orgs.length && !stateParties.length && (
           <div className="cd-org-empty">Resources loading…</div>
         )}
       </div>

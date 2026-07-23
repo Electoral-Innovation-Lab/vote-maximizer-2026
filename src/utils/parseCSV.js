@@ -164,17 +164,34 @@ export async function loadStateLegLowerRaces() {
 
 export async function loadCivicOrgs() {
   const rows = await fetchRows('/data_civic.csv');
+  return rows.map((r) => {
+    const stateVal = r.state?.trim() ?? '';
+    let level = r.chapter_level?.trim().toLowerCase() ?? '';
+    if (level === 'local') level = 'county';
+    // If state is 'All' or comma-separated (multi-state), treat as national
+    if (!stateVal || stateVal === 'All' || stateVal.includes(',')) level = 'national';
+    return {
+      name: r.organization?.trim(),
+      level,
+      state: stateVal,
+      county: r.county_or_city?.trim(),
+      url: r.url?.trim(),
+      type: r.organization_type?.trim(),
+      pollWorker: r.poll_worker_signup === 'TRUE',
+      electionProtection: r.election_protection === 'TRUE',
+      notes: r.notes?.trim(),
+    };
+  }).filter((r) => r.name && r.url);
+}
+
+export async function loadParties() {
+  const rows = await fetchRows('/data_parties.csv');
   return rows.map((r) => ({
-    name: r.organization?.trim(),
-    level: r.chapter_level?.trim(),       // 'national' | 'state' | 'county'
-    state: r.state?.trim(),               // 'All' or full state name
-    county: r.county_or_city?.trim(),     // county/city name or ''
-    url: r.url?.trim(),
-    type: r.organization_type?.trim(),
-    pollWorker: r.poll_worker_signup === 'TRUE',
-    electionProtection: r.election_protection === 'TRUE',
-    notes: r.notes?.trim(),
-  })).filter((r) => r.name && r.url);
+    level: r['Level (State, County, City)']?.trim().toLowerCase(),
+    state: r.Name?.trim(),
+    affiliation: r.Affiliation?.trim(),
+    url: r.Link?.trim(),
+  })).filter((r) => r.state && r.url);
 }
 
 export async function loadPrimaryCalendar() {

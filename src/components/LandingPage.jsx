@@ -126,7 +126,7 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
           Find the races where<br />your vote matters most.
         </h1>
         <p className="landing-sub anim-3">
-          Vote Maximizer shows you which 2026 contests are close enough that a few votes could change the winner — so your donations and canvassing hours go exactly where they'll count.<br className="landing-br" />These are also the races most worth defending.
+          Vote Maximizer is democracy moneyball for everyday people. It identifies the 2026 contests so close that a donation or canvassing shift can change the winner — giving you leverage where elections are most at risk.
         </p>
 
         {/* Stat tagline */}
