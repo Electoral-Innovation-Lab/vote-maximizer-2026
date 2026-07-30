@@ -1,0 +1,194 @@
+[
+ {
+  "state_name": "Missouri",
+  "name of ballot": "MO Amendment 3 \u2013 Repeal Abortion Rights",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "ON THE BALLOT (legislatively referred, certified)",
+  "voter_power": 53,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Nevada",
+  "name of ballot": "NV Question 6 \u2013 Abortion Rights (2nd approval)",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "ON THE BALLOT (certified)",
+  "voter_power": 23,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Idaho",
+  "name of ballot": "ID Reproductive Rights Initiative",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "DISPUTED \u2014 Ballotpedia listed this as POTENTIAL as of Nov 2025; KFF (Jul 2026) lists Idaho among states voting on abortion in Nov 2026. CONFIRM before publishing \u2014 this row currently carries voter_power 77, the 3rd highest on the tab.",
+  "voter_power": 77,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "name of ballot": "VA Right to Reproductive Freedom Amendment",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "ON THE BALLOT (certified)",
+  "voter_power": 16,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Missouri",
+  "name of ballot": "MO \"Protect Missouri Voters\" Amendment",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "Not confirmed \u2014 verify",
+  "voter_power": 53,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Alaska",
+  "name of ballot": "AK Repeal Top-Four Ranked-Choice Voting Initiative",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "ON THE BALLOT (certified)",
+  "voter_power": 100,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Alaska",
+  "name of ballot": "AK Campaign Contribution Limits Initiative",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "ON THE BALLOT (qualified \u2014 legislature adjourned without passing the indirect initiative)",
+  "voter_power": 34,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Dakota",
+  "name of ballot": "ND Supermajority Threshold for Constitutional Amendments",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "Certified per Ballotpedia supermajority-measure list",
+  "voter_power": 72,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "South Dakota",
+  "name of ballot": "SD Supermajority Threshold for Constitutional Amendments",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "Certified per Ballotpedia supermajority-measure list",
+  "voter_power": 69,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Utah",
+  "name of ballot": "UT Tax Initiative Supermajority Requirement",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "Certified per Ballotpedia supermajority-measure list (CA, MO, ND, SD, UT)",
+  "voter_power": 7,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Montana",
+  "name of ballot": "MT Nonpartisan Judicial Elections Initiative",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "POTENTIAL, not confirmed certified",
+  "voter_power": 62,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Nebraska",
+  "name of ballot": "NE Direct Democracy Protection Initiative",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "POTENTIAL, not confirmed certified",
+  "voter_power": 54,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arkansas",
+  "name of ballot": "AR Direct Democracy Protection (Save AR Democracy)",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "POTENTIAL, not confirmed certified",
+  "voter_power": 8,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "name of ballot": "VA Congressional Redistricting Map Amendment",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "\u26a0 ALREADY DECIDED \u2014 this was an APRIL 2026 ballot question and it PASSED on Apr 21 2026. It is not an upcoming race and should be REMOVED from a forward-looking tool.",
+  "voter_power": 16,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "name of ballot": "VA Voting Rights Restoration for Felons Upon Release",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "ON THE BALLOT (certified)",
+  "voter_power": 16,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "name of ballot": "VA Remove Same-Sex Marriage Ban Amendment",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "Not confirmed \u2014 verify. Virginia passed several amendments through two legislative sessions for the Nov 2026 ballot; Ballotpedia confirms the felon-voting and reproductive-freedom ones, this one was not visible in the sources checked.",
+  "voter_power": 16,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Missouri",
+  "name of ballot": "MO LGBTQ Anti-Discrimination + Same-Sex Marriage",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "Not confirmed \u2014 verify",
+  "voter_power": 53,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "name of ballot": "OH Equal Rights Amendment (incl. gender identity)",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "Not confirmed \u2014 verify",
+  "voter_power": 43,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oregon",
+  "name of ballot": "OR LGBTQ Non-Discrimination + Same-Sex Marriage Repeal",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "POTENTIAL, not confirmed certified",
+  "voter_power": 7,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Nevada",
+  "name of ballot": "NV Question 7 \u2013 Voter ID (2nd approval)",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "ON THE BALLOT (certified)",
+  "voter_power": 66,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "name of ballot": "CA Recall Process Reform Amendment",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "Not confirmed \u2014 verify",
+  "voter_power": 4,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "name of ballot": "CA Supermajority Vote Requirements for Initiatives",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "Certified per Ballotpedia supermajority-measure list",
+  "voter_power": 4,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kansas",
+  "name of ballot": "KS Referendum on Elected Judicial Elections",
+  "ballot_type": "legislative referral",
+  "qualification_status_2026-07-29": "Not confirmed \u2014 verify",
+  "voter_power": 48,
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oklahoma",
+  "name of ballot": "OK Minimum Wage Increase to $15/hour",
+  "ballot_type": "citizen initiative",
+  "qualification_status_2026-07-29": "POTENTIAL, not confirmed certified",
+  "voter_power": 64,
+  "last_verified": "2026-07-29"
+ }
+]

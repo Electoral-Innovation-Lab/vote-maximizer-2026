@@ -17,7 +17,7 @@ const RADIUS_STATE_MI = 450;
 
 const STATEWIDE_TYPES = ['senate', 'governor', 'ag', 'sos', 'judicial', 'ballot'];
 
-function findNearbyRaces(lat, lng, datasets, districtCentroids, sldUpperCentroids, sldLowerCentroids) {
+function findNearbyRaces(lat, lng, datasets, districtCentroids) {
   const nearby = [];
 
   for (const race of datasets.house) {
@@ -34,24 +34,6 @@ function findNearbyRaces(lat, lng, datasets, districtCentroids, sldUpperCentroid
       const dist = haversineDistance(lat, lng, c[0], c[1]);
       if (dist <= RADIUS_STATE_MI) nearby.push({ ...race, distance: Math.round(dist) });
     }
-  }
-
-  for (const race of (datasets.state_leg_upper ?? [])) {
-    const dc = sldUpperCentroids[race.geoid];
-    const c = dc || STATE_CENTROIDS[race.state];
-    if (!c) continue;
-    const dist = haversineDistance(lat, lng, c[0], c[1]);
-    const radius = dc ? RADIUS_HOUSE_MI : RADIUS_STATE_MI;
-    if (dist <= radius) nearby.push({ ...race, distance: Math.round(dist) });
-  }
-
-  for (const race of (datasets.state_leg_lower ?? [])) {
-    const dc = sldLowerCentroids[race.geoid];
-    const c = dc || STATE_CENTROIDS[race.state];
-    if (!c) continue;
-    const dist = haversineDistance(lat, lng, c[0], c[1]);
-    const radius = dc ? RADIUS_HOUSE_MI : RADIUS_STATE_MI;
-    if (dist <= radius) nearby.push({ ...race, distance: Math.round(dist) });
   }
 
   return nearby.sort((a, b) => a.distance - b.distance || b.voterPower - a.voterPower);
@@ -219,7 +201,7 @@ export default function App() {
   const handleSelect = useCallback((geoid) => setSelectedGeoid(geoid), []);
 
   const handleLocationSearch = useCallback(({ lat, lng, placeName }) => {
-    const nearby = findNearbyRaces(lat, lng, allDatasets, districtCentroids, sldUpperCentroids, sldLowerCentroids);
+    const nearby = findNearbyRaces(lat, lng, allDatasets, districtCentroids);
     setNearbyRaces(nearby);
     setSearchPlaceName(placeName ?? '');
     setSearchCoords({ lat, lng });

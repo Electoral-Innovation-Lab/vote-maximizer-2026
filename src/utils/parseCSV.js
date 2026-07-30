@@ -14,29 +14,52 @@ async function fetchRows(path) {
   return data;
 }
 
+async function fetchJSON(path) {
+  const res = await fetch(path);
+  return res.json();
+}
+
+// Standard US state FIPS codes (name → zero-padded 2-digit string)
+const STATE_FIPS = {
+  'Alabama': '01', 'Alaska': '02', 'Arizona': '04', 'Arkansas': '05',
+  'California': '06', 'Colorado': '08', 'Connecticut': '09', 'Delaware': '10',
+  'District of Columbia': '11', 'Florida': '12', 'Georgia': '13', 'Hawaii': '15',
+  'Idaho': '16', 'Illinois': '17', 'Indiana': '18', 'Iowa': '19', 'Kansas': '20',
+  'Kentucky': '21', 'Louisiana': '22', 'Maine': '23', 'Maryland': '24',
+  'Massachusetts': '25', 'Michigan': '26', 'Minnesota': '27', 'Mississippi': '28',
+  'Missouri': '29', 'Montana': '30', 'Nebraska': '31', 'Nevada': '32',
+  'New Hampshire': '33', 'New Jersey': '34', 'New Mexico': '35', 'New York': '36',
+  'North Carolina': '37', 'North Dakota': '38', 'Ohio': '39', 'Oklahoma': '40',
+  'Oregon': '41', 'Pennsylvania': '42', 'Rhode Island': '44', 'South Carolina': '45',
+  'South Dakota': '46', 'Tennessee': '47', 'Texas': '48', 'Utah': '49',
+  'Vermont': '50', 'Virginia': '51', 'Washington': '53', 'West Virginia': '54',
+  'Wisconsin': '55', 'Wyoming': '56',
+};
+
 export async function loadHouseRaces() {
-  const rows = await fetchRows('/data_house.csv');
+  const rows = await fetchJSON('/house.json');
   return rows
     .map((r) => {
       const a = abbr(r.state_name);
       const isAtLarge = AT_LARGE_STATES.has(r.state_name);
-      const geoid = isAtLarge ? `${a}-AT-LARGE` : `${a}-${String(parseInt(r.congress, 10)).padStart(2, '0')}`;
+      const num = parseInt(r.congress, 10);
+      const geoid = isAtLarge ? `${a}-AT-LARGE` : `${a}-${String(num).padStart(2, '0')}`;
       return {
         geoid,
-        label: `${a}-${parseInt(r.congress, 10)}`,
+        label: `${a}-${num}`,
         state: r.state_name,
-        race: r.election_name,
+        race: isAtLarge ? 'At-Large' : `Congressional District ${num}`,
         raceType: 'house',
-        districtNum: parseInt(r.congress, 10),
+        districtNum: num,
         voterPower: toNum(r.voter_power),
-        cookRating: r.cook_rating?.trim(),
-        margin: toFloat(r['Margin (Averages)']),
-        dCandidate: clean(r.D_running),
-        rCandidate: clean(r.R_running),
-        dLink: r.D_link,
-        rLink: r.R_link,
+        cookRating: r.rating_2026?.trim(),
+        margin: toFloat(r.margin_2026_v2),
+        dCandidate: null,
+        rCandidate: null,
+        dLink: null,
+        rLink: null,
         incumbent: clean(r.incumbent),
-        notes: r.notes,
+        notes: null,
       };
     })
     .filter((r) => r.voterPower > 0 && r.geoid)
@@ -70,11 +93,49 @@ function parseStatewideRows(rows, raceType) {
 }
 
 export async function loadSenateRaces() {
-  return parseStatewideRows(await fetchRows('/data_senate.csv'), 'senate');
+  const rows = await fetchJSON('/senate.json');
+  return rows
+    .map((r) => ({
+      geoid: STATE_FIPS[r.state_name] ?? '00',
+      label: abbr(r.state_name),
+      state: r.state_name,
+      race: `${r.state_name} Senate 2026`,
+      raceType: 'senate',
+      voterPower: toNum(r.voter_power),
+      cookRating: r.cook_rating?.trim(),
+      margin: toFloat(r.margin_recommended),
+      dCandidate: clean(r.D_running),
+      rCandidate: clean(r.R_running),
+      dLink: null,
+      rLink: null,
+      incumbent: clean(r.incumbent),
+      notes: null,
+    }))
+    .filter((r) => r.voterPower > 0)
+    .sort((a, b) => b.voterPower - a.voterPower);
 }
 
 export async function loadGovernorRaces() {
-  return parseStatewideRows(await fetchRows('/data_gov.csv'), 'governor');
+  const rows = await fetchJSON('/governor.json');
+  return rows
+    .map((r) => ({
+      geoid: STATE_FIPS[r.state_name] ?? '00',
+      label: abbr(r.state_name),
+      state: r.state_name,
+      race: `${r.state_name} Governor 2026`,
+      raceType: 'governor',
+      voterPower: toNum(r.voter_power),
+      cookRating: r.cook_rating?.trim(),
+      margin: toFloat(r.margin_recommended),
+      dCandidate: clean(r.D_running),
+      rCandidate: clean(r.R_running),
+      dLink: null,
+      rLink: null,
+      incumbent: clean(r.incumbent),
+      notes: null,
+    }))
+    .filter((r) => r.voterPower > 0)
+    .sort((a, b) => b.voterPower - a.voterPower);
 }
 
 export async function loadAGRaces() {
@@ -108,18 +169,22 @@ export async function loadJudicialRaces() {
 }
 
 export async function loadBallotRaces() {
-  const rows = await fetchRows('/data_ballot.csv');
+  const rows = await fetchJSON('/ballot_initiatives.json');
   return rows
-    .map((r) => ({
-      geoid: pad2(r.state),
-      label: r['name of ballot'] || r.election_name,
-      state: r.state_name,
-      race: r.election_name,
-      raceType: 'ballot',
-      voterPower: toNum(r.voter_power),
-      cookRating: r.cook_rating?.trim(),
-      notes: (r['ballot notes'] || r.description || '').slice(0, 200),
-    }))
+    .map((r) => {
+      const statusKey = Object.keys(r).find((k) => k.startsWith('qualification_status'));
+      const status = statusKey ? r[statusKey] : '';
+      return {
+        geoid: STATE_FIPS[r.state_name] ?? '00',
+        label: r['name of ballot'] || r.state_name,
+        state: r.state_name,
+        race: r.ballot_type || 'Ballot Initiative',
+        raceType: 'ballot',
+        voterPower: toNum(r.voter_power),
+        cookRating: null,
+        notes: status ? String(status).slice(0, 200) : null,
+      };
+    })
     .filter((r) => r.voterPower > 0)
     .sort((a, b) => b.voterPower - a.voterPower);
 }

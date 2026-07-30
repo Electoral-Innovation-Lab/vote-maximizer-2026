@@ -1,0 +1,3917 @@
+[
+ {
+  "state_name": "Alabama",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -29,
+  "voter_power": 3,
+  "incumbent": "OPEN (Moore)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Alabama",
+  "congress": 2,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -6,
+  "voter_power": 33,
+  "incumbent": "Shomari Figures",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Alabama",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -44,
+  "voter_power": 3,
+  "incumbent": "Mike Rogers",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Alabama",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -64,
+  "voter_power": 3,
+  "incumbent": "Robert Aderholt",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Alabama",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -28,
+  "voter_power": 3,
+  "incumbent": "Dale Strong",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Alabama",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -32,
+  "voter_power": 3,
+  "incumbent": "Gary Palmer",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Alabama",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 28,
+  "voter_power": 3,
+  "incumbent": "Terri Sewell",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Alaska",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "Nick Begich",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arizona",
+  "congress": 1,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 3,
+  "voter_power": 73,
+  "incumbent": "OPEN (Schweikert)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arizona",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -12,
+  "voter_power": 4,
+  "incumbent": "Eli Crane",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arizona",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 52,
+  "voter_power": 3,
+  "incumbent": "Yassamin Ansari",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arizona",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 16,
+  "voter_power": 3,
+  "incumbent": "Greg Stanton",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arizona",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -15,
+  "voter_power": 3,
+  "incumbent": "OPEN (Biggs)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arizona",
+  "congress": 6,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 2,
+  "voter_power": 87,
+  "incumbent": "Juan Ciscomani",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arizona",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 34,
+  "voter_power": 3,
+  "incumbent": "Adelita Grijalva",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arizona",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Abraham Hamadeh",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arizona",
+  "congress": 9,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -28,
+  "voter_power": 3,
+  "incumbent": "Paul Gosar",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arkansas",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -44,
+  "voter_power": 3,
+  "incumbent": "Rick Crawford",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arkansas",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "French Hill",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arkansas",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -24,
+  "voter_power": 3,
+  "incumbent": "Steve Womack",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Arkansas",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -38,
+  "voter_power": 3,
+  "incumbent": "Bruce Westerman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 16,
+  "voter_power": 3,
+  "incumbent": "James Gallagher",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 34,
+  "voter_power": 3,
+  "incumbent": "Jared Huffman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "Ami Bera",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 24,
+  "voter_power": 3,
+  "incumbent": "Mike Thompson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Tom McClintock",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 15,
+  "voter_power": 3,
+  "incumbent": "Kevin Kiley",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 22,
+  "voter_power": 3,
+  "incumbent": "Doris Matsui",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 8,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 46,
+  "voter_power": 3,
+  "incumbent": "John Garamendi",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 9,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 24,
+  "voter_power": 3,
+  "incumbent": "Josh Harder",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 10,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 44,
+  "voter_power": 3,
+  "incumbent": "Mark DeSaulnier",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 11,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 77,
+  "voter_power": 3,
+  "incumbent": "OPEN (Pelosi)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 12,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 86,
+  "voter_power": 3,
+  "incumbent": "Lateefah Simon",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 13,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Adam Gray",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 14,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 46,
+  "voter_power": 3,
+  "incumbent": "VACANT (Swalwell)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 15,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 60,
+  "voter_power": 3,
+  "incumbent": "Kevin Mullin",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 16,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 58,
+  "voter_power": 3,
+  "incumbent": "Sam Liccardo",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 17,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 50,
+  "voter_power": 3,
+  "incumbent": "Ro Khanna",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 18,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 40,
+  "voter_power": 3,
+  "incumbent": "Zoe Lofgren",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 19,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 44,
+  "voter_power": 3,
+  "incumbent": "Jimmy Panetta",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 20,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -30,
+  "voter_power": 3,
+  "incumbent": "Vince Fong",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 21,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 18,
+  "voter_power": 3,
+  "incumbent": "Jim Costa",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 22,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 4,
+  "voter_power": 59,
+  "incumbent": "David Valadao",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 23,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -16,
+  "voter_power": 3,
+  "incumbent": "Jay Obernolte",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 24,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 34,
+  "voter_power": 3,
+  "incumbent": "Salud Carbajal",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 25,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 16,
+  "voter_power": 3,
+  "incumbent": "Raul Ruiz",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 26,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 23,
+  "voter_power": 3,
+  "incumbent": "OPEN (Brownley)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 27,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "George Whitesides",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 28,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 36,
+  "voter_power": 3,
+  "incumbent": "Judy Chu",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 29,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 46,
+  "voter_power": 3,
+  "incumbent": "Luz Rivas",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 30,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 50,
+  "voter_power": 3,
+  "incumbent": "Laura Friedman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 31,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 24,
+  "voter_power": 3,
+  "incumbent": "Gil Cisneros",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 32,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 36,
+  "voter_power": 3,
+  "incumbent": "Brad Sherman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 33,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 22,
+  "voter_power": 3,
+  "incumbent": "Pete Aguilar",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 34,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 64,
+  "voter_power": 3,
+  "incumbent": "Jimmy Gomez",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 35,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "Norma Torres",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 36,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 50,
+  "voter_power": 3,
+  "incumbent": "Ted Lieu",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 37,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 74,
+  "voter_power": 3,
+  "incumbent": "Sydney Kamlager-Dove",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 38,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 21,
+  "voter_power": 3,
+  "incumbent": "OPEN (S\u00e1nchez)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 39,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 22,
+  "voter_power": 3,
+  "incumbent": "Mark Takano",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 40,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "Young Kim",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 41,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 26,
+  "voter_power": 3,
+  "incumbent": "Linda Sanchez",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 42,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 24,
+  "voter_power": 3,
+  "incumbent": "Robert Garcia",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 43,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 62,
+  "voter_power": 3,
+  "incumbent": "Maxine Waters",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 44,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 48,
+  "voter_power": 3,
+  "incumbent": "Nanette Barragan",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 45,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 14,
+  "voter_power": 3,
+  "incumbent": "Derek Tran",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 46,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 28,
+  "voter_power": 3,
+  "incumbent": "Lou Correa",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 47,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "Dave Min",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 48,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 9,
+  "voter_power": 11,
+  "incumbent": "OPEN (Issa)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 49,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 22,
+  "voter_power": 3,
+  "incumbent": "Mike Levin",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 50,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 28,
+  "voter_power": 3,
+  "incumbent": "Scott Peters",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 51,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 28,
+  "voter_power": 3,
+  "incumbent": "Sara Jacobs",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "California",
+  "congress": 52,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 30,
+  "voter_power": 3,
+  "incumbent": "Juan Vargas",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Colorado",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 63,
+  "voter_power": 3,
+  "incumbent": "OPEN (DeGette)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Colorado",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 48,
+  "voter_power": 3,
+  "incumbent": "Joe Neguse",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Colorado",
+  "congress": 3,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -8,
+  "voter_power": 16,
+  "incumbent": "Jeff Hurd",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Colorado",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -16,
+  "voter_power": 3,
+  "incumbent": "Lauren Boebert",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Colorado",
+  "congress": 5,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -8,
+  "voter_power": 16,
+  "incumbent": "Jeff Crank",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Colorado",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 30,
+  "voter_power": 3,
+  "incumbent": "Jason Crow",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Colorado",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 24,
+  "voter_power": 3,
+  "incumbent": "Brittany Petterson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Colorado",
+  "congress": 8,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 2,
+  "voter_power": 87,
+  "incumbent": "Gabe Evans",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Connecticut",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 32,
+  "voter_power": 3,
+  "incumbent": "John Larson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Connecticut",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 16,
+  "voter_power": 3,
+  "incumbent": "Joe Courtney",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Connecticut",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 24,
+  "voter_power": 3,
+  "incumbent": "Rosa DeLauro",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Connecticut",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 34,
+  "voter_power": 3,
+  "incumbent": "Jim Himes",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Connecticut",
+  "congress": 5,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 14,
+  "voter_power": 3,
+  "incumbent": "Jahana Hayes",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Delaware",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 24,
+  "voter_power": 3,
+  "incumbent": "Sarah McBride",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -34,
+  "voter_power": 3,
+  "incumbent": "Jimmy Patronis",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -11,
+  "voter_power": 5,
+  "incumbent": "OPEN (Dunn)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Kat Cammack",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 4,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -8,
+  "voter_power": 16,
+  "incumbent": "Aaron Bean",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "John Rutherford",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -26,
+  "voter_power": 3,
+  "incumbent": "Randy Fine",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 7,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -8,
+  "voter_power": 16,
+  "incumbent": "Cory Mills",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Mike Haridopolis",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 9,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -8,
+  "voter_power": 16,
+  "incumbent": "Darren Soto",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 10,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 34,
+  "voter_power": 3,
+  "incumbent": "Maxwell Frost",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 11,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -9,
+  "voter_power": 11,
+  "incumbent": "OPEN (Webster)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 12,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -12,
+  "voter_power": 4,
+  "incumbent": "Gus Bilirakis",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 13,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "Anna Paulina Luna",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 14,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 0,
+  "voter_power": 100,
+  "incumbent": "Kathy Castor",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 15,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -16,
+  "voter_power": 3,
+  "incumbent": "Laurel Lee",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 16,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -7,
+  "voter_power": 23,
+  "incumbent": "OPEN (Buchanan)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 17,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Greg Steube",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 18,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Scott Franklin",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 19,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -23,
+  "voter_power": 3,
+  "incumbent": "OPEN (Donalds)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 20,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 48,
+  "voter_power": 3,
+  "incumbent": "VACANT (Cherfilus-McCormick)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 21,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -12,
+  "voter_power": 4,
+  "incumbent": "Brian Mast",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 22,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -3,
+  "voter_power": 73,
+  "incumbent": "OPEN (Wasserman Schultz)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 23,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 26,
+  "voter_power": 3,
+  "incumbent": "Lois Frankel",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 24,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 52,
+  "voter_power": 3,
+  "incumbent": "Frederica Wilson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 25,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 2,
+  "voter_power": 87,
+  "incumbent": "Jared Moskowitz",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 26,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -12,
+  "voter_power": 4,
+  "incumbent": "Mario Diaz-Balart",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 27,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "Maria Elvira Salazar",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Florida",
+  "congress": 28,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Carlos Gimenez",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -11,
+  "voter_power": 5,
+  "incumbent": "OPEN (Carter)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 16,
+  "voter_power": 3,
+  "incumbent": "Sanford Bishop",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -28,
+  "voter_power": 3,
+  "incumbent": "Brian Jack",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 62,
+  "voter_power": 3,
+  "incumbent": "Hank Johnson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 5,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 80,
+  "voter_power": 3,
+  "incumbent": "Nikema Williams",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 58,
+  "voter_power": 3,
+  "incumbent": "Lucy McBath",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 7,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Rich McCormick",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -28,
+  "voter_power": 3,
+  "incumbent": "Austin Scott",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 9,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -32,
+  "voter_power": 3,
+  "incumbent": "Andrew Clyde",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 10,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -17,
+  "voter_power": 3,
+  "incumbent": "OPEN (Collins)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 11,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -19,
+  "voter_power": 3,
+  "incumbent": "OPEN (Loudermilk)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 12,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -12,
+  "voter_power": 4,
+  "incumbent": "Rick Allen",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 13,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 50,
+  "voter_power": 3,
+  "incumbent": "VACANT (Scott)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Georgia",
+  "congress": 14,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -36,
+  "voter_power": 3,
+  "incumbent": "Clay Fuller",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Hawaii",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 34,
+  "voter_power": 3,
+  "incumbent": "Ed Case",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Hawaii",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 32,
+  "voter_power": 3,
+  "incumbent": "Jill Tokuda",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Idaho",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -42,
+  "voter_power": 3,
+  "incumbent": "Russ Fulcher",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Idaho",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -24,
+  "voter_power": 3,
+  "incumbent": "Mike Simpson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 44,
+  "voter_power": 3,
+  "incumbent": "Jonathan Jackson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 41,
+  "voter_power": 3,
+  "incumbent": "OPEN (Kelly)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 42,
+  "voter_power": 3,
+  "incumbent": "Delia Ramirez",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 39,
+  "voter_power": 3,
+  "incumbent": "OPEN (Garc\u00eda)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 5,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 46,
+  "voter_power": 3,
+  "incumbent": "Mike Quigley",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 14,
+  "voter_power": 3,
+  "incumbent": "Sean Casten",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 73,
+  "voter_power": 3,
+  "incumbent": "OPEN (Davis)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 8,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 15,
+  "voter_power": 3,
+  "incumbent": "OPEN (Krishnamoorthi)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 9,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 43,
+  "voter_power": 3,
+  "incumbent": "OPEN (Schakowsky)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 10,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 32,
+  "voter_power": 3,
+  "incumbent": "Brad Schneider",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 11,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "Bill Foster",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 12,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -42,
+  "voter_power": 3,
+  "incumbent": "Mike Bost",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 13,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 18,
+  "voter_power": 3,
+  "incumbent": "Nikki Budzinski",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 14,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 14,
+  "voter_power": 3,
+  "incumbent": "Lauren Underwood",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 15,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -38,
+  "voter_power": 3,
+  "incumbent": "Mary Miller",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 16,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Darin LaHood",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Illinois",
+  "congress": 17,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 14,
+  "voter_power": 3,
+  "incumbent": "Eric Sorensen",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Indiana",
+  "congress": 1,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 10,
+  "voter_power": 8,
+  "incumbent": "Frank Mrvan",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Indiana",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -24,
+  "voter_power": 3,
+  "incumbent": "Rudy Yakym",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Indiana",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -30,
+  "voter_power": 3,
+  "incumbent": "Marlin Stutzman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Indiana",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -28,
+  "voter_power": 3,
+  "incumbent": "Jim Baird",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Indiana",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Victoria Spartz",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Indiana",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -30,
+  "voter_power": 3,
+  "incumbent": "Jefferson Shreve",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Indiana",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 50,
+  "voter_power": 3,
+  "incumbent": "Andr\u00e9 Carson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Indiana",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -34,
+  "voter_power": 3,
+  "incumbent": "Mark Messmer",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Indiana",
+  "congress": 9,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -28,
+  "voter_power": 3,
+  "incumbent": "Erin Houchin",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Iowa",
+  "congress": 1,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -6,
+  "voter_power": 33,
+  "incumbent": "Mariannette Miller-Meeks",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Iowa",
+  "congress": 2,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -3,
+  "voter_power": 73,
+  "incumbent": "OPEN (Hinson)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Iowa",
+  "congress": 3,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": -2,
+  "voter_power": 87,
+  "incumbent": "Zach Nunn",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Iowa",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -25,
+  "voter_power": 3,
+  "incumbent": "OPEN (Feenstra)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kansas",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -30,
+  "voter_power": 3,
+  "incumbent": "Tracey Mann",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kansas",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Derek Schmidt",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kansas",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Sharice Davids",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kansas",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -22,
+  "voter_power": 3,
+  "incumbent": "Ron Estes",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kentucky",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -44,
+  "voter_power": 3,
+  "incumbent": "James Comer",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kentucky",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -38,
+  "voter_power": 3,
+  "incumbent": "Brett Guthrie",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kentucky",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 28,
+  "voter_power": 3,
+  "incumbent": "Morgan McGarvey",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kentucky",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -34,
+  "voter_power": 3,
+  "incumbent": "Thomas Massie",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kentucky",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -62,
+  "voter_power": 3,
+  "incumbent": "Hal Rogers",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Kentucky",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -9,
+  "voter_power": 11,
+  "incumbent": "OPEN (Barr)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Louisiana",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -38,
+  "voter_power": 3,
+  "incumbent": "Steve Scalise",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Louisiana",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 58,
+  "voter_power": 3,
+  "incumbent": "Troy Carter",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Louisiana",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -34,
+  "voter_power": 3,
+  "incumbent": "Clay Higgins",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Louisiana",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -32,
+  "voter_power": 3,
+  "incumbent": "Mike Johnson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Louisiana",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -29,
+  "voter_power": 3,
+  "incumbent": "OPEN (Letlow)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Louisiana",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -27,
+  "voter_power": 3,
+  "incumbent": "OPEN (Fields)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Maine",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 30,
+  "voter_power": 3,
+  "incumbent": "Chellie Pingree",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Maine",
+  "congress": 2,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -3,
+  "voter_power": 73,
+  "incumbent": "OPEN (Golden)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Maryland",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Andy Harris",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Maryland",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 28,
+  "voter_power": 3,
+  "incumbent": "Johnny Olszewski",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Maryland",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 32,
+  "voter_power": 3,
+  "incumbent": "Sarah Elfreth",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Maryland",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 86,
+  "voter_power": 3,
+  "incumbent": "Glenn Ivey",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Maryland",
+  "congress": 5,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 39,
+  "voter_power": 3,
+  "incumbent": "OPEN (Hoyer)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Maryland",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 14,
+  "voter_power": 3,
+  "incumbent": "April McClain Delaney",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Maryland",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 70,
+  "voter_power": 3,
+  "incumbent": "Kweisi Mfume",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Maryland",
+  "congress": 8,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 68,
+  "voter_power": 3,
+  "incumbent": "Jamie Raskin",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Massachusetts",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 24,
+  "voter_power": 3,
+  "incumbent": "Richard Neal",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Massachusetts",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 34,
+  "voter_power": 3,
+  "incumbent": "Jim McGovern",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Massachusetts",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 30,
+  "voter_power": 3,
+  "incumbent": "Lori Trahan",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Massachusetts",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 30,
+  "voter_power": 3,
+  "incumbent": "Jake Auchincloss",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Massachusetts",
+  "congress": 5,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 56,
+  "voter_power": 3,
+  "incumbent": "Katherine Clark",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Massachusetts",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 27,
+  "voter_power": 3,
+  "incumbent": "OPEN (Moulton)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Massachusetts",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 76,
+  "voter_power": 3,
+  "incumbent": "Ayanna Pressley",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Massachusetts",
+  "congress": 8,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 38,
+  "voter_power": 3,
+  "incumbent": "Stephen Lynch",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Massachusetts",
+  "congress": 9,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "Bill Keating",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Jack Bergman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -28,
+  "voter_power": 3,
+  "incumbent": "John Moolenaar",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 16,
+  "voter_power": 3,
+  "incumbent": "Hillary Scholten",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 4,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -4,
+  "voter_power": 59,
+  "incumbent": "Bill Huizenga",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -24,
+  "voter_power": 3,
+  "incumbent": "Tim Walberg",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 32,
+  "voter_power": 3,
+  "incumbent": "Debbie Dingell",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 7,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 2,
+  "voter_power": 87,
+  "incumbent": "Tom Barrett",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 8,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 6,
+  "voter_power": 33,
+  "incumbent": "Kristen McDonald Rivet",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 9,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -30,
+  "voter_power": 3,
+  "incumbent": "Lisa McClain",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 10,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": -1,
+  "voter_power": 97,
+  "incumbent": "OPEN (James)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 11,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 23,
+  "voter_power": 3,
+  "incumbent": "OPEN (Stevens)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 12,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 50,
+  "voter_power": 3,
+  "incumbent": "Rashida Tlaib",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Michigan",
+  "congress": 13,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 52,
+  "voter_power": 3,
+  "incumbent": "Shri Thanedar",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Minnesota",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "Brad Finstad",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Minnesota",
+  "congress": 2,
+  "rating_2026": "likely-D",
+  "margin_2026_v2": 11,
+  "voter_power": 5,
+  "incumbent": "OPEN (Craig)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Minnesota",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 30,
+  "voter_power": 3,
+  "incumbent": "Kelly Morrison",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Minnesota",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 44,
+  "voter_power": 3,
+  "incumbent": "Betty McCollum",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Minnesota",
+  "congress": 5,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 72,
+  "voter_power": 3,
+  "incumbent": "Ilhan Omar",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Minnesota",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Tom Emmer",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Minnesota",
+  "congress": 7,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -34,
+  "voter_power": 3,
+  "incumbent": "Michelle Fischbach",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Minnesota",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -12,
+  "voter_power": 4,
+  "incumbent": "Pete Stauber",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Mississippi",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -34,
+  "voter_power": 3,
+  "incumbent": "Trent Kelly",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Mississippi",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 30,
+  "voter_power": 3,
+  "incumbent": "Bennie Thompson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Mississippi",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -26,
+  "voter_power": 3,
+  "incumbent": "Michael Guest",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Mississippi",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -40,
+  "voter_power": 3,
+  "incumbent": "Mike Ezell",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Missouri",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 66,
+  "voter_power": 3,
+  "incumbent": "Wesley Bell",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Missouri",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "Ann Wagner",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Missouri",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Bob Onder",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Missouri",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Mark Alford",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Missouri",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "Emanuel Cleaver",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Missouri",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -21,
+  "voter_power": 3,
+  "incumbent": "OPEN (Graves)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Missouri",
+  "congress": 7,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -40,
+  "voter_power": 3,
+  "incumbent": "Eric Burlison",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Missouri",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -52,
+  "voter_power": 3,
+  "incumbent": "Jason Smith",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Montana",
+  "congress": 1,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -5,
+  "voter_power": 45,
+  "incumbent": "OPEN (Zinke)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Montana",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -28,
+  "voter_power": 3,
+  "incumbent": "Troy Downing",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Nebraska",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "Mike Flood",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Nebraska",
+  "congress": 2,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 11,
+  "voter_power": 5,
+  "incumbent": "OPEN (Bacon)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Nebraska",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -52,
+  "voter_power": 3,
+  "incumbent": "Adrian Smith",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Nevada",
+  "congress": 1,
+  "rating_2026": "likely-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Dina Titus",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Nevada",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -9,
+  "voter_power": 11,
+  "incumbent": "OPEN (Amodei)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Nevada",
+  "congress": 3,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 10,
+  "voter_power": 8,
+  "incumbent": "Susie Lee",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Nevada",
+  "congress": 4,
+  "rating_2026": "likely-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Steven Horsford",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Hampshire",
+  "congress": 1,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 9,
+  "voter_power": 11,
+  "incumbent": "OPEN (Pappas)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Hampshire",
+  "congress": 2,
+  "rating_2026": "likely-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Maggie Goodlander",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 28,
+  "voter_power": 3,
+  "incumbent": "Donald Norcross",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 2,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -8,
+  "voter_power": 16,
+  "incumbent": "Jeff Van Drew",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 18,
+  "voter_power": 3,
+  "incumbent": "Herb Conaway",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -26,
+  "voter_power": 3,
+  "incumbent": "Chris Smith",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 5,
+  "rating_2026": "likely-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Josh Gottheimer",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 18,
+  "voter_power": 3,
+  "incumbent": "Frank Pallone",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 7,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 2,
+  "voter_power": 87,
+  "incumbent": "Thomas Kean",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 8,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 38,
+  "voter_power": 3,
+  "incumbent": "Rob Menendez",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 9,
+  "rating_2026": "likely-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Nellie Pou",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 10,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 62,
+  "voter_power": 3,
+  "incumbent": "LaMonica McIver",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 11,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 18,
+  "voter_power": 3,
+  "incumbent": "Analilia Mejia",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Jersey",
+  "congress": 12,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 31,
+  "voter_power": 3,
+  "incumbent": "OPEN (Watson Coleman)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Mexico",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 22,
+  "voter_power": 3,
+  "incumbent": "Melanie Stansbury",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Mexico",
+  "congress": 2,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 8,
+  "voter_power": 16,
+  "incumbent": "Gabe Vasquez",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New Mexico",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 14,
+  "voter_power": 3,
+  "incumbent": "Teresa Leger Fernandez",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 1,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -6,
+  "voter_power": 33,
+  "incumbent": "Nick LaLota",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "Andrew Garbarino",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 3,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 8,
+  "voter_power": 16,
+  "incumbent": "Tom Suozzi",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 4,
+  "rating_2026": "likely-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Laura Gillen",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 5,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 56,
+  "voter_power": 3,
+  "incumbent": "Gregory Meeks",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "Grace Meng",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 55,
+  "voter_power": 3,
+  "incumbent": "OPEN (Vel\u00e1zquez)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 8,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 56,
+  "voter_power": 3,
+  "incumbent": "Hakeem Jeffries",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 9,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 52,
+  "voter_power": 3,
+  "incumbent": "Yvette Clarke",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 10,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 69,
+  "voter_power": 3,
+  "incumbent": "OPEN (Goldman)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 11,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Nicole Malliotakis",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 12,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 71,
+  "voter_power": 3,
+  "incumbent": "OPEN (Nadler)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 13,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 69,
+  "voter_power": 3,
+  "incumbent": "OPEN (Espaillat)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 14,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 46,
+  "voter_power": 3,
+  "incumbent": "Alexandria Ocasio-Cortez",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 15,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 62,
+  "voter_power": 3,
+  "incumbent": "Ritchie Torres",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 16,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 44,
+  "voter_power": 3,
+  "incumbent": "George Latimer",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 17,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 4,
+  "voter_power": 59,
+  "incumbent": "Mike Lawler",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 18,
+  "rating_2026": "likely-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Pat Ryan",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 19,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 10,
+  "voter_power": 8,
+  "incumbent": "Josh Riley",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 20,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 24,
+  "voter_power": 3,
+  "incumbent": "Paul Tonko",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 21,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -15,
+  "voter_power": 3,
+  "incumbent": "OPEN (Stefanik)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 22,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 16,
+  "voter_power": 3,
+  "incumbent": "John Mannion",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 23,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Nick Langworthy",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 24,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Claudia Tenney",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 25,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 28,
+  "voter_power": 3,
+  "incumbent": "Joseph Morelle",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "New York",
+  "congress": 26,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 30,
+  "voter_power": 3,
+  "incumbent": "Tim Kennedy",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 1,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": -2,
+  "voter_power": 87,
+  "incumbent": "Don Davis",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 42,
+  "voter_power": 3,
+  "incumbent": "Deborah Ross",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "Greg Murphy",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 54,
+  "voter_power": 3,
+  "incumbent": "Valerie Foushee",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -16,
+  "voter_power": 3,
+  "incumbent": "Virginia Foxx",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -16,
+  "voter_power": 3,
+  "incumbent": "Addison McDowell",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 7,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -12,
+  "voter_power": 4,
+  "incumbent": "David Rouzer",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Mark Harris",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 9,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Richard Hudson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 10,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -16,
+  "voter_power": 3,
+  "incumbent": "Pat Harrigan",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 11,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -8,
+  "voter_power": 16,
+  "incumbent": "Chuck Edwards",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 12,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 56,
+  "voter_power": 3,
+  "incumbent": "Alma Adams",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 13,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Brad Knott",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Carolina",
+  "congress": 14,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Tim Moore",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "North Dakota",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -34,
+  "voter_power": 3,
+  "incumbent": "Julie Fedorchak",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 1,
+  "rating_2026": "lean-D",
+  "margin_2026_v2": 6,
+  "voter_power": 33,
+  "incumbent": "Greg Landsman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -40,
+  "voter_power": 3,
+  "incumbent": "David Taylor",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 50,
+  "voter_power": 3,
+  "incumbent": "Joyce Beatty",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -40,
+  "voter_power": 3,
+  "incumbent": "Jim Jordan",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -22,
+  "voter_power": 3,
+  "incumbent": "Bob Latta",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -32,
+  "voter_power": 3,
+  "incumbent": "Michael Rulli",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 7,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -8,
+  "voter_power": 16,
+  "incumbent": "Max Miller",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Warren Davidson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 9,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": -2,
+  "voter_power": 87,
+  "incumbent": "Marcy Kaptur",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 10,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -6,
+  "voter_power": 33,
+  "incumbent": "Mike Turner",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 11,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 64,
+  "voter_power": 3,
+  "incumbent": "Shontel Brown",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 12,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -28,
+  "voter_power": 3,
+  "incumbent": "Troy Balderson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 13,
+  "rating_2026": "likely-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Emilia Sykes",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 14,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "David Joyce",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Ohio",
+  "congress": 15,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -8,
+  "voter_power": 16,
+  "incumbent": "Mike Carey",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oklahoma",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -17,
+  "voter_power": 3,
+  "incumbent": "OPEN (Hern)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oklahoma",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -54,
+  "voter_power": 3,
+  "incumbent": "Josh Brecheen",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oklahoma",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -44,
+  "voter_power": 3,
+  "incumbent": "Frank Lucas",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oklahoma",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -32,
+  "voter_power": 3,
+  "incumbent": "Tom Cole",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oklahoma",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -16,
+  "voter_power": 3,
+  "incumbent": "Stephanie Bice",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oregon",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 48,
+  "voter_power": 3,
+  "incumbent": "Suzanne Bonamici",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oregon",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -26,
+  "voter_power": 3,
+  "incumbent": "Cliff Bentz",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oregon",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 56,
+  "voter_power": 3,
+  "incumbent": "Maxine Dexter",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oregon",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "Val Hoyle",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oregon",
+  "congress": 5,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 16,
+  "voter_power": 3,
+  "incumbent": "Janelle Bynum",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Oregon",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "Andrea Salinas",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 1,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 4,
+  "voter_power": 59,
+  "incumbent": "Brian Fitzpatrick",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 46,
+  "voter_power": 3,
+  "incumbent": "Brendan Boyle",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 85,
+  "voter_power": 3,
+  "incumbent": "OPEN (Evans)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 24,
+  "voter_power": 3,
+  "incumbent": "Madeleine Dean",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 5,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 38,
+  "voter_power": 3,
+  "incumbent": "Mary Gay Scanlon",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "Chrissy Houlahan",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 7,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 0,
+  "voter_power": 100,
+  "incumbent": "Ryan Mackenzie",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 8,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -6,
+  "voter_power": 33,
+  "incumbent": "Rob Bresnahan",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 9,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -36,
+  "voter_power": 3,
+  "incumbent": "Dan Meuser",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 10,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -4,
+  "voter_power": 59,
+  "incumbent": "Scott Perry",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 11,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Lloyd Smucker",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 12,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 28,
+  "voter_power": 3,
+  "incumbent": "Summer Lee",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 13,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -44,
+  "voter_power": 3,
+  "incumbent": "John Joyce",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 14,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -32,
+  "voter_power": 3,
+  "incumbent": "Guy Reschenthaler",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 15,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -36,
+  "voter_power": 3,
+  "incumbent": "Glenn Thompson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 16,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Mike Kelly",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Pennsylvania",
+  "congress": 17,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 14,
+  "voter_power": 3,
+  "incumbent": "Chris Deluzio",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Rhode Island",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 32,
+  "voter_power": 3,
+  "incumbent": "Gabe Amo",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Rhode Island",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 16,
+  "voter_power": 3,
+  "incumbent": "Seth Magaziner",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "South Carolina",
+  "congress": 1,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -7,
+  "voter_power": 23,
+  "incumbent": "OPEN (Mace)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "South Carolina",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -12,
+  "voter_power": 4,
+  "incumbent": "Joe Wilson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "South Carolina",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -40,
+  "voter_power": 3,
+  "incumbent": "Sheri Biggs",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "South Carolina",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "William Timmons",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "South Carolina",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -17,
+  "voter_power": 3,
+  "incumbent": "OPEN (Norman)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "South Carolina",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 34,
+  "voter_power": 3,
+  "incumbent": "Jim Clyburn",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "South Carolina",
+  "congress": 7,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -22,
+  "voter_power": 3,
+  "incumbent": "Russell Fry",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "South Dakota",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -25,
+  "voter_power": 3,
+  "incumbent": "OPEN (Johnson)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Tennessee",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -56,
+  "voter_power": 3,
+  "incumbent": "Diana Harshbarger",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Tennessee",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -32,
+  "voter_power": 3,
+  "incumbent": "Tim Burchett",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Tennessee",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -34,
+  "voter_power": 3,
+  "incumbent": "Chuck Fleischmann",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Tennessee",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Scott DesJarlais",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Tennessee",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Andy Ogles",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Tennessee",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -21,
+  "voter_power": 3,
+  "incumbent": "OPEN (Rose)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Tennessee",
+  "congress": 7,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Matt Van Epps",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Tennessee",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "David Kustoff",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Tennessee",
+  "congress": 9,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -13,
+  "voter_power": 3,
+  "incumbent": "OPEN (Cohen)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -46,
+  "voter_power": 3,
+  "incumbent": "Nathaniel Moran",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -17,
+  "voter_power": 3,
+  "incumbent": "OPEN (Crenshaw)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Keith Self",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -22,
+  "voter_power": 3,
+  "incumbent": "Pat Fallon",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Lance Gooden",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Jake Ellzey",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 34,
+  "voter_power": 3,
+  "incumbent": "Lizzie Fletcher",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -21,
+  "voter_power": 3,
+  "incumbent": "OPEN (Luttrell)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 9,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -13,
+  "voter_power": 3,
+  "incumbent": "OPEN (Green)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 10,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -15,
+  "voter_power": 3,
+  "incumbent": "OPEN (McCaul)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 11,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -32,
+  "voter_power": 3,
+  "incumbent": "August Pfluger",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 12,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Craig Goldman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 13,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -44,
+  "voter_power": 3,
+  "incumbent": "Ronny Jackson",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 14,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -22,
+  "voter_power": 3,
+  "incumbent": "Randy Weber",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 15,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -12,
+  "voter_power": 4,
+  "incumbent": "Monica De La Cruz",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 16,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 30,
+  "voter_power": 3,
+  "incumbent": "Veronica Escobar",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 17,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Pete Sessions",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 18,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 66,
+  "voter_power": 3,
+  "incumbent": "Christian Menefee",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 19,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -45,
+  "voter_power": 3,
+  "incumbent": "OPEN (Arrington)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 20,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 40,
+  "voter_power": 3,
+  "incumbent": "Joaquin Castro",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 21,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -15,
+  "voter_power": 3,
+  "incumbent": "OPEN (Roy)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 22,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -17,
+  "voter_power": 3,
+  "incumbent": "OPEN (Nehls)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 23,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -12,
+  "voter_power": 4,
+  "incumbent": "VACANT (Gonzales)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 24,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Beth Van Duyne",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 25,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Roger Williams",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 26,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Brandon Gill",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 27,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -18,
+  "voter_power": 3,
+  "incumbent": "Michael Cloud",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 28,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 2,
+  "voter_power": 87,
+  "incumbent": "Henry Cuellar",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 29,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 42,
+  "voter_power": 3,
+  "incumbent": "Sylvia Garcia",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 30,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 55,
+  "voter_power": 3,
+  "incumbent": "OPEN (Crockett)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 31,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "John Carter",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 32,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -11,
+  "voter_power": 5,
+  "incumbent": "OPEN (Johnson)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 33,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 41,
+  "voter_power": 3,
+  "incumbent": "OPEN (Veasey)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 34,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 2,
+  "voter_power": 87,
+  "incumbent": "Vicente Gonzalez",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 35,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -3,
+  "voter_power": 73,
+  "incumbent": "OPEN (Casar)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 36,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -22,
+  "voter_power": 3,
+  "incumbent": "Brian Babin",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 37,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 68,
+  "voter_power": 3,
+  "incumbent": "Greg Casar",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Texas",
+  "congress": 38,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -15,
+  "voter_power": 3,
+  "incumbent": "OPEN (Hunt)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Utah",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 29,
+  "voter_power": 3,
+  "incumbent": "OPEN (Owens)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Utah",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -28,
+  "voter_power": 3,
+  "incumbent": "Blake Moore",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Utah",
+  "congress": 3,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -40,
+  "voter_power": 3,
+  "incumbent": "Celeste Maloy",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Utah",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -32,
+  "voter_power": 3,
+  "incumbent": "Mike Kennedy",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Vermont",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 42,
+  "voter_power": 3,
+  "incumbent": "Becca Balint",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 1,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -4,
+  "voter_power": 59,
+  "incumbent": "Rob Wittman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 2,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 2,
+  "voter_power": 87,
+  "incumbent": "Jen Kiggans",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 3,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 44,
+  "voter_power": 3,
+  "incumbent": "Bobby Scott",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 42,
+  "voter_power": 3,
+  "incumbent": "Jennifer McClellan",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -10,
+  "voter_power": 8,
+  "incumbent": "John McGuire",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -22,
+  "voter_power": 3,
+  "incumbent": "Ben Cline",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 7,
+  "rating_2026": "likely-D",
+  "margin_2026_v2": 12,
+  "voter_power": 4,
+  "incumbent": "Eugene Vindman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 8,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 60,
+  "voter_power": 3,
+  "incumbent": "Don Beyer",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 9,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -42,
+  "voter_power": 3,
+  "incumbent": "Morgan Griffith",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 10,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 20,
+  "voter_power": 3,
+  "incumbent": "Suhas Subramanyam",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Virginia",
+  "congress": 11,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 44,
+  "voter_power": 3,
+  "incumbent": "James Walkinshaw",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Washington",
+  "congress": 1,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 38,
+  "voter_power": 3,
+  "incumbent": "Suzan DelBene",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Washington",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 32,
+  "voter_power": 3,
+  "incumbent": "Rick Larsen",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Washington",
+  "congress": 3,
+  "rating_2026": "toss-up",
+  "margin_2026_v2": 4,
+  "voter_power": 59,
+  "incumbent": "Marie Gluesenkamp Perez",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Washington",
+  "congress": 4,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -15,
+  "voter_power": 3,
+  "incumbent": "OPEN (Newhouse)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Washington",
+  "congress": 5,
+  "rating_2026": "likely-R",
+  "margin_2026_v2": -8,
+  "voter_power": 16,
+  "incumbent": "Michael Baumgartner",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Washington",
+  "congress": 6,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 28,
+  "voter_power": 3,
+  "incumbent": "Emily Randall",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Washington",
+  "congress": 7,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 86,
+  "voter_power": 3,
+  "incumbent": "Pramila Jayapal",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Washington",
+  "congress": 8,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 14,
+  "voter_power": 3,
+  "incumbent": "Kim Schrier",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Washington",
+  "congress": 9,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 52,
+  "voter_power": 3,
+  "incumbent": "Adam Smith",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Washington",
+  "congress": 10,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 26,
+  "voter_power": 3,
+  "incumbent": "Marilyn Strickland",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "West Virginia",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -42,
+  "voter_power": 3,
+  "incumbent": "Carol Miller",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "West Virginia",
+  "congress": 2,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -38,
+  "voter_power": 3,
+  "incumbent": "Riley Moore",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Wisconsin",
+  "congress": 1,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -2,
+  "voter_power": 87,
+  "incumbent": "Bryan Steil",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Wisconsin",
+  "congress": 2,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 50,
+  "voter_power": 3,
+  "incumbent": "Mark Pocan",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Wisconsin",
+  "congress": 3,
+  "rating_2026": "lean-R",
+  "margin_2026_v2": -4,
+  "voter_power": 59,
+  "incumbent": "Derrick Van Orden",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Wisconsin",
+  "congress": 4,
+  "rating_2026": "solid-D",
+  "margin_2026_v2": 60,
+  "voter_power": 3,
+  "incumbent": "Gwen Moore",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Wisconsin",
+  "congress": 5,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -20,
+  "voter_power": 3,
+  "incumbent": "Scott Fitzgerald",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Wisconsin",
+  "congress": 6,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Glenn Grothman",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Wisconsin",
+  "congress": 7,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -17,
+  "voter_power": 3,
+  "incumbent": "OPEN (Tiffany)",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Wisconsin",
+  "congress": 8,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -14,
+  "voter_power": 3,
+  "incumbent": "Tony Wied",
+  "last_verified": "2026-07-29"
+ },
+ {
+  "state_name": "Wyoming",
+  "congress": 1,
+  "rating_2026": "solid-R",
+  "margin_2026_v2": -41,
+  "voter_power": 3,
+  "incumbent": "OPEN (Hageman)",
+  "last_verified": "2026-07-29"
+ }
+]
