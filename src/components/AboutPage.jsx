@@ -29,7 +29,7 @@ const SECTIONS = [
   {
     num: '04',
     title: 'Data Sources',
-    body: `Margins come from two sources, color-coded in the interface: real polling averages (sourced from Emerson, PPP, ASR, and Sabato's Crystal Ball, Jan–Mar 2026) shown in green, and Cook Political Report rating proxies shown in amber. Cook ratings are translated as: Toss-Up = 0, Lean = ±4 pts, Likely = ±9 pts, Solid = ±18 pts.
+    body: `Margins come from two sources, color-coded in the interface: polling averages (sourced from Emerson, PPP, ASR, and Sabato's Crystal Ball, Jan-Jul 2026) shown in green, and rating proxies shown in amber. 2026 ratings are translated as: Toss-Up = 0, Lean = ±4 pts, Likely = ±9 pts, Solid = ±18 pts.
 
     As more polls become available through the election cycle, Cook proxies are replaced with real data and all voter power scores update automatically.`,
   },

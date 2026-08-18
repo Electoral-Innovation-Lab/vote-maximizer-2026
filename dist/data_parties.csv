@@ -1,0 +1,103 @@
+"Level (State, County, City)",Name,Affiliation,Link
+State ,Alabama,Democratic,https://aldemocrats.org/
+State ,Alaska,Democratic,https://alaskademocrats.org/
+State ,Arizona,Democratic,https://azdem.org/
+State ,Arkansas,Democratic,https://www.arkdems.org/
+State ,California,Democratic,https://cadem.org/
+State ,Colorado,Democratic,https://coloradodems.org/
+State ,Connecticut,Democratic,https://ctdems.org/
+State ,Delaware,Democratic,https://deldems.org/
+City,D.C.,Democratic,https://dcdemocraticparty.org/
+State ,Florida,Democratic,https://floridadems.org/
+State ,Georgia,Democratic,https://georgiademocrat.org/
+State ,Hawaii,Democratic,https://hawaiidemocrats.org/
+State ,Idaho,Democratic,https://idahodems.org/
+State ,Illinois,Democratic,https://ildems.com/
+State ,Indiana,Democratic,https://indems.org/
+State ,Iowa,Democratic,https://iowademocrats.org/
+State ,Kansas,Democratic,https://kansasdems.org/
+State ,Kentucky,Democratic,https://kydemocrats.org/
+State ,Louisiana,Democratic,https://louisianadems.org/
+State ,Maine,Democratic,https://mainedems.org/
+State ,Maryland,Democratic,https://mddems.org/
+State ,Massachusetts,Democratic,https://massdems.org/
+State ,Michigan,Democratic,https://michigandems.com/
+State ,Minnesota,Democratic,https://dfl.org/
+State ,Mississippi,Democratic,https://www.mississippidemocrats.org/
+State ,Missouri,Democratic,https://missouridems.org/
+State ,Montana,Democratic,https://montanademocrats.org/
+State ,Nebraska,Democratic,https://nebraskademocrats.org/
+State ,Nevada,Democratic,https://nvdems.com/
+State ,New Hampshire,Democratic,https://nhdp.org/
+State ,New Jersey,Democratic,https://www.njdems.org/
+State ,New Mexico,Democratic,https://nmdemocrats.org/
+State ,New York,Democratic,https://nydems.org/
+State ,North Carolina,Democratic,https://ncdp.org/
+State ,North Dakota,Democratic,https://demnpl.com/
+State ,Ohio,Democratic,https://ohiodems.org/
+State ,Oklahoma,Democratic,https://okdemocrats.org/
+State ,Oregon ,Democratic,https://dpo.org/
+State ,Pennsylvania,Democratic,https://padems.com/
+State ,Rhode Island,Democratic,https://www.ridemocrats.org/
+State ,South Carolina,Democratic,https://scdp.org/
+State ,South Dakota,Democratic,https://sddp.org/
+State ,Tennessee,Democratic,https://tndp.org/
+State ,Texas,Democratic,https://txdemocrats.org/
+State ,Utah,Democratic,https://www.utahdemocrats.org/
+State ,Vermont,Democratic,https://vtdemocrats.org/
+State ,Virginia,Democratic,https://vademocrats.org/
+State ,Washington,Democratic,https://wa-democrats.org/
+State ,West Virginia,Democratic,https://wvdemocrats.com/
+State ,Wisconsin,Democratic,https://wisdems.org/
+State ,Wyoming,Democratic,https://wyodems.org/
+State ,Alabama,Republican,https://algop.org/
+State ,Alaska,Republican,https://alaskagop.net/
+State ,Arizona,Republican,https://azgop.com/
+State ,Arkansas,Republican,https://www.arkansasgop.org/
+State ,California,Republican,https://cagop.org/
+State ,Colorado,Republican,https://colorado.gop/
+State ,Connecticut,Republican,https://ct.gop/
+State ,Delaware,Republican,https://degop.gop/
+City,D.C.,Republican,https://dcgop.com/
+State ,Florida,Republican,https://florida.gop/
+State ,Georgia,Republican,https://www.gagop.org/
+State ,Hawaii,Republican,https://thehawaiirepublicanparty.com/
+State ,Idaho,Republican,https://idgop.org/
+State ,Illinois,Republican,https://illinois.gop/
+State ,Indiana,Republican,https://indiana.gop/
+State ,Iowa,Republican,https://iowagop.org/
+State ,Kansas ,Republican,https://kansas.gop/
+State ,Kentucky,Republican,https://rpk.org/
+State ,Louisiana,Republican,https://lagop.com/
+State ,Maine,Republican,https://mainegop.com/
+State ,Maryland,Republican,https://mdgop.org/
+State ,Massachusetts,Republican,https://massgop.com/
+State ,Michigan,Republican,https://mi.gop/
+State ,Minnesota,Republican,https://mngop.com/
+State ,Mississippi,Republican,https://www.msgop.org/
+State ,Missouri,Republican,https://missouri.gop/
+State ,Montana,Republican,https://mtgop.org/
+State ,Nebraska,Republican,https://ne.gop/
+State ,Nevada,Republican,https://nevadagop.org/
+State ,New Hampshire,Republican,https://nh.gop/
+State ,New Jersey,Republican,https://www.njgop.org/
+State ,New Mexico,Republican,https://newmexico.gop/
+State ,New York,Republican,https://nygop.org/
+State ,North Carolina,Republican,https://www.nc.gop/
+State ,North Dakota,Republican,https://ndgop.org/
+State ,Ohio,Republican,https://ohiogop.org/
+State ,Oklahoma,Republican,https://okgop.com/
+State ,Oregon,Republican,https://oregon.gop/
+State ,Pennsylvania,Republican,https://pagop.org/
+State ,Rhode Island,Republican,https://ri.gop/
+State ,South Carolina,Republican,https://sc.gop/
+State ,South Dakota,Republican,https://www.sdgop.com/
+State ,Tennessee,Republican,https://www.tngop.org/
+State ,Texas,Republican,https://texasgop.org/
+State ,Utah,Republican,https://www.utgop.org/
+State ,Vermont,Republican,https://vtgop.org/
+State ,Virginia,Republican,https://virginia.gop/
+State ,Washington,Republican,https://wagop.org/
+State ,West Virginia,Republican,https://wvgop.org/
+State ,Wisconsin,Republican,https://wisgop.org/
+State ,Wyoming,Republican,https://www.wygop.org/

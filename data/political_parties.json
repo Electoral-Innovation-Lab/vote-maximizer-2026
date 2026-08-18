@@ -1,0 +1,614 @@
+[
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Alabama",
+  "Affiliation": "Democratic",
+  "Link": "https://aldemocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Alaska",
+  "Affiliation": "Democratic",
+  "Link": "https://alaskademocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Arizona",
+  "Affiliation": "Democratic",
+  "Link": "https://azdem.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Arkansas",
+  "Affiliation": "Democratic",
+  "Link": "https://www.arkdems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "California",
+  "Affiliation": "Democratic",
+  "Link": "https://cadem.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Colorado",
+  "Affiliation": "Democratic",
+  "Link": "https://coloradodems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Connecticut",
+  "Affiliation": "Democratic",
+  "Link": "https://ctdems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Delaware",
+  "Affiliation": "Democratic",
+  "Link": "https://deldems.org/"
+ },
+ {
+  "Level (State, County, City)": "City",
+  "Name": "D.C.",
+  "Affiliation": "Democratic",
+  "Link": "https://dcdemocraticparty.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Florida",
+  "Affiliation": "Democratic",
+  "Link": "https://floridadems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Georgia",
+  "Affiliation": "Democratic",
+  "Link": "https://georgiademocrat.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Hawaii",
+  "Affiliation": "Democratic",
+  "Link": "https://hawaiidemocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Idaho",
+  "Affiliation": "Democratic",
+  "Link": "https://idahodems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Illinois",
+  "Affiliation": "Democratic",
+  "Link": "https://ildems.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Indiana",
+  "Affiliation": "Democratic",
+  "Link": "https://indems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Iowa",
+  "Affiliation": "Democratic",
+  "Link": "https://iowademocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Kansas",
+  "Affiliation": "Democratic",
+  "Link": "https://kansasdems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Kentucky",
+  "Affiliation": "Democratic",
+  "Link": "https://kydemocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Louisiana",
+  "Affiliation": "Democratic",
+  "Link": "https://louisianadems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Maine",
+  "Affiliation": "Democratic",
+  "Link": "https://mainedems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Maryland",
+  "Affiliation": "Democratic",
+  "Link": "https://mddems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Massachusetts",
+  "Affiliation": "Democratic",
+  "Link": "https://massdems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Michigan",
+  "Affiliation": "Democratic",
+  "Link": "https://michigandems.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Minnesota",
+  "Affiliation": "Democratic",
+  "Link": "https://dfl.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Mississippi",
+  "Affiliation": "Democratic",
+  "Link": "https://www.mississippidemocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Missouri",
+  "Affiliation": "Democratic",
+  "Link": "https://missouridems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Montana",
+  "Affiliation": "Democratic",
+  "Link": "https://montanademocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Nebraska",
+  "Affiliation": "Democratic",
+  "Link": "https://nebraskademocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Nevada",
+  "Affiliation": "Democratic",
+  "Link": "https://nvdems.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "New Hampshire",
+  "Affiliation": "Democratic",
+  "Link": "https://nhdp.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "New Jersey",
+  "Affiliation": "Democratic",
+  "Link": "https://www.njdems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "New Mexico",
+  "Affiliation": "Democratic",
+  "Link": "https://nmdemocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "New York",
+  "Affiliation": "Democratic",
+  "Link": "https://nydems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "North Carolina",
+  "Affiliation": "Democratic",
+  "Link": "https://ncdp.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "North Dakota",
+  "Affiliation": "Democratic",
+  "Link": "https://demnpl.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Ohio",
+  "Affiliation": "Democratic",
+  "Link": "https://ohiodems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Oklahoma",
+  "Affiliation": "Democratic",
+  "Link": "https://okdemocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Oregon ",
+  "Affiliation": "Democratic",
+  "Link": "https://dpo.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Pennsylvania",
+  "Affiliation": "Democratic",
+  "Link": "https://padems.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Rhode Island",
+  "Affiliation": "Democratic",
+  "Link": "https://www.ridemocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "South Carolina",
+  "Affiliation": "Democratic",
+  "Link": "https://scdp.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "South Dakota",
+  "Affiliation": "Democratic",
+  "Link": "https://sddp.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Tennessee",
+  "Affiliation": "Democratic",
+  "Link": "https://tndp.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Texas",
+  "Affiliation": "Democratic",
+  "Link": "https://txdemocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Utah",
+  "Affiliation": "Democratic",
+  "Link": "https://www.utahdemocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Vermont",
+  "Affiliation": "Democratic",
+  "Link": "https://vtdemocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Virginia",
+  "Affiliation": "Democratic",
+  "Link": "https://vademocrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Washington",
+  "Affiliation": "Democratic",
+  "Link": "https://wa-democrats.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "West Virginia",
+  "Affiliation": "Democratic",
+  "Link": "https://wvdemocrats.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Wisconsin",
+  "Affiliation": "Democratic",
+  "Link": "https://wisdems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Wyoming",
+  "Affiliation": "Democratic",
+  "Link": "https://wyodems.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Alabama",
+  "Affiliation": "Republican",
+  "Link": "https://algop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Alaska",
+  "Affiliation": "Republican",
+  "Link": "https://alaskagop.net/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Arizona",
+  "Affiliation": "Republican",
+  "Link": "https://azgop.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Arkansas",
+  "Affiliation": "Republican",
+  "Link": "https://www.arkansasgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "California",
+  "Affiliation": "Republican",
+  "Link": "https://cagop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Colorado",
+  "Affiliation": "Republican",
+  "Link": "https://colorado.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Connecticut",
+  "Affiliation": "Republican",
+  "Link": "https://ct.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Delaware",
+  "Affiliation": "Republican",
+  "Link": "https://degop.gop/"
+ },
+ {
+  "Level (State, County, City)": "City",
+  "Name": "D.C.",
+  "Affiliation": "Republican",
+  "Link": "https://dcgop.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Florida",
+  "Affiliation": "Republican",
+  "Link": "https://florida.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Georgia",
+  "Affiliation": "Republican",
+  "Link": "https://www.gagop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Hawaii",
+  "Affiliation": "Republican",
+  "Link": "https://thehawaiirepublicanparty.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Idaho",
+  "Affiliation": "Republican",
+  "Link": "https://idgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Illinois",
+  "Affiliation": "Republican",
+  "Link": "https://illinois.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Indiana",
+  "Affiliation": "Republican",
+  "Link": "https://indiana.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Iowa",
+  "Affiliation": "Republican",
+  "Link": "https://iowagop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Kansas ",
+  "Affiliation": "Republican",
+  "Link": "https://kansas.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Kentucky",
+  "Affiliation": "Republican",
+  "Link": "https://rpk.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Louisiana",
+  "Affiliation": "Republican",
+  "Link": "https://lagop.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Maine",
+  "Affiliation": "Republican",
+  "Link": "https://mainegop.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Maryland",
+  "Affiliation": "Republican",
+  "Link": "https://mdgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Massachusetts",
+  "Affiliation": "Republican",
+  "Link": "https://massgop.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Michigan",
+  "Affiliation": "Republican",
+  "Link": "https://mi.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Minnesota",
+  "Affiliation": "Republican",
+  "Link": "https://mngop.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Mississippi",
+  "Affiliation": "Republican",
+  "Link": "https://www.msgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Missouri",
+  "Affiliation": "Republican",
+  "Link": "https://missouri.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Montana",
+  "Affiliation": "Republican",
+  "Link": "https://mtgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Nebraska",
+  "Affiliation": "Republican",
+  "Link": "https://ne.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Nevada",
+  "Affiliation": "Republican",
+  "Link": "https://nevadagop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "New Hampshire",
+  "Affiliation": "Republican",
+  "Link": "https://nh.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "New Jersey",
+  "Affiliation": "Republican",
+  "Link": "https://www.njgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "New Mexico",
+  "Affiliation": "Republican",
+  "Link": "https://newmexico.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "New York",
+  "Affiliation": "Republican",
+  "Link": "https://nygop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "North Carolina",
+  "Affiliation": "Republican",
+  "Link": "https://www.nc.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "North Dakota",
+  "Affiliation": "Republican",
+  "Link": "https://ndgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Ohio",
+  "Affiliation": "Republican",
+  "Link": "https://ohiogop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Oklahoma",
+  "Affiliation": "Republican",
+  "Link": "https://okgop.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Oregon",
+  "Affiliation": "Republican",
+  "Link": "https://oregon.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Pennsylvania",
+  "Affiliation": "Republican",
+  "Link": "https://pagop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Rhode Island",
+  "Affiliation": "Republican",
+  "Link": "https://ri.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "South Carolina",
+  "Affiliation": "Republican",
+  "Link": "https://sc.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "South Dakota",
+  "Affiliation": "Republican",
+  "Link": "https://www.sdgop.com/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Tennessee",
+  "Affiliation": "Republican",
+  "Link": "https://www.tngop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Texas",
+  "Affiliation": "Republican",
+  "Link": "https://texasgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Utah",
+  "Affiliation": "Republican",
+  "Link": "https://www.utgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Vermont",
+  "Affiliation": "Republican",
+  "Link": "https://vtgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Virginia",
+  "Affiliation": "Republican",
+  "Link": "https://virginia.gop/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Washington",
+  "Affiliation": "Republican",
+  "Link": "https://wagop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "West Virginia",
+  "Affiliation": "Republican",
+  "Link": "https://wvgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Wisconsin",
+  "Affiliation": "Republican",
+  "Link": "https://wisgop.org/"
+ },
+ {
+  "Level (State, County, City)": "State ",
+  "Name": "Wyoming",
+  "Affiliation": "Republican",
+  "Link": "https://www.wygop.org/"
+ }
+]

@@ -131,7 +131,7 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
 
         {/* Stat tagline */}
         <p className="landing-tagline anim-4">
-          <span className="landing-tagline-num">6,696</span> contests.{' '}
+          <span className="landing-tagline-num">6,474</span> contests.{' '}
           <span className="landing-tagline-num">50</span> states.{' '}
           One question: where does one vote go furthest?
         </p>

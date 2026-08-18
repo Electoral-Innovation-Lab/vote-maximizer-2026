@@ -81,7 +81,7 @@ function sortRaces(races, sortBy, vpDir, cookDir) {
   return sorted;
 }
 
-// Inserts a header marker every time the Cook Rating changes across an already-sorted list,
+// Inserts a header marker every time the 2026 Rating changes across an already-sorted list,
 // so each rating (e.g. Lean D vs Lean R) reads as its own visible block.
 function withCookHeaders(sortedRaces) {
   const items = [];
@@ -97,7 +97,7 @@ function withCookHeaders(sortedRaces) {
   return items;
 }
 
-// Sorted race list, with group-header markers inserted whenever sorted by Cook Rating.
+// Sorted race list, with group-header markers inserted whenever sorted by 2026 Rating.
 function buildListItems(races, sortBy, vpDir, cookDir) {
   const sorted = sortRaces(races, sortBy, vpDir, cookDir);
   if (sortBy !== 'cook') return sorted.map((race, idx) => ({ type: 'race', race, idx }));
@@ -165,9 +165,9 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
         <button
           className={`lh-cook lh-sort-btn ${sortBy === 'cook' ? 'lh-sort-btn--active' : ''}`}
           onClick={handleCookSortClick}
-          title="Sort by Cook Rating"
+          title="Sort by 2026 Rating"
         >
-          Cook Rating{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
+          2026 Rating{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
         </button>
         <button
           className={`lh-vp lh-sort-btn ${sortBy === 'voterPower' ? 'lh-sort-btn--active' : ''}`}
@@ -386,7 +386,7 @@ export default function InfoBox({
                 <button
                   className={`lh-cook lh-sort-btn ${sortBy === 'cook' ? 'lh-sort-btn--active' : ''}`}
                   onClick={handleCookSortClick}
-                  title="Sort by Cook Rating"
+                  title="Sort by 2026 Rating"
                 >
                   Cook{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
                 </button>
@@ -463,9 +463,9 @@ export default function InfoBox({
                 <button
                   className={`lh-cook lh-sort-btn ${sortBy === 'cook' ? 'lh-sort-btn--active' : ''}`}
                   onClick={handleCookSortClick}
-                  title="Sort by Cook Rating"
+                  title="Sort by 2026 Rating"
                 >
-                  Cook Rating{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
+                  2026 Rating{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
                 </button>
                 <button
                   className={`lh-vp lh-sort-btn ${sortBy === 'voterPower' ? 'lh-sort-btn--active' : ''}`}

@@ -1,0 +1,267 @@
+[
+ {
+  "state": 1,
+  "FP Code": 1,
+  "General Elections Info": "https://www.sos.alabama.gov/alabama-votes/voter/election-information"
+ },
+ {
+  "state": 2,
+  "FP Code": 2,
+  "General Elections Info": "https://www.elections.alaska.gov/"
+ },
+ {
+  "state": 4,
+  "FP Code": 4,
+  "General Elections Info": "https://azsos.gov/elections"
+ },
+ {
+  "state": 5,
+  "FP Code": 5,
+  "General Elections Info": "https://www.sos.arkansas.gov/elections"
+ },
+ {
+  "state": 6,
+  "FP Code": 6,
+  "General Elections Info": "https://www.sos.ca.gov/elections"
+ },
+ {
+  "state": 8,
+  "FP Code": 8,
+  "General Elections Info": "https://www.sos.state.co.us/pubs/elections/electionInfo.html"
+ },
+ {
+  "state": 9,
+  "FP Code": 9,
+  "General Elections Info": "https://portal.ct.gov/sots/common-elements/v5-template---redesign/elections--voting--home-page"
+ },
+ {
+  "state": 10,
+  "FP Code": 10,
+  "General Elections Info": "https://elections.delaware.gov/"
+ },
+ {
+  "state": 11,
+  "FP Code": 11,
+  "General Elections Info": "https://www.vote411.org/district-of-columbia"
+ },
+ {
+  "state": 12,
+  "FP Code": 12,
+  "General Elections Info": "https://dos.fl.gov/elections"
+ },
+ {
+  "state": 13,
+  "FP Code": 13,
+  "General Elections Info": "https://sos.ga.gov/elections-division-georgia-secretary-states-office"
+ },
+ {
+  "state": 15,
+  "FP Code": 15,
+  "General Elections Info": "https://portal.ehawaii.gov/government/voting-and-elections/"
+ },
+ {
+  "state": 16,
+  "FP Code": 16,
+  "General Elections Info": "https://voteidaho.gov/election-information/"
+ },
+ {
+  "state": 17,
+  "FP Code": 17,
+  "General Elections Info": "https://www.elections.il.gov/"
+ },
+ {
+  "state": 18,
+  "FP Code": 18,
+  "General Elections Info": "https://www.in.gov/sos/elections/"
+ },
+ {
+  "state": 19,
+  "FP Code": 19,
+  "General Elections Info": "https://sos.iowa.gov/index.html"
+ },
+ {
+  "state": 20,
+  "FP Code": 20,
+  "General Elections Info": "https://sos.ks.gov/elections/elections.html"
+ },
+ {
+  "state": 21,
+  "FP Code": 21,
+  "General Elections Info": "https://elect.ky.gov/Pages/default.aspx"
+ },
+ {
+  "state": 22,
+  "FP Code": 22,
+  "General Elections Info": "https://www.sos.la.gov/ElectionsAndVoting/BrowseByAudience/Pages/default.aspx"
+ },
+ {
+  "state": 23,
+  "FP Code": 23,
+  "General Elections Info": "https://www.maine.gov/sos/cec/elec/index.html"
+ },
+ {
+  "state": 24,
+  "FP Code": 24,
+  "General Elections Info": "https://elections.maryland.gov/"
+ },
+ {
+  "state": 25,
+  "FP Code": 25,
+  "General Elections Info": "https://www.sec.state.ma.us/divisions/elections/elections-and-voting.htm"
+ },
+ {
+  "state": 26,
+  "FP Code": 26,
+  "General Elections Info": "https://www.michigan.gov/sos/elections"
+ },
+ {
+  "state": 27,
+  "FP Code": 27,
+  "General Elections Info": "https://www.sos.state.mn.us/elections-voting/"
+ },
+ {
+  "state": 28,
+  "FP Code": 28,
+  "General Elections Info": "https://www.sos.ms.gov/elections-voting"
+ },
+ {
+  "state": 29,
+  "FP Code": 29,
+  "General Elections Info": "https://www.sos.mo.gov/elections/"
+ },
+ {
+  "state": 30,
+  "FP Code": 30,
+  "General Elections Info": "https://sosmt.gov/elections/"
+ },
+ {
+  "state": 31,
+  "FP Code": 31,
+  "General Elections Info": "https://designegov.nebraska.gov/featured/elections-voting/"
+ },
+ {
+  "state": 32,
+  "FP Code": 32,
+  "General Elections Info": "https://www.nvsos.gov/sos/elections"
+ },
+ {
+  "state": 33,
+  "FP Code": 33,
+  "General Elections Info": "https://www.sos.nh.gov/elections"
+ },
+ {
+  "state": 34,
+  "FP Code": 34,
+  "General Elections Info": "https://www.sos.nh.gov/elections"
+ },
+ {
+  "state": 35,
+  "FP Code": 35,
+  "General Elections Info": "https://www.sos.nm.gov/voting-and-elections/"
+ },
+ {
+  "state": 36,
+  "FP Code": 36,
+  "General Elections Info": "https://elections.ny.gov/election-information"
+ },
+ {
+  "state": 37,
+  "FP Code": 37,
+  "General Elections Info": "https://www.ncsbe.gov/"
+ },
+ {
+  "state": 38,
+  "FP Code": 38,
+  "General Elections Info": "https://www.sos.nd.gov/elections/voter"
+ },
+ {
+  "state": 39,
+  "FP Code": 39,
+  "General Elections Info": "https://www.ohiosos.gov/elections/"
+ },
+ {
+  "state": 40,
+  "FP Code": 40,
+  "General Elections Info": "https://oklahoma.gov/elections.html"
+ },
+ {
+  "state": 41,
+  "FP Code": 41,
+  "General Elections Info": "https://sos.oregon.gov/voting-elections/Pages/default.aspx"
+ },
+ {
+  "state": 42,
+  "FP Code": 42,
+  "General Elections Info": "https://www.pa.gov/en/agencies/vote.html"
+ },
+ {
+  "state": null,
+  "FP Code": 72,
+  "General Elections Info": "https://www.eac.gov/voters/puerto-rico-elections-office"
+ },
+ {
+  "state": 44,
+  "FP Code": 44,
+  "General Elections Info": "https://elections.ri.gov/"
+ },
+ {
+  "state": 45,
+  "FP Code": 45,
+  "General Elections Info": "https://scvotes.gov/"
+ },
+ {
+  "state": 46,
+  "FP Code": 46,
+  "General Elections Info": "https://sdsos.gov/elections-voting/upcoming-elections/general-information/default.aspx"
+ },
+ {
+  "state": 47,
+  "FP Code": 47,
+  "General Elections Info": "https://sos.tn.gov/elections"
+ },
+ {
+  "state": 48,
+  "FP Code": 48,
+  "General Elections Info": "https://sos.tn.gov/elections"
+ },
+ {
+  "state": 49,
+  "FP Code": 49,
+  "General Elections Info": "https://vote.utah.gov/"
+ },
+ {
+  "state": 50,
+  "FP Code": 50,
+  "General Elections Info": "https://sos.vermont.gov/elections/"
+ },
+ {
+  "state": 51,
+  "FP Code": 51,
+  "General Elections Info": "https://www.elections.virginia.gov/"
+ },
+ {
+  "state": null,
+  "FP Code": 78,
+  "General Elections Info": "https://vivote.gov/"
+ },
+ {
+  "state": 53,
+  "FP Code": 53,
+  "General Elections Info": "https://www.sos.wa.gov/elections"
+ },
+ {
+  "state": 54,
+  "FP Code": 54,
+  "General Elections Info": "https://sos.wv.gov/elections/Pages/GoVoteWV.aspx"
+ },
+ {
+  "state": 55,
+  "FP Code": 55,
+  "General Elections Info": "https://myvote.wi.gov/en-us/"
+ },
+ {
+  "state": 56,
+  "FP Code": 56,
+  "General Elections Info": "https://sos.wyo.gov/Elections/"
+ }
+]

@@ -4,7 +4,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { feature as topoFeature } from 'topojson-client';
 import statesData from 'us-atlas/states-10m.json';
-import { getDistrictColor, URBANICITY_CONFIG } from '../utils/districtUtils.js';
+import { getDistrictColor, URBANICITY_CONFIG, STATE_CENTROIDS } from '../utils/districtUtils.js';
 import './Map.css';
 
 const DISTRICT_TILESET  = import.meta.env.VITE_DISTRICT_TILESET  ?? null;
@@ -449,7 +449,17 @@ export default function Map({
       const f = sldFilter(selectedGeoid);
       try { map.setFilter(selLayerId, f); } catch (_) {}
       const features = map.querySourceFeatures(source, { filter: f, sourceLayer: srcLayer });
-      fitAndPopup(map, features, race, tab);
+      if (features.length) {
+        fitAndPopup(map, features, race, tab);
+      } else {
+        // District tiles not loaded yet — fly to state center, then retry on idle
+        const sc = STATE_CENTROIDS[race.state];
+        if (sc) map.flyTo({ center: [sc[1], sc[0]], zoom: 7, speed: 1.4, curve: 1.2 });
+        map.once('idle', () => {
+          const retry = map.querySourceFeatures(source, { filter: f, sourceLayer: srcLayer });
+          fitAndPopup(map, retry, race, tabRef.current);
+        });
+      }
     } else {
       setFState(map, source, selectedGeoid, { selected: true });
       const queryOpts = (DISTRICT_TILESET && tab === 'house')
@@ -630,7 +640,7 @@ function buildPopupHTML(race, tab) {
         ${urbanicityBadge}
       </div>
       ${subtitle ? `<div class="popup-subtitle">${subtitle}</div>` : ''}
-      <div class="popup-row"><span class="popup-label">Cook Rating</span><span class="popup-value">${cookLabel ?? '—'}</span></div>
+      ${cookLabel ? `<div class="popup-row"><span class="popup-label">2026 Rating</span><span class="popup-value">${cookLabel}</span></div>` : ''}
       ${marginLabel ? `<div class="popup-row"><span class="popup-label">Est. Margin</span><span class="popup-value">${marginLabel}</span></div>` : ''}
       <div class="popup-row">
         <span class="popup-label">Voter Power</span>
