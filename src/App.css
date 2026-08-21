@@ -2,5 +2,67 @@
   display: flex;
   flex-direction: column;
   height: 100vh;
+  height: 100svh; /* accounts for iOS Safari dynamic toolbar */
   overflow: hidden;
 }
+
+@media (max-width: 640px) {
+  .top-banner { padding: 0 14px; }
+  .top-banner-brand { font-size: 13px; }
+  .top-banner-donate { padding: 6px 12px; font-size: 12px; }
+}
+
+/* ── Top banner ──────────────────────────────────────────────────────────────── */
+.top-banner {
+  height: 46px;
+  flex-shrink: 0;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  z-index: 20;
+}
+
+.top-banner-brand {
+  font-size: 15px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.3px;
+}
+
+.top-banner-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.top-banner-about {
+  background: none;
+  border: none;
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-family: inherit;
+  transition: color 0.15s, background 0.15s;
+}
+.top-banner-about:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.top-banner-donate {
+  padding: 7px 15px;
+  background: #FF8F00;
+  color: #fff;
+  border-radius: 6px;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+.top-banner-donate:hover { background: #E67E00; }

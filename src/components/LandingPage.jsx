@@ -32,7 +32,6 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
   const suggestTimer = useRef(null);
   const suggestionsRef = useRef(null);
 
-  // Slide up on scroll down or swipe up
   useEffect(() => {
     let touchStartY = 0;
     const onWheel = (e) => { if (e.deltaY > 40 && !dismissing) startDismiss(); };
@@ -50,7 +49,6 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
     };
   }, [dismissing]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Hide suggestions on outside click
   useEffect(() => {
     function onDocClick(e) {
       if (
@@ -116,21 +114,56 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
       {/* Nav */}
       <nav className="landing-nav">
         <span className="landing-wordmark">Vote Maximizer 2026</span>
-        <button className="landing-nav-link" onClick={onAbout}>About</button>
+        <div className="landing-nav-right">
+          <button className="landing-nav-link" onClick={onAbout}>About</button>
+          <a
+            href="https://www.electoral-lab.org/donate"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="landing-nav-donate"
+          >
+            Donate →
+          </a>
+        </div>
       </nav>
 
       {/* Hero */}
       <div className="landing-hero">
-        <div className="landing-eyebrow anim-1">Vote Maximizer by The <a href="https://www.electoral-lab.org/" style={{ color: '#FF8F00', textDecoration: 'underline', textDecorationColor: 'rgba(255,143,0,0.4)' }}>Electoral Innovation Lab</a></div>
-        <h1 className="landing-headline anim-2">
-          Find the races where<br />your vote matters most.
-        </h1>
+        <h1 className="landing-main-title anim-1">Vote Maximizer 2026</h1>
+
+        <div className="landing-eyebrow anim-2">
+          By the{' '}
+          <a href="https://www.electoral-lab.org/" style={{ color: '#FF8F00', textDecoration: 'underline', textDecorationColor: 'rgba(255,143,0,0.4)' }}>
+            Electoral Innovation Lab
+          </a>
+        </div>
+
+        <h2 className="landing-headline anim-2">
+          Find the races where your vote matters most.
+        </h2>
+
         <p className="landing-sub anim-3">
-          Vote Maximizer is democracy moneyball for everyday people. It identifies the 2026 contests so close that a donation or canvassing shift can change the winner — giving you leverage where elections are most at risk.
+          Democracy moneyball for everyday people — identifying the 2026 contests where a donation or canvassing shift can change the winner.
         </p>
 
+        {/* Three pillars */}
+        <div className="landing-pillars anim-4">
+          <div className="landing-pillar">
+            <div className="landing-pillar-title">Democracy Moneyball</div>
+            <div className="landing-pillar-desc">Find races where a small donation has outsized impact. In a close contest, $50 shifts real campaign resources.</div>
+          </div>
+          <div className="landing-pillar">
+            <div className="landing-pillar-title">Election Hotspots</div>
+            <div className="landing-pillar-desc">See where canvassing shifts outcomes. A weekend of door-knocking in the right district can flip the race.</div>
+          </div>
+          <div className="landing-pillar">
+            <div className="landing-pillar-title">Civic Leverage</div>
+            <div className="landing-pillar-desc">Close races are where civic engagement matters most — and where protecting democracy has the biggest effect.</div>
+          </div>
+        </div>
+
         {/* Stat tagline */}
-        <p className="landing-tagline anim-4">
+        <p className="landing-tagline anim-5">
           <span className="landing-tagline-num">6,474</span> contests.{' '}
           <span className="landing-tagline-num">50</span> states.{' '}
           One question: where does one vote go furthest?
@@ -177,7 +210,7 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
           {error && <p className="landing-search-error">{error}</p>}
         </form>
 
-        <button className="landing-skip anim-5" onClick={() => startDismiss()}>
+        <button className="landing-skip anim-6" onClick={() => startDismiss()}>
           Browse the full map ↓
         </button>
       </div>

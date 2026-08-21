@@ -42,13 +42,13 @@ export function getGEOID(stateName, districtNum) {
   return fips + String(districtNum).padStart(2, '0');
 }
 
-// Warm gradient: light yellow → orange → red (high VP = more intense)
+// Warm gradient: amber → orange → red (high VP = more intense)
 export function getDistrictColor(voterPower) {
   if (voterPower === null || voterPower === undefined) return '#cbd5e1';
   const t = Math.min(1, Math.max(0, voterPower / 100));
-  const hue = Math.round(52 - t * 52);         // 52° (yellow) → 0° (red)
-  const saturation = Math.round(85 + t * 10);  // 85% → 95%
-  const lightness = Math.round(90 - t * 40);   // 90% → 50%
+  const hue = Math.round(42 - t * 42);         // 42° (amber) → 0° (red)
+  const saturation = Math.round(88 + t * 7);   // 88% → 95%
+  const lightness = Math.round(68 - t * 18);   // 68% → 50%
   return `hsl(${hue}, ${saturation}%, ${lightness}%)`;
 }
 

@@ -2,10 +2,11 @@
   position: relative;
   height: 50vh;
   flex-shrink: 0;
+  isolation: isolate;
 }
 
 @media (max-width: 640px) {
-  .map-wrapper { height: 42vh; }
+  .map-wrapper { height: 32vh; }
   .mapboxgl-ctrl-geocoder {
     min-width: 160px !important;
     max-width: calc(100vw - 110px) !important;
@@ -76,12 +77,11 @@
 .legend-gradient {
   height: 10px;
   border-radius: 5px;
-  /* Match the getDistrictColor hsl gradient */
   background: linear-gradient(
     to right,
-    hsl(52, 85%, 90%),
-    hsl(35, 92%, 72%),
-    hsl(15, 93%, 62%),
+    hsl(42, 88%, 68%),
+    hsl(28, 92%, 62%),
+    hsl(14, 94%, 56%),
     hsl(0, 95%, 50%)
   );
   margin-bottom: 4px;

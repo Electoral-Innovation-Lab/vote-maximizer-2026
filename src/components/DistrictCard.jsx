@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { getDistrictColor, COOK_CONFIG, URBANICITY_CONFIG } from '../utils/districtUtils.js';
+import { getDistrictColor, COOK_CONFIG } from '../utils/districtUtils.js';
 import './InfoBox.css';
 
 export default function DistrictCard({
@@ -19,7 +19,6 @@ export default function DistrictCard({
   };
   const vpColor = getDistrictColor(district.voterPower);
   const vpRounded = Math.round(district.voterPower);
-  const urbanicityCfg = URBANICITY_CONFIG[district.urbanicity];
 
   // Scroll into view when this card becomes hovered or selected externally
   useEffect(() => {
@@ -49,15 +48,6 @@ export default function DistrictCard({
       >
         {cookCfg.label}
       </span>
-
-      {urbanicityCfg && (
-        <span
-          className="card-urbanicity"
-          style={{ color: urbanicityCfg.color, background: urbanicityCfg.bg }}
-        >
-          {urbanicityCfg.label}
-        </span>
-      )}
 
       <div className="card-vp">
         <div className="vp-bar-track">

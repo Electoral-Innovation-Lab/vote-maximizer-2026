@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { getDistrictColor, COOK_CONFIG, URBANICITY_CONFIG, STATE_ABBR } from '../utils/districtUtils.js';
+import { getDistrictColor, COOK_CONFIG, STATE_ABBR } from '../utils/districtUtils.js';
 import './ContestDetail.css';
 
-// Which primary column applies to each raceType
 const PRIMARY_COL = {
   house:           'hasHouse',
   senate:          'hasSenate',
@@ -48,8 +47,6 @@ function filterOrgs(civicOrgs, race, userCounty) {
   });
 }
 
-// ── Helpers ───────────────────────────────────────────────────────────────────
-
 function cookCfg(cookRating) {
   return COOK_CONFIG[cookRating] ?? { label: cookRating, color: '#475569', bg: '#f1f5f9' };
 }
@@ -70,7 +67,34 @@ function getNearby(race, allRaces) {
   return others.slice(0, 3);
 }
 
-// ── Shared sub-components ─────────────────────────────────────────────────────
+// ── Voter Power hero (right panel large display) ──────────────────────────────
+function VPHero({ voterPower }) {
+  const color = getDistrictColor(voterPower);
+  const score = Math.round(voterPower);
+  const msg = score >= 70
+    ? 'One of the highest-impact races in the country — every vote and dollar here goes furthest.'
+    : score >= 40
+    ? 'A genuinely competitive race where your engagement can shift the outcome.'
+    : 'A lower-margin race. Down-ballot organizing and local turnout still matter here.';
+  return (
+    <div className="cd-vp-hero">
+      <div className="cd-vp-hero-top">
+        <div className="cd-vp-hero-label-row">
+          <span className="cd-vp-hero-label">Voter Power</span>
+          <span
+            className="cd-vp-tooltip"
+            title="Voter Power measures how much impact each individual vote has in this race — based on how competitive it is and how many people vote."
+          >?</span>
+        </div>
+        <span className="cd-vp-hero-score" style={{ color }}>{score}</span>
+      </div>
+      <div className="cd-vp-hero-bar-track">
+        <div className="cd-vp-hero-bar-fill" style={{ width: `${score}%`, background: color }} />
+      </div>
+      <p className="cd-vp-hero-msg">{msg}</p>
+    </div>
+  );
+}
 
 function VPBar({ voterPower }) {
   const color = getDistrictColor(voterPower);
@@ -112,7 +136,6 @@ function OrgList({ orgs, label, limit }) {
 
 function MiniCard({ race, rank, onClick }) {
   const cfg = cookCfg(race.cookRating);
-  const urbanicityCfg = URBANICITY_CONFIG[race.urbanicity];
   return (
     <button className="cd-mini-card" onClick={onClick}>
       <span className="cd-mini-rank">{rank}</span>
@@ -120,12 +143,9 @@ function MiniCard({ race, rank, onClick }) {
         <span className="cd-mini-label">{race.label}</span>
         <span className="cd-mini-state">{race.state}</span>
       </div>
-      <span className="cd-mini-cook" style={{ color: cfg.color, background: cfg.bg }}>
-        {cfg.label}
-      </span>
-      {urbanicityCfg && (
-        <span className="cd-mini-cook" style={{ color: urbanicityCfg.color, background: urbanicityCfg.bg }}>
-          {urbanicityCfg.label}
+      {race.cookRating && (
+        <span className="cd-mini-cook" style={{ color: cfg.color, background: cfg.bg }}>
+          {cfg.label}
         </span>
       )}
       <span className="cd-mini-vp" style={{ color: getDistrictColor(race.voterPower) }}>
@@ -157,8 +177,6 @@ function ComparePicker({ current, allRaces, onPick, onCancel }) {
 function CompareView({ raceA, raceB, onClose, orgs }) {
   const cfgA = cookCfg(raceA.cookRating);
   const cfgB = cookCfg(raceB.cookRating);
-  const urbA = URBANICITY_CONFIG[raceA.urbanicity];
-  const urbB = URBANICITY_CONFIG[raceB.urbanicity];
 
   const rows = [
     raceA.cookRating || raceB.cookRating
@@ -181,14 +199,12 @@ function CompareView({ raceA, raceB, onClose, orgs }) {
           <span className="cd-cmp-label">{raceA.label}</span>
           <span className="cd-cmp-state">{raceA.state}</span>
           {raceA.cookRating && <span className="cd-cmp-cook" style={{ color: cfgA.color, background: cfgA.bg }}>{cfgA.label}</span>}
-          {urbA && <span className="cd-cmp-cook" style={{ color: urbA.color, background: urbA.bg }}>{urbA.label}</span>}
         </div>
         <div className="cd-cmp-vs">vs</div>
         <div className="cd-cmp-col">
           <span className="cd-cmp-label">{raceB.label}</span>
           <span className="cd-cmp-state">{raceB.state}</span>
           {raceB.cookRating && <span className="cd-cmp-cook" style={{ color: cfgB.color, background: cfgB.bg }}>{cfgB.label}</span>}
-          {urbB && <span className="cd-cmp-cook" style={{ color: urbB.color, background: urbB.bg }}>{urbB.label}</span>}
         </div>
       </div>
 
@@ -214,17 +230,29 @@ function CompareView({ raceA, raceB, onClose, orgs }) {
         ))}
       </div>
 
-      <div className="cd-section">
-        <h3 className="cd-section-title">Get Involved</h3>
-        <OrgList orgs={orgs?.filter((o) => o.level === 'national')} label={null} />
-      </div>
+      {orgs?.length > 0 && (
+        <div className="cd-section">
+          <h3 className="cd-section-title">Get Involved</h3>
+          <OrgList orgs={orgs.filter((o) => o.level === 'national')} label={null} />
+        </div>
+      )}
     </div>
   );
 }
 
 // ── Main detail view ──────────────────────────────────────────────────────────
 
-export default function ContestDetail({ race, allRaces, onBack, onSelect, civicOrgs, primaryCalendar, userCounty, parties }) {
+export default function ContestDetail({
+  race,
+  allRaces,
+  onBack,
+  onSelect,
+  civicOrgs,
+  primaryCalendar,
+  userCounty,
+  parties,
+  hideOrgs,
+}) {
   const [compareRace, setCompareRace] = useState(null);
   const [picking, setPicking] = useState(false);
 
@@ -234,7 +262,7 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
   }, [race?.geoid]);
 
   if (compareRace) {
-    const compareOrgs = filterOrgs(civicOrgs, race, userCounty);
+    const compareOrgs = hideOrgs ? [] : filterOrgs(civicOrgs, race, userCounty);
     return <CompareView raceA={race} raceB={compareRace} onClose={() => setCompareRace(null)} orgs={compareOrgs} />;
   }
 
@@ -250,7 +278,6 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
   }
 
   const cfg = cookCfg(race.cookRating);
-  const urbanicityCfg = URBANICITY_CONFIG[race.urbanicity];
   const nearby = getNearby(race, allRaces);
   const isHouse = race.districtNum !== undefined;
   const nearbyTitle = isHouse && allRaces.some((r) => r.geoid !== race.geoid && r.state === race.state)
@@ -258,11 +285,15 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
     : 'Other high-impact contests';
 
   const primaryBadge = getPrimaryBadge(primaryCalendar, race);
-  const orgs = filterOrgs(civicOrgs, race, userCounty);
 
-  const stateParties = filterParties(parties, race);
+  // Higher-VP races from same pool (shown when hideOrgs=true, i.e. right panel)
+  const higherVpRaces = hideOrgs
+    ? allRaces.filter((r) => r.geoid !== race.geoid && r.voterPower > race.voterPower).slice(0, 3)
+    : [];
 
-  // Group: county-level first, then state, then national
+  // Full org list (for legacy single-panel mode)
+  const orgs = hideOrgs ? [] : filterOrgs(civicOrgs, race, userCounty);
+  const stateParties = hideOrgs ? [] : filterParties(parties, race);
   const localOrgs    = orgs.filter((o) => o.level === 'county');
   const stateOrgs    = orgs.filter((o) => o.level === 'state');
   const nationalOrgs = orgs.filter((o) => o.level === 'national');
@@ -283,14 +314,8 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
             {race.cookRating && (
               <span className="cd-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
             )}
-            {urbanicityCfg && (
-              <span className="cd-urbanicity" style={{ color: urbanicityCfg.color, background: urbanicityCfg.bg }}>
-                {urbanicityCfg.label}
-              </span>
-            )}
           </div>
         </div>
-        <VPBar voterPower={race.voterPower} />
         {formatMargin(race.margin) && (
           <div className="cd-meta">
             <span>Est. Margin: <strong>{formatMargin(race.margin)}</strong></span>
@@ -302,6 +327,16 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
           </div>
         )}
       </div>
+
+      {/* ── Voter Power (hero when hideOrgs, compact otherwise) ── */}
+      {hideOrgs ? (
+        <VPHero voterPower={race.voterPower} />
+      ) : (
+        <div className="cd-section">
+          <h3 className="cd-section-title">Voter Power</h3>
+          <VPBar voterPower={race.voterPower} />
+        </div>
+      )}
 
       {/* ── Candidates ── */}
       {(race.dCandidate || race.rCandidate) && (
@@ -331,20 +366,32 @@ export default function ContestDetail({ race, allRaces, onBack, onSelect, civicO
         </div>
       )}
 
-      {/* ── Get Involved ── */}
-      <div className="cd-section">
-        <h3 className="cd-section-title">Get Involved</h3>
-        <OrgList orgs={localOrgs} label={localOrgs.length ? 'In your area' : null} />
-        <OrgList orgs={stateParties} label={stateParties.length ? 'State parties' : null} />
-        <OrgList orgs={stateOrgs} label={stateOrgs.length ? 'Statewide' : null} />
-        <OrgList orgs={nationalOrgs} label={nationalOrgs.length ? 'National' : null} limit={3} />
-        {!orgs.length && !stateParties.length && (
-          <div className="cd-org-empty">Resources loading…</div>
-        )}
-      </div>
+      {/* ── Higher VP nearby (right panel only) ── */}
+      {higherVpRaces.length > 0 && (
+        <div className="cd-section">
+          <h3 className="cd-section-title">Higher voter power nearby</h3>
+          {higherVpRaces.map((r, i) => (
+            <MiniCard key={`higher-${r.raceType}-${r.geoid}`} race={r} rank={i + 1} onClick={() => onSelect(r.geoid)} />
+          ))}
+        </div>
+      )}
 
-      {/* ── Nearby contests ── */}
-      {nearby.length > 0 && (
+      {/* ── Get Involved (legacy single-panel mode only) ── */}
+      {!hideOrgs && (
+        <div className="cd-section">
+          <h3 className="cd-section-title">Get Involved</h3>
+          <OrgList orgs={localOrgs}    label={localOrgs.length    ? 'In your area' : null} />
+          <OrgList orgs={stateParties} label={stateParties.length ? 'State parties' : null} />
+          <OrgList orgs={stateOrgs}    label={stateOrgs.length    ? 'Statewide'    : null} />
+          <OrgList orgs={nationalOrgs} label={nationalOrgs.length ? 'National'     : null} limit={3} />
+          {!orgs.length && !stateParties.length && (
+            <div className="cd-org-empty">Resources loading…</div>
+          )}
+        </div>
+      )}
+
+      {/* ── Nearby contests (legacy mode only) ── */}
+      {!hideOrgs && nearby.length > 0 && (
         <div className="cd-section">
           <h3 className="cd-section-title">{nearbyTitle}</h3>
           {nearby.map((r, i) => (

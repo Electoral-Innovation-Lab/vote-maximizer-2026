@@ -1,6 +1,25 @@
 import { useState, useEffect, useCallback, useRef, useMemo } from 'react';
 import Map from './components/Map.jsx';
 import InfoBox from './components/InfoBox.jsx';
+
+function TopBanner({ onAbout }) {
+  return (
+    <div className="top-banner">
+      <span className="top-banner-brand">Vote Maximizer 2026</span>
+      <div className="top-banner-actions">
+        <button className="top-banner-about" onClick={onAbout}>About</button>
+        <a
+          href="https://www.electoral-lab.org/donate"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="top-banner-donate"
+        >
+          Donate →
+        </a>
+      </div>
+    </div>
+  );
+}
 import LandingPage from './components/LandingPage.jsx';
 import AboutPage from './components/AboutPage.jsx';
 import {
@@ -13,7 +32,7 @@ import { STATE_CENTROIDS, haversineDistance } from './utils/districtUtils.js';
 import './App.css';
 
 const RADIUS_HOUSE_MI = 200;
-const RADIUS_STATE_MI = 450;
+const RADIUS_STATE_MI = 300;
 
 const STATEWIDE_TYPES = ['senate', 'governor', 'ag', 'sos', 'judicial', 'ballot'];
 
@@ -36,7 +55,8 @@ function findNearbyRaces(lat, lng, datasets, districtCentroids) {
     }
   }
 
-  return nearby.sort((a, b) => a.distance - b.distance || b.voterPower - a.voterPower);
+  const score = (r) => 0.7 * (1 - Math.min(r.distance, 500) / 500) + 0.3 * (r.voterPower / 100);
+  return nearby.sort((a, b) => score(b) - score(a));
 }
 
 function parseUrlParams() {
@@ -226,6 +246,19 @@ export default function App() {
     setDistrictCentroids(centroids);
   }, []);
 
+  // Re-run nearby search once centroids load, in case the user searched before the map fired
+  const centroidsReadyRef = useRef(false);
+  const searchCoordsRef = useRef(null);
+  useEffect(() => { searchCoordsRef.current = searchCoords; }, [searchCoords]);
+  useEffect(() => {
+    if (centroidsReadyRef.current || !Object.keys(districtCentroids).length) return;
+    centroidsReadyRef.current = true;
+    const coords = searchCoordsRef.current;
+    if (coords) {
+      setNearbyRaces(findNearbyRaces(coords.lat, coords.lng, allDatasets, districtCentroids));
+    }
+  }, [districtCentroids, allDatasets]);
+
   const handleSldCentroidsReady = useCallback((mapTab, centroids) => {
     if (mapTab === 'sld_upper') setSldUpperCentroids((prev) => ({ ...prev, ...centroids }));
     else if (mapTab === 'sld_lower') setSldLowerCentroids((prev) => ({ ...prev, ...centroids }));
@@ -259,6 +292,7 @@ export default function App() {
   return (
     <>
       <div className="app">
+        <TopBanner onAbout={() => setShowAbout(true)} />
         <Map
           raceData={mapRaceData}
           tab={mapTab}

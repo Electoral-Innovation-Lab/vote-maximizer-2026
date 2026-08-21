@@ -501,3 +501,107 @@
   text-align: left;
 }
 .cd-org-more:hover { text-decoration: underline; }
+
+/* ── Voter Power hero (right-panel large display) ───────────────────────────── */
+.cd-vp-hero {
+  padding: 14px 14px 12px;
+  border-bottom: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.cd-vp-hero-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.cd-vp-hero-label-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding-top: 6px;
+}
+
+.cd-vp-hero-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: #94a3b8;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.cd-vp-tooltip {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #e2e8f0;
+  color: #64748b;
+  font-size: 9px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: default;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.cd-vp-tooltip:hover::after {
+  content: attr(title);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  background: #0f172a;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.4;
+  padding: 7px 10px;
+  border-radius: 6px;
+  width: 200px;
+  white-space: normal;
+  z-index: 100;
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.cd-vp-hero-score {
+  font-size: 52px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -3px;
+}
+
+.cd-vp-hero-bar-track {
+  height: 8px;
+  background: #f1f5f9;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.cd-vp-hero-bar-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.cd-vp-hero-msg {
+  font-size: 11px;
+  color: #475569;
+  line-height: 1.5;
+  margin: 0;
+}
+
+/* ── Mobile ────────────────────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  .cd-label { font-size: 15px; }
+  .cd-section { padding: 10px 12px; }
+  .cd-vp-hero { padding: 10px 12px 10px; }
+  .cd-vp-hero-score { font-size: 40px; letter-spacing: -2px; }
+  .cd-cmp-table { padding: 0 10px 4px; overflow-x: auto; }
+  .cd-header { padding: 8px 12px 10px; }
+  .cd-back { padding: 8px 12px 6px; }
+}
