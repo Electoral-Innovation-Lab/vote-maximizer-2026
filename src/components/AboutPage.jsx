@@ -4,7 +4,7 @@ const SECTIONS = [
   {
     num: '01',
     title: 'What is Vote Maximizer?',
-    body: `Vote Maximizer identifies high-impact races across three lenses: Democracy Moneyball (where to donate), Election Hotspots (where to canvass), and Civic Leverage (which elections are most at risk).
+    body: `Vote Maximizer identifies high-impact races across three lenses: Democracy Moneyball (where to donate), Election Hotspots (where to canvass), and Election Protection (which elections are most at risk).
 
     Vote Maximizer uses mathematical and strategic analysis to find the 2026 contests where your donation, canvassing hours, or vote will have the greatest impact. Our tool centers on the individual voter — giving you the kind of rigorous strategic analysis that campaign teams use, so you can direct your time and money where they'll make the most difference.
 

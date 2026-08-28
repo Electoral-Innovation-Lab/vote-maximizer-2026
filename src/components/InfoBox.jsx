@@ -182,7 +182,7 @@ function ActionPane({ race, civicOrgs, primaryCalendar, partiesData, allRaces, a
         </div>
 
         <div className="action-section">
-          <div className="action-section-label">Civic Leverage</div>
+          <div className="action-section-label">Election Protection</div>
           <p className="action-section-body">
             {isHighVP
               ? 'Close races are where election integrity matters most. Volunteer as a poll worker or observer to protect this race.'
@@ -227,7 +227,7 @@ function DescriptionPane() {
         <p className="info-desc-body">Canvass where it counts. High-scoring races are where a weekend shift can actually change the outcome — door-knocking, phone banking, or text banking.</p>
       </div>
       <div className="info-desc-section">
-        <span className="info-desc-heading">Civic Leverage</span>
+        <span className="info-desc-heading">Election Protection</span>
         <p className="info-desc-body">Close races are where election integrity matters most. Serve as a poll worker, join a local organization, and protect the vote where it counts.</p>
       </div>
     </div>

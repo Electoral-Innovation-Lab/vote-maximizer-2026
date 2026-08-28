@@ -157,8 +157,8 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
             <div className="landing-pillar-desc">See where canvassing shifts outcomes. A weekend of door-knocking in the right district can flip the race.</div>
           </div>
           <div className="landing-pillar">
-            <div className="landing-pillar-title">Civic Leverage</div>
-            <div className="landing-pillar-desc">Close races are where civic engagement matters most — and where protecting democracy has the biggest effect.</div>
+            <div className="landing-pillar-title">Election Protection</div>
+            <div className="landing-pillar-desc">Close races are where election integrity matters most — and where protecting democracy has the biggest effect.</div>
           </div>
         </div>
 
