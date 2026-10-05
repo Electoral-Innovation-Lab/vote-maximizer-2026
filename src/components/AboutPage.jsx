@@ -4,7 +4,7 @@ const SECTIONS = [
   {
     num: '01',
     title: 'What is Vote Maximizer?',
-    body: `Vote Maximizer identifies high-impact races across three lenses: Democracy Moneyball (where to donate), Election Hotspots (where to canvass), and Election Protection (which elections are most at risk).
+    body: `Vote Maximizer identifies high-impact races across three lenses: Democracy Moneyball (where to donate, with a Donation Power score for House and Senate races showing where each dollar goes furthest), Election Hotspots (where to canvass), and Election Protection (which elections are most at risk).
 
     Vote Maximizer uses mathematical and strategic analysis to find the 2026 contests where your donation, canvassing hours, or vote will have the greatest impact. Our tool centers on the individual voter — giving you the kind of rigorous strategic analysis that campaign teams use, so you can direct your time and money where they'll make the most difference.
 
@@ -31,7 +31,7 @@ const SECTIONS = [
     title: 'Data Sources',
     body: `Senate and governor margins come from polling: the FiftyPlusOne polling average where one is published, otherwise the median of the three most recent polls from the last 60 days (campaign internal polls are weighted toward each state's partisan lean). Races with little or no polling — and the House, state, judicial and legislative races — use partisan lean (Cook PVI) or recent results, adjusted for incumbency and a national environment of D+12.5. Each race shows a "Polling" or "Estimate" badge.
 
-    Donation power uses the same closeness measure divided by the money the nominees have already raised, from Federal Election Commission filings. Polling data: Powered by FiftyPlusOne (fiftyplusone.news).`,
+    Donation power uses the same closeness measure divided by the money the nominees have already raised, from Federal Election Commission filings. Polling data: Powered by FiftyPlusOne.`,
   },
   // {
   //   num: '05',

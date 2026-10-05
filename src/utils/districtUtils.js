@@ -89,17 +89,46 @@ export const URBANICITY_CONFIG = {
   rural:    { label: 'Rural',    color: '#65a30d', bg: '#ecfccb' },
 };
 
-export const COOK_CONFIG = {
-  'toss-up':  { label: 'Toss-Up',  color: '#92400e', bg: '#fef3c7' },
-  'lean-D':   { label: 'Lean D',   color: '#1e40af', bg: '#dbeafe' },
-  'lean-R':   { label: 'Lean R',   color: '#991b1b', bg: '#fee2e2' },
-  'likely-D': { label: 'Likely D', color: '#1e3a8a', bg: '#bfdbfe' },
-  'likely-R': { label: 'Likely R', color: '#7f1d1d', bg: '#fecaca' },
-  'solid-D':  { label: 'Solid D',  color: '#1e3a8a', bg: '#93c5fd' },
-  'solid-R':  { label: 'Solid R',  color: '#7f1d1d', bg: '#fca5a5' },
-  retention:    { label: 'Retention',   color: '#3f3f46', bg: '#e4e4e7' },
-  nonpartisan:  { label: 'Nonpartisan', color: '#3f3f46', bg: '#e4e4e7' },
+// ── Competitiveness label, computed from our own margin estimate ─────────────
+export const COMPETITIVENESS_TITLE = 'Our estimate';
+export const COMPETITIVENESS_TOOLTIP =
+  'Based on our current margin estimate (polls where available, otherwise partisan baseline + national environment). Not a Cook/Sabato rating.';
+
+const TIER_COLORS = {
+  'Toss-up': { color: '#92400e', bg: '#fef3c7' },
+  Lean:   { D: ['#1e40af', '#dbeafe'], R: ['#991b1b', '#fee2e2'], I: ['#0f766e', '#ccfbf1'] },
+  Likely: { D: ['#1e3a8a', '#bfdbfe'], R: ['#7f1d1d', '#fecaca'], I: ['#115e59', '#99f6e4'] },
+  Safe:   { D: ['#1e3a8a', '#93c5fd'], R: ['#7f1d1d', '#fca5a5'], I: ['#134e4a', '#5eead4'] },
 };
+
+export const COMPETITIVENESS_CONFIG = { 'Toss-up': { label: 'Toss-up', ...TIER_COLORS['Toss-up'] } };
+for (const tier of ['Lean', 'Likely', 'Safe']) {
+  for (const party of ['D', 'R', 'I']) {
+    const [color, bg] = TIER_COLORS[tier][party];
+    COMPETITIVENESS_CONFIG[`${tier} ${party}`] = { label: `${tier} ${party}`, color, bg };
+  }
+}
+
+// Sort order for the list: closest first, then D / R / I within a tier.
+export const COMPETITIVENESS_ORDER = Object.keys(COMPETITIVENESS_CONFIG);
+
+export function competitivenessConfig(label) {
+  return COMPETITIVENESS_CONFIG[label] ?? { label, color: '#475569', bg: '#f1f5f9' };
+}
+
+// Positive margin = D (or the leading non-R challenger); negative = R.
+export function competitivenessLabel(race) {
+  if (race.margin == null || race.unopposed || race.raceType === 'ballot') return null;
+  const abs = Math.abs(race.margin);
+  if (abs < 3) return 'Toss-up';
+  const tier = abs < 7 ? 'Lean' : abs < 12 ? 'Likely' : 'Safe';
+  let party = 'R';
+  if (race.margin > 0) {
+    const parties = (race.candidates ?? []).map((c) => c.party);
+    party = !parties.includes('D') && parties.includes('I') ? 'I' : 'D';
+  }
+  return `${tier} ${party}`;
+}
 
 // ── Margin text shared by the detail panel, compare view and map popup ───────
 // Prefers the exported margin_display ("D+2.2", "R+0.4", "I+0.8", "Yes+4.0", "Unopposed")
@@ -122,8 +151,18 @@ export function formatMarginText(race) {
   return margin > 0 ? `+${abs} Dem` : `+${abs} Rep`;
 }
 
-// Per-dollar power is shown only where the race is also competitive; otherwise a
-// cheap long shot would top the donor ranking.
-export const DONATION_VP_MIN = 50;
+// Metric used to rank / color contests. Add new entries here to expose another score.
+export const METRICS = {
+  voter:    { label: 'Voter Power',    short: 'Voter Power' },
+  donation: { label: 'Donation Power', short: 'Donation' },
+};
+
+// Score (0-100) for a race under a metric, or null when the metric doesn't apply to it.
+export function getScore(race, metric = 'voter') {
+  if (metric === 'donation') {
+    return race.perDollarPower ?? null;
+  }
+  return race.voterPower;
+}
 
 export const FIFTYPLUSONE_URL = 'https://fiftyplusone.news';

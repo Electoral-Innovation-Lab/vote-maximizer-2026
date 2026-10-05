@@ -150,7 +150,7 @@ export default function LandingPage({ onDismiss, onSearch, onAbout }) {
         <div className="landing-pillars anim-4">
           <div className="landing-pillar">
             <div className="landing-pillar-title">Democracy Moneyball</div>
-            <div className="landing-pillar-desc">Find races where a small donation has outsized impact. In a close contest, $50 shifts real campaign resources.</div>
+            <div className="landing-pillar-desc">Find races where a small donation has outsized impact. Our Donation Power score ranks House and Senate races by how far each dollar goes. In a close, under-funded contest, $50 shifts real campaign resources.</div>
           </div>
           <div className="landing-pillar">
             <div className="landing-pillar-title">Election Hotspots</div>

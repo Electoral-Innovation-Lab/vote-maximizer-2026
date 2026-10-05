@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getDistrictColor, COOK_CONFIG, STATE_ABBR, formatMarginText, DONATION_VP_MIN, FIFTYPLUSONE_URL } from '../utils/districtUtils.js';
+import { getDistrictColor, competitivenessConfig, COMPETITIVENESS_TITLE, COMPETITIVENESS_TOOLTIP, STATE_ABBR, formatMarginText, FIFTYPLUSONE_URL } from '../utils/districtUtils.js';
 import './ContestDetail.css';
 
 const PRIMARY_COL = {
@@ -47,9 +47,8 @@ function filterOrgs(civicOrgs, race, userCounty) {
   });
 }
 
-function cookCfg(cookRating) {
-  return COOK_CONFIG[cookRating] ?? { label: cookRating, color: '#475569', bg: '#f1f5f9' };
-}
+const cookCfg = competitivenessConfig;
+const COMPETITIVENESS_HINT = `${COMPETITIVENESS_TITLE}: ${COMPETITIVENESS_TOOLTIP}`;
 
 const formatMargin = formatMarginText;
 
@@ -93,7 +92,7 @@ function WinProbability({ race }) {
 }
 
 function DonationPower({ race }) {
-  if (race.perDollarPower == null || race.voterPower < DONATION_VP_MIN) return null;
+  if (race.perDollarPower == null) return null;
   const color = getDistrictColor(race.perDollarPower);
   return (
     <div className="cd-section">
@@ -122,10 +121,9 @@ function DonationPower({ race }) {
 
 function DataNotes({ race }) {
   const poll = race.sourceKind === 'poll';
-  if (!race.caveats && !race.lastVerified && !poll) return null;
+  if (!race.lastVerified && !poll) return null;
   return (
     <div className="cd-data-notes">
-      {race.caveats && <p className="cd-caveats">{race.caveats}</p>}
       <p className="cd-data-meta">
         {race.lastVerified && <>Last verified {race.lastVerified}. </>}
         {poll && (
@@ -213,7 +211,7 @@ function OrgList({ orgs, label, limit }) {
 }
 
 function MiniCard({ race, rank, onClick }) {
-  const cfg = cookCfg(race.cookRating);
+  const cfg = cookCfg(race.competitiveness);
   return (
     <button className="cd-mini-card" onClick={onClick}>
       <span className="cd-mini-rank">{rank}</span>
@@ -221,8 +219,8 @@ function MiniCard({ race, rank, onClick }) {
         <span className="cd-mini-label">{race.label}</span>
         <span className="cd-mini-state">{race.state}</span>
       </div>
-      {race.cookRating && (
-        <span className="cd-mini-cook" style={{ color: cfg.color, background: cfg.bg }}>
+      {race.competitiveness && (
+        <span className="cd-mini-cook" style={{ color: cfg.color, background: cfg.bg }} title={COMPETITIVENESS_HINT}>
           {cfg.label}
         </span>
       )}
@@ -245,7 +243,7 @@ function ComparePicker({ current, allRaces, onPick, onCancel }) {
       </div>
       <div className="cd-picker-list">
         {options.map((r, i) => (
-          <MiniCard key={r.geoid} race={r} rank={i + 1} onClick={() => onPick(r)} />
+          <MiniCard key={r.id ?? r.geoid} race={r} rank={i + 1} onClick={() => onPick(r)} />
         ))}
       </div>
     </div>
@@ -253,12 +251,12 @@ function ComparePicker({ current, allRaces, onPick, onCancel }) {
 }
 
 function CompareView({ raceA, raceB, onClose, orgs }) {
-  const cfgA = cookCfg(raceA.cookRating);
-  const cfgB = cookCfg(raceB.cookRating);
+  const cfgA = cookCfg(raceA.competitiveness);
+  const cfgB = cookCfg(raceB.competitiveness);
 
   const rows = [
-    raceA.cookRating || raceB.cookRating
-      ? { label: '2026 Rating', a: cfgA.label, b: cfgB.label }
+    raceA.competitiveness || raceB.competitiveness
+      ? { label: COMPETITIVENESS_TITLE, a: raceA.competitiveness ?? '—', b: raceB.competitiveness ?? '—', hint: COMPETITIVENESS_TOOLTIP }
       : null,
     { label: 'Projected Margin', a: formatMargin(raceA), b: formatMargin(raceB) },
     { label: 'Data Source', a: sourceLabel(raceA), b: sourceLabel(raceB) },
@@ -279,13 +277,13 @@ function CompareView({ raceA, raceB, onClose, orgs }) {
         <div className="cd-cmp-col">
           <span className="cd-cmp-label">{raceA.label}</span>
           <span className="cd-cmp-state">{raceA.state}</span>
-          {raceA.cookRating && <span className="cd-cmp-cook" style={{ color: cfgA.color, background: cfgA.bg }}>{cfgA.label}</span>}
+          {raceA.competitiveness && <span className="cd-cmp-cook" style={{ color: cfgA.color, background: cfgA.bg }} title={COMPETITIVENESS_HINT}>{cfgA.label}</span>}
         </div>
         <div className="cd-cmp-vs">vs</div>
         <div className="cd-cmp-col">
           <span className="cd-cmp-label">{raceB.label}</span>
           <span className="cd-cmp-state">{raceB.state}</span>
-          {raceB.cookRating && <span className="cd-cmp-cook" style={{ color: cfgB.color, background: cfgB.bg }}>{cfgB.label}</span>}
+          {raceB.competitiveness && <span className="cd-cmp-cook" style={{ color: cfgB.color, background: cfgB.bg }} title={COMPETITIVENESS_HINT}>{cfgB.label}</span>}
         </div>
       </div>
 
@@ -302,9 +300,9 @@ function CompareView({ raceA, raceB, onClose, orgs }) {
           <div className="cd-cmp-row-val"><VPBar voterPower={raceB.voterPower} /></div>
         </div>
 
-        {rows.map(({ label, a, b }) => (
+        {rows.map(({ label, a, b, hint }) => (
           <div className="cd-cmp-row" key={label}>
-            <span className="cd-cmp-row-label">{label}</span>
+            <span className="cd-cmp-row-label" title={hint}>{label}</span>
             <span className="cd-cmp-row-val">{a}</span>
             <span className="cd-cmp-row-val">{b}</span>
           </div>
@@ -358,7 +356,7 @@ export default function ContestDetail({
     );
   }
 
-  const cfg = cookCfg(race.cookRating);
+  const cfg = cookCfg(race.competitiveness);
   const nearby = getNearby(race, allRaces);
   const isHouse = race.districtNum !== undefined;
   const nearbyTitle = isHouse && allRaces.some((r) => r.geoid !== race.geoid && r.state === race.state)
@@ -392,8 +390,8 @@ export default function ContestDetail({
             {!isHouse && <span className="cd-race-name">{race.race}</span>}
           </div>
           <div className="cd-header-badges">
-            {race.cookRating && (
-              <span className="cd-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
+            {race.competitiveness && (
+              <span className="cd-cook" style={{ color: cfg.color, background: cfg.bg }} title={COMPETITIVENESS_HINT}>{cfg.label}</span>
             )}
           </div>
         </div>
@@ -462,7 +460,7 @@ export default function ContestDetail({
         <div className="cd-section">
           <h3 className="cd-section-title">Higher voter power nearby</h3>
           {higherVpRaces.map((r, i) => (
-            <MiniCard key={`higher-${r.raceType}-${r.geoid}`} race={r} rank={i + 1} onClick={() => onSelect(r.geoid)} />
+            <MiniCard key={`higher-${r.id ?? r.geoid}`} race={r} rank={i + 1} onClick={() => onSelect(r.geoid, r.id)} />
           ))}
         </div>
       )}
@@ -486,7 +484,7 @@ export default function ContestDetail({
         <div className="cd-section">
           <h3 className="cd-section-title">{nearbyTitle}</h3>
           {nearby.map((r, i) => (
-            <MiniCard key={`${r.raceType}-${r.geoid}`} race={r} rank={i + 1} onClick={() => onSelect(r.geoid)} />
+            <MiniCard key={r.id ?? `${r.raceType}-${r.geoid}`} race={r} rank={i + 1} onClick={() => onSelect(r.geoid, r.id)} />
           ))}
         </div>
       )}

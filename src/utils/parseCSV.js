@@ -1,5 +1,5 @@
 import Papa from 'papaparse';
-import { STATE_ABBR, AT_LARGE_STATES } from './districtUtils.js';
+import { STATE_ABBR, AT_LARGE_STATES, getScore, competitivenessLabel } from './districtUtils.js';
 
 // All model data comes from the Vote Maximizer JSON export (vm_export_json.py), copied into
 // public/data/. See public/data/schema.json for field definitions and manifest.json for the
@@ -22,18 +22,17 @@ function firstCand(cands, party) {
 }
 
 // Map one exported race record onto the object shape the components already use,
-// plus the new fields (win probability, donation power, margin source, caveats).
+// plus the new fields (win probability, donation power, margin source).
 function toRace(r, raceType, extra) {
   const cands = r.candidates ?? [];
   const marginSource = r.margin_source ?? null;
   const sourceKind = POLL_SOURCES.has(marginSource) ? 'poll' : 'estimate';
-  return {
+  const race = {
     id: r.id,
     state: r.state,
     race: r.election_name,
     raceType,
     voterPower: num(r.voter_power) ?? 0,
-    cookRating: r.rating ?? null,
     margin: num(r.margin),
     marginDisplay: r.margin_display ?? null,
     marginSource,
@@ -51,11 +50,12 @@ function toRace(r, raceType, extra) {
     rLink: r.links?.R ?? null,
     incumbent: r.incumbent ?? null,
     notes: r.notes ?? null,
-    caveats: r.caveats ?? null,
     lastVerified: r.last_verified ?? null,
     unopposed: !!r.unopposed,
     ...extra,
   };
+  race.competitiveness = competitivenessLabel(race);
+  return race;
 }
 
 async function loadRaces(file, raceType, extraFn) {
@@ -101,7 +101,6 @@ export function loadBallotRaces() {
     geoid: r.state_fips ?? '00',
     label: r.detail?.measure_name || r.state,
     race: r.detail?.ballot_type || 'Ballot Initiative',
-    cookRating: null,
     notes: r.detail?.qualification_status ? String(r.detail.qualification_status).slice(0, 200) : null,
   }));
 }
@@ -191,10 +190,11 @@ export async function loadUrbanicity() {
 }
 
 // For map: aggregate state_leg races to one entry per state (max VP)
-export function aggregateByState(races) {
+export function aggregateByState(races, metric = 'voter') {
   const byState = {};
+  const score = (r) => getScore(r, metric) ?? -1;
   for (const r of races) {
-    if (!byState[r.geoid] || r.voterPower > byState[r.geoid].voterPower) {
+    if (!byState[r.geoid] || score(r) > score(byState[r.geoid])) {
       byState[r.geoid] = r;
     }
   }

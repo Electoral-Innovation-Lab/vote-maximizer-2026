@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import DistrictCard from './DistrictCard.jsx';
 import ContestDetail from './ContestDetail.jsx';
-import { COOK_CONFIG, getDistrictColor, STATE_CENTROIDS, haversineDistance, DONATION_VP_MIN } from '../utils/districtUtils.js';
+import { COMPETITIVENESS_CONFIG, COMPETITIVENESS_ORDER, COMPETITIVENESS_TITLE, COMPETITIVENESS_TOOLTIP, competitivenessConfig, METRICS, getScore, getDistrictColor, STATE_CENTROIDS, haversineDistance } from '../utils/districtUtils.js';
 import './InfoBox.css';
 
 const RACE_TYPE_LABELS = {
@@ -117,7 +117,7 @@ function ActionPane({ race, civicOrgs, primaryCalendar, partiesData, allRaces, a
               <button
                 key={r.geoid}
                 className="action-higher-card"
-                onClick={() => onSelect?.(r.geoid)}
+                onClick={() => onSelect?.(r.geoid, r.id)}
               >
                 <div className="action-higher-info">
                   <span className="action-higher-label">{r.label}</span>
@@ -145,7 +145,7 @@ function ActionPane({ race, civicOrgs, primaryCalendar, partiesData, allRaces, a
               ? 'This is a high-impact race. A small donation goes directly where it matters most.'
               : 'In a close race, small donations shift real resources to where they are most needed.'}
           </p>
-          {race.perDollarPower != null && race.voterPower >= DONATION_VP_MIN && (
+          {race.perDollarPower != null && (
             <p className="action-section-body">
               Donation power: <strong>{Math.round(race.perDollarPower)}</strong>/100
               {race.perDollarPower >= 50
@@ -226,11 +226,11 @@ function DescriptionPane() {
     <div className="info-description">
       <p className="info-intro-text">Click any district on the map to see your path to action.</p>
       <p className="info-vp-desc">
-        Each contest is scored by <strong>Voter Power</strong> — how much your vote, donation, or volunteer shift can influence the outcome. Higher scores mean higher leverage. Use these scores to find where your civic engagement goes furthest.
+        Each contest is scored by <strong>Voter Power</strong> — how much your vote, donation, or volunteer shift can influence the outcome. House and Senate races also have a <strong>Donation Power</strong> score showing where a dollar goes furthest. Higher scores mean higher leverage. Use these scores to find where your civic engagement goes furthest.
       </p>
       <div className="info-desc-section">
         <span className="info-desc-heading">Democracy Moneyball</span>
-        <p className="info-desc-body">Find the races where your dollar goes furthest. In a close contest, $50 shifts real campaign resources where they're needed most.</p>
+        <p className="info-desc-body">Find the races where your dollar goes furthest. Switch the list to <strong>Donation Power</strong> to rank contests by how much one extra dollar can move the race, based on how close it is and how much money has already been raised. In a close, under-funded contest, $50 shifts real campaign resources.</p>
       </div>
       <div className="info-desc-section">
         <span className="info-desc-heading">Election Hotspots</span>
@@ -245,9 +245,10 @@ function DescriptionPane() {
 }
 
 // ── NearbyCard ────────────────────────────────────────────────────────────────
-function NearbyCard({ race, isHovered, isSelected, onHover, onLeave, onClick }) {
-  const cfg = COOK_CONFIG[race.cookRating] ?? { label: race.cookRating, color: '#475569', bg: '#f1f5f9' };
-  const vpColor = getDistrictColor(race.voterPower);
+function NearbyCard({ race, metric, isHovered, isSelected, onHover, onLeave, onClick }) {
+  const cfg = competitivenessConfig(race.competitiveness);
+  const score = getScore(race, metric);
+  const vpColor = getDistrictColor(score);
   return (
     <div
       className={`district-card nearby-card ${isHovered ? 'hovered' : ''} ${isSelected ? 'selected' : ''}`}
@@ -262,32 +263,33 @@ function NearbyCard({ race, isHovered, isSelected, onHover, onLeave, onClick }) 
         </div>
         <div className="card-state">{race.state} · {race.distance} mi</div>
       </div>
-      {race.cookRating && (
-        <span className="card-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
+      {race.competitiveness && (
+        <span className="card-cook" style={{ color: cfg.color, background: cfg.bg }} title={COMPETITIVENESS_TOOLTIP}>{cfg.label}</span>
       )}
       <div className="card-vp">
         <div className="vp-bar-track">
-          <div className="vp-bar-fill" style={{ width: `${Math.round(race.voterPower)}%`, background: vpColor }} />
+          <div className="vp-bar-fill" style={{ width: `${Math.round(score)}%`, background: vpColor }} />
         </div>
-        <span className="vp-score">{Math.round(race.voterPower)}</span>
+        <span className="vp-score">{Math.round(score)}</span>
       </div>
     </div>
   );
 }
 
-const COOK_ORDER = ['toss-up', 'lean-D', 'lean-R', 'likely-D', 'likely-R', 'solid-D', 'solid-R', 'retention', 'nonpartisan'];
-const COOK_PRIORITY = Object.fromEntries(COOK_ORDER.map((rating, i) => [rating, i]));
-function cookPriority(r) { return COOK_PRIORITY[r.cookRating] ?? COOK_ORDER.length; }
+const COOK_PRIORITY = Object.fromEntries(COMPETITIVENESS_ORDER.map((label, i) => [label, i]));
+function cookPriority(r) { return COOK_PRIORITY[r.competitiveness] ?? COMPETITIVENESS_ORDER.length; }
 
-function sortRaces(races, sortBy, vpDir, cookDir) {
-  const sorted = races.slice();
+// Races that have no score under the metric (e.g. no donation data) are dropped.
+function sortRaces(races, sortBy, vpDir, cookDir, metric = 'voter') {
+  const score = (r) => getScore(r, metric);
+  const sorted = races.filter((r) => score(r) != null);
   if (sortBy === 'cook') {
     sorted.sort((a, b) => {
       const diff = cookPriority(a) - cookPriority(b);
-      return (cookDir === 'desc' ? -diff : diff) || b.voterPower - a.voterPower;
+      return (cookDir === 'desc' ? -diff : diff) || score(b) - score(a);
     });
   } else {
-    sorted.sort((a, b) => (vpDir === 'asc' ? a.voterPower - b.voterPower : b.voterPower - a.voterPower));
+    sorted.sort((a, b) => (vpDir === 'asc' ? score(a) - score(b) : score(b) - score(a)));
   }
   return sorted;
 }
@@ -296,30 +298,54 @@ function withCookHeaders(sortedRaces) {
   const items = [];
   let lastRating = undefined;
   sortedRaces.forEach((race, idx) => {
-    if (race.cookRating !== lastRating) {
-      const label = COOK_CONFIG[race.cookRating]?.label ?? 'Unrated';
-      items.push({ type: 'header', key: `hdr-${race.cookRating ?? 'unrated'}`, label });
-      lastRating = race.cookRating;
+    if (race.competitiveness !== lastRating) {
+      const label = COMPETITIVENESS_CONFIG[race.competitiveness]?.label ?? 'Unrated';
+      items.push({ type: 'header', key: `hdr-${race.competitiveness ?? 'unrated'}`, label });
+      lastRating = race.competitiveness;
     }
     items.push({ type: 'race', race, idx });
   });
   return items;
 }
 
-function buildListItems(races, sortBy, vpDir, cookDir) {
-  const sorted = sortRaces(races, sortBy, vpDir, cookDir);
+function buildListItems(races, sortBy, vpDir, cookDir, metric) {
+  const sorted = sortRaces(races, sortBy, vpDir, cookDir, metric);
   if (sortBy !== 'cook') return sorted.map((race, idx) => ({ type: 'race', race, idx }));
   return withCookHeaders(sorted);
 }
 
+const NO_DONATION_DATA_MSG = 'Donation power data for this contest type is not currently available.';
+
+// Does any race of this type have a score under the metric?
+function hasMetricData(allData, type, metric) {
+  if (metric === 'voter') return true;
+  return (allData?.[type] ?? []).some((r) => getScore(r, metric) != null);
+}
+
+// ── MetricToggle ──────────────────────────────────────────────────────────────
+function MetricToggle({ metric, onChange }) {
+  return (
+    <div className="metric-toggle" role="group" aria-label="Rank contests by">
+      {Object.entries(METRICS).map(([id, m]) => (
+        <button
+          key={id}
+          className={`metric-btn ${metric === id ? 'metric-btn--active' : ''}`}
+          onClick={() => onChange?.(id)}
+        >
+          {m.label}
+        </button>
+      ))}
+    </div>
+  );
+}
+
 // ── TopContestsPane ───────────────────────────────────────────────────────────
-function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
-  const [topType, setTopType] = useState('house');
+function TopContestsPane({ allData, topType, metric, onRacePreview, onTopTypeChange }) {
   const [sortBy, setSortBy] = useState('voterPower');
   const [vpDir, setVpDir] = useState('desc');
   const [cookDir, setCookDir] = useState('asc');
 
-  function switchType(t) { setTopType(t); onTopTypeChange?.(t); }
+  function switchType(t) { onTopTypeChange?.(t); }
 
   function handleVpSortClick() {
     if (sortBy === 'voterPower') setVpDir((d) => (d === 'desc' ? 'asc' : 'desc'));
@@ -332,12 +358,12 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
   }
 
   const top10Fixed = (allData?.[topType] ?? [])
-    .slice()
-    .sort((a, b) => b.voterPower - a.voterPower || cookPriority(a) - cookPriority(b))
+    .filter((r) => getScore(r, metric) != null)
+    .sort((a, b) => getScore(b, metric) - getScore(a, metric) || cookPriority(a) - cookPriority(b))
     .slice(0, 10)
     .map((race, i) => ({ ...race, _topRank: i + 1 }));
 
-  const orderedTop10 = sortRaces(top10Fixed, sortBy, vpDir, cookDir);
+  const orderedTop10 = sortRaces(top10Fixed, sortBy, vpDir, cookDir, metric);
   const top10Items = sortBy === 'cook'
     ? withCookHeaders(orderedTop10)
     : orderedTop10.map((race, idx) => ({ type: 'race', race, idx }));
@@ -345,15 +371,20 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
   return (
     <div className="tc-pane">
       <div className="tc-type-tabs">
-        {TOP_TYPES.map((t) => (
-          <button
-            key={t.id}
-            className={`tc-type-btn ${topType === t.id ? 'tc-type-btn--active' : ''}`}
-            onClick={() => switchType(t.id)}
-          >
-            {t.label}
-          </button>
-        ))}
+        {TOP_TYPES.map((t) => {
+          const unavailable = !hasMetricData(allData, t.id, metric);
+          return (
+            <button
+              key={t.id}
+              className={`tc-type-btn ${topType === t.id ? 'tc-type-btn--active' : ''} ${unavailable ? 'is-unavailable' : ''}`}
+              aria-disabled={unavailable}
+              title={unavailable ? NO_DONATION_DATA_MSG : undefined}
+              onClick={() => { if (!unavailable) switchType(t.id); }}
+            >
+              {t.label}
+            </button>
+          );
+        })}
       </div>
       <div className="list-header">
         <span className="lh-rank">#</span>
@@ -361,30 +392,33 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
         <button
           className={`lh-cook lh-sort-btn ${sortBy === 'cook' ? 'lh-sort-btn--active' : ''}`}
           onClick={handleCookSortClick}
-          title="Sort by 2026 Rating"
+          title={`Sort by ${COMPETITIVENESS_TITLE}. ${COMPETITIVENESS_TOOLTIP}`}
         >
-          2026 Rating{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
+          {COMPETITIVENESS_TITLE}{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
         </button>
         <button
           className={`lh-vp lh-sort-btn ${sortBy === 'voterPower' ? 'lh-sort-btn--active' : ''}`}
           onClick={handleVpSortClick}
-          title="Sort by Voter Power"
+          title={`Sort by ${METRICS[metric].label}`}
         >
-          Voter Power{sortBy === 'voterPower' ? (vpDir === 'desc' ? ' ▾' : ' ▴') : ''}
+          {METRICS[metric].short}{sortBy === 'voterPower' ? (vpDir === 'desc' ? ' ▾' : ' ▴') : ''}
         </button>
       </div>
       <div className="tc-list">
         {top10Items.length === 0 ? (
-          <div className="tc-empty">Loading…</div>
+          <div className="tc-empty">
+            {allData?.[topType]?.length ? `No ${METRICS[metric].label.toLowerCase()} data for this contest type.` : 'Loading…'}
+          </div>
         ) : (
           top10Items.map((item) => {
             if (item.type === 'header') {
               return <div key={item.key} className="list-group-header">{item.label}</div>;
             }
             const { race, idx } = item;
-            const cfg = COOK_CONFIG[race.cookRating] ?? { label: race.cookRating, color: '#475569', bg: '#f1f5f9' };
-            const vpColor = getDistrictColor(race.voterPower);
-            const vp = Math.round(race.voterPower);
+            const cfg = competitivenessConfig(race.competitiveness);
+            const score = getScore(race, metric);
+            const vpColor = getDistrictColor(score);
+            const vp = Math.round(score);
             return (
               <div
                 key={`${topType}-${race.geoid}-${idx}`}
@@ -399,8 +433,8 @@ function TopContestsPane({ allData, onRacePreview, onTopTypeChange }) {
                     <span className="tc-label">{race.label}</span>
                     <span className="tc-sublabel">{race.state}</span>
                   </div>
-                  {race.cookRating && (
-                    <span className="tc-cook" style={{ color: cfg.color, background: cfg.bg }}>{cfg.label}</span>
+                  {race.competitiveness && (
+                    <span className="tc-cook" style={{ color: cfg.color, background: cfg.bg }} title={COMPETITIVENESS_TOOLTIP}>{cfg.label}</span>
                   )}
                   <div className="tc-vp-block">
                     <div className="tc-vp-track">
@@ -427,10 +461,13 @@ function extractCounty(placeName) {
 // ── Main InfoBox ──────────────────────────────────────────────────────────────
 export default function InfoBox({
   raceData,
+  metric = 'voter',
+  onMetricChange,
   activeTab,
   onTabChange,
   hoveredGeoid,
   selectedGeoid,
+  selectedRaceId,
   onRaceHover,
   onRaceSelect,
   nearbyRaces,
@@ -439,6 +476,7 @@ export default function InfoBox({
   onClearNearby,
   allData,
   onRacePreview,
+  topType,
   onTopTypeChange,
   civicOrgs,
   primaryCalendar,
@@ -450,15 +488,18 @@ export default function InfoBox({
   const [cookDir, setCookDir] = useState('asc');
   const districtListRef = useRef(null);
 
+  // Several contests can share a geoid (statewide races), so match on race id when we have one.
+  const isSel = (r) => r.geoid === selectedGeoid && (!selectedRaceId || r.id === selectedRaceId);
   const selectedRace = selectedGeoid
-    ? (activeTab === 'nearby' ? nearbyRaces : raceData)?.find((r) => r.geoid === selectedGeoid)
+    ? (activeTab === 'nearby' ? nearbyRaces : raceData)?.find(isSel)
     : null;
+  const toggleSelect = (r) => (isSel(r) ? onRaceSelect(null) : onRaceSelect(r.geoid, r.id));
 
   useEffect(() => {
     if (selectedRace && districtListRef.current) {
       districtListRef.current.scrollTop = 0;
     }
-  }, [selectedRace?.geoid]);
+  }, [selectedRace?.id, selectedRace?.geoid]);
 
   function handleVpSortClick() {
     if (sortBy === 'voterPower') setVpDir((d) => (d === 'desc' ? 'asc' : 'desc'));
@@ -515,19 +556,26 @@ export default function InfoBox({
       {/* ── Right panel ──────────────────────────────────────────────────── */}
       <div className="district-list" ref={districtListRef}>
         <div className="race-tabs">
-          {visibleTabs.map((t) => (
-            <button
-              key={t.id}
-              className={`tab-btn ${activeTab === t.id ? 'tab-btn--active' : ''}`}
-              onClick={() => onTabChange(t.id)}
-            >
-              {t.label}
-            </button>
-          ))}
+          {visibleTabs.map((t) => {
+            const unavailable = t.id !== 'top' && t.id !== 'nearby' && !hasMetricData(allData, t.id, metric);
+            return (
+              <button
+                key={t.id}
+                className={`tab-btn ${activeTab === t.id ? 'tab-btn--active' : ''} ${unavailable ? 'is-unavailable' : ''}`}
+                aria-disabled={unavailable}
+                title={unavailable ? NO_DONATION_DATA_MSG : undefined}
+                onClick={() => { if (!unavailable) onTabChange(t.id); }}
+              >
+                {t.label}
+              </button>
+            );
+          })}
           {nearbyRaces && (
             <button className="tab-clear-btn" onClick={onClearNearby} title="Clear location search">✕</button>
           )}
         </div>
+
+        {!selectedRace && <MetricToggle metric={metric} onChange={onMetricChange} />}
 
         {/* Top Contests tab */}
         {activeTab === 'top' && (
@@ -544,7 +592,7 @@ export default function InfoBox({
               hideOrgs
             />
           ) : (
-            <TopContestsPane allData={allData} onRacePreview={onRacePreview} onTopTypeChange={onTopTypeChange} />
+            <TopContestsPane allData={allData} topType={topType} metric={metric} onRacePreview={onRacePreview} onTopTypeChange={onTopTypeChange} />
           )
         )}
 
@@ -572,16 +620,16 @@ export default function InfoBox({
                 <button
                   className={`lh-cook lh-sort-btn ${sortBy === 'cook' ? 'lh-sort-btn--active' : ''}`}
                   onClick={handleCookSortClick}
-                  title="Sort by 2026 Rating"
+                  title={`Sort by ${COMPETITIVENESS_TITLE}. ${COMPETITIVENESS_TOOLTIP}`}
                 >
-                  Cook{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
+                  {COMPETITIVENESS_TITLE}{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
                 </button>
                 <button
                   className={`lh-vp lh-sort-btn ${sortBy === 'voterPower' ? 'lh-sort-btn--active' : ''}`}
                   onClick={handleVpSortClick}
-                  title="Sort by Voter Power"
+                  title={`Sort by ${METRICS[metric].label}`}
                 >
-                  Voter Power{sortBy === 'voterPower' ? (vpDir === 'desc' ? ' ▾' : ' ▴') : ''}
+                  {METRICS[metric].short}{sortBy === 'voterPower' ? (vpDir === 'desc' ? ' ▾' : ' ▴') : ''}
                 </button>
                 {shareUrl && (
                   <button className="tab-share-btn" onClick={handleShare} title="Copy shareable link">
@@ -592,18 +640,19 @@ export default function InfoBox({
               {nearbyRaces.length === 0 ? (
                 <div className="list-loading">No competitive contests found within range.</div>
               ) : (
-                buildListItems(nearbyRaces, sortBy, vpDir, cookDir).map((item) =>
+                buildListItems(nearbyRaces, sortBy, vpDir, cookDir, metric).map((item) =>
                   item.type === 'header' ? (
                     <div key={item.key} className="list-group-header">{item.label}</div>
                   ) : (
                     <NearbyCard
                       key={`${item.race.raceType}-${item.race.label}`}
                       race={item.race}
+                      metric={metric}
                       isHovered={hoveredGeoid === item.race.geoid}
-                      isSelected={selectedGeoid === item.race.geoid}
+                      isSelected={isSel(item.race)}
                       onHover={() => onRacePreview?.({ race: item.race, raceType: item.race.raceType })}
                       onLeave={() => onRacePreview?.(null)}
-                      onClick={() => onRaceSelect(selectedGeoid === item.race.geoid ? null : item.race.geoid)}
+                      onClick={() => toggleSelect(item.race)}
                     />
                   )
                 )
@@ -636,31 +685,32 @@ export default function InfoBox({
                 <button
                   className={`lh-cook lh-sort-btn ${sortBy === 'cook' ? 'lh-sort-btn--active' : ''}`}
                   onClick={handleCookSortClick}
-                  title="Sort by 2026 Rating"
+                  title={`Sort by ${COMPETITIVENESS_TITLE}. ${COMPETITIVENESS_TOOLTIP}`}
                 >
-                  2026 Rating{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
+                  {COMPETITIVENESS_TITLE}{sortBy === 'cook' ? (cookDir === 'asc' ? ' ▾' : ' ▴') : ''}
                 </button>
                 <button
                   className={`lh-vp lh-sort-btn ${sortBy === 'voterPower' ? 'lh-sort-btn--active' : ''}`}
                   onClick={handleVpSortClick}
-                  title="Sort by Voter Power"
+                  title={`Sort by ${METRICS[metric].label}`}
                 >
-                  Voter Power{sortBy === 'voterPower' ? (vpDir === 'desc' ? ' ▾' : ' ▴') : ''}
+                  {METRICS[metric].short}{sortBy === 'voterPower' ? (vpDir === 'desc' ? ' ▾' : ' ▴') : ''}
                 </button>
               </div>
-              {buildListItems(raceData, sortBy, vpDir, cookDir).map((item) =>
+              {buildListItems(raceData, sortBy, vpDir, cookDir, metric).map((item) =>
                 item.type === 'header' ? (
                   <div key={item.key} className="list-group-header">{item.label}</div>
                 ) : (
                   <DistrictCard
                     key={`${item.race.raceType}-${item.race.geoid}-${item.idx}`}
                     district={item.race}
+                    metric={metric}
                     rank={item.idx + 1}
                     isHovered={hoveredGeoid === item.race.geoid}
-                    isSelected={selectedGeoid === item.race.geoid}
+                    isSelected={isSel(item.race)}
                     onHover={() => onRaceHover(item.race.geoid)}
                     onLeave={() => onRaceHover(null)}
-                    onClick={() => onRaceSelect(selectedGeoid === item.race.geoid ? null : item.race.geoid)}
+                    onClick={() => toggleSelect(item.race)}
                   />
                 )
               )}

@@ -4,7 +4,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { feature as topoFeature } from 'topojson-client';
 import statesData from 'us-atlas/states-10m.json';
-import { getDistrictColor, URBANICITY_CONFIG, STATE_CENTROIDS, formatMarginText } from '../utils/districtUtils.js';
+import { getDistrictColor, getScore, COMPETITIVENESS_TITLE, COMPETITIVENESS_TOOLTIP, URBANICITY_CONFIG, STATE_CENTROIDS, formatMarginText } from '../utils/districtUtils.js';
 import './Map.css';
 
 const DISTRICT_TILESET  = import.meta.env.VITE_DISTRICT_TILESET  ?? null;
@@ -61,13 +61,13 @@ function computeCentroid(geometry) {
   ];
 }
 
-function buildColorExpression(raceData, matchExpr) {
+function buildColorExpression(raceData, matchExpr, metric) {
   const expr = ['match', matchExpr];
   const seen = new Set();
   for (const d of raceData) {
     if (d.geoid && !seen.has(d.geoid)) {
       seen.add(d.geoid);
-      expr.push(d.geoid, getDistrictColor(d.voterPower));
+      expr.push(d.geoid, getDistrictColor(getScore(d, metric)));
     }
   }
   expr.push('#cbd5e1');
@@ -110,6 +110,7 @@ function activeLayersForTab(tab) {
 
 export default function Map({
   raceData,
+  metric = 'voter',
   tab,
   hoveredGeoid,
   selectedGeoid,
@@ -129,6 +130,8 @@ export default function Map({
   const [isMapReady, setIsMapReady] = useState(false);
 
   const raceDataRef = useRef(raceData);
+  const metricRef = useRef(metric);
+  metricRef.current = metric;
   const onHoverRef = useRef(onRaceHover);
   const onSelectRef = useRef(onRaceSelect);
   const onLocationSearchRef = useRef(onLocationSearch);
@@ -280,7 +283,7 @@ export default function Map({
 
         if (raceDataRef.current.length) {
           map.setPaintProperty('districts-fill', 'fill-color',
-            buildColorExpression(raceDataRef.current, GEOID_EXPR.house));
+            buildColorExpression(raceDataRef.current, GEOID_EXPR.house, metricRef.current));
         }
 
         setIsMapReady(true);
@@ -365,9 +368,9 @@ export default function Map({
       tab === 'sld_lower' ? 'sld-lower-fill'  :
       'states-fill';
     try {
-      map.setPaintProperty(fillLayer, 'fill-color', buildColorExpression(raceData, matchExpr));
+      map.setPaintProperty(fillLayer, 'fill-color', buildColorExpression(raceData, matchExpr, metric));
     } catch (_) {}
-  }, [raceData, tab, isMapReady]);
+  }, [raceData, tab, metric, isMapReady]);
 
   // ── Compute SLD centroids when SLD tab becomes active ────────────────────
   useEffect(() => {
@@ -593,17 +596,6 @@ function addSldLayers(map, srcId, srcLayer) {
     paint: { 'line-color': '#FF8F00', 'line-width': 2.5 } });
 }
 
-function formatCookLabel(cookRating) {
-  return cookRating
-    ?.replace('toss-up', 'Toss-Up')
-    .replace('lean-D', 'Lean Dem')
-    .replace('lean-R', 'Lean Rep')
-    .replace('likely-D', 'Likely Dem')
-    .replace('likely-R', 'Likely Rep')
-    .replace('solid-D', 'Solid Dem')
-    .replace('solid-R', 'Solid Rep') ?? cookRating;
-}
-
 const formatMarginLabel = formatMarginText;
 
 function candidateRow(d, r) {
@@ -616,7 +608,6 @@ function candidateRow(d, r) {
 
 function buildPopupHTML(race, tab) {
   const vpColor = getDistrictColor(race.voterPower);
-  const cookLabel = formatCookLabel(race.cookRating);
   const marginLabel = formatMarginLabel(race);
   const isSld = tab === 'sld_upper' || tab === 'sld_lower';
   const title = isSld ? race.label : tab === 'house' ? race.label : (race.state ?? race.label);
@@ -635,7 +626,7 @@ function buildPopupHTML(race, tab) {
         ${urbanicityBadge}
       </div>
       ${subtitle ? `<div class="popup-subtitle">${subtitle}</div>` : ''}
-      ${cookLabel ? `<div class="popup-row"><span class="popup-label">2026 Rating</span><span class="popup-value">${cookLabel}</span></div>` : ''}
+      ${race.competitiveness ? `<div class="popup-row" title="${COMPETITIVENESS_TOOLTIP}"><span class="popup-label">${COMPETITIVENESS_TITLE}</span><span class="popup-value">${race.competitiveness}</span></div>` : ''}
       ${marginLabel ? `<div class="popup-row"><span class="popup-label">Est. Margin</span><span class="popup-value">${marginLabel}</span></div>` : ''}
       <div class="popup-row">
         <span class="popup-label">Voter Power</span>

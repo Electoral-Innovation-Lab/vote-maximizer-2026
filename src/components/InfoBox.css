@@ -763,3 +763,35 @@
   font-weight: 800;
   text-align: right;
 }
+
+/* ── Metric toggle (Voter Power / Donation Power) ──────────────────────────── */
+.metric-toggle {
+  display: flex;
+  gap: 2px;
+  margin: 8px 14px 0;
+  padding: 2px;
+  background: #f1f5f9;
+  border-radius: 8px;
+}
+.metric-btn {
+  flex: 1;
+  padding: 4px 8px;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.metric-btn:hover { color: #FF8F00; }
+.metric-btn--active { background: #fff; color: #FF8F00; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
+
+/* Tabs / type buttons with no data under the selected metric */
+.tab-btn.is-unavailable,
+.tc-type-btn.is-unavailable {
+  color: #cbd5e1;
+  cursor: not-allowed;
+}
+.tab-btn.is-unavailable:hover,
+.tc-type-btn.is-unavailable:hover { color: #cbd5e1; }

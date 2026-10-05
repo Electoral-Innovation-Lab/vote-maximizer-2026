@@ -1,0 +1,845 @@
+From 491a6a13efd6b20fa6c57f6abcc1884dee15edc7 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Mon, 5 Oct 2026 13:49:10 -0400
+Subject: [PATCH] Switch site to Vote Maximizer v43 JSON export
+
+- Loaders read public/data/races/*.json and reference/*.json (vm_export_json.py schema)
+- Race detail: margin source badge (Polling/Estimate), win probability (Senate/Governor),
+  donation power (Senate/House, voter power >= 50), third-party candidates, data caveats,
+  last-verified date and FiftyPlusOne credit
+- Margin labels handle independents and ballot measures (+0.8 Ind, +4 Yes)
+- Fix compare view Data Source always showing 'Poll'
+- About page data-sources text updated
+- DATA.md documents the data drop
+
+Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01KQQMRqF8BE26VwV45ZmT1a
+---
+ DATA.md                          |  31 +++
+ src/components/AboutPage.jsx     |   4 +-
+ src/components/ContestDetail.css |  43 ++++
+ src/components/ContestDetail.jsx | 123 +++++++++--
+ src/components/InfoBox.jsx       |  12 +-
+ src/components/Map.jsx           |  11 +-
+ src/utils/districtUtils.js       |  27 +++
+ src/utils/parseCSV.js            | 367 ++++++++++---------------------
+ 8 files changed, 338 insertions(+), 280 deletions(-)
+ create mode 100644 DATA.md
+
+diff --git a/DATA.md b/DATA.md
+new file mode 100644
+index 0000000..ac679c4
+--- /dev/null
++++ b/DATA.md
+@@ -0,0 +1,31 @@
++# Model data (public/data)
++
++The site reads every voter-power number from `public/data/`, a JSON export of the Vote Maximizer
++workbook produced by `vm_export_json.py` (in the data team's `vm_scripts`). Nothing in `src/` should
++read spreadsheet column names directly; `src/utils/parseCSV.js` maps the export onto the race objects
++the components use.
++
++| File | Used for |
++|---|---|
++| `manifest.json` | Workbook version, export date, model settings (national environment, sigmas), data sources |
++| `schema.json` | Field definitions for race records |
++| `races/<type>.json` | One array per race type — what the loaders read |
++| `races_all.json` | All races, no `detail` block (national rankings, future API) |
++| `by_state/<AB>.json` | All races in one state (for lighter state / address lookups) |
++| `reference/*.json` | Civic orgs, parties, primary calendar, local resources, candidates, RCV places |
++
++## Updating the data
++
++1. Data team refreshes the workbook (polls, FEC), recalculates it, and runs
++   `python vm_export_json.py Vote_Maximizer_2026_vNN.xlsx vm26_json/`.
++2. Replace `public/data/` with the new `vm26_json/` contents **except `full/`** (full is for
++   internal/API use and is not needed by the site).
++3. `npm run build`, check a few race pages (Senate, House, a state-legislature district), deploy.
++
++## Things the site must keep
++
++- **FiftyPlusOne credit**: races whose `margin_source` is polling show "Polling data: Powered by
++  FiftyPlusOne" with a link (ContestDetail `DataNotes`). FiftyPlusOne's terms require it.
++- **Donation power is shown only where voter power ≥ 50** (`DONATION_VP_MIN` in `districtUtils.js`);
++  below that, cheap long-shot races would top the donor ranking.
++- Poll-level FiftyPlusOne data is never exported; do not add it to the site.
+diff --git a/src/components/AboutPage.jsx b/src/components/AboutPage.jsx
+index b5f9773..11d7c67 100644
+--- a/src/components/AboutPage.jsx
++++ b/src/components/AboutPage.jsx
+@@ -29,9 +29,9 @@ const SECTIONS = [
+   {
+     num: '04',
+     title: 'Data Sources',
+-    body: `Margins come from two sources, color-coded in the interface: polling averages (sourced from Emerson, PPP, ASR, and Sabato's Crystal Ball, Jan-Jul 2026) shown in green, and rating proxies shown in amber. 2026 ratings are translated as: Toss-Up = 0, Lean = ±4 pts, Likely = ±9 pts, Solid = ±18 pts.
++    body: `Senate and governor margins come from polling: the FiftyPlusOne polling average where one is published, otherwise the median of the three most recent polls from the last 60 days (campaign internal polls are weighted toward each state's partisan lean). Races with little or no polling — and the House, state, judicial and legislative races — use partisan lean (Cook PVI) or recent results, adjusted for incumbency and a national environment of D+12.5. Each race shows a "Polling" or "Estimate" badge.
+ 
+-    As more polls become available through the election cycle, Cook proxies are replaced with real data and all voter power scores update automatically.`,
++    Donation power uses the same closeness measure divided by the money the nominees have already raised, from Federal Election Commission filings. Polling data: Powered by FiftyPlusOne (fiftyplusone.news).`,
+   },
+   // {
+   //   num: '05',
+diff --git a/src/components/ContestDetail.css b/src/components/ContestDetail.css
+index 9e712cf..3c4858f 100644
+--- a/src/components/ContestDetail.css
++++ b/src/components/ContestDetail.css
+@@ -605,3 +605,46 @@
+   .cd-header { padding: 8px 12px 10px; }
+   .cd-back { padding: 8px 12px 6px; }
+ }
++
++/* ── Margin source badge, win probability, donation power, data notes (v43 data) ── */
++.cd-source-badge {
++  display: inline-flex;
++  align-items: center;
++  font-size: 10px;
++  font-weight: 600;
++  border-radius: 4px;
++  padding: 1px 6px;
++  border: 1px solid transparent;
++}
++.cd-source-badge--poll { color: #166534; background: #dcfce7; border-color: #bbf7d0; }
++.cd-source-badge--est  { color: #92400e; background: #fef3c7; border-color: #fde68a; }
++
++.cd-winprob { margin-top: 4px; }
++
++.cd-donation-note {
++  font-size: 11px;
++  color: #64748b;
++  margin-top: 6px;
++}
++
++.cd-candidate--o .cd-cand-party { background: #64748b; }
++
++.cd-data-notes {
++  padding: 10px 0 0;
++  border-top: 1px solid #f1f5f9;
++}
++.cd-caveats {
++  font-size: 11px;
++  color: #92400e;
++  background: #fffbeb;
++  border: 1px solid #fde68a;
++  border-radius: 6px;
++  padding: 8px 10px;
++  margin-bottom: 8px;
++  line-height: 1.45;
++}
++.cd-data-meta {
++  font-size: 10px;
++  color: #94a3b8;
++}
++.cd-data-meta a { color: #64748b; }
+diff --git a/src/components/ContestDetail.jsx b/src/components/ContestDetail.jsx
+index 783fac3..bfc101e 100644
+--- a/src/components/ContestDetail.jsx
++++ b/src/components/ContestDetail.jsx
+@@ -1,5 +1,5 @@
+ import { useState, useEffect } from 'react';
+-import { getDistrictColor, COOK_CONFIG, STATE_ABBR } from '../utils/districtUtils.js';
++import { getDistrictColor, COOK_CONFIG, STATE_ABBR, formatMarginText, DONATION_VP_MIN, FIFTYPLUSONE_URL } from '../utils/districtUtils.js';
+ import './ContestDetail.css';
+ 
+ const PRIMARY_COL = {
+@@ -51,11 +51,89 @@ function cookCfg(cookRating) {
+   return COOK_CONFIG[cookRating] ?? { label: cookRating, color: '#475569', bg: '#f1f5f9' };
+ }
+ 
+-function formatMargin(margin) {
+-  if (margin == null || isNaN(margin)) return null;
+-  if (margin === 0) return 'Even';
+-  const abs = Math.abs(margin).toFixed(1).replace(/\.0$/, '');
+-  return margin > 0 ? `+${abs} Dem` : `+${abs} Rep`;
++const formatMargin = formatMarginText;
++
++function sourceLabel(race) {
++  return race.sourceKind === 'poll' ? 'Polling' : 'Estimate';
++}
++
++function SourceBadge({ race }) {
++  if (!race.marginSource) return null;
++  const poll = race.sourceKind === 'poll';
++  return (
++    <span
++      className={`cd-source-badge ${poll ? 'cd-source-badge--poll' : 'cd-source-badge--est'}`}
++      title={poll
++        ? `Margin from polling (${race.marginSource})`
++        : `No usable polling — margin estimated from partisan lean (${race.marginSource})`}
++    >
++      {sourceLabel(race)}
++    </span>
++  );
++}
++
++function formatMoney(n) {
++  if (n == null) return null;
++  if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
++  if (n >= 1e3) return `$${Math.round(n / 1e3)}K`;
++  return `$${Math.round(n)}`;
++}
++
++function WinProbability({ race }) {
++  const w = race.winProbability;
++  if (!w || w.p == null) return null;
++  const pct = Math.round(w.p * 100);
++  return (
++    <div className="cd-meta cd-winprob">
++      <span>
++        Chance {w.candidate} finishes ahead of {w.opponent}: <strong>{pct}%</strong>
++      </span>
++    </div>
++  );
++}
++
++function DonationPower({ race }) {
++  if (race.perDollarPower == null || race.voterPower < DONATION_VP_MIN) return null;
++  const color = getDistrictColor(race.perDollarPower);
++  return (
++    <div className="cd-section">
++      <h3 className="cd-section-title">
++        Donation Power{' '}
++        <span
++          className="cd-vp-tooltip"
++          title="How much one additional dollar can move this race: the same closeness measure as voter power, divided by the money the nominees have already raised (FEC). 0–100 within this race type."
++        >?</span>
++      </h3>
++      <div className="cd-vp-bar">
++        <div className="cd-vp-track">
++          <div className="cd-vp-fill" style={{ width: `${Math.round(race.perDollarPower)}%`, background: color }} />
++        </div>
++        <span className="cd-vp-score">{Math.round(race.perDollarPower)}</span>
++      </div>
++      {race.fecReceipts != null && (
++        <div className="cd-donation-note">
++          Nominees have raised {formatMoney(race.fecReceipts)}
++          {race.fecThrough ? ` (FEC reports through ${race.fecThrough})` : ''}.
++        </div>
++      )}
++    </div>
++  );
++}
++
++function DataNotes({ race }) {
++  const poll = race.sourceKind === 'poll';
++  if (!race.caveats && !race.lastVerified && !poll) return null;
++  return (
++    <div className="cd-data-notes">
++      {race.caveats && <p className="cd-caveats">{race.caveats}</p>}
++      <p className="cd-data-meta">
++        {race.lastVerified && <>Last verified {race.lastVerified}. </>}
++        {poll && (
++          <>Polling data: <a href={FIFTYPLUSONE_URL} target="_blank" rel="noopener noreferrer">Powered by FiftyPlusOne</a>.</>
++        )}
++      </p>
++    </div>
++  );
+ }
+ 
+ function getNearby(race, allRaces) {
+@@ -182,12 +260,15 @@ function CompareView({ raceA, raceB, onClose, orgs }) {
+     raceA.cookRating || raceB.cookRating
+       ? { label: '2026 Rating', a: cfgA.label, b: cfgB.label }
+       : null,
+-    { label: 'Projected Margin', a: formatMargin(raceA.margin), b: formatMargin(raceB.margin) },
+-    {
+-      label: 'Data Source',
+-      a: raceA.source === 'cook' ? 'Cook proxy' : 'Poll',
+-      b: raceB.source === 'cook' ? 'Cook proxy' : 'Poll',
+-    },
++    { label: 'Projected Margin', a: formatMargin(raceA), b: formatMargin(raceB) },
++    { label: 'Data Source', a: sourceLabel(raceA), b: sourceLabel(raceB) },
++    raceA.perDollarPower != null || raceB.perDollarPower != null
++      ? {
++          label: 'Donation Power',
++          a: raceA.perDollarPower != null ? Math.round(raceA.perDollarPower) : '—',
++          b: raceB.perDollarPower != null ? Math.round(raceB.perDollarPower) : '—',
++        }
++      : null,
+   ].filter(Boolean);
+ 
+   return (
+@@ -316,11 +397,13 @@ export default function ContestDetail({
+             )}
+           </div>
+         </div>
+-        {formatMargin(race.margin) && (
++        {formatMargin(race) && (
+           <div className="cd-meta">
+-            <span>Est. Margin: <strong>{formatMargin(race.margin)}</strong></span>
++            <span>Est. Margin: <strong>{formatMargin(race)}</strong></span>
++            <SourceBadge race={race} />
+           </div>
+         )}
++        <WinProbability race={race} />
+         {primaryBadge && (
+           <div className="cd-primary-badge">
+             Primary: {primaryBadge.date}
+@@ -338,8 +421,10 @@ export default function ContestDetail({
+         </div>
+       )}
+ 
++      <DonationPower race={race} />
++
+       {/* ── Candidates ── */}
+-      {(race.dCandidate || race.rCandidate) && (
++      {(race.dCandidate || race.rCandidate || race.otherCandidates?.length > 0) && (
+         <div className="cd-section">
+           <h3 className="cd-section-title">Candidates</h3>
+           <div className="cd-candidates">
+@@ -359,6 +444,12 @@ export default function ContestDetail({
+                 </span>
+               </div>
+             )}
++            {race.otherCandidates?.map((c) => (
++              <div key={`${c.party}-${c.name}`} className="cd-candidate cd-candidate--o">
++                <span className="cd-cand-party">{c.party}</span>
++                <span className="cd-cand-name">{c.name}</span>
++              </div>
++            ))}
+             {race.incumbent && (
+               <div className="cd-incumbent">Incumbent: {race.incumbent}</div>
+             )}
+@@ -400,6 +491,8 @@ export default function ContestDetail({
+         </div>
+       )}
+ 
++      <DataNotes race={race} />
++
+       {/* ── Compare ── */}
+       <div className="cd-section">
+         <h3 className="cd-section-title">Compare Contests</h3>
+diff --git a/src/components/InfoBox.jsx b/src/components/InfoBox.jsx
+index aec84f9..712e898 100644
+--- a/src/components/InfoBox.jsx
++++ b/src/components/InfoBox.jsx
+@@ -1,7 +1,7 @@
+ import { useState, useRef, useEffect } from 'react';
+ import DistrictCard from './DistrictCard.jsx';
+ import ContestDetail from './ContestDetail.jsx';
+-import { COOK_CONFIG, getDistrictColor, STATE_CENTROIDS, haversineDistance } from '../utils/districtUtils.js';
++import { COOK_CONFIG, getDistrictColor, STATE_CENTROIDS, haversineDistance, DONATION_VP_MIN } from '../utils/districtUtils.js';
+ import './InfoBox.css';
+ 
+ const RACE_TYPE_LABELS = {
+@@ -145,6 +145,16 @@ function ActionPane({ race, civicOrgs, primaryCalendar, partiesData, allRaces, a
+               ? 'This is a high-impact race. A small donation goes directly where it matters most.'
+               : 'In a close race, small donations shift real resources to where they are most needed.'}
+           </p>
++          {race.perDollarPower != null && race.voterPower >= DONATION_VP_MIN && (
++            <p className="action-section-body">
++              Donation power: <strong>{Math.round(race.perDollarPower)}</strong>/100
++              {race.perDollarPower >= 50
++                ? ' — relatively little money has been raised here, so each dollar goes further.'
++                : race.perDollarPower < 15
++                ? ' — this race is already heavily funded; a dollar may go further in a less-saturated race.'
++                : '.'}
++            </p>
++          )}
+           {hasCandidateLinks ? (
+             <div className="action-cta-links">
+               {race.dLink && (
+diff --git a/src/components/Map.jsx b/src/components/Map.jsx
+index 650ee0c..4e70108 100644
+--- a/src/components/Map.jsx
++++ b/src/components/Map.jsx
+@@ -4,7 +4,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
+ import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
+ import { feature as topoFeature } from 'topojson-client';
+ import statesData from 'us-atlas/states-10m.json';
+-import { getDistrictColor, URBANICITY_CONFIG, STATE_CENTROIDS } from '../utils/districtUtils.js';
++import { getDistrictColor, URBANICITY_CONFIG, STATE_CENTROIDS, formatMarginText } from '../utils/districtUtils.js';
+ import './Map.css';
+ 
+ const DISTRICT_TILESET  = import.meta.env.VITE_DISTRICT_TILESET  ?? null;
+@@ -604,12 +604,7 @@ function formatCookLabel(cookRating) {
+     .replace('solid-R', 'Solid Rep') ?? cookRating;
+ }
+ 
+-function formatMarginLabel(margin) {
+-  if (margin == null || isNaN(margin)) return null;
+-  if (margin === 0) return 'Even';
+-  const abs = Math.abs(margin).toFixed(1).replace(/\.0$/, '');
+-  return margin > 0 ? `+${abs} Dem` : `+${abs} Rep`;
+-}
++const formatMarginLabel = formatMarginText;
+ 
+ function candidateRow(d, r) {
+   if (!d && !r) return '';
+@@ -622,7 +617,7 @@ function candidateRow(d, r) {
+ function buildPopupHTML(race, tab) {
+   const vpColor = getDistrictColor(race.voterPower);
+   const cookLabel = formatCookLabel(race.cookRating);
+-  const marginLabel = formatMarginLabel(race.margin);
++  const marginLabel = formatMarginLabel(race);
+   const isSld = tab === 'sld_upper' || tab === 'sld_lower';
+   const title = isSld ? race.label : tab === 'house' ? race.label : (race.state ?? race.label);
+   const subtitle = tab === 'house'
+diff --git a/src/utils/districtUtils.js b/src/utils/districtUtils.js
+index 8c5db22..8475831 100644
+--- a/src/utils/districtUtils.js
++++ b/src/utils/districtUtils.js
+@@ -100,3 +100,30 @@ export const COOK_CONFIG = {
+   retention:    { label: 'Retention',   color: '#3f3f46', bg: '#e4e4e7' },
+   nonpartisan:  { label: 'Nonpartisan', color: '#3f3f46', bg: '#e4e4e7' },
+ };
++
++// ── Margin text shared by the detail panel, compare view and map popup ───────
++// Prefers the exported margin_display ("D+2.2", "R+0.4", "I+0.8", "Yes+4.0", "Unopposed")
++// so independent challengers and ballot measures are labelled correctly.
++const PARTY_WORD = { D: 'Dem', R: 'Rep', I: 'Ind', L: 'Lib', G: 'Green' };
++
++export function formatMarginText(race) {
++  const d = race?.marginDisplay;
++  if (d) {
++    const m = /^([A-Za-z]+)\+(\d+(?:\.\d+)?)$/.exec(d);
++    if (!m) return d; // "Even", "Unopposed"
++    const abs = parseFloat(m[2]).toFixed(1).replace(/\.0$/, '');
++    if (m[1] === 'Yes' || m[1] === 'No') return `+${abs} ${m[1]}`;
++    return `+${abs} ${PARTY_WORD[m[1]] ?? m[1]}`;
++  }
++  const margin = race?.margin;
++  if (margin == null || isNaN(margin)) return null;
++  if (margin === 0) return 'Even';
++  const abs = Math.abs(margin).toFixed(1).replace(/\.0$/, '');
++  return margin > 0 ? `+${abs} Dem` : `+${abs} Rep`;
++}
++
++// Per-dollar power is shown only where the race is also competitive; otherwise a
++// cheap long shot would top the donor ranking.
++export const DONATION_VP_MIN = 50;
++
++export const FIFTYPLUSONE_URL = 'https://fiftyplusone.news';
+diff --git a/src/utils/parseCSV.js b/src/utils/parseCSV.js
+index 9690cde..950e724 100644
+--- a/src/utils/parseCSV.js
++++ b/src/utils/parseCSV.js
+@@ -1,282 +1,139 @@
+ import Papa from 'papaparse';
+ import { STATE_ABBR, AT_LARGE_STATES } from './districtUtils.js';
+ 
+-function pad2(n) { return String(parseInt(n, 10) || 0).padStart(2, '0'); }
+-function toNum(v) { const n = parseFloat(v); return isNaN(n) ? 0 : n; }
+-function toFloat(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
++// All model data comes from the Vote Maximizer JSON export (vm_export_json.py), copied into
++// public/data/. See public/data/schema.json for field definitions and manifest.json for the
++// workbook version, model settings and data dates.
++const DATA = '/data';
++
+ function abbr(name) { return STATE_ABBR[name] ?? name?.slice(0, 2).toUpperCase() ?? '??'; }
+-function clean(v) {
+-  const t = v?.trim() || null;
+-  return t === 'None' ? null : t;
+-}
++function num(v) { return typeof v === 'number' && !isNaN(v) ? v : null; }
+ 
+ async function fetchJSON(path) {
+   const res = await fetch(path);
++  if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
+   return res.json();
+ }
+ 
+-// Standard US state FIPS codes (name → zero-padded 2-digit string)
+-const STATE_FIPS = {
+-  'Alabama': '01', 'Alaska': '02', 'Arizona': '04', 'Arkansas': '05',
+-  'California': '06', 'Colorado': '08', 'Connecticut': '09', 'Delaware': '10',
+-  'District of Columbia': '11', 'Florida': '12', 'Georgia': '13', 'Hawaii': '15',
+-  'Idaho': '16', 'Illinois': '17', 'Indiana': '18', 'Iowa': '19', 'Kansas': '20',
+-  'Kentucky': '21', 'Louisiana': '22', 'Maine': '23', 'Maryland': '24',
+-  'Massachusetts': '25', 'Michigan': '26', 'Minnesota': '27', 'Mississippi': '28',
+-  'Missouri': '29', 'Montana': '30', 'Nebraska': '31', 'Nevada': '32',
+-  'New Hampshire': '33', 'New Jersey': '34', 'New Mexico': '35', 'New York': '36',
+-  'North Carolina': '37', 'North Dakota': '38', 'Ohio': '39', 'Oklahoma': '40',
+-  'Oregon': '41', 'Pennsylvania': '42', 'Rhode Island': '44', 'South Carolina': '45',
+-  'South Dakota': '46', 'Tennessee': '47', 'Texas': '48', 'Utah': '49',
+-  'Vermont': '50', 'Virginia': '51', 'Washington': '53', 'West Virginia': '54',
+-  'Wisconsin': '55', 'Wyoming': '56',
+-};
+-
+-export async function loadHouseRaces() {
+-  const rows = await fetchJSON('/house_dataset.json');
++const POLL_SOURCES = new Set(['F1 average', 'poll median', 'poll median + PVI baseline']);
++
++function firstCand(cands, party) {
++  return cands?.find((c) => c.party === party)?.name ?? null;
++}
++
++// Map one exported race record onto the object shape the components already use,
++// plus the new fields (win probability, donation power, margin source, caveats).
++function toRace(r, raceType, extra) {
++  const cands = r.candidates ?? [];
++  const marginSource = r.margin_source ?? null;
++  const sourceKind = POLL_SOURCES.has(marginSource) ? 'poll' : 'estimate';
++  return {
++    id: r.id,
++    state: r.state,
++    race: r.election_name,
++    raceType,
++    voterPower: num(r.voter_power) ?? 0,
++    cookRating: r.rating ?? null,
++    margin: num(r.margin),
++    marginDisplay: r.margin_display ?? null,
++    marginSource,
++    sourceKind,
++    source: sourceKind === 'poll' ? 'poll' : 'cook', // legacy field used by CompareView
++    winProbability: r.win_probability ?? null,
++    perDollarPower: num(r.donation?.per_dollar_power),
++    fecReceipts: num(r.donation?.fec_receipts),
++    fecThrough: r.donation?.fec_reports_through ?? null,
++    candidates: cands,
++    dCandidate: firstCand(cands, 'D'),
++    rCandidate: firstCand(cands, 'R'),
++    otherCandidates: cands.filter((c) => c.party !== 'D' && c.party !== 'R'),
++    dLink: r.links?.D ?? null,
++    rLink: r.links?.R ?? null,
++    incumbent: r.incumbent ?? null,
++    notes: r.notes ?? null,
++    caveats: r.caveats ?? null,
++    lastVerified: r.last_verified ?? null,
++    unopposed: !!r.unopposed,
++    ...extra,
++  };
++}
++
++async function loadRaces(file, raceType, extraFn) {
++  const rows = await fetchJSON(`${DATA}/races/${file}.json`);
+   return rows
+-    .filter((r) => r.active !== 'FALSE')
+-    .map((r) => {
+-      const a = abbr(r.state_name);
+-      const isAtLarge = AT_LARGE_STATES.has(r.state_name);
+-      const num = parseInt(r.congress, 10);
+-      const geoid = isAtLarge ? `${a}-AT-LARGE` : `${a}-${String(num).padStart(2, '0')}`;
+-      return {
+-        geoid,
+-        label: `${a}-${num}`,
+-        state: r.state_name,
+-        race: isAtLarge ? 'At-Large' : `Congressional District ${num}`,
+-        raceType: 'house',
+-        districtNum: num,
+-        voterPower: toNum(r.voter_power),
+-        cookRating: clean(r.rating_2026),
+-        margin: toFloat(r.margin_2026_v2),
+-        dCandidate: clean(r.D_running),
+-        rCandidate: clean(r.R_running),
+-        dLink: null,
+-        rLink: null,
+-        incumbent: clean(r.incumbent),
+-        notes: clean(r.notes),
+-      };
+-    })
++    .filter((r) => r.active !== false)
++    .map((r) => toRace(r, raceType, extraFn(r)))
+     .filter((r) => r.voterPower > 0 && r.geoid)
+     .sort((a, b) => b.voterPower - a.voterPower);
+ }
+ 
+-export async function loadSenateRaces() {
+-  const rows = await fetchJSON('/senate_dataset.json');
+-  return rows
+-    .filter((r) => r.active !== 'FALSE')
+-    .map((r) => ({
+-      geoid: pad2(r.state),
+-      label: abbr(r.state_name),
+-      state: r.state_name,
+-      race: r.election_name,
+-      raceType: 'senate',
+-      voterPower: toNum(r.voter_power),
+-      cookRating: clean(r.cook_rating),
+-      margin: toFloat(r.margin_recommended),
+-      dCandidate: clean(r.D_running),
+-      rCandidate: clean(r.R_running),
+-      dLink: r.D_link || null,
+-      rLink: r.R_link || null,
+-      incumbent: clean(r.incumbent),
+-      notes: clean(r.notes),
+-    }))
+-    .filter((r) => r.voterPower > 0)
+-    .sort((a, b) => b.voterPower - a.voterPower);
+-}
++const statewide = (r) => ({ geoid: r.state_fips, label: r.state_abbr });
+ 
+-export async function loadGovernorRaces() {
+-  const rows = await fetchJSON('/governor_dataset.json');
+-  return rows
+-    .filter((r) => r.active !== 'FALSE')
+-    .map((r) => ({
+-      geoid: pad2(r.state),
+-      label: abbr(r.state_name),
+-      state: r.state_name,
+-      race: r.election_name,
+-      raceType: 'governor',
+-      voterPower: toNum(r.voter_power),
+-      cookRating: clean(r.cook_rating),
+-      margin: toFloat(r.margin_recommended),
+-      dCandidate: clean(r.D_running),
+-      rCandidate: clean(r.R_running),
+-      dLink: r.D_link || null,
+-      rLink: r.R_link || null,
+-      incumbent: clean(r.incumbent),
+-      notes: clean(r.notes),
+-    }))
+-    .filter((r) => r.voterPower > 0)
+-    .sort((a, b) => b.voterPower - a.voterPower);
++export function loadHouseRaces() {
++  return loadRaces('house', 'house', (r) => {
++    const a = r.state_abbr;
++    const n = parseInt(r.district, 10);
++    const isAtLarge = AT_LARGE_STATES.has(r.state);
++    return {
++      geoid: isAtLarge ? `${a}-AT-LARGE` : `${a}-${String(n).padStart(2, '0')}`,
++      label: `${a}-${n}`,
++      race: isAtLarge ? 'At-Large' : `Congressional District ${n}`,
++      districtNum: n,
++    };
++  });
+ }
+ 
+-export async function loadAGRaces() {
+-  const rows = await fetchJSON('/attorney_general_dataset.json');
+-  return rows
+-    .filter((r) => r.active !== 'FALSE')
+-    .map((r) => ({
+-      geoid: pad2(r.state),
+-      label: abbr(r.state_name),
+-      state: r.state_name,
+-      race: r.election_name,
+-      raceType: 'ag',
+-      voterPower: toNum(r.voter_power),
+-      cookRating: clean(r.cook_rating),
+-      margin: toFloat(r.margin_est),
+-      dCandidate: clean(r.D_running),
+-      rCandidate: clean(r.R_running),
+-      dLink: null,
+-      rLink: null,
+-      incumbent: clean(r.incumbent),
+-      notes: clean(r.notes),
+-    }))
+-    .filter((r) => r.voterPower > 0)
+-    .sort((a, b) => b.voterPower - a.voterPower);
+-}
++export const loadSenateRaces = () => loadRaces('senate', 'senate', statewide);
++export const loadGovernorRaces = () => loadRaces('governor', 'governor', statewide);
++export const loadAGRaces = () => loadRaces('attorney_general', 'ag', statewide);
++export const loadSOSRaces = () => loadRaces('secretary_of_state', 'sos', statewide);
+ 
+-export async function loadSOSRaces() {
+-  const rows = await fetchJSON('/secretary_of_state_dataset.json');
+-  return rows
+-    .filter((r) => r.active !== 'FALSE')
+-    .map((r) => ({
+-      geoid: pad2(r.state),
+-      label: abbr(r.state_name),
+-      state: r.state_name,
+-      race: r.election_name,
+-      raceType: 'sos',
+-      voterPower: toNum(r.voter_power),
+-      cookRating: clean(r.cook_rating),
+-      margin: toFloat(r.margin_est),
+-      dCandidate: clean(r.D_running),
+-      rCandidate: clean(r.R_running),
+-      dLink: null,
+-      rLink: null,
+-      incumbent: clean(r.incumbent),
+-      notes: clean(r.notes),
+-    }))
+-    .filter((r) => r.voterPower > 0)
+-    .sort((a, b) => b.voterPower - a.voterPower);
++export function loadJudicialRaces() {
++  return loadRaces('judicial', 'judicial', (r) => ({
++    geoid: r.state_fips,
++    label: r.election_name,
++    race: r.detail?.court_race_type ?? 'Judicial',
++  }));
+ }
+ 
+-export async function loadJudicialRaces() {
+-  const rows = await fetchJSON('/judicial_dataset.json');
+-  return rows
+-    .filter((r) => r.active !== 'FALSE')
+-    .map((r) => ({
+-      geoid: pad2(r['FP Code']),
+-      label: r.election_name,
+-      state: r.state,
+-      race: r.race_type,
+-      raceType: 'judicial',
+-      voterPower: toNum(r.voter_power),
+-      cookRating: clean(r.cook_rating),
+-      margin: toFloat(r.margin_est),
+-      dCandidate: clean(r.D_running),
+-      rCandidate: clean(r.R_running),
+-      dLink: null,
+-      rLink: null,
+-      incumbent: clean(r.incumbent),
+-      notes: clean(r.notes),
+-    }))
+-    .filter((r) => r.voterPower > 0)
+-    .sort((a, b) => b.voterPower - a.voterPower);
++export function loadBallotRaces() {
++  return loadRaces('ballot_measures', 'ballot', (r) => ({
++    geoid: r.state_fips ?? '00',
++    label: r.detail?.measure_name || r.state,
++    race: r.detail?.ballot_type || 'Ballot Initiative',
++    cookRating: null,
++    notes: r.detail?.qualification_status ? String(r.detail.qualification_status).slice(0, 200) : null,
++  }));
+ }
+ 
+-export async function loadBallotRaces() {
+-  const rows = await fetchJSON('/ballot_initiative_dataset.json');
+-  return rows
+-    .filter((r) => r.active !== 'FALSE')
+-    .map((r) => {
+-      const statusKey = Object.keys(r).find((k) => k.startsWith('qualification_status'));
+-      const status = statusKey ? r[statusKey] : '';
+-      return {
+-        geoid: STATE_FIPS[r.state_name] ?? '00',
+-        label: r['name of ballot'] || r.state_name,
+-        state: r.state_name,
+-        race: r.ballot_type || r.race_type || 'Ballot Initiative',
+-        raceType: 'ballot',
+-        voterPower: toNum(r.voter_power),
+-        cookRating: null,
+-        margin: toFloat(r.margin_est),
+-        notes: status ? String(status).slice(0, 200) : null,
+-      };
+-    })
+-    .filter((r) => r.voterPower > 0)
+-    .sort((a, b) => b.voterPower - a.voterPower);
+-}
+-
+-function sldGeoid(stateName, districtId) {
+-  const a = abbr(stateName);
++function sldGeoid(a, districtId) {
+   const s = String(districtId ?? '').trim();
+-  // Pure numeric: use zero-padded int to match map tiles
++  // Pure numeric: use the integer to match map tiles; named districts ("1A", "Belknap 1") work in lists only
+   if (/^\d+$/.test(s)) return `${a}-${parseInt(s, 10)}`;
+-  // Named district (e.g. "1A", "Belknap 1"): use raw string; won't hit map but works in list
+   return `${a}-${s}`;
+ }
+ 
+-export async function loadStateLegUpperRaces() {
+-  const rows = await fetchJSON('/state_legislature_upper.json');
+-  return rows
+-    .filter((r) => r.active !== 'FALSE')
+-    .map((r) => {
+-      const a = abbr(r.state_name);
+-      const s = String(r.s_upper ?? '').trim();
+-      const geoid = sldGeoid(r.state_name, s);
+-      const isNumeric = /^\d+$/.test(s);
+-      return {
+-        geoid,
+-        label: isNumeric ? `${a} SD-${parseInt(s, 10)}` : `${a} SD-${s}`,
+-        state: r.state_name,
+-        race: r.election_name,
+-        raceType: 'state_leg_upper',
+-        voterPower: toNum(r.voter_power),
+-        cookRating: clean(r.cook_rating),
+-        margin: toFloat(r.margin_2026_est),
+-        dCandidate: clean(r.D_running),
+-        rCandidate: clean(r.R_running),
+-        dLink: null,
+-        rLink: null,
+-        incumbent: clean(r.incumbent),
+-        notes: clean(r.notes),
+-      };
+-    })
+-    .filter((r) => r.voterPower > 0)
+-    .sort((a, b) => b.voterPower - a.voterPower);
++function sld(prefix) {
++  return (r) => {
++    const a = r.state_abbr;
++    const s = String(r.district ?? '').trim();
++    const isNumeric = /^\d+$/.test(s);
++    return {
++      geoid: sldGeoid(a, s),
++      label: isNumeric ? `${a} ${prefix}-${parseInt(s, 10)}` : `${a} ${prefix}-${s}`,
++    };
++  };
+ }
+ 
+-export async function loadStateLegLowerRaces() {
+-  const rows = await fetchJSON('/state_legislature_lower.json');
+-  return rows
+-    .filter((r) => r.active !== 'FALSE')
+-    .map((r) => {
+-      const a = abbr(r.state_name);
+-      const s = String(r.s_lower ?? '').trim();
+-      const geoid = sldGeoid(r.state_name, s);
+-      const isNumeric = /^\d+$/.test(s);
+-      return {
+-        geoid,
+-        label: isNumeric ? `${a} HD-${parseInt(s, 10)}` : `${a} HD-${s}`,
+-        state: r.state_name,
+-        race: r.election_name,
+-        raceType: 'state_leg_lower',
+-        voterPower: toNum(r.voter_power),
+-        cookRating: clean(r.cook_rating),
+-        margin: toFloat(r.margin_2026_est),
+-        dCandidate: clean(r.D_running),
+-        rCandidate: clean(r.R_running),
+-        dLink: null,
+-        rLink: null,
+-        incumbent: clean(r.incumbent),
+-        notes: clean(r.notes),
+-      };
+-    })
+-    .filter((r) => r.voterPower > 0)
+-    .sort((a, b) => b.voterPower - a.voterPower);
++export const loadStateLegUpperRaces = () => loadRaces('state_legislature_upper', 'state_leg_upper', sld('SD'));
++export const loadStateLegLowerRaces = () => loadRaces('state_legislature_lower', 'state_leg_lower', sld('HD'));
++
++export async function loadManifest() {
++  return fetchJSON(`${DATA}/manifest.json`);
+ }
+ 
+ export async function loadCivicOrgs() {
+-  const rows = await fetchJSON('/civic_organizations.json');
++  const rows = await fetchJSON(`${DATA}/reference/civic_organizations.json`);
+   return rows.map((r) => {
+     const stateVal = r.state?.trim() ?? '';
+     let level = r.chapter_level?.trim().toLowerCase() ?? '';
+@@ -297,26 +154,26 @@ export async function loadCivicOrgs() {
+ }
+ 
+ export async function loadParties() {
+-  const rows = await fetchJSON('/political_parties.json');
++  const rows = await fetchJSON(`${DATA}/reference/political_parties.json`);
+   return rows.map((r) => ({
+-    level: r['Level (State, County, City)']?.trim().toLowerCase(),
+-    state: r.Name?.trim(),
+-    affiliation: r.Affiliation?.trim(),
+-    url: r.Link?.trim(),
++    level: r.level_state_county_city?.trim().toLowerCase(),
++    state: r.name?.trim(),
++    affiliation: r.affiliation?.trim(),
++    url: r.link?.trim(),
+   })).filter((r) => r.state && r.url);
+ }
+ 
+ export async function loadPrimaryCalendar() {
+-  const rows = await fetchJSON('/primary_calendar.json');
++  const rows = await fetchJSON(`${DATA}/reference/primary_calendar.json`);
+   return rows.map((r) => ({
+     state: r.state_name?.trim(),
+-    primaryDate: r.primary_date?.trim(),
++    primaryDate: r.primary_date != null ? String(r.primary_date).trim() : null,
+     primaryType: r.primary_type?.trim(),
+     hasSenate: r.senate_primary === true,
+     hasGovernor: r.governor_primary === true,
+     hasHouse: r.house_primary === true,
+     hasStateLeg: r.state_leg_primary === true,
+-    runoffDate: r.runoff_date?.trim() || null,
++    runoffDate: r.runoff_date != null ? String(r.runoff_date).trim() : null,
+   })).filter((r) => r.state);
+ }
+ 
+@@ -343,3 +200,5 @@ export function aggregateByState(races) {
+   }
+   return Object.values(byState);
+ }
++
++export { abbr };
+-- 
+2.43.0
+

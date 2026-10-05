@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react';
-import { getDistrictColor, COOK_CONFIG } from '../utils/districtUtils.js';
+import { getDistrictColor, getScore, competitivenessConfig, COMPETITIVENESS_TITLE, COMPETITIVENESS_TOOLTIP } from '../utils/districtUtils.js';
 import './InfoBox.css';
 
 export default function DistrictCard({
   district,
+  metric,
   rank,
   isHovered,
   isSelected,
@@ -12,13 +13,10 @@ export default function DistrictCard({
   onClick,
 }) {
   const ref = useRef(null);
-  const cookCfg = COOK_CONFIG[district.cookRating] ?? {
-    label: district.cookRating,
-    color: '#475569',
-    bg: '#f1f5f9',
-  };
-  const vpColor = getDistrictColor(district.voterPower);
-  const vpRounded = Math.round(district.voterPower);
+  const cookCfg = competitivenessConfig(district.competitiveness);
+  const score = getScore(district, metric);
+  const vpColor = getDistrictColor(score);
+  const vpRounded = Math.round(score ?? 0);
 
   // Scroll into view when this card becomes hovered or selected externally
   useEffect(() => {
@@ -42,12 +40,17 @@ export default function DistrictCard({
         <div className="card-state">{district.state}</div>
       </div>
 
-      <span
-        className="card-cook"
-        style={{ color: cookCfg.color, background: cookCfg.bg }}
-      >
-        {cookCfg.label}
-      </span>
+      {district.competitiveness ? (
+        <span
+          className="card-cook"
+          style={{ color: cookCfg.color, background: cookCfg.bg }}
+          title={`${COMPETITIVENESS_TITLE}: ${COMPETITIVENESS_TOOLTIP}`}
+        >
+          {cookCfg.label}
+        </span>
+      ) : (
+        <span className="card-cook" />
+      )}
 
       <div className="card-vp">
         <div className="vp-bar-track">

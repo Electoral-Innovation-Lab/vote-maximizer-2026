@@ -28,7 +28,7 @@ import {
   loadStateLegUpperRaces, loadStateLegLowerRaces, aggregateByState,
   loadCivicOrgs, loadPrimaryCalendar, loadUrbanicity, loadParties,
 } from './utils/parseCSV.js';
-import { STATE_CENTROIDS, haversineDistance } from './utils/districtUtils.js';
+import { STATE_CENTROIDS, haversineDistance, getScore } from './utils/districtUtils.js';
 import './App.css';
 
 const RADIUS_HOUSE_MI = 200;
@@ -114,6 +114,8 @@ export default function App() {
   // Top Contests hover preview (map layer override)
   const [previewRace, setPreviewRace] = useState(null);
   const [topContestType, setTopContestType] = useState('house');
+  const [selectedRaceId, setSelectedRaceId] = useState(null);
+  const [metric, setMetric] = useState('voter');
   const [mapResetTrigger, setMapResetTrigger] = useState(0);
 
   const [civicOrgs, setCivicOrgs] = useState([]);
@@ -177,11 +179,11 @@ export default function App() {
       if (raceType === 'state_leg_upper') return { mapTab: 'sld_upper', mapRaceData: data };
       if (raceType === 'state_leg_lower') return { mapTab: 'sld_lower', mapRaceData: data };
       if (raceType === 'house') return { mapTab: 'house', mapRaceData: data };
-      return { mapTab: 'state', mapRaceData: aggregateByState(data) };
+      return { mapTab: 'state', mapRaceData: aggregateByState(data, metric) };
     }
     if (activeTab === 'top') {
       const data = allDatasets[topContestType] ?? houseData;
-      const aggregated = topContestType === 'house' ? data : aggregateByState(data);
+      const aggregated = topContestType === 'house' ? data : aggregateByState(data, metric);
       return { mapTab: topContestType === 'house' ? 'house' : 'state', mapRaceData: aggregated };
     }
     switch (activeTab) {
@@ -196,7 +198,7 @@ export default function App() {
       case 'state_leg_lower': return { mapTab: 'sld_lower', mapRaceData: stateLegLowerData };
       default:                return { mapTab: 'house',  mapRaceData: houseData };
     }
-  }, [previewRace, activeTab, topContestType, allDatasets, houseData, senateData, governorData, agData, sosData, judicialData, ballotData, stateLegUpperData, stateLegLowerData]);
+  }, [previewRace, activeTab, topContestType, metric, allDatasets, houseData, senateData, governorData, agData, sosData, judicialData, ballotData, stateLegUpperData, stateLegLowerData]);
 
   const previewCenter = useMemo(() => {
     if (!previewRace) return null;
@@ -213,12 +215,26 @@ export default function App() {
     setActiveTab(tab);
     setHoveredGeoid(null);
     setSelectedGeoid(null);
+    setSelectedRaceId(null);
     setPreviewRace(null);
     setMapResetTrigger((n) => n + 1);
   }, []);
 
+  // Leaving a contest type that has no data under the new metric would show an empty list.
+  const handleMetricChange = useCallback((next) => {
+    setMetric(next);
+    const hasData = (type) => next === 'voter' || (allDatasets[type] ?? []).some((r) => getScore(r, next) != null);
+    if (!hasData(topContestType)) setTopContestType('house');
+    if (activeTab !== 'top' && activeTab !== 'nearby' && !hasData(activeTab)) handleTabChange('top');
+  }, [allDatasets, topContestType, activeTab, handleTabChange]);
+
   const handleHover = useCallback((geoid) => setHoveredGeoid(geoid), []);
-  const handleSelect = useCallback((geoid) => setSelectedGeoid(geoid), []);
+  // Statewide contests in the same state share a geoid, so selection also tracks the race id.
+  const handleSelect = useCallback((geoid, id = null) => {
+    setSelectedGeoid(geoid);
+    setSelectedRaceId(geoid ? id : null);
+    setPreviewRace(null); // a hovered card may unmount before its mouseleave fires
+  }, []);
 
   const handleLocationSearch = useCallback(({ lat, lng, placeName }) => {
     const nearby = findNearbyRaces(lat, lng, allDatasets, districtCentroids);
@@ -279,9 +295,9 @@ export default function App() {
     if (select) {
       setPreviewRace(null);
       handleTabChange(raceType);
-      setSelectedGeoid(race.geoid);
+      handleSelect(race.geoid, race.id);
     }
-  }, [handleTabChange]);
+  }, [handleTabChange, handleSelect]);
 
   const shareUrl = searchCoords
     ? `${window.location.origin}${window.location.pathname}?lat=${searchCoords.lat.toFixed(4)}&lng=${searchCoords.lng.toFixed(4)}&place=${encodeURIComponent(searchPlaceName)}`
@@ -295,6 +311,7 @@ export default function App() {
         <TopBanner onAbout={() => setShowAbout(true)} />
         <Map
           raceData={mapRaceData}
+          metric={metric}
           tab={mapTab}
           hoveredGeoid={mapHoveredGeoid}
           selectedGeoid={selectedGeoid}
@@ -309,10 +326,13 @@ export default function App() {
         />
         <InfoBox
           raceData={raceData}
+          metric={metric}
+          onMetricChange={handleMetricChange}
           activeTab={activeTab}
           onTabChange={handleTabChange}
           hoveredGeoid={hoveredGeoid}
           selectedGeoid={selectedGeoid}
+          selectedRaceId={selectedRaceId}
           onRaceHover={handleHover}
           onRaceSelect={handleSelect}
           nearbyRaces={nearbyRaces}
@@ -322,6 +342,7 @@ export default function App() {
           onAbout={() => setShowAbout(true)}
           allData={allDatasets}
           onRacePreview={handleRacePreview}
+          topType={topContestType}
           onTopTypeChange={setTopContestType}
           civicOrgs={civicOrgs}
           primaryCalendar={primaryCalendar}
