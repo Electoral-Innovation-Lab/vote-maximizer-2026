@@ -645,7 +645,7 @@ export default function InfoBox({
                     <div key={item.key} className="list-group-header">{item.label}</div>
                   ) : (
                     <NearbyCard
-                      key={`${item.race.raceType}-${item.race.label}`}
+                      key={item.race.id ?? `${item.race.raceType}-${item.race.state}-${item.race.label}`}
                       race={item.race}
                       metric={metric}
                       isHovered={hoveredGeoid === item.race.geoid}
