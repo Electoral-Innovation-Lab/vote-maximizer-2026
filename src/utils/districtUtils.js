@@ -100,3 +100,30 @@ export const COOK_CONFIG = {
   retention:    { label: 'Retention',   color: '#3f3f46', bg: '#e4e4e7' },
   nonpartisan:  { label: 'Nonpartisan', color: '#3f3f46', bg: '#e4e4e7' },
 };
+
+// ── Margin text shared by the detail panel, compare view and map popup ───────
+// Prefers the exported margin_display ("D+2.2", "R+0.4", "I+0.8", "Yes+4.0", "Unopposed")
+// so independent challengers and ballot measures are labelled correctly.
+const PARTY_WORD = { D: 'Dem', R: 'Rep', I: 'Ind', L: 'Lib', G: 'Green' };
+
+export function formatMarginText(race) {
+  const d = race?.marginDisplay;
+  if (d) {
+    const m = /^([A-Za-z]+)\+(\d+(?:\.\d+)?)$/.exec(d);
+    if (!m) return d; // "Even", "Unopposed"
+    const abs = parseFloat(m[2]).toFixed(1).replace(/\.0$/, '');
+    if (m[1] === 'Yes' || m[1] === 'No') return `+${abs} ${m[1]}`;
+    return `+${abs} ${PARTY_WORD[m[1]] ?? m[1]}`;
+  }
+  const margin = race?.margin;
+  if (margin == null || isNaN(margin)) return null;
+  if (margin === 0) return 'Even';
+  const abs = Math.abs(margin).toFixed(1).replace(/\.0$/, '');
+  return margin > 0 ? `+${abs} Dem` : `+${abs} Rep`;
+}
+
+// Per-dollar power is shown only where the race is also competitive; otherwise a
+// cheap long shot would top the donor ranking.
+export const DONATION_VP_MIN = 50;
+
+export const FIFTYPLUSONE_URL = 'https://fiftyplusone.news';

@@ -605,3 +605,46 @@
   .cd-header { padding: 8px 12px 10px; }
   .cd-back { padding: 8px 12px 6px; }
 }
+
+/* ── Margin source badge, win probability, donation power, data notes (v43 data) ── */
+.cd-source-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 10px;
+  font-weight: 600;
+  border-radius: 4px;
+  padding: 1px 6px;
+  border: 1px solid transparent;
+}
+.cd-source-badge--poll { color: #166534; background: #dcfce7; border-color: #bbf7d0; }
+.cd-source-badge--est  { color: #92400e; background: #fef3c7; border-color: #fde68a; }
+
+.cd-winprob { margin-top: 4px; }
+
+.cd-donation-note {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 6px;
+}
+
+.cd-candidate--o .cd-cand-party { background: #64748b; }
+
+.cd-data-notes {
+  padding: 10px 0 0;
+  border-top: 1px solid #f1f5f9;
+}
+.cd-caveats {
+  font-size: 11px;
+  color: #92400e;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 6px;
+  padding: 8px 10px;
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+.cd-data-meta {
+  font-size: 10px;
+  color: #94a3b8;
+}
+.cd-data-meta a { color: #64748b; }

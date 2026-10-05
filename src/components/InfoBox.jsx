@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import DistrictCard from './DistrictCard.jsx';
 import ContestDetail from './ContestDetail.jsx';
-import { COOK_CONFIG, getDistrictColor, STATE_CENTROIDS, haversineDistance } from '../utils/districtUtils.js';
+import { COOK_CONFIG, getDistrictColor, STATE_CENTROIDS, haversineDistance, DONATION_VP_MIN } from '../utils/districtUtils.js';
 import './InfoBox.css';
 
 const RACE_TYPE_LABELS = {
@@ -145,6 +145,16 @@ function ActionPane({ race, civicOrgs, primaryCalendar, partiesData, allRaces, a
               ? 'This is a high-impact race. A small donation goes directly where it matters most.'
               : 'In a close race, small donations shift real resources to where they are most needed.'}
           </p>
+          {race.perDollarPower != null && race.voterPower >= DONATION_VP_MIN && (
+            <p className="action-section-body">
+              Donation power: <strong>{Math.round(race.perDollarPower)}</strong>/100
+              {race.perDollarPower >= 50
+                ? ' — relatively little money has been raised here, so each dollar goes further.'
+                : race.perDollarPower < 15
+                ? ' — this race is already heavily funded; a dollar may go further in a less-saturated race.'
+                : '.'}
+            </p>
+          )}
           {hasCandidateLinks ? (
             <div className="action-cta-links">
               {race.dLink && (

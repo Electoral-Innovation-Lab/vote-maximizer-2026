@@ -1,282 +1,139 @@
 import Papa from 'papaparse';
 import { STATE_ABBR, AT_LARGE_STATES } from './districtUtils.js';
 
-function pad2(n) { return String(parseInt(n, 10) || 0).padStart(2, '0'); }
-function toNum(v) { const n = parseFloat(v); return isNaN(n) ? 0 : n; }
-function toFloat(v) { const n = parseFloat(v); return isNaN(n) ? null : n; }
+// All model data comes from the Vote Maximizer JSON export (vm_export_json.py), copied into
+// public/data/. See public/data/schema.json for field definitions and manifest.json for the
+// workbook version, model settings and data dates.
+const DATA = '/data';
+
 function abbr(name) { return STATE_ABBR[name] ?? name?.slice(0, 2).toUpperCase() ?? '??'; }
-function clean(v) {
-  const t = v?.trim() || null;
-  return t === 'None' ? null : t;
-}
+function num(v) { return typeof v === 'number' && !isNaN(v) ? v : null; }
 
 async function fetchJSON(path) {
   const res = await fetch(path);
+  if (!res.ok) throw new Error(`${path}: HTTP ${res.status}`);
   return res.json();
 }
 
-// Standard US state FIPS codes (name → zero-padded 2-digit string)
-const STATE_FIPS = {
-  'Alabama': '01', 'Alaska': '02', 'Arizona': '04', 'Arkansas': '05',
-  'California': '06', 'Colorado': '08', 'Connecticut': '09', 'Delaware': '10',
-  'District of Columbia': '11', 'Florida': '12', 'Georgia': '13', 'Hawaii': '15',
-  'Idaho': '16', 'Illinois': '17', 'Indiana': '18', 'Iowa': '19', 'Kansas': '20',
-  'Kentucky': '21', 'Louisiana': '22', 'Maine': '23', 'Maryland': '24',
-  'Massachusetts': '25', 'Michigan': '26', 'Minnesota': '27', 'Mississippi': '28',
-  'Missouri': '29', 'Montana': '30', 'Nebraska': '31', 'Nevada': '32',
-  'New Hampshire': '33', 'New Jersey': '34', 'New Mexico': '35', 'New York': '36',
-  'North Carolina': '37', 'North Dakota': '38', 'Ohio': '39', 'Oklahoma': '40',
-  'Oregon': '41', 'Pennsylvania': '42', 'Rhode Island': '44', 'South Carolina': '45',
-  'South Dakota': '46', 'Tennessee': '47', 'Texas': '48', 'Utah': '49',
-  'Vermont': '50', 'Virginia': '51', 'Washington': '53', 'West Virginia': '54',
-  'Wisconsin': '55', 'Wyoming': '56',
-};
+const POLL_SOURCES = new Set(['F1 average', 'poll median', 'poll median + PVI baseline']);
 
-export async function loadHouseRaces() {
-  const rows = await fetchJSON('/house_dataset.json');
+function firstCand(cands, party) {
+  return cands?.find((c) => c.party === party)?.name ?? null;
+}
+
+// Map one exported race record onto the object shape the components already use,
+// plus the new fields (win probability, donation power, margin source, caveats).
+function toRace(r, raceType, extra) {
+  const cands = r.candidates ?? [];
+  const marginSource = r.margin_source ?? null;
+  const sourceKind = POLL_SOURCES.has(marginSource) ? 'poll' : 'estimate';
+  return {
+    id: r.id,
+    state: r.state,
+    race: r.election_name,
+    raceType,
+    voterPower: num(r.voter_power) ?? 0,
+    cookRating: r.rating ?? null,
+    margin: num(r.margin),
+    marginDisplay: r.margin_display ?? null,
+    marginSource,
+    sourceKind,
+    source: sourceKind === 'poll' ? 'poll' : 'cook', // legacy field used by CompareView
+    winProbability: r.win_probability ?? null,
+    perDollarPower: num(r.donation?.per_dollar_power),
+    fecReceipts: num(r.donation?.fec_receipts),
+    fecThrough: r.donation?.fec_reports_through ?? null,
+    candidates: cands,
+    dCandidate: firstCand(cands, 'D'),
+    rCandidate: firstCand(cands, 'R'),
+    otherCandidates: cands.filter((c) => c.party !== 'D' && c.party !== 'R'),
+    dLink: r.links?.D ?? null,
+    rLink: r.links?.R ?? null,
+    incumbent: r.incumbent ?? null,
+    notes: r.notes ?? null,
+    caveats: r.caveats ?? null,
+    lastVerified: r.last_verified ?? null,
+    unopposed: !!r.unopposed,
+    ...extra,
+  };
+}
+
+async function loadRaces(file, raceType, extraFn) {
+  const rows = await fetchJSON(`${DATA}/races/${file}.json`);
   return rows
-    .filter((r) => r.active !== 'FALSE')
-    .map((r) => {
-      const a = abbr(r.state_name);
-      const isAtLarge = AT_LARGE_STATES.has(r.state_name);
-      const num = parseInt(r.congress, 10);
-      const geoid = isAtLarge ? `${a}-AT-LARGE` : `${a}-${String(num).padStart(2, '0')}`;
-      return {
-        geoid,
-        label: `${a}-${num}`,
-        state: r.state_name,
-        race: isAtLarge ? 'At-Large' : `Congressional District ${num}`,
-        raceType: 'house',
-        districtNum: num,
-        voterPower: toNum(r.voter_power),
-        cookRating: clean(r.rating_2026),
-        margin: toFloat(r.margin_2026_v2),
-        dCandidate: clean(r.D_running),
-        rCandidate: clean(r.R_running),
-        dLink: null,
-        rLink: null,
-        incumbent: clean(r.incumbent),
-        notes: clean(r.notes),
-      };
-    })
+    .filter((r) => r.active !== false)
+    .map((r) => toRace(r, raceType, extraFn(r)))
     .filter((r) => r.voterPower > 0 && r.geoid)
     .sort((a, b) => b.voterPower - a.voterPower);
 }
 
-export async function loadSenateRaces() {
-  const rows = await fetchJSON('/senate_dataset.json');
-  return rows
-    .filter((r) => r.active !== 'FALSE')
-    .map((r) => ({
-      geoid: pad2(r.state),
-      label: abbr(r.state_name),
-      state: r.state_name,
-      race: r.election_name,
-      raceType: 'senate',
-      voterPower: toNum(r.voter_power),
-      cookRating: clean(r.cook_rating),
-      margin: toFloat(r.margin_recommended),
-      dCandidate: clean(r.D_running),
-      rCandidate: clean(r.R_running),
-      dLink: r.D_link || null,
-      rLink: r.R_link || null,
-      incumbent: clean(r.incumbent),
-      notes: clean(r.notes),
-    }))
-    .filter((r) => r.voterPower > 0)
-    .sort((a, b) => b.voterPower - a.voterPower);
+const statewide = (r) => ({ geoid: r.state_fips, label: r.state_abbr });
+
+export function loadHouseRaces() {
+  return loadRaces('house', 'house', (r) => {
+    const a = r.state_abbr;
+    const n = parseInt(r.district, 10);
+    const isAtLarge = AT_LARGE_STATES.has(r.state);
+    return {
+      geoid: isAtLarge ? `${a}-AT-LARGE` : `${a}-${String(n).padStart(2, '0')}`,
+      label: `${a}-${n}`,
+      race: isAtLarge ? 'At-Large' : `Congressional District ${n}`,
+      districtNum: n,
+    };
+  });
 }
 
-export async function loadGovernorRaces() {
-  const rows = await fetchJSON('/governor_dataset.json');
-  return rows
-    .filter((r) => r.active !== 'FALSE')
-    .map((r) => ({
-      geoid: pad2(r.state),
-      label: abbr(r.state_name),
-      state: r.state_name,
-      race: r.election_name,
-      raceType: 'governor',
-      voterPower: toNum(r.voter_power),
-      cookRating: clean(r.cook_rating),
-      margin: toFloat(r.margin_recommended),
-      dCandidate: clean(r.D_running),
-      rCandidate: clean(r.R_running),
-      dLink: r.D_link || null,
-      rLink: r.R_link || null,
-      incumbent: clean(r.incumbent),
-      notes: clean(r.notes),
-    }))
-    .filter((r) => r.voterPower > 0)
-    .sort((a, b) => b.voterPower - a.voterPower);
+export const loadSenateRaces = () => loadRaces('senate', 'senate', statewide);
+export const loadGovernorRaces = () => loadRaces('governor', 'governor', statewide);
+export const loadAGRaces = () => loadRaces('attorney_general', 'ag', statewide);
+export const loadSOSRaces = () => loadRaces('secretary_of_state', 'sos', statewide);
+
+export function loadJudicialRaces() {
+  return loadRaces('judicial', 'judicial', (r) => ({
+    geoid: r.state_fips,
+    label: r.election_name,
+    race: r.detail?.court_race_type ?? 'Judicial',
+  }));
 }
 
-export async function loadAGRaces() {
-  const rows = await fetchJSON('/attorney_general_dataset.json');
-  return rows
-    .filter((r) => r.active !== 'FALSE')
-    .map((r) => ({
-      geoid: pad2(r.state),
-      label: abbr(r.state_name),
-      state: r.state_name,
-      race: r.election_name,
-      raceType: 'ag',
-      voterPower: toNum(r.voter_power),
-      cookRating: clean(r.cook_rating),
-      margin: toFloat(r.margin_est),
-      dCandidate: clean(r.D_running),
-      rCandidate: clean(r.R_running),
-      dLink: null,
-      rLink: null,
-      incumbent: clean(r.incumbent),
-      notes: clean(r.notes),
-    }))
-    .filter((r) => r.voterPower > 0)
-    .sort((a, b) => b.voterPower - a.voterPower);
+export function loadBallotRaces() {
+  return loadRaces('ballot_measures', 'ballot', (r) => ({
+    geoid: r.state_fips ?? '00',
+    label: r.detail?.measure_name || r.state,
+    race: r.detail?.ballot_type || 'Ballot Initiative',
+    cookRating: null,
+    notes: r.detail?.qualification_status ? String(r.detail.qualification_status).slice(0, 200) : null,
+  }));
 }
 
-export async function loadSOSRaces() {
-  const rows = await fetchJSON('/secretary_of_state_dataset.json');
-  return rows
-    .filter((r) => r.active !== 'FALSE')
-    .map((r) => ({
-      geoid: pad2(r.state),
-      label: abbr(r.state_name),
-      state: r.state_name,
-      race: r.election_name,
-      raceType: 'sos',
-      voterPower: toNum(r.voter_power),
-      cookRating: clean(r.cook_rating),
-      margin: toFloat(r.margin_est),
-      dCandidate: clean(r.D_running),
-      rCandidate: clean(r.R_running),
-      dLink: null,
-      rLink: null,
-      incumbent: clean(r.incumbent),
-      notes: clean(r.notes),
-    }))
-    .filter((r) => r.voterPower > 0)
-    .sort((a, b) => b.voterPower - a.voterPower);
-}
-
-export async function loadJudicialRaces() {
-  const rows = await fetchJSON('/judicial_dataset.json');
-  return rows
-    .filter((r) => r.active !== 'FALSE')
-    .map((r) => ({
-      geoid: pad2(r['FP Code']),
-      label: r.election_name,
-      state: r.state,
-      race: r.race_type,
-      raceType: 'judicial',
-      voterPower: toNum(r.voter_power),
-      cookRating: clean(r.cook_rating),
-      margin: toFloat(r.margin_est),
-      dCandidate: clean(r.D_running),
-      rCandidate: clean(r.R_running),
-      dLink: null,
-      rLink: null,
-      incumbent: clean(r.incumbent),
-      notes: clean(r.notes),
-    }))
-    .filter((r) => r.voterPower > 0)
-    .sort((a, b) => b.voterPower - a.voterPower);
-}
-
-export async function loadBallotRaces() {
-  const rows = await fetchJSON('/ballot_initiative_dataset.json');
-  return rows
-    .filter((r) => r.active !== 'FALSE')
-    .map((r) => {
-      const statusKey = Object.keys(r).find((k) => k.startsWith('qualification_status'));
-      const status = statusKey ? r[statusKey] : '';
-      return {
-        geoid: STATE_FIPS[r.state_name] ?? '00',
-        label: r['name of ballot'] || r.state_name,
-        state: r.state_name,
-        race: r.ballot_type || r.race_type || 'Ballot Initiative',
-        raceType: 'ballot',
-        voterPower: toNum(r.voter_power),
-        cookRating: null,
-        margin: toFloat(r.margin_est),
-        notes: status ? String(status).slice(0, 200) : null,
-      };
-    })
-    .filter((r) => r.voterPower > 0)
-    .sort((a, b) => b.voterPower - a.voterPower);
-}
-
-function sldGeoid(stateName, districtId) {
-  const a = abbr(stateName);
+function sldGeoid(a, districtId) {
   const s = String(districtId ?? '').trim();
-  // Pure numeric: use zero-padded int to match map tiles
+  // Pure numeric: use the integer to match map tiles; named districts ("1A", "Belknap 1") work in lists only
   if (/^\d+$/.test(s)) return `${a}-${parseInt(s, 10)}`;
-  // Named district (e.g. "1A", "Belknap 1"): use raw string; won't hit map but works in list
   return `${a}-${s}`;
 }
 
-export async function loadStateLegUpperRaces() {
-  const rows = await fetchJSON('/state_legislature_upper.json');
-  return rows
-    .filter((r) => r.active !== 'FALSE')
-    .map((r) => {
-      const a = abbr(r.state_name);
-      const s = String(r.s_upper ?? '').trim();
-      const geoid = sldGeoid(r.state_name, s);
-      const isNumeric = /^\d+$/.test(s);
-      return {
-        geoid,
-        label: isNumeric ? `${a} SD-${parseInt(s, 10)}` : `${a} SD-${s}`,
-        state: r.state_name,
-        race: r.election_name,
-        raceType: 'state_leg_upper',
-        voterPower: toNum(r.voter_power),
-        cookRating: clean(r.cook_rating),
-        margin: toFloat(r.margin_2026_est),
-        dCandidate: clean(r.D_running),
-        rCandidate: clean(r.R_running),
-        dLink: null,
-        rLink: null,
-        incumbent: clean(r.incumbent),
-        notes: clean(r.notes),
-      };
-    })
-    .filter((r) => r.voterPower > 0)
-    .sort((a, b) => b.voterPower - a.voterPower);
+function sld(prefix) {
+  return (r) => {
+    const a = r.state_abbr;
+    const s = String(r.district ?? '').trim();
+    const isNumeric = /^\d+$/.test(s);
+    return {
+      geoid: sldGeoid(a, s),
+      label: isNumeric ? `${a} ${prefix}-${parseInt(s, 10)}` : `${a} ${prefix}-${s}`,
+    };
+  };
 }
 
-export async function loadStateLegLowerRaces() {
-  const rows = await fetchJSON('/state_legislature_lower.json');
-  return rows
-    .filter((r) => r.active !== 'FALSE')
-    .map((r) => {
-      const a = abbr(r.state_name);
-      const s = String(r.s_lower ?? '').trim();
-      const geoid = sldGeoid(r.state_name, s);
-      const isNumeric = /^\d+$/.test(s);
-      return {
-        geoid,
-        label: isNumeric ? `${a} HD-${parseInt(s, 10)}` : `${a} HD-${s}`,
-        state: r.state_name,
-        race: r.election_name,
-        raceType: 'state_leg_lower',
-        voterPower: toNum(r.voter_power),
-        cookRating: clean(r.cook_rating),
-        margin: toFloat(r.margin_2026_est),
-        dCandidate: clean(r.D_running),
-        rCandidate: clean(r.R_running),
-        dLink: null,
-        rLink: null,
-        incumbent: clean(r.incumbent),
-        notes: clean(r.notes),
-      };
-    })
-    .filter((r) => r.voterPower > 0)
-    .sort((a, b) => b.voterPower - a.voterPower);
+export const loadStateLegUpperRaces = () => loadRaces('state_legislature_upper', 'state_leg_upper', sld('SD'));
+export const loadStateLegLowerRaces = () => loadRaces('state_legislature_lower', 'state_leg_lower', sld('HD'));
+
+export async function loadManifest() {
+  return fetchJSON(`${DATA}/manifest.json`);
 }
 
 export async function loadCivicOrgs() {
-  const rows = await fetchJSON('/civic_organizations.json');
+  const rows = await fetchJSON(`${DATA}/reference/civic_organizations.json`);
   return rows.map((r) => {
     const stateVal = r.state?.trim() ?? '';
     let level = r.chapter_level?.trim().toLowerCase() ?? '';
@@ -297,26 +154,26 @@ export async function loadCivicOrgs() {
 }
 
 export async function loadParties() {
-  const rows = await fetchJSON('/political_parties.json');
+  const rows = await fetchJSON(`${DATA}/reference/political_parties.json`);
   return rows.map((r) => ({
-    level: r['Level (State, County, City)']?.trim().toLowerCase(),
-    state: r.Name?.trim(),
-    affiliation: r.Affiliation?.trim(),
-    url: r.Link?.trim(),
+    level: r.level_state_county_city?.trim().toLowerCase(),
+    state: r.name?.trim(),
+    affiliation: r.affiliation?.trim(),
+    url: r.link?.trim(),
   })).filter((r) => r.state && r.url);
 }
 
 export async function loadPrimaryCalendar() {
-  const rows = await fetchJSON('/primary_calendar.json');
+  const rows = await fetchJSON(`${DATA}/reference/primary_calendar.json`);
   return rows.map((r) => ({
     state: r.state_name?.trim(),
-    primaryDate: r.primary_date?.trim(),
+    primaryDate: r.primary_date != null ? String(r.primary_date).trim() : null,
     primaryType: r.primary_type?.trim(),
     hasSenate: r.senate_primary === true,
     hasGovernor: r.governor_primary === true,
     hasHouse: r.house_primary === true,
     hasStateLeg: r.state_leg_primary === true,
-    runoffDate: r.runoff_date?.trim() || null,
+    runoffDate: r.runoff_date != null ? String(r.runoff_date).trim() : null,
   })).filter((r) => r.state);
 }
 
@@ -343,3 +200,5 @@ export function aggregateByState(races) {
   }
   return Object.values(byState);
 }
+
+export { abbr };

@@ -29,9 +29,9 @@ const SECTIONS = [
   {
     num: '04',
     title: 'Data Sources',
-    body: `Margins come from two sources, color-coded in the interface: polling averages (sourced from Emerson, PPP, ASR, and Sabato's Crystal Ball, Jan-Jul 2026) shown in green, and rating proxies shown in amber. 2026 ratings are translated as: Toss-Up = 0, Lean = ±4 pts, Likely = ±9 pts, Solid = ±18 pts.
+    body: `Senate and governor margins come from polling: the FiftyPlusOne polling average where one is published, otherwise the median of the three most recent polls from the last 60 days (campaign internal polls are weighted toward each state's partisan lean). Races with little or no polling — and the House, state, judicial and legislative races — use partisan lean (Cook PVI) or recent results, adjusted for incumbency and a national environment of D+12.5. Each race shows a "Polling" or "Estimate" badge.
 
-    As more polls become available through the election cycle, Cook proxies are replaced with real data and all voter power scores update automatically.`,
+    Donation power uses the same closeness measure divided by the money the nominees have already raised, from Federal Election Commission filings. Polling data: Powered by FiftyPlusOne (fiftyplusone.news).`,
   },
   // {
   //   num: '05',

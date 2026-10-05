@@ -4,7 +4,7 @@ import MapboxGeocoder from '@mapbox/mapbox-gl-geocoder';
 import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 import { feature as topoFeature } from 'topojson-client';
 import statesData from 'us-atlas/states-10m.json';
-import { getDistrictColor, URBANICITY_CONFIG, STATE_CENTROIDS } from '../utils/districtUtils.js';
+import { getDistrictColor, URBANICITY_CONFIG, STATE_CENTROIDS, formatMarginText } from '../utils/districtUtils.js';
 import './Map.css';
 
 const DISTRICT_TILESET  = import.meta.env.VITE_DISTRICT_TILESET  ?? null;
@@ -604,12 +604,7 @@ function formatCookLabel(cookRating) {
     .replace('solid-R', 'Solid Rep') ?? cookRating;
 }
 
-function formatMarginLabel(margin) {
-  if (margin == null || isNaN(margin)) return null;
-  if (margin === 0) return 'Even';
-  const abs = Math.abs(margin).toFixed(1).replace(/\.0$/, '');
-  return margin > 0 ? `+${abs} Dem` : `+${abs} Rep`;
-}
+const formatMarginLabel = formatMarginText;
 
 function candidateRow(d, r) {
   if (!d && !r) return '';
@@ -622,7 +617,7 @@ function candidateRow(d, r) {
 function buildPopupHTML(race, tab) {
   const vpColor = getDistrictColor(race.voterPower);
   const cookLabel = formatCookLabel(race.cookRating);
-  const marginLabel = formatMarginLabel(race.margin);
+  const marginLabel = formatMarginLabel(race);
   const isSld = tab === 'sld_upper' || tab === 'sld_lower';
   const title = isSld ? race.label : tab === 'house' ? race.label : (race.state ?? race.label);
   const subtitle = tab === 'house'

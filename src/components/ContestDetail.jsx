@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getDistrictColor, COOK_CONFIG, STATE_ABBR } from '../utils/districtUtils.js';
+import { getDistrictColor, COOK_CONFIG, STATE_ABBR, formatMarginText, DONATION_VP_MIN, FIFTYPLUSONE_URL } from '../utils/districtUtils.js';
 import './ContestDetail.css';
 
 const PRIMARY_COL = {
@@ -51,11 +51,89 @@ function cookCfg(cookRating) {
   return COOK_CONFIG[cookRating] ?? { label: cookRating, color: '#475569', bg: '#f1f5f9' };
 }
 
-function formatMargin(margin) {
-  if (margin == null || isNaN(margin)) return null;
-  if (margin === 0) return 'Even';
-  const abs = Math.abs(margin).toFixed(1).replace(/\.0$/, '');
-  return margin > 0 ? `+${abs} Dem` : `+${abs} Rep`;
+const formatMargin = formatMarginText;
+
+function sourceLabel(race) {
+  return race.sourceKind === 'poll' ? 'Polling' : 'Estimate';
+}
+
+function SourceBadge({ race }) {
+  if (!race.marginSource) return null;
+  const poll = race.sourceKind === 'poll';
+  return (
+    <span
+      className={`cd-source-badge ${poll ? 'cd-source-badge--poll' : 'cd-source-badge--est'}`}
+      title={poll
+        ? `Margin from polling (${race.marginSource})`
+        : `No usable polling — margin estimated from partisan lean (${race.marginSource})`}
+    >
+      {sourceLabel(race)}
+    </span>
+  );
+}
+
+function formatMoney(n) {
+  if (n == null) return null;
+  if (n >= 1e6) return `$${(n / 1e6).toFixed(1)}M`;
+  if (n >= 1e3) return `$${Math.round(n / 1e3)}K`;
+  return `$${Math.round(n)}`;
+}
+
+function WinProbability({ race }) {
+  const w = race.winProbability;
+  if (!w || w.p == null) return null;
+  const pct = Math.round(w.p * 100);
+  return (
+    <div className="cd-meta cd-winprob">
+      <span>
+        Chance {w.candidate} finishes ahead of {w.opponent}: <strong>{pct}%</strong>
+      </span>
+    </div>
+  );
+}
+
+function DonationPower({ race }) {
+  if (race.perDollarPower == null || race.voterPower < DONATION_VP_MIN) return null;
+  const color = getDistrictColor(race.perDollarPower);
+  return (
+    <div className="cd-section">
+      <h3 className="cd-section-title">
+        Donation Power{' '}
+        <span
+          className="cd-vp-tooltip"
+          title="How much one additional dollar can move this race: the same closeness measure as voter power, divided by the money the nominees have already raised (FEC). 0–100 within this race type."
+        >?</span>
+      </h3>
+      <div className="cd-vp-bar">
+        <div className="cd-vp-track">
+          <div className="cd-vp-fill" style={{ width: `${Math.round(race.perDollarPower)}%`, background: color }} />
+        </div>
+        <span className="cd-vp-score">{Math.round(race.perDollarPower)}</span>
+      </div>
+      {race.fecReceipts != null && (
+        <div className="cd-donation-note">
+          Nominees have raised {formatMoney(race.fecReceipts)}
+          {race.fecThrough ? ` (FEC reports through ${race.fecThrough})` : ''}.
+        </div>
+      )}
+    </div>
+  );
+}
+
+function DataNotes({ race }) {
+  const poll = race.sourceKind === 'poll';
+  if (!race.caveats && !race.lastVerified && !poll) return null;
+  return (
+    <div className="cd-data-notes">
+      {race.caveats && <p className="cd-caveats">{race.caveats}</p>}
+      <p className="cd-data-meta">
+        {race.lastVerified && <>Last verified {race.lastVerified}. </>}
+        {poll && (
+          <>Polling data: <a href={FIFTYPLUSONE_URL} target="_blank" rel="noopener noreferrer">Powered by FiftyPlusOne</a>.</>
+        )}
+      </p>
+    </div>
+  );
 }
 
 function getNearby(race, allRaces) {
@@ -182,12 +260,15 @@ function CompareView({ raceA, raceB, onClose, orgs }) {
     raceA.cookRating || raceB.cookRating
       ? { label: '2026 Rating', a: cfgA.label, b: cfgB.label }
       : null,
-    { label: 'Projected Margin', a: formatMargin(raceA.margin), b: formatMargin(raceB.margin) },
-    {
-      label: 'Data Source',
-      a: raceA.source === 'cook' ? 'Cook proxy' : 'Poll',
-      b: raceB.source === 'cook' ? 'Cook proxy' : 'Poll',
-    },
+    { label: 'Projected Margin', a: formatMargin(raceA), b: formatMargin(raceB) },
+    { label: 'Data Source', a: sourceLabel(raceA), b: sourceLabel(raceB) },
+    raceA.perDollarPower != null || raceB.perDollarPower != null
+      ? {
+          label: 'Donation Power',
+          a: raceA.perDollarPower != null ? Math.round(raceA.perDollarPower) : '—',
+          b: raceB.perDollarPower != null ? Math.round(raceB.perDollarPower) : '—',
+        }
+      : null,
   ].filter(Boolean);
 
   return (
@@ -316,11 +397,13 @@ export default function ContestDetail({
             )}
           </div>
         </div>
-        {formatMargin(race.margin) && (
+        {formatMargin(race) && (
           <div className="cd-meta">
-            <span>Est. Margin: <strong>{formatMargin(race.margin)}</strong></span>
+            <span>Est. Margin: <strong>{formatMargin(race)}</strong></span>
+            <SourceBadge race={race} />
           </div>
         )}
+        <WinProbability race={race} />
         {primaryBadge && (
           <div className="cd-primary-badge">
             Primary: {primaryBadge.date}
@@ -338,8 +421,10 @@ export default function ContestDetail({
         </div>
       )}
 
+      <DonationPower race={race} />
+
       {/* ── Candidates ── */}
-      {(race.dCandidate || race.rCandidate) && (
+      {(race.dCandidate || race.rCandidate || race.otherCandidates?.length > 0) && (
         <div className="cd-section">
           <h3 className="cd-section-title">Candidates</h3>
           <div className="cd-candidates">
@@ -359,6 +444,12 @@ export default function ContestDetail({
                 </span>
               </div>
             )}
+            {race.otherCandidates?.map((c) => (
+              <div key={`${c.party}-${c.name}`} className="cd-candidate cd-candidate--o">
+                <span className="cd-cand-party">{c.party}</span>
+                <span className="cd-cand-name">{c.name}</span>
+              </div>
+            ))}
             {race.incumbent && (
               <div className="cd-incumbent">Incumbent: {race.incumbent}</div>
             )}
@@ -399,6 +490,8 @@ export default function ContestDetail({
           ))}
         </div>
       )}
+
+      <DataNotes race={race} />
 
       {/* ── Compare ── */}
       <div className="cd-section">
