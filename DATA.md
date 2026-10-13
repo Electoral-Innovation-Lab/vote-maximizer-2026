@@ -1,5 +1,7 @@
 # Model data (public/data)
 
+Current drop: **workbook v45** (`Vote_Maximizer_2026_v45_20261013.xlsx`), generated **2026-10-13**.
+
 The site reads every voter-power number from `public/data/`, a JSON export of the Vote Maximizer
 workbook produced by `vm_export_json.py` (in the data team's `vm_scripts`). Nothing in `src/` should
 read spreadsheet column names directly; `src/utils/parseCSV.js` maps the export onto the race objects
@@ -26,6 +28,6 @@ the components use.
 
 - **FiftyPlusOne credit**: races whose `margin_source` is polling show "Polling data: Powered by
   FiftyPlusOne" with a link (ContestDetail `DataNotes`). FiftyPlusOne's terms require it.
-- **Donation power is shown only where voter power ≥ 50** (`DONATION_VP_MIN` in `districtUtils.js`);
-  below that, cheap long-shot races would top the donor ranking.
+- **Donation power** exists only for House and Senate races (FEC data); other race types are greyed
+  out in Donation Power mode.
 - Poll-level FiftyPlusOne data is never exported; do not add it to the site.
