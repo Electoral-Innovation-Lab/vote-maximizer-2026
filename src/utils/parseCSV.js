@@ -64,12 +64,14 @@ function toRace(r, raceType, extra) {
   return race;
 }
 
-async function loadRaces(file, raceType, extraFn) {
+// keepUnopposed: unopposed races score 0, so they are normally dropped; state-legislature pages keep them
+// so a district's page can say it is unopposed.
+async function loadRaces(file, raceType, extraFn, { keepUnopposed = false } = {}) {
   const rows = await fetchJSON(`${DATA}/races/${file}.json`);
   return rows
     .filter((r) => r.active !== false)
     .map((r) => toRace(r, raceType, extraFn(r)))
-    .filter((r) => r.voterPower > 0 && r.geoid)
+    .filter((r) => (r.voterPower > 0 || (keepUnopposed && r.unopposed)) && r.geoid)
     .sort((a, b) => b.voterPower - a.voterPower);
 }
 
@@ -130,8 +132,8 @@ function sld(prefix) {
   };
 }
 
-export const loadStateLegUpperRaces = () => loadRaces('state_legislature_upper', 'state_leg_upper', sld('SD'));
-export const loadStateLegLowerRaces = () => loadRaces('state_legislature_lower', 'state_leg_lower', sld('HD'));
+export const loadStateLegUpperRaces = () => loadRaces('state_legislature_upper', 'state_leg_upper', sld('SD'), { keepUnopposed: true });
+export const loadStateLegLowerRaces = () => loadRaces('state_legislature_lower', 'state_leg_lower', sld('HD'), { keepUnopposed: true });
 
 export async function loadManifest() {
   return fetchJSON(`${DATA}/manifest.json`);
