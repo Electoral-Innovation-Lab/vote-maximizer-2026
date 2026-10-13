@@ -45,6 +45,7 @@ function toRace(r, raceType, extra) {
     candidates: cands,
     dCandidate: firstCand(cands, 'D'),
     rCandidate: firstCand(cands, 'R'),
+    // Anything that isn't D or R (independents, Nebraska's nonpartisan 'NP') goes here, never in D/R slots.
     otherCandidates: cands.filter((c) => c.party !== 'D' && c.party !== 'R'),
     dLink: r.links?.D ?? null,
     rLink: r.links?.R ?? null,
@@ -52,6 +53,11 @@ function toRace(r, raceType, extra) {
     notes: r.notes ?? null,
     lastVerified: r.last_verified ?? null,
     unopposed: !!r.unopposed,
+    // State-legislature extras (all null elsewhere)
+    committeeTargets: r.detail?.committee_targets || null,
+    chamberTier: r.detail?.chamber_tier ?? null,
+    chamberPDem: num(r.detail?.chamber_p_dem_majority),
+    pivotalProb: num(r.detail?.seat_pivotal_prob),
     ...extra,
   };
   race.competitiveness = competitivenessLabel(race);

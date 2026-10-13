@@ -136,6 +136,7 @@ export function competitivenessLabel(race) {
 const PARTY_WORD = { D: 'Dem', R: 'Rep', I: 'Ind', L: 'Lib', G: 'Green' };
 
 export function formatMarginText(race) {
+  if (race?.margin == null) return race?.unopposed ? 'Unopposed' : null; // e.g. Nebraska's nonpartisan races
   const d = race?.marginDisplay;
   if (d) {
     const m = /^([A-Za-z]+)\+(\d+(?:\.\d+)?)$/.exec(d);
