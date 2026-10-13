@@ -298,7 +298,7 @@ function CompareView({ raceA, raceB, onClose, orgs }) {
     raceA.competitiveness || raceB.competitiveness
       ? { label: COMPETITIVENESS_TITLE, a: raceA.competitiveness ?? '—', b: raceB.competitiveness ?? '—', hint: COMPETITIVENESS_TOOLTIP }
       : null,
-    { label: 'Projected Margin', a: formatMargin(raceA), b: formatMargin(raceB) },
+    { label: 'Projected Margin', a: formatMargin(raceA) ?? '—', b: formatMargin(raceB) ?? '—' },
     { label: 'Data Source', a: sourceLabel(raceA), b: sourceLabel(raceB) },
     raceA.perDollarPower != null || raceB.perDollarPower != null
       ? {
