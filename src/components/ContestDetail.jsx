@@ -119,6 +119,46 @@ function DonationPower({ race }) {
   );
 }
 
+const pct = (p) => `${Math.round(p * 100)}%`;
+
+// Committee targets and chamber-control odds (state legislature only)
+function StateLegInfo({ race }) {
+  if (race.raceType !== 'state_leg_upper' && race.raceType !== 'state_leg_lower') return null;
+  const targets = race.committeeTargets ? race.committeeTargets.split(';').map((t) => t.trim()).filter(Boolean) : [];
+  const hasOdds = race.chamberPDem != null;
+  if (!targets.length && !hasOdds) return null;
+  return (
+    <>
+      {targets.length > 0 && (
+        <div className="cd-section">
+          <h3 className="cd-section-title">National committee targets</h3>
+          <div className="cd-pills">
+            {targets.map((t) => <span key={t} className="cd-pill">{t}</span>)}
+          </div>
+          <p className="cd-footnote">DLCC and RSLC published target lists. These are announcements, not spending.</p>
+        </div>
+      )}
+      {hasOdds && (
+        <div className="cd-section">
+          <div className="cd-odds-row">
+            <span>Chance Democrats win this chamber:</span>
+            <strong>{pct(race.chamberPDem)}</strong>
+          </div>
+          {race.pivotalProb != null && race.pivotalProb >= 0.01 && (
+            <div className="cd-odds-row">
+              <span>Chance this seat decides control:</span>
+              <strong>{pct(race.pivotalProb)}</strong>
+            </div>
+          )}
+          <p className="cd-footnote">
+            Simulated at the current D+12.5 national environment. Alaska's legislature runs on bipartisan coalitions, so treat it as rough.
+          </p>
+        </div>
+      )}
+    </>
+  );
+}
+
 function DataNotes({ race }) {
   const poll = race.sourceKind === 'poll';
   if (!race.lastVerified && !poll) return null;
@@ -258,7 +298,7 @@ function CompareView({ raceA, raceB, onClose, orgs }) {
     raceA.competitiveness || raceB.competitiveness
       ? { label: COMPETITIVENESS_TITLE, a: raceA.competitiveness ?? '—', b: raceB.competitiveness ?? '—', hint: COMPETITIVENESS_TOOLTIP }
       : null,
-    { label: 'Projected Margin', a: formatMargin(raceA), b: formatMargin(raceB) },
+    { label: 'Projected Margin', a: formatMargin(raceA) ?? '—', b: formatMargin(raceB) ?? '—' },
     { label: 'Data Source', a: sourceLabel(raceA), b: sourceLabel(raceB) },
     raceA.perDollarPower != null || raceB.perDollarPower != null
       ? {
@@ -395,12 +435,14 @@ export default function ContestDetail({
             )}
           </div>
         </div>
-        {formatMargin(race) && (
+        {race.margin != null && formatMargin(race) ? (
           <div className="cd-meta">
             <span>Est. Margin: <strong>{formatMargin(race)}</strong></span>
             <SourceBadge race={race} />
           </div>
-        )}
+        ) : race.unopposed ? (
+          <div className="cd-meta"><strong>Unopposed</strong></div>
+        ) : null}
         <WinProbability race={race} />
         {primaryBadge && (
           <div className="cd-primary-badge">
@@ -420,6 +462,7 @@ export default function ContestDetail({
       )}
 
       <DonationPower race={race} />
+      <StateLegInfo race={race} />
 
       {/* ── Candidates ── */}
       {(race.dCandidate || race.rCandidate || race.otherCandidates?.length > 0) && (
@@ -444,7 +487,7 @@ export default function ContestDetail({
             )}
             {race.otherCandidates?.map((c) => (
               <div key={`${c.party}-${c.name}`} className="cd-candidate cd-candidate--o">
-                <span className="cd-cand-party">{c.party}</span>
+                {c.party !== 'NP' && <span className="cd-cand-party">{c.party}</span>}
                 <span className="cd-cand-name">{c.name}</span>
               </div>
             ))}

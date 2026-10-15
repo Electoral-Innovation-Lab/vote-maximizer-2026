@@ -65,7 +65,8 @@ function buildColorExpression(raceData, matchExpr, metric) {
   const expr = ['match', matchExpr];
   const seen = new Set();
   for (const d of raceData) {
-    if (d.geoid && !seen.has(d.geoid)) {
+    // Unopposed races (kept for their detail page) stay the default grey, as before.
+    if (d.geoid && !d.unopposed && !seen.has(d.geoid)) {
       seen.add(d.geoid);
       expr.push(d.geoid, getDistrictColor(getScore(d, metric)));
     }

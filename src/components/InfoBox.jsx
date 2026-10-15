@@ -323,18 +323,24 @@ function hasMetricData(allData, type, metric) {
 }
 
 // ── MetricToggle ──────────────────────────────────────────────────────────────
-function MetricToggle({ metric, onChange }) {
+// `unavailable` lists metric ids that can't be chosen for the contest type being viewed.
+function MetricToggle({ metric, onChange, unavailable = [] }) {
   return (
     <div className="metric-toggle" role="group" aria-label="Rank contests by">
-      {Object.entries(METRICS).map(([id, m]) => (
-        <button
-          key={id}
-          className={`metric-btn ${metric === id ? 'metric-btn--active' : ''}`}
-          onClick={() => onChange?.(id)}
-        >
-          {m.label}
-        </button>
-      ))}
+      {Object.entries(METRICS).map(([id, m]) => {
+        const disabled = unavailable.includes(id);
+        return (
+          <button
+            key={id}
+            className={`metric-btn ${metric === id ? 'metric-btn--active' : ''} ${disabled ? 'is-unavailable' : ''}`}
+            aria-disabled={disabled}
+            title={disabled ? NO_DONATION_DATA_MSG : undefined}
+            onClick={() => { if (!disabled) onChange?.(id); }}
+          >
+            {m.label}
+          </button>
+        );
+      })}
     </div>
   );
 }
@@ -517,6 +523,12 @@ export default function InfoBox({
     });
   }
 
+  // The contest type on screen decides which metrics make sense (My Area mixes types, so allow all).
+  const viewedType = activeTab === 'top' ? topType : activeTab;
+  const unavailableMetrics = Object.keys(METRICS).filter(
+    (id) => viewedType !== 'nearby' && !hasMetricData(allData, viewedType, id)
+  );
+
   const columnLabel = activeTab === 'house' ? 'District' : 'State';
   const visibleTabs = nearbyRaces
     ? [{ id: 'nearby', label: '📍 My Area' }, ...ALL_TABS]
@@ -575,7 +587,7 @@ export default function InfoBox({
           )}
         </div>
 
-        {!selectedRace && <MetricToggle metric={metric} onChange={onMetricChange} />}
+        {!selectedRace && <MetricToggle metric={metric} onChange={onMetricChange} unavailable={unavailableMetrics} />}
 
         {/* Top Contests tab */}
         {activeTab === 'top' && (

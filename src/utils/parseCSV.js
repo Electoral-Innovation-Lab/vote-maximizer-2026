@@ -45,6 +45,7 @@ function toRace(r, raceType, extra) {
     candidates: cands,
     dCandidate: firstCand(cands, 'D'),
     rCandidate: firstCand(cands, 'R'),
+    // Anything that isn't D or R (independents, Nebraska's nonpartisan 'NP') goes here, never in D/R slots.
     otherCandidates: cands.filter((c) => c.party !== 'D' && c.party !== 'R'),
     dLink: r.links?.D ?? null,
     rLink: r.links?.R ?? null,
@@ -52,18 +53,25 @@ function toRace(r, raceType, extra) {
     notes: r.notes ?? null,
     lastVerified: r.last_verified ?? null,
     unopposed: !!r.unopposed,
+    // State-legislature extras (all null elsewhere)
+    committeeTargets: r.detail?.committee_targets || null,
+    chamberTier: r.detail?.chamber_tier ?? null,
+    chamberPDem: num(r.detail?.chamber_p_dem_majority),
+    pivotalProb: num(r.detail?.seat_pivotal_prob),
     ...extra,
   };
   race.competitiveness = competitivenessLabel(race);
   return race;
 }
 
-async function loadRaces(file, raceType, extraFn) {
+// keepUnopposed: unopposed races score 0, so they are normally dropped; state-legislature pages keep them
+// so a district's page can say it is unopposed.
+async function loadRaces(file, raceType, extraFn, { keepUnopposed = false } = {}) {
   const rows = await fetchJSON(`${DATA}/races/${file}.json`);
   return rows
     .filter((r) => r.active !== false)
     .map((r) => toRace(r, raceType, extraFn(r)))
-    .filter((r) => r.voterPower > 0 && r.geoid)
+    .filter((r) => (r.voterPower > 0 || (keepUnopposed && r.unopposed)) && r.geoid)
     .sort((a, b) => b.voterPower - a.voterPower);
 }
 
@@ -124,8 +132,8 @@ function sld(prefix) {
   };
 }
 
-export const loadStateLegUpperRaces = () => loadRaces('state_legislature_upper', 'state_leg_upper', sld('SD'));
-export const loadStateLegLowerRaces = () => loadRaces('state_legislature_lower', 'state_leg_lower', sld('HD'));
+export const loadStateLegUpperRaces = () => loadRaces('state_legislature_upper', 'state_leg_upper', sld('SD'), { keepUnopposed: true });
+export const loadStateLegLowerRaces = () => loadRaces('state_legislature_lower', 'state_leg_lower', sld('HD'), { keepUnopposed: true });
 
 export async function loadManifest() {
   return fetchJSON(`${DATA}/manifest.json`);
