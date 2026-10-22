@@ -1,6 +1,8 @@
 # Model data (public/data)
 
-Current drop: **workbook v45** (`Vote_Maximizer_2026_v45_20261013.xlsx`), generated **2026-10-13**.
+Current drop: **workbook v50** (`Vote_Maximizer_2026_v50_20261022.xlsx`), generated **2026-10-22**.
+
+> v46–v50 note: this drop was produced by patching the v45 export with the differences between the workbooks (checked against the v45 export first), not by `vm_export_json.py`. Please regenerate with the exporter from the v50 workbook when convenient. Changes since v45: FEC refresh and independent expenditures in per-dollar power, Senate/Governor poll refresh, state-legislature scores scaled per state (`detail.voter_power_national` keeps the all-states score), Sabato chamber flags, PA Senate District 46 corrected, ballot-measure reconciliation (166 rows: 145 on the Nov 3 ballot, 19 decided, 2 removed). See the workbook's Update Log.
 
 The site reads every voter-power number from `public/data/`, a JSON export of the Vote Maximizer
 workbook produced by `vm_export_json.py` (in the data team's `vm_scripts`). Nothing in `src/` should
@@ -14,6 +16,7 @@ the components use.
 | `races/<type>.json` | One array per race type — what the loaders read |
 | `races_all.json` | All races, no `detail` block (national rankings, future API) |
 | `by_state/<AB>.json` | All races in one state (for lighter state / address lookups) |
+| `flip/state_flip_summary.json`, `flip/states/<slug>.json` | Chance each state legislature chamber flips (default D+12.5; D+4.5 and D+8.5 scenarios included), Sabato-flagged states first, plus per-state detail |
 | `reference/*.json` | Civic orgs, parties, primary calendar, local resources, candidates, RCV places |
 
 ## Updating the data
