@@ -1,0 +1,1763 @@
+{
+ "meta": {
+  "source_workbook": "Vote_Maximizer_2026_v50_20261022.xlsx",
+  "built_utc": "2026-10-22T14:19:51Z",
+  "row_counts": {
+   "senate": 35,
+   "house": 435,
+   "governor": 36,
+   "attorney_general": 30,
+   "secretary_of_state": 26,
+   "judicial": 57,
+   "ballot_measures": 166,
+   "state_leg_upper": 1165,
+   "state_leg_lower": 4565,
+   "sl_state_max": 46,
+   "sl_chamber_control": 88,
+   "sl_holdovers": 11,
+   "candidates": 490
+  }
+ },
+ "notes": [
+  "p_flip = chance the chamber changes party control: R-held chambers use P(D majority), D-held use P(R majority), a tied chamber uses P(D)+P(R).",
+  "Alaska's bipartisan coalition chambers have no single flip definition (p_flip is null); their P(D)/P(R) majority are shown.",
+  "expected_chambers_flipping is the sum of chamber probabilities (valid without an independence assumption). p_any_chamber_flips_low/high bound the chance at least one chamber flips.",
+  "Chambers marked 'Not modeled' (holdover seats not collected, multi-member districts, nonpartisan) are excluded from the sums; chambers_not_modeled says how many are missing per state.",
+  "Landing view order: sabato_focus.ranked_states first (states with a Sabato-flagged chamber), then the remaining states by rank. Flagged chambers that are not modeled (Arizona House, New Hampshire House) or are Alaska coalitions have no probability and are listed in sabato_chambers_not_modeled.",
+  "Default probabilities assume the workbook's NATIONAL_ENV of D+12.5; generic-ballot polling averaged about D+8.3 in Oct 2026. p_flip_by_national_env gives the same chambers at D+4.5, D+8.5 and D+12.5 so the UI can show a range (tied chambers keep the default value in every scenario).",
+  "Probabilities come from the workbook's chamber-control simulation, which was NOT re-run after the Oct 2026 poll/FEC refreshes (see CHANGELOG)."
+ ],
+ "sabato_focus": {
+  "description": "States with at least one chamber Sabato's Crystal Ball flagged as within a few seats of flipping (list supplied by the project owner 2026-10-22). Ranked by the summed flip probability of the flagged chambers that are modeled, at the default national environment D+12.5.",
+  "ranked_states": [
+   "wisconsin",
+   "minnesota",
+   "georgia",
+   "michigan",
+   "arizona",
+   "new-hampshire",
+   "pennsylvania",
+   "maine"
+  ],
+  "flagged_not_rankable": [
+   "alaska"
+  ]
+ },
+ "states": [
+  {
+   "state": "North Carolina",
+   "slug": "north-carolina",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 1.2023,
+    "8.5": 1.667,
+    "12.5": 1.9053
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 1.9053,
+   "p_any_chamber_flips_low": 0.9885,
+   "p_any_chamber_flips_high": 1.0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.9885,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 28,
+   "top_seat": "North Carolina Senate District 17",
+   "rank": 1,
+   "rank_by_national_env": {
+    "4.5": 1,
+    "8.5": 1,
+    "12.5": 1
+   }
+  },
+  {
+   "state": "Wisconsin",
+   "slug": "wisconsin",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 1.081,
+    "8.5": 1.6113,
+    "12.5": 1.8963
+   },
+   "sabato_chambers": [
+    "Lower",
+    "Upper"
+   ],
+   "sabato_expected_flips": 1.8963,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": 1.081,
+    "8.5": 1.6113,
+    "12.5": 1.8963
+   },
+   "sabato_p_any_flip_low": 0.9703,
+   "sabato_p_any_flip_high": 1.0,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 1.8963,
+   "p_any_chamber_flips_low": 0.9703,
+   "p_any_chamber_flips_high": 1.0,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0.9703,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 2,
+   "contested_within_5": 26,
+   "top_seat": "Wisconsin Senate District 7",
+   "rank": 2,
+   "rank_by_national_env": {
+    "4.5": 3,
+    "8.5": 2,
+    "12.5": 2
+   },
+   "sabato_rank": 1,
+   "sabato_rank_by_national_env": {
+    "4.5": 1,
+    "8.5": 1,
+    "12.5": 1
+   }
+  },
+  {
+   "state": "Georgia",
+   "slug": "georgia",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 1.1258,
+    "8.5": 1.596,
+    "12.5": 1.8742
+   },
+   "sabato_chambers": [
+    "Lower"
+   ],
+   "sabato_expected_flips": 0.989,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": 0.7545,
+    "8.5": 0.9303,
+    "12.5": 0.989
+   },
+   "sabato_p_any_flip_low": 0.989,
+   "sabato_p_any_flip_high": 0.989,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 1.8742,
+   "p_any_chamber_flips_low": 0.989,
+   "p_any_chamber_flips_high": 1.0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.989,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 1,
+   "contested_within_5": 33,
+   "top_seat": "Georgia Senate District 50",
+   "rank": 3,
+   "rank_by_national_env": {
+    "4.5": 2,
+    "8.5": 3,
+    "12.5": 3
+   },
+   "sabato_rank": 3,
+   "sabato_rank_by_national_env": {
+    "4.5": 4,
+    "8.5": 4,
+    "12.5": 3
+   }
+  },
+  {
+   "state": "Minnesota",
+   "slug": "minnesota",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 1.0753,
+    "8.5": 1.013,
+    "12.5": 0.9998
+   },
+   "sabato_chambers": [
+    "Lower",
+    "Upper"
+   ],
+   "sabato_expected_flips": 0.9998,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": 1.0753,
+    "8.5": 1.013,
+    "12.5": 0.9998
+   },
+   "sabato_p_any_flip_low": 0.9988,
+   "sabato_p_any_flip_high": 0.9998,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.9998,
+   "p_any_chamber_flips_low": 0.9988,
+   "p_any_chamber_flips_high": 0.9998,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.9988,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 1,
+   "sabato_close_chambers": 2,
+   "contested_within_5": 23,
+   "top_seat": "Minnesota Senate District 17",
+   "rank": 4,
+   "rank_by_national_env": {
+    "4.5": 4,
+    "8.5": 4,
+    "12.5": 4
+   },
+   "sabato_rank": 2,
+   "sabato_rank_by_national_env": {
+    "4.5": 2,
+    "8.5": 2,
+    "12.5": 2
+   }
+  },
+  {
+   "state": "Michigan",
+   "slug": "michigan",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.8767,
+    "8.5": 0.9432,
+    "12.5": 0.9817
+   },
+   "sabato_chambers": [
+    "Lower",
+    "Upper"
+   ],
+   "sabato_expected_flips": 0.9817,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": 0.8767,
+    "8.5": 0.9432,
+    "12.5": 0.9817
+   },
+   "sabato_p_any_flip_low": 0.9762,
+   "sabato_p_any_flip_high": 0.9817,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.9817,
+   "p_any_chamber_flips_low": 0.9762,
+   "p_any_chamber_flips_high": 0.9817,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.9762,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 2,
+   "contested_within_5": 29,
+   "top_seat": "Michigan Senate District 25",
+   "rank": 5,
+   "rank_by_national_env": {
+    "4.5": 5,
+    "8.5": 5,
+    "12.5": 5
+   },
+   "sabato_rank": 4,
+   "sabato_rank_by_national_env": {
+    "4.5": 3,
+    "8.5": 3,
+    "12.5": 4
+   }
+  },
+  {
+   "state": "Arizona",
+   "slug": "arizona",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.3617,
+    "8.5": 0.6585,
+    "12.5": 0.8747
+   },
+   "sabato_chambers": [
+    "Upper",
+    "Lower"
+   ],
+   "sabato_expected_flips": 0.8747,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": 0.3617,
+    "8.5": 0.6585,
+    "12.5": 0.8747
+   },
+   "sabato_p_any_flip_low": 0.8747,
+   "sabato_p_any_flip_high": 0.8747,
+   "sabato_chambers_not_modeled": [
+    "Lower (not modeled)"
+   ],
+   "expected_chambers_flipping": 0.8747,
+   "p_any_chamber_flips_low": 0.8747,
+   "p_any_chamber_flips_high": 0.8747,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0.8747,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 2,
+   "contested_within_5": 4,
+   "top_seat": "Arizona Senate District 12",
+   "rank": 6,
+   "rank_by_national_env": {
+    "4.5": 7,
+    "8.5": 6,
+    "12.5": 6
+   },
+   "sabato_rank": 5,
+   "sabato_rank_by_national_env": {
+    "4.5": 5,
+    "8.5": 5,
+    "12.5": 5
+   }
+  },
+  {
+   "state": "Texas",
+   "slug": "texas",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.259,
+    "8.5": 0.5447,
+    "12.5": 0.8185
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.8185,
+   "p_any_chamber_flips_low": 0.8175,
+   "p_any_chamber_flips_high": 0.8185,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.8175,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 37,
+   "top_seat": "Texas Senate District 21",
+   "rank": 7,
+   "rank_by_national_env": {
+    "4.5": 8,
+    "8.5": 7,
+    "12.5": 7
+   }
+  },
+  {
+   "state": "New Hampshire",
+   "slug": "new-hampshire",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.2495,
+    "8.5": 0.5418,
+    "12.5": 0.8017
+   },
+   "sabato_chambers": [
+    "Upper",
+    "Lower"
+   ],
+   "sabato_expected_flips": 0.8017,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": 0.2495,
+    "8.5": 0.5418,
+    "12.5": 0.8017
+   },
+   "sabato_p_any_flip_low": 0.8017,
+   "sabato_p_any_flip_high": 0.8017,
+   "sabato_chambers_not_modeled": [
+    "Lower (not modeled)"
+   ],
+   "expected_chambers_flipping": 0.8017,
+   "p_any_chamber_flips_low": 0.8017,
+   "p_any_chamber_flips_high": 0.8017,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0.8017,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 2,
+   "contested_within_5": 5,
+   "top_seat": "New Hampshire Senate District 22",
+   "rank": 8,
+   "rank_by_national_env": {
+    "4.5": 9,
+    "8.5": 8,
+    "12.5": 8
+   },
+   "sabato_rank": 6,
+   "sabato_rank_by_national_env": {
+    "4.5": 6,
+    "8.5": 6,
+    "12.5": 6
+   }
+  },
+  {
+   "state": "Iowa",
+   "slug": "iowa",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.204,
+    "8.5": 0.4735,
+    "12.5": 0.7753
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.7753,
+   "p_any_chamber_flips_low": 0.7515,
+   "p_any_chamber_flips_high": 0.7753,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.7515,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 22,
+   "top_seat": "Iowa Senate District 1",
+   "rank": 9,
+   "rank_by_national_env": {
+    "4.5": 11,
+    "8.5": 9,
+    "12.5": 9
+   }
+  },
+  {
+   "state": "Florida",
+   "slug": "florida",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.1522,
+    "8.5": 0.3986,
+    "12.5": 0.7059
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.7058,
+   "p_any_chamber_flips_low": 0.7032,
+   "p_any_chamber_flips_high": 0.7058,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.7032,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 32,
+   "top_seat": "Florida Senate District 20",
+   "rank": 10,
+   "rank_by_national_env": {
+    "4.5": 12,
+    "8.5": 10,
+    "12.5": 10
+   }
+  },
+  {
+   "state": "Ohio",
+   "slug": "ohio",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.1257,
+    "8.5": 0.3705,
+    "12.5": 0.6652
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.6652,
+   "p_any_chamber_flips_low": 0.6652,
+   "p_any_chamber_flips_high": 0.6652,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.6652,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 25,
+   "top_seat": "Ohio Senate District 29",
+   "rank": 11,
+   "rank_by_national_env": {
+    "4.5": 13,
+    "8.5": 11,
+    "12.5": 11
+   }
+  },
+  {
+   "state": "South Carolina",
+   "slug": "south-carolina",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.0405,
+    "8.5": 0.1742,
+    "12.5": 0.4362
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.4362,
+   "p_any_chamber_flips_low": 0.4362,
+   "p_any_chamber_flips_high": 0.4362,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.4362,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 29,
+   "top_seat": "South Carolina House District 17",
+   "rank": 12,
+   "rank_by_national_env": {
+    "4.5": 15,
+    "8.5": 13,
+    "12.5": 12
+   }
+  },
+  {
+   "state": "Pennsylvania",
+   "slug": "pennsylvania",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.2397,
+    "8.5": 0.222,
+    "12.5": 0.4105
+   },
+   "sabato_chambers": [
+    "Upper"
+   ],
+   "sabato_expected_flips": 0.4047,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": 0.0535,
+    "8.5": 0.1762,
+    "12.5": 0.4047
+   },
+   "sabato_p_any_flip_low": 0.4047,
+   "sabato_p_any_flip_high": 0.4047,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.4105,
+   "p_any_chamber_flips_low": 0.4047,
+   "p_any_chamber_flips_high": 0.4105,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0.4047,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 1,
+   "contested_within_5": 38,
+   "top_seat": "Pennsylvania Senate District 40",
+   "rank": 13,
+   "rank_by_national_env": {
+    "4.5": 10,
+    "8.5": 12,
+    "12.5": 13
+   },
+   "sabato_rank": 7,
+   "sabato_rank_by_national_env": {
+    "4.5": 7,
+    "8.5": 7,
+    "12.5": 7
+   }
+  },
+  {
+   "state": "Missouri",
+   "slug": "missouri",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.0035,
+    "8.5": 0.0345,
+    "12.5": 0.1562
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.1562,
+   "p_any_chamber_flips_low": 0.1562,
+   "p_any_chamber_flips_high": 0.1562,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.1562,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 25,
+   "top_seat": "Missouri Senate District 30",
+   "rank": 14,
+   "rank_by_national_env": {
+    "4.5": 20,
+    "8.5": 15,
+    "12.5": 14
+   }
+  },
+  {
+   "state": "Indiana",
+   "slug": "indiana",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.0035,
+    "8.5": 0.0263,
+    "12.5": 0.117
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.117,
+   "p_any_chamber_flips_low": 0.117,
+   "p_any_chamber_flips_high": 0.117,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.117,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 11,
+   "top_seat": "Indiana Senate District 25",
+   "rank": 15,
+   "rank_by_national_env": {
+    "4.5": 19,
+    "8.5": 16,
+    "12.5": 15
+   }
+  },
+  {
+   "state": "Kansas",
+   "slug": "kansas",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.0017,
+    "8.5": 0.0198,
+    "12.5": 0.0998
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.0998,
+   "p_any_chamber_flips_low": 0.0998,
+   "p_any_chamber_flips_high": 0.0998,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.0998,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 23,
+   "top_seat": "Kansas House District 13",
+   "rank": 16,
+   "rank_by_national_env": {
+    "4.5": 21,
+    "8.5": 17,
+    "12.5": 16
+   }
+  },
+  {
+   "state": "Montana",
+   "slug": "montana",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.0012,
+    "8.5": 0.0137,
+    "12.5": 0.0778
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.0778,
+   "p_any_chamber_flips_low": 0.0778,
+   "p_any_chamber_flips_high": 0.0778,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.0778,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 25,
+   "top_seat": "Montana Senate District 23",
+   "rank": 17,
+   "rank_by_national_env": {
+    "4.5": 22,
+    "8.5": 19,
+    "12.5": 17
+   }
+  },
+  {
+   "state": "Nevada",
+   "slug": "nevada",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.5177,
+    "8.5": 0.1738,
+    "12.5": 0.0334
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.0333,
+   "p_any_chamber_flips_low": 0.0292,
+   "p_any_chamber_flips_high": 0.0333,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0.0292,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 15,
+   "top_seat": "Nevada Senate District 16",
+   "rank": 18,
+   "rank_by_national_env": {
+    "4.5": 6,
+    "8.5": 14,
+    "12.5": 18
+   }
+  },
+  {
+   "state": "Oklahoma",
+   "slug": "oklahoma",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0.0007,
+    "12.5": 0.0112
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.0112,
+   "p_any_chamber_flips_low": 0.0112,
+   "p_any_chamber_flips_high": 0.0112,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.0112,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 1,
+   "top_seat": "Oklahoma House District 63",
+   "rank": 19,
+   "rank_by_national_env": {
+    "4.5": 35,
+    "8.5": 21,
+    "12.5": 19
+   }
+  },
+  {
+   "state": "Utah",
+   "slug": "utah",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0.0017
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.0017,
+   "p_any_chamber_flips_low": 0.0017,
+   "p_any_chamber_flips_high": 0.0017,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.0017,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 11,
+   "top_seat": "Utah Senate District 1",
+   "rank": 20,
+   "rank_by_national_env": {
+    "4.5": 39,
+    "8.5": 39,
+    "12.5": 20
+   }
+  },
+  {
+   "state": "Oregon",
+   "slug": "oregon",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.0742,
+    "8.5": 0.0162,
+    "12.5": 0.0005
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.0005,
+   "p_any_chamber_flips_low": 0.0005,
+   "p_any_chamber_flips_high": 0.0005,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0.0005,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 3,
+   "top_seat": "Oregon Senate District 20",
+   "rank": 21,
+   "rank_by_national_env": {
+    "4.5": 14,
+    "8.5": 18,
+    "12.5": 21
+   }
+  },
+  {
+   "state": "Tennessee",
+   "slug": "tennessee",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0.0002
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0.0002,
+   "p_any_chamber_flips_low": 0.0002,
+   "p_any_chamber_flips_high": 0.0002,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0.0002,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 6,
+   "top_seat": "Tennessee Senate District 27",
+   "rank": 22,
+   "rank_by_national_env": {
+    "4.5": 38,
+    "8.5": 38,
+    "12.5": 22
+   }
+  },
+  {
+   "state": "Maine",
+   "slug": "maine",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.0225,
+    "8.5": 0.0009,
+    "12.5": 0
+   },
+   "sabato_chambers": [
+    "Lower"
+   ],
+   "sabato_expected_flips": 0,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": 0.012,
+    "8.5": 0.0007,
+    "12.5": 0
+   },
+   "sabato_p_any_flip_low": 0,
+   "sabato_p_any_flip_high": 0,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 1,
+   "contested_within_5": 16,
+   "top_seat": "Maine Senate District 3",
+   "rank": 23,
+   "rank_by_national_env": {
+    "4.5": 16,
+    "8.5": 20,
+    "12.5": 23
+   },
+   "sabato_rank": 8,
+   "sabato_rank_by_national_env": {
+    "4.5": 8,
+    "8.5": 8,
+    "12.5": 8
+   }
+  },
+  {
+   "state": "Alabama",
+   "slug": "alabama",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 12,
+   "top_seat": "Alabama Senate District 8",
+   "rank": 24,
+   "rank_by_national_env": {
+    "4.5": 23,
+    "8.5": 24,
+    "12.5": 24
+   }
+  },
+  {
+   "state": "Arkansas",
+   "slug": "arkansas",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 2,
+   "top_seat": "Arkansas Senate District 9",
+   "rank": 25,
+   "rank_by_national_env": {
+    "4.5": 24,
+    "8.5": 25,
+    "12.5": 25
+   }
+  },
+  {
+   "state": "California",
+   "slug": "california",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 3,
+   "top_seat": "California Senate District 8",
+   "rank": 26,
+   "rank_by_national_env": {
+    "4.5": 25,
+    "8.5": 26,
+    "12.5": 26
+   }
+  },
+  {
+   "state": "Colorado",
+   "slug": "colorado",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.0052,
+    "8.5": 0.0003,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 5,
+   "top_seat": "Colorado House District 57",
+   "rank": 27,
+   "rank_by_national_env": {
+    "4.5": 18,
+    "8.5": 22,
+    "12.5": 27
+   }
+  },
+  {
+   "state": "Connecticut",
+   "slug": "connecticut",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 9,
+   "top_seat": "Connecticut Senate District 16",
+   "rank": 28,
+   "rank_by_national_env": {
+    "4.5": 26,
+    "8.5": 27,
+    "12.5": 28
+   }
+  },
+  {
+   "state": "Delaware",
+   "slug": "delaware",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 2,
+   "top_seat": "Delaware House District 12",
+   "rank": 29,
+   "rank_by_national_env": {
+    "4.5": 27,
+    "8.5": 28,
+    "12.5": 29
+   }
+  },
+  {
+   "state": "Hawaii",
+   "slug": "hawaii",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 0,
+   "top_seat": "Hawaii House District 40",
+   "rank": 30,
+   "rank_by_national_env": {
+    "4.5": 28,
+    "8.5": 29,
+    "12.5": 30
+   }
+  },
+  {
+   "state": "Idaho",
+   "slug": "idaho",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 9,
+   "top_seat": "Idaho Senate District 5",
+   "rank": 31,
+   "rank_by_national_env": {
+    "4.5": 29,
+    "8.5": 30,
+    "12.5": 31
+   }
+  },
+  {
+   "state": "Illinois",
+   "slug": "illinois",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 6,
+   "top_seat": "Illinois Senate District 56",
+   "rank": 32,
+   "rank_by_national_env": {
+    "4.5": 30,
+    "8.5": 31,
+    "12.5": 32
+   }
+  },
+  {
+   "state": "Kentucky",
+   "slug": "kentucky",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 7,
+   "top_seat": "Kentucky Senate District 26",
+   "rank": 33,
+   "rank_by_national_env": {
+    "4.5": 31,
+    "8.5": 32,
+    "12.5": 33
+   }
+  },
+  {
+   "state": "Maryland",
+   "slug": "maryland",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 0,
+   "top_seat": "Maryland House District 38A",
+   "rank": 34,
+   "rank_by_national_env": {
+    "4.5": 32,
+    "8.5": 33,
+    "12.5": 34
+   }
+  },
+  {
+   "state": "Massachusetts",
+   "slug": "massachusetts",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 2,
+   "top_seat": "Massachusetts House District 18th Worcester District",
+   "rank": 35,
+   "rank_by_national_env": {
+    "4.5": 33,
+    "8.5": 34,
+    "12.5": 35
+   }
+  },
+  {
+   "state": "New Mexico",
+   "slug": "new-mexico",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0.006,
+    "8.5": 0.0003,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 4,
+   "top_seat": "New Mexico House District 17",
+   "rank": 36,
+   "rank_by_national_env": {
+    "4.5": 17,
+    "8.5": 23,
+    "12.5": 36
+   }
+  },
+  {
+   "state": "New York",
+   "slug": "new-york",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 8,
+   "top_seat": "New York Senate District 60",
+   "rank": 37,
+   "rank_by_national_env": {
+    "4.5": 34,
+    "8.5": 35,
+    "12.5": 37
+   }
+  },
+  {
+   "state": "Rhode Island",
+   "slug": "rhode-island",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 2,
+   "top_seat": "Rhode Island Senate District 17",
+   "rank": 38,
+   "rank_by_national_env": {
+    "4.5": 36,
+    "8.5": 36,
+    "12.5": 38
+   }
+  },
+  {
+   "state": "South Dakota",
+   "slug": "south-dakota",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 0,
+   "top_seat": "South Dakota House District 5",
+   "rank": 39,
+   "rank_by_national_env": {
+    "4.5": 37,
+    "8.5": 37,
+    "12.5": 39
+   }
+  },
+  {
+   "state": "Washington",
+   "slug": "washington",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Upper",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 2,
+   "chambers_not_modeled": 0,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 4,
+   "top_seat": "Washington House District 19",
+   "rank": 40,
+   "rank_by_national_env": {
+    "4.5": 40,
+    "8.5": 40,
+    "12.5": 40
+   }
+  },
+  {
+   "state": "West Virginia",
+   "slug": "west-virginia",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 2,
+   "top_seat": "West Virginia Senate District 16",
+   "rank": 41,
+   "rank_by_national_env": {
+    "4.5": 41,
+    "8.5": 41,
+    "12.5": 41
+   }
+  },
+  {
+   "state": "Wyoming",
+   "slug": "wyoming",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": 0,
+    "8.5": 0,
+    "12.5": 0
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": 0,
+   "p_any_chamber_flips_low": 0,
+   "p_any_chamber_flips_high": 0,
+   "most_likely_chamber": "Lower",
+   "most_likely_p_flip": 0,
+   "chambers_modeled": 1,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 1,
+   "top_seat": "Wyoming House District 13",
+   "rank": 42,
+   "rank_by_national_env": {
+    "4.5": 42,
+    "8.5": 42,
+    "12.5": 42
+   }
+  },
+  {
+   "state": "Alaska",
+   "slug": "alaska",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_chambers": [
+    "Lower",
+    "Upper"
+   ],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [
+    "Lower (coalition)",
+    "Upper (coalition)"
+   ],
+   "expected_chambers_flipping": null,
+   "p_any_chamber_flips_low": null,
+   "p_any_chamber_flips_high": null,
+   "most_likely_chamber": null,
+   "most_likely_p_flip": null,
+   "chambers_modeled": 0,
+   "chambers_not_modeled": 2,
+   "chambers_coalition_or_tied": 2,
+   "sabato_close_chambers": 2,
+   "contested_within_5": 9,
+   "top_seat": "Alaska Senate District C",
+   "rank": null
+  },
+  {
+   "state": "Nebraska",
+   "slug": "nebraska",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": null,
+   "p_any_chamber_flips_low": null,
+   "p_any_chamber_flips_high": null,
+   "most_likely_chamber": null,
+   "most_likely_p_flip": null,
+   "chambers_modeled": 0,
+   "chambers_not_modeled": 1,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 0,
+   "top_seat": "Nebraska Senate District 2",
+   "rank": null
+  },
+  {
+   "state": "North Dakota",
+   "slug": "north-dakota",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": null,
+   "p_any_chamber_flips_low": null,
+   "p_any_chamber_flips_high": null,
+   "most_likely_chamber": null,
+   "most_likely_p_flip": null,
+   "chambers_modeled": 0,
+   "chambers_not_modeled": 2,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 0,
+   "top_seat": "North Dakota Senate District 35",
+   "rank": null
+  },
+  {
+   "state": "Vermont",
+   "slug": "vermont",
+   "expected_chambers_flipping_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_chambers": [],
+   "sabato_expected_flips": null,
+   "sabato_expected_flips_by_national_env": {
+    "4.5": null,
+    "8.5": null,
+    "12.5": null
+   },
+   "sabato_p_any_flip_low": null,
+   "sabato_p_any_flip_high": null,
+   "sabato_chambers_not_modeled": [],
+   "expected_chambers_flipping": null,
+   "p_any_chamber_flips_low": null,
+   "p_any_chamber_flips_high": null,
+   "most_likely_chamber": null,
+   "most_likely_p_flip": null,
+   "chambers_modeled": 0,
+   "chambers_not_modeled": 2,
+   "chambers_coalition_or_tied": 0,
+   "sabato_close_chambers": 0,
+   "contested_within_5": 0,
+   "top_seat": "Vermont House Rutland-2 District  (2 seats)",
+   "rank": null
+  }
+ ]
+}
