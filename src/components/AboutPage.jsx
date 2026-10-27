@@ -29,7 +29,7 @@ const SECTIONS = [
   {
     num: '04',
     title: 'Data Sources',
-    body: `Senate and governor margins come from polling: the FiftyPlusOne polling average where one is published, otherwise the median of the three most recent polls from the last 60 days (campaign internal polls are weighted toward each state's partisan lean). Races with little or no polling — and the House, state, judicial and legislative races — use partisan lean (Cook PVI) or recent results, adjusted for incumbency and a national environment of D+12.5. Each race shows a "Polling" or "Estimate" badge.
+    body: `Senate and governor margins come from polling: the FiftyPlusOne polling average where one is published, otherwise the median of the three most recent polls from the last 60 days (campaign internal polls are weighted toward each state's partisan lean). House districts with recent public polls (about 90 of 435) use the median of the latest polls blended with the partisan-lean estimate, in proportion to how many polls there are. Races with little or no polling — and the other House, state, judicial and legislative races — use partisan lean (Cook PVI) or recent results, adjusted for incumbency and a national environment of D+12.5. Each race shows a "Polling" or "Estimate" badge.
 
     Donation power uses the same closeness measure divided by the money the nominees have already raised, from Federal Election Commission filings. Polling data: Powered by FiftyPlusOne.`,
   },

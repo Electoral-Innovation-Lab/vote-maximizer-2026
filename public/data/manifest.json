@@ -1,11 +1,11 @@
 {
  "schema_version": "1.0",
- "workbook": "Vote_Maximizer_2026_v50_20261022.xlsx",
- "generated": "2026-10-22",
+ "workbook": "Vote_Maximizer_2026_v52_20261027.xlsx",
+ "generated": "2026-10-27",
  "model": {
   "national_environment_D_minus_R": 12.5,
   "poll_sigma_now": 4.8,
-  "statewide_margin_source": "F1 average",
+  "statewide_margin_source": "Poll median",
   "internal_poll_weight": 0.5,
   "money_exponent": 1,
   "money_basis": "Nominees",
@@ -13,12 +13,14 @@
   "voter_power_floor": 3,
   "state_leg_anchor_to_2020_result": "On",
   "independent_expenditures_included": true,
-  "state_leg_normalization": "per state, both chambers pooled (best seat in each state = 100); voter_power_national keeps the all-states score"
+  "state_leg_normalization": "per state, both chambers pooled (best seat in each state = 100); voter_power_national keeps the all-states score",
+  "house_district_polls": "On (polled districts: poll median blended with PVI baseline by poll count; weight = polls/3, max 1)"
  },
  "sources": {
-  "polling": "FiftyPlusOne (fiftyplusone.news), averages as of 2026-10-01 plus poll CSVs through 2026-10-19 \u2014 requires 'Powered by FiftyPlusOne' credit with link; publishing derived scores may require an Enterprise licence.",
+  "polling": "FiftyPlusOne (fiftyplusone.news), poll CSVs through 2026-10-26 (tracker averages not re-pulled; last as of 2026-10-01) — requires 'Powered by FiftyPlusOne' credit with link; publishing derived scores may require an Enterprise licence.",
   "fundraising": "FEC candidate summary (weball26, coverage mostly through 2026-09-30) plus FEC Schedule E independent expenditures (support and opposition counted equally; switch IE_INCLUDE).",
-  "partisan_lean": "Cook PVI 2026 (derived state PVI for statewide races)."
+  "partisan_lean": "Cook PVI 2026 (derived state PVI for statewide races).",
+  "house_ratings": "House competitiveness labels are derived bands, cut to Cook Political Report's published House distribution of 2026-10-23 (186/18/16/17/17/13/168); not Cook's per-district ratings."
  },
  "files": {
   "races/senate.json": 35,
