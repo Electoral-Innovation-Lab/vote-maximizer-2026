@@ -381,7 +381,7 @@
 .race-tabs {
   display: flex;
   gap: 2px;
-  padding: 8px 14px 0;
+  padding: 5px 14px 0;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
   position: sticky;
@@ -394,7 +394,7 @@
 .race-tabs::-webkit-scrollbar { display: none; }
 
 .tab-btn {
-  padding: 6px 12px;
+  padding: 4px 12px;
   font-size: 12px;
   font-weight: 600;
   color: #64748b;
@@ -461,7 +461,7 @@
 .list-header {
   display: flex;
   align-items: center;
-  padding: 8px 14px;
+  padding: 5px 14px;
   border-bottom: 1px solid #e2e8f0;
   background: #f8fafc;
   position: sticky;
@@ -638,7 +638,7 @@
 .tc-type-tabs {
   display: flex;
   gap: 2px;
-  padding: 6px 14px 0;
+  padding: 3px 14px 0;
   border-bottom: 1px solid #e2e8f0;
   background: #fafafa;
   overflow-x: auto;
@@ -648,7 +648,7 @@
 .tc-type-tabs::-webkit-scrollbar { display: none; }
 
 .tc-type-btn {
-  padding: 5px 10px;
+  padding: 3px 10px;
   font-size: 11px;
   font-weight: 600;
   color: #64748b;
@@ -774,14 +774,14 @@
 .metric-toggle {
   display: flex;
   gap: 2px;
-  margin: 8px 14px 0;
+  margin: 5px 14px 0;
   padding: 2px;
   background: #f1f5f9;
   border-radius: 8px;
 }
 .metric-btn {
   flex: 1;
-  padding: 4px 8px;
+  padding: 2px 8px;
   font-size: 11px;
   font-weight: 600;
   color: #64748b;
