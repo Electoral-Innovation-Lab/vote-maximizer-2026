@@ -32,6 +32,8 @@ const TOP_TYPES = [
   { id: 'ballot',   label: 'Ballot' },
 ];
 
+const TOP_COUNT = 20; // contests listed per type in Top Contests
+
 const PRIMARY_COL = {
   house: 'hasHouse', senate: 'hasSenate', governor: 'hasGovernor',
   state_leg_upper: 'hasStateLeg', state_leg_lower: 'hasStateLeg',
@@ -363,16 +365,16 @@ function TopContestsPane({ allData, topType, metric, onRacePreview, onTopTypeCha
     else setSortBy('cook');
   }
 
-  const top10Fixed = (allData?.[topType] ?? [])
+  const topFixed = (allData?.[topType] ?? [])
     .filter((r) => getScore(r, metric) != null)
     .sort((a, b) => getScore(b, metric) - getScore(a, metric) || cookPriority(a) - cookPriority(b))
-    .slice(0, 10)
+    .slice(0, TOP_COUNT)
     .map((race, i) => ({ ...race, _topRank: i + 1 }));
 
-  const orderedTop10 = sortRaces(top10Fixed, sortBy, vpDir, cookDir, metric);
-  const top10Items = sortBy === 'cook'
-    ? withCookHeaders(orderedTop10)
-    : orderedTop10.map((race, idx) => ({ type: 'race', race, idx }));
+  const orderedTop = sortRaces(topFixed, sortBy, vpDir, cookDir, metric);
+  const topItems = sortBy === 'cook'
+    ? withCookHeaders(orderedTop)
+    : orderedTop.map((race, idx) => ({ type: 'race', race, idx }));
 
   return (
     <div className="tc-pane">
@@ -394,7 +396,7 @@ function TopContestsPane({ allData, topType, metric, onRacePreview, onTopTypeCha
       </div>
       <div className="list-header">
         <span className="lh-rank">#</span>
-        <span className="lh-district">Top 10</span>
+        <span className="lh-district">Top {TOP_COUNT}</span>
         <button
           className={`lh-cook lh-sort-btn ${sortBy === 'cook' ? 'lh-sort-btn--active' : ''}`}
           onClick={handleCookSortClick}
@@ -411,12 +413,12 @@ function TopContestsPane({ allData, topType, metric, onRacePreview, onTopTypeCha
         </button>
       </div>
       <div className="tc-list">
-        {top10Items.length === 0 ? (
+        {topItems.length === 0 ? (
           <div className="tc-empty">
             {allData?.[topType]?.length ? `No ${METRICS[metric].label.toLowerCase()} data for this contest type.` : 'Loading…'}
           </div>
         ) : (
-          top10Items.map((item) => {
+          topItems.map((item) => {
             if (item.type === 'header') {
               return <div key={item.key} className="list-group-header">{item.label}</div>;
             }
