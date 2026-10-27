@@ -1,6 +1,8 @@
 # Model data (public/data)
 
-Current drop: **workbook v50** (`Vote_Maximizer_2026_v50_20261022.xlsx`), generated **2026-10-22**.
+Current drop: **workbook v52** (`Vote_Maximizer_2026_v52_20261027.xlsx`), generated **2026-10-27**.
+
+> v52 (2026-10-27): FiftyPlusOne poll pull through 2026-10-26 for Senate, Governor and House. Senate/Governor margin source is the poll median (tracker averages not re-pulled; last as of 2026-10-01). House: districts with public polls (92) now use a poll median blended with the PVI baseline (`detail.poll_weight`, `detail.pvi_baseline_margin`). House `rating` re-banded to Cook's 2026-10-23 distribution (derived, not per-district Cook ratings). Only `senate`, `governor` and `house` records (plus their copies in `races_all.json` and `by_state/`) changed; all other files are carried over from the v50 drop. The exporter now also writes the donation `independent_expenditures`/`money_used` and state-leg `voter_power_national`/`sabato_close_chamber` fields; ballot-measure ids still differ from this repo for 2 Missouri measures, so those files were not replaced.
 
 > v46–v50 note: this drop was produced by patching the v45 export with the differences between the workbooks (checked against the v45 export first), not by `vm_export_json.py`. Please regenerate with the exporter from the v50 workbook when convenient. Changes since v45: FEC refresh and independent expenditures in per-dollar power, Senate/Governor poll refresh, state-legislature scores scaled per state (`detail.voter_power_national` keeps the all-states score), Sabato chamber flags, PA Senate District 46 corrected, ballot-measure reconciliation (166 rows: 145 on the Nov 3 ballot, 19 decided, 2 removed). See the workbook's Update Log.
 
